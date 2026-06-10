@@ -1,27 +1,32 @@
 {%- comment -%}
-  B2B Order Form — GT Everyday (דף נחיתה B2B, גרסת Horizon)
-
-  חוזה ההעברה לחשבונית ירוקה (דרך Make.com) — סטטוס: STUB עד אישור G3.
-  POST {webhook_url} • Content-Type: application/json
-  {
-    "source": "gt-b2b-landing",
-    "shop": "gteveryday.myshopify.com",
-    "currency": "ILS",
-    "created_at": "<ISO-8601>",
-    "business": { "company", "business_id", "contact_name", "phone", "email", "notes" },
-    "lines": [ { "product_id", "variant_id", "sku", "title", "quantity",
-                 "unit_price", "line_total" } ],   // מחירים בש"ח (decimal)
-    "totals": { "item_count", "subtotal" }
-  }
-  תשובה צפויה: 200 { "payment_url": "https://..." } → הדפדפן מועבר לדף הסליקה
-  של חשבונית ירוקה. כששדה webhook_url ריק — מצב הדגמה: אין קריאת רשת,
-  ה-payload מוצג בחלון סיכום בלבד.
+  B2B Order Form v2 — GT Everyday (Horizon)
+  זרימה: בחירת מוצרים → ולידציה → מודאל סיכום → demo/live.
+  חוזה ההעברה (stub עד G3): POST {webhook_url} JSON —
+  { source:"b2b-landing", idempotencyKey, createdAt,
+    items:[{sku,title,qty,unitPriceILS,lineTotalILS}], totalILS,
+    customer:{businessName,companyId,contactName,phone,email,city,street,notes} }
+  תשובה: 200 {"paymentUrl":"https://..."} → redirect לדף הסליקה של חשבונית ירוקה.
+  mode="demo" (ברירת מחדל) = אין קריאת רשת; G3 = mode→live + webhook_url.
 {%- endcomment -%}
 
-{%- assign accent = section.settings.accent | default: '#457439' -%}
-<section id="b2b-order" class="b2bof" data-section-id="{{ section.id }}">
-  <div class="b2bof__container">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=Frank+Ruhl+Libre:wght@500;700&display=swap">
+{{ 'b2b-order-form.css' | asset_url | stylesheet_tag }}
 
+<section id="b2b-order" class="b2bof" data-section-id="{{ section.id }}">
+  <span id="order" aria-hidden="true"></span>
+  <script type="application/json" data-b2bof-config>
+    {
+      "mode": {{ section.settings.mode | default: 'demo' | json }},
+      "webhookUrl": {{ section.settings.webhook_url | default: '' | json }},
+      "successPath": {{ section.settings.success_path | default: '/pages/b2b-thank-you' | json }},
+      "minOrderILS": {% if section.settings.min_order_ils != blank and section.settings.min_order_ils > 0 %}{{ section.settings.min_order_ils }}{% else %}null{% endif %},
+      "whatsapp": {{ section.settings.whatsapp | default: '' | json }}
+    }
+  </script>
+
+  <div class="b2bof__container">
     <header class="b2bof__head">
       {%- if section.settings.title != blank -%}
         <h2 class="b2bof__title">{{ section.settings.title }}</h2>
@@ -31,15 +36,34 @@
       {%- endif -%}
     </header>
 
+    <div class="b2bof__toolbar">
+      <div class="b2bof__search">
+        <input type="search" placeholder="חיפוש מוצר או מק&quot;ט…" aria-label="חיפוש מוצר">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </div>
+      <nav class="b2bof__nav" aria-label="קפיצה לקבוצת מוצרים">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'group' and block.settings.nav_label != blank -%}
+            <a href="#b2bof-g-{{ block.id }}">{{ block.settings.nav_label }}</a>
+          {%- endif -%}
+        {%- endfor -%}
+      </nav>
+    </div>
+
+    <div class="b2bof__restore" hidden>
+      <span>שחזרנו את ההזמנה הקודמת שלך</span>
+      <button type="button">נקה והתחל מחדש</button>
+    </div>
+
     <form id="b2bofForm-{{ section.id }}" class="b2bof__form" novalidate>
-      <input type="text" name="website" class="b2bof__hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <input type="text" name="website" class="b2bof__hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;inset-inline-start:-9999px;opacity:0;height:0;">
 
       {%- assign grid_open = false -%}
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when 'group' -%}
             {%- if grid_open -%}</div>{%- assign grid_open = false -%}{%- endif -%}
-            <div class="b2bof__group-head" {{ block.shopify_attributes }}>
+            <div class="b2bof__group-head" id="b2bof-g-{{ block.id }}" {{ block.shopify_attributes }}>
               <h3 class="b2bof__group-title">{{ block.settings.title }}</h3>
               {%- if block.settings.subtitle != blank -%}
                 <span class="b2bof__group-sub">{{ block.settings.subtitle }}</span>
@@ -58,18 +82,21 @@
                 data-price="{{ v.price }}" {{ block.shopify_attributes }}>
                 <div class="b2bof__img">
                   {%- if p.featured_image != blank -%}
-                    <img src="{{ p.featured_image | image_url: width: 300, height: 300, crop: 'center' }}"
-                      alt="{{ p.featured_image.alt | default: p.title | escape }}" loading="lazy" width="150" height="150">
+                    <img src="{{ p.featured_image | image_url: width: 208, height: 208, crop: 'center' }}"
+                      alt="{{ p.featured_image.alt | default: p.title | escape }}"
+                      loading="lazy" width="104" height="104" style="aspect-ratio:1/1;">
                   {%- endif -%}
                 </div>
                 <div class="b2bof__info">
                   <span class="b2bof__name">{{ p.title }}</span>
-                  <span class="b2bof__price">{{ v.price | money }}{% if block.settings.note != blank %} · {{ block.settings.note }}{% endif %}</span>
+                  {%- if v.sku != blank -%}<span class="b2bof__sku"><bdi>{{ v.sku }}</bdi></span>{%- endif -%}
+                  <span class="b2bof__price num"><bdi>{{ v.price | money }}</bdi> ליחידה{% if block.settings.note != blank %} · {{ block.settings.note }}{% endif %}</span>
+                  <span class="b2bof__line-total num" aria-live="off"></span>
                 </div>
                 <div class="b2bof__qty">
-                  <button type="button" class="b2bof__step" data-step="-1" aria-label="הפחתת כמות">&minus;</button>
-                  <input type="number" class="b2bof__qty-input" inputmode="numeric" min="0" max="9999" step="1" value="0" aria-label="כמות — {{ p.title | escape }}">
-                  <button type="button" class="b2bof__step" data-step="1" aria-label="הוספת כמות">+</button>
+                  <button type="button" class="b2bof__step" data-step="-1" aria-label="הפחתת כמות — {{ p.title | escape }}">&minus;</button>
+                  <input type="text" class="b2bof__qty-input" inputmode="numeric" pattern="[0-9]*" maxlength="3" value="0" aria-label="כמות — {{ p.title | escape }}">
+                  <button type="button" class="b2bof__step" data-step="1" aria-label="הוספת כמות — {{ p.title | escape }}">+</button>
                 </div>
               </div>
             {%- endif -%}
@@ -77,20 +104,33 @@
       {%- endfor -%}
       {%- if grid_open -%}</div>{%- endif -%}
 
+      <p class="b2bof__empty" hidden>לא נמצאו מוצרים מתאימים — נסו חיפוש אחר</p>
+
       <fieldset class="b2bof__biz">
-        <legend class="b2bof__biz-title">פרטי העסק</legend>
+        <legend class="b2bof__biz-title">פרטי העסק והאספקה</legend>
         <div class="b2bof__fields">
           <label class="b2bof__field"><span>שם העסק *</span>
-            <input type="text" name="company" required autocomplete="organization"></label>
-          <label class="b2bof__field"><span>ח.פ / עוסק מורשה</span>
-            <input type="text" name="business_id" inputmode="numeric"></label>
+            <input type="text" name="company" required autocomplete="organization" aria-describedby="b2bof-err-company">
+            <p class="b2bof__field-err" id="b2bof-err-company" aria-live="polite"></p></label>
+          <label class="b2bof__field"><span>ח.פ / עוסק מורשה *</span>
+            <input type="text" name="business_id" required inputmode="numeric" maxlength="9" dir="ltr" aria-describedby="b2bof-err-business_id">
+            <p class="b2bof__field-err" id="b2bof-err-business_id" aria-live="polite"></p></label>
           <label class="b2bof__field"><span>איש קשר *</span>
-            <input type="text" name="contact_name" required autocomplete="name"></label>
+            <input type="text" name="contact_name" required autocomplete="name" aria-describedby="b2bof-err-contact_name">
+            <p class="b2bof__field-err" id="b2bof-err-contact_name" aria-live="polite"></p></label>
           <label class="b2bof__field"><span>טלפון *</span>
-            <input type="tel" name="phone" required autocomplete="tel" dir="ltr"></label>
+            <input type="tel" name="phone" required autocomplete="tel" dir="ltr" aria-describedby="b2bof-err-phone">
+            <p class="b2bof__field-err" id="b2bof-err-phone" aria-live="polite"></p></label>
           <label class="b2bof__field"><span>אימייל *</span>
-            <input type="email" name="email" required autocomplete="email" dir="ltr"></label>
-          <label class="b2bof__field b2bof__field--wide"><span>הערות להזמנה</span>
+            <input type="email" name="email" required autocomplete="email" dir="ltr" aria-describedby="b2bof-err-email">
+            <p class="b2bof__field-err" id="b2bof-err-email" aria-live="polite"></p></label>
+          <label class="b2bof__field"><span>עיר *</span>
+            <input type="text" name="city" required autocomplete="address-level2" aria-describedby="b2bof-err-city">
+            <p class="b2bof__field-err" id="b2bof-err-city" aria-live="polite"></p></label>
+          <label class="b2bof__field"><span>רחוב ומספר *</span>
+            <input type="text" name="street" required autocomplete="street-address" aria-describedby="b2bof-err-street">
+            <p class="b2bof__field-err" id="b2bof-err-street" aria-live="polite"></p></label>
+          <label class="b2bof__field b2bof__field--wide"><span>הערות לאספקה</span>
             <textarea name="notes" rows="2"></textarea></label>
         </div>
       </fieldset>
@@ -100,214 +140,55 @@
       <div class="b2bof__bar">
         <div class="b2bof__totals" aria-live="polite">
           <span class="b2bof__count">0 פריטים</span>
-          <strong class="b2bof__sum">‏0.00 ₪</strong>
+          <strong class="b2bof__sum num">‏0.00 ₪</strong>
+          <p class="b2bof__vat">המחירים כוללים מע״מ · חשבונית מס תופק אוטומטית למייל</p>
         </div>
-        <button type="submit" class="b2bof__submit">{{ section.settings.submit_label | default: 'המשך לתשלום' }}</button>
+        <div class="b2bof__minbar" hidden>
+          <p class="b2bof__minbar-label"></p>
+          <div class="b2bof__minbar-track"><div class="b2bof__minbar-fill"></div></div>
+        </div>
+        <button type="submit" class="b2bof__submit b2bof__submit--bar">{{ section.settings.submit_label | default: 'המשך לתשלום' }}</button>
       </div>
-      {%- if section.settings.webhook_url == blank and section.settings.demo_note != blank -%}
+      {%- if section.settings.mode != 'live' and section.settings.demo_note != blank -%}
         <p class="b2bof__demo-note">{{ section.settings.demo_note }}</p>
       {%- endif -%}
     </form>
 
     <div class="b2bof__overlay" hidden>
-      <div class="b2bof__dialog" role="dialog" aria-modal="true" aria-label="סיכום הזמנה">
-        <h3 class="b2bof__dialog-title">סיכום הזמנה — מצב הדגמה</h3>
-        <p class="b2bof__dialog-sub">החיבור לסליקת חשבונית ירוקה יופעל לאחר אישור (G3). זהו הסיכום שיישלח:</p>
-        <pre class="b2bof__payload" dir="ltr"></pre>
-        <button type="button" class="b2bof__close">סגירה</button>
+      <div class="b2bof__dialog" role="dialog" aria-modal="true" aria-label="סיכום הזמנה" tabindex="-1">
+        <h3 class="b2bof__dialog-title">סיכום ההזמנה</h3>
+        <p class="b2bof__dialog-sub">רגע לפני התשלום — ודאו שהכל נכון:</p>
+        <div class="b2bof__demo-flag" hidden>מצב הדגמה — ההזמנה תוצג לסיכום בלבד ולא תחויב.</div>
+        <table class="b2bof__sum-table">
+          <thead><tr><th>מוצר</th><th class="num">כמות</th><th class="num">ליחידה</th><th class="num">סה"כ</th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <div class="b2bof__sum-biz">
+          <button type="button" class="b2bof__edit-biz">עריכה</button>
+          <div class="b2bof__sum-biz-body"></div>
+        </div>
+        <details class="b2bof__payload-wrap" hidden>
+          <summary>פרטי השליחה הטכניים (demo)</summary>
+          <pre class="b2bof__payload"></pre>
+        </details>
+        <label class="b2bof__confirm">
+          <input type="checkbox">
+          <span>אני מאשר/ת את פרטי ההזמנה</span>
+        </label>
+        <p class="b2bof__modal-msg b2bof__msg" role="alert" aria-live="polite" hidden></p>
+        <div class="b2bof__dialog-actions">
+          <button type="button" class="b2bof__submit b2bof__submit--modal">
+            <span class="b2bof__spinner" hidden></span>
+            <span class="b2bof__submit-label">אישור ושליחה</span>
+          </button>
+          <button type="button" class="b2bof__cancel">חזרה לעריכה</button>
+        </div>
       </div>
     </div>
-
   </div>
 </section>
 
-{% style %}
-#b2b-order{ --b2b-accent: {{ accent }}; --b2b-accent-dark: {{ accent | color_darken: 12 }};
-  --b2b-border:#e6e6e6; --b2b-ink:#111; --b2b-muted:#555c55; background:#fff; padding:56px 0 0; }
-#b2b-order .b2bof__container{ max-width:1060px; margin-inline:auto; padding-inline:20px; }
-#b2b-order .b2bof__head{ text-align:center; max-width:640px; margin:0 auto 8px; }
-#b2b-order .b2bof__title{ font-size:clamp(26px,4vw,34px); font-weight:700; color:var(--b2b-ink); margin:0 0 10px; }
-#b2b-order .b2bof__sub{ color:var(--b2b-muted); font-size:16px; margin:0 0 8px; }
-#b2b-order .b2bof__hp{ position:absolute; inset-inline-start:-9999px; opacity:0; height:0; }
-#b2b-order .b2bof__group-head{ display:flex; align-items:baseline; gap:12px; margin:36px 0 14px;
-  padding-top:22px; border-top:1px solid var(--b2b-border); }
-#b2b-order .b2bof__group-title{ font-size:19px; font-weight:700; color:var(--b2b-ink); margin:0; }
-#b2b-order .b2bof__group-title::before{ content:''; display:inline-block; width:10px; height:10px;
-  border-radius:50%; background:var(--b2b-accent); margin-inline-end:10px; }
-#b2b-order .b2bof__group-sub{ color:var(--b2b-muted); font-size:14px; }
-#b2b-order .b2bof__grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:12px; }
-#b2b-order .b2bof__card{ display:flex; align-items:center; gap:12px; border:1px solid var(--b2b-border);
-  border-radius:10px; padding:10px 12px; background:#fff; transition:box-shadow .2s,border-color .2s; }
-#b2b-order .b2bof__card:hover{ border-color:#cfd6cd; box-shadow:0 2px 10px rgba(0,0,0,.05); }
-#b2b-order .b2bof__card.is-active{ border-color:var(--b2b-accent); }
-#b2b-order .b2bof__img{ width:54px; height:54px; flex:0 0 54px; border-radius:8px; overflow:hidden; background:#f4f6f3; }
-#b2b-order .b2bof__img img{ width:100%; height:100%; object-fit:cover; display:block; }
-#b2b-order .b2bof__info{ flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:2px; }
-#b2b-order .b2bof__name{ font-size:14px; font-weight:600; color:var(--b2b-ink); line-height:1.25; }
-#b2b-order .b2bof__price{ font-size:13px; color:var(--b2b-muted); }
-#b2b-order .b2bof__qty{ display:flex; align-items:center; gap:4px; }
-#b2b-order .b2bof__step{ width:32px; height:32px; border:1px solid var(--b2b-border); background:#fff;
-  border-radius:8px; font-size:17px; line-height:1; cursor:pointer; color:var(--b2b-ink); padding:0; }
-#b2b-order .b2bof__step:hover{ border-color:var(--b2b-accent); color:var(--b2b-accent); }
-#b2b-order .b2bof__qty-input{ width:48px; height:32px; text-align:center; border:1px solid var(--b2b-border);
-  border-radius:8px; font-size:14px; -moz-appearance:textfield; background:#fff; }
-#b2b-order .b2bof__qty-input::-webkit-outer-spin-button,
-#b2b-order .b2bof__qty-input::-webkit-inner-spin-button{ -webkit-appearance:none; margin:0; }
-#b2b-order .b2bof__qty-input:focus{ outline:none; border-color:var(--b2b-accent); }
-#b2b-order .b2bof__biz{ border:1px solid var(--b2b-border); border-radius:12px; padding:18px 18px 8px; margin:36px 0 0; }
-#b2b-order .b2bof__biz-title{ font-size:17px; font-weight:700; color:var(--b2b-ink); padding:0 8px; }
-#b2b-order .b2bof__fields{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px 16px; }
-#b2b-order .b2bof__field{ display:flex; flex-direction:column; gap:4px; font-size:13px; color:var(--b2b-muted); margin:0 0 10px; }
-#b2b-order .b2bof__field--wide{ grid-column:1 / -1; }
-#b2b-order .b2bof__field input, #b2b-order .b2bof__field textarea{ border:1px solid #d6d6d6; border-radius:8px;
-  padding:9px 12px; font:inherit; font-size:14px; color:var(--b2b-ink); background:#fff; }
-#b2b-order .b2bof__field input:focus, #b2b-order .b2bof__field textarea:focus{ outline:none; border-color:var(--b2b-accent); }
-#b2b-order .b2bof__field input.b2bof--invalid{ border-color:#c0392b; }
-#b2b-order .b2bof__msg{ margin:14px 0 0; color:#c0392b; font-size:14px; text-align:center; }
-#b2b-order .b2bof__msg.b2bof__msg--ok{ color:var(--b2b-accent-dark); }
-#b2b-order .b2bof__bar{ position:sticky; bottom:0; z-index:5; display:flex; align-items:center; justify-content:space-between;
-  gap:16px; background:#fff; border-top:2px solid var(--b2b-accent); box-shadow:0 -4px 16px rgba(0,0,0,.06);
-  padding:12px 16px calc(12px + env(safe-area-inset-bottom)); margin-top:24px; border-radius:12px 12px 0 0; }
-#b2b-order .b2bof__totals{ display:flex; flex-direction:column; line-height:1.3; }
-#b2b-order .b2bof__count{ font-size:13px; color:var(--b2b-muted); }
-#b2b-order .b2bof__sum{ font-size:19px; color:var(--b2b-ink); }
-#b2b-order .b2bof__submit{ background:var(--b2b-accent); color:#fff; border:0; border-radius:14px;
-  font-size:16px; font-weight:700; padding:13px 34px; cursor:pointer; transition:background .2s; }
-#b2b-order .b2bof__submit:hover{ background:var(--b2b-accent-dark); }
-#b2b-order .b2bof__submit[disabled]{ opacity:.6; cursor:wait; }
-#b2b-order .b2bof__demo-note{ text-align:center; color:var(--b2b-muted); font-size:13px; margin:10px 0 0; }
-#b2b-order .b2bof__overlay{ position:fixed; inset:0; z-index:1000; background:rgba(0,0,0,.45);
-  display:flex; align-items:center; justify-content:center; padding:20px; }
-#b2b-order .b2bof__dialog{ background:#fff; border-radius:14px; max-width:560px; width:100%;
-  max-height:80vh; overflow:auto; padding:24px; }
-#b2b-order .b2bof__dialog-title{ margin:0 0 6px; font-size:20px; color:var(--b2b-ink); }
-#b2b-order .b2bof__dialog-sub{ color:var(--b2b-muted); font-size:14px; margin:0 0 12px; }
-#b2b-order .b2bof__payload{ background:#f4f6f3; border:1px solid var(--b2b-border); border-radius:8px;
-  padding:12px; font-size:12px; overflow:auto; max-height:40vh; text-align:left; }
-#b2b-order .b2bof__close{ background:var(--b2b-ink); color:#fff; border:0; border-radius:8px;
-  padding:10px 22px; font-size:14px; cursor:pointer; margin-top:6px; }
-@media (max-width:767px){
-  #b2b-order{ padding-top:36px; }
-  #b2b-order .b2bof__grid{ grid-template-columns:1fr; }
-  #b2b-order .b2bof__bar{ flex-wrap:wrap; }
-  #b2b-order .b2bof__submit{ flex:1 1 100%; }
-}
-{% endstyle %}
-
-<script>
-(function(){
-  var root = document.getElementById('b2b-order'); if(!root) return;
-  var form = root.querySelector('.b2bof__form');
-  var webhookUrl = {{ section.settings.webhook_url | default: '' | json }};
-  var fmt = new Intl.NumberFormat('he-IL', { style:'currency', currency:'ILS' });
-  var msg = root.querySelector('.b2bof__msg');
-  var overlay = root.querySelector('.b2bof__overlay');
-  overlay.hidden = true;
-
-  function cards(){ return Array.prototype.slice.call(root.querySelectorAll('.b2bof__card')); }
-  function qtyOf(card){ return Math.max(0, parseInt(card.querySelector('.b2bof__qty-input').value, 10) || 0); }
-
-  function refresh(){
-    var count = 0, sum = 0;
-    cards().forEach(function(c){
-      var q = qtyOf(c);
-      c.classList.toggle('is-active', q > 0);
-      count += q; sum += q * parseInt(c.dataset.price, 10);
-    });
-    root.querySelector('.b2bof__count').textContent = count + ' פריטים';
-    root.querySelector('.b2bof__sum').textContent = fmt.format(sum / 100);
-  }
-
-  root.addEventListener('click', function(e){
-    var btn = e.target.closest('.b2bof__step'); if(!btn) return;
-    var input = btn.parentElement.querySelector('.b2bof__qty-input');
-    input.value = Math.max(0, (parseInt(input.value, 10) || 0) + parseInt(btn.dataset.step, 10));
-    refresh();
-  });
-  root.addEventListener('input', function(e){
-    if(e.target.classList.contains('b2bof__qty-input')) refresh();
-  });
-
-  function showMsg(text, ok){
-    msg.textContent = text; msg.hidden = false;
-    msg.classList.toggle('b2bof__msg--ok', !!ok);
-  }
-
-  function buildPayload(){
-    var lines = [];
-    cards().forEach(function(c){
-      var q = qtyOf(c); if(!q) return;
-      var unit = parseInt(c.dataset.price, 10) / 100;
-      lines.push({ product_id:+c.dataset.pid, variant_id:+c.dataset.vid, sku:c.dataset.sku,
-        title:c.dataset.title, quantity:q, unit_price:unit,
-        line_total:Math.round(unit * q * 100) / 100 });
-    });
-    var f = form.elements;
-    return {
-      source:'gt-b2b-landing', shop:{{ shop.permanent_domain | json }}, currency:'ILS',
-      created_at:new Date().toISOString(),
-      business:{ company:f.company.value.trim(), business_id:f.business_id.value.trim(),
-        contact_name:f.contact_name.value.trim(), phone:f.phone.value.trim(),
-        email:f.email.value.trim(), notes:f.notes.value.trim() },
-      lines:lines,
-      totals:{ item_count:lines.reduce(function(a,l){ return a + l.quantity; }, 0),
-        subtotal:Math.round(lines.reduce(function(a,l){ return a + l.line_total; }, 0) * 100) / 100 }
-    };
-  }
-
-  function validate(payload){
-    ['company','contact_name','phone','email'].forEach(function(n){
-      form.elements[n].classList.remove('b2bof--invalid');
-    });
-    if(!payload.lines.length){ showMsg('בחרו לפחות מוצר אחד כדי להמשיך.'); return false; }
-    var bad = null;
-    if(!payload.business.company) bad = 'company';
-    else if(!payload.business.contact_name) bad = 'contact_name';
-    else if(!/^[\d\s+().-]{8,}$/.test(payload.business.phone)) bad = 'phone';
-    else if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(payload.business.email)) bad = 'email';
-    if(bad){
-      form.elements[bad].classList.add('b2bof--invalid');
-      form.elements[bad].focus();
-      showMsg('נא להשלים את פרטי העסק המסומנים.');
-      return false;
-    }
-    return true;
-  }
-
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    if(form.elements.website.value) return; /* honeypot */
-    msg.hidden = true;
-    var payload = buildPayload();
-    if(!validate(payload)) return;
-
-    if(!webhookUrl){
-      overlay.querySelector('.b2bof__payload').textContent = JSON.stringify(payload, null, 2);
-      overlay.hidden = false;
-      return;
-    }
-    var submitBtn = form.querySelector('.b2bof__submit');
-    submitBtn.disabled = true;
-    fetch(webhookUrl, { method:'POST', headers:{ 'Content-Type':'application/json' },
-      body:JSON.stringify(payload) })
-      .then(function(r){ if(!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
-      .then(function(data){
-        if(data && data.payment_url){ window.location.href = data.payment_url; }
-        else { throw new Error('missing payment_url'); }
-      })
-      .catch(function(){
-        showMsg('שליחת ההזמנה נכשלה. נסו שוב או צרו קשר דרך הטופס בתחתית הדף.');
-        submitBtn.disabled = false;
-      });
-  });
-
-  overlay.addEventListener('click', function(e){
-    if(e.target === overlay || e.target.classList.contains('b2bof__close')) overlay.hidden = true;
-  });
-
-  refresh();
-})();
-</script>
+<script src="{{ 'b2b-order-form.js' | asset_url }}" defer></script>
 
 {% schema %}
 {
@@ -318,17 +199,41 @@
   "settings": [
     {
       "type": "paragraph",
-      "content": "טופס הזמנה סיטונאית. כשכתובת ה-Webhook ריקה הטופס פועל במצב הדגמה (ללא סליקה)."
+      "content": "טופס הזמנה סיטונאית. mode=demo — אין סליקה; ל-G3: להחליף ל-live ולהדביק Webhook."
     },
     { "type": "text", "id": "title", "label": "כותרת", "default": "הרכיבו הזמנה לעסק" },
     { "type": "text", "id": "sub_title", "label": "תת כותרת", "default": "בחרו כמויות, מלאו את פרטי העסק והמשיכו לתשלום מאובטח" },
-    { "type": "color", "id": "accent", "label": "צבע הדגשה", "default": "#457439" },
     { "type": "text", "id": "submit_label", "label": "טקסט כפתור", "default": "המשך לתשלום" },
+    {
+      "type": "select",
+      "id": "mode",
+      "label": "מצב פעולה",
+      "options": [
+        { "value": "demo", "label": "הדגמה (ללא סליקה)" },
+        { "value": "live", "label": "חי (שולח ל-Webhook)" }
+      ],
+      "default": "demo",
+      "info": "להעביר ל-live רק אחרי אישור G3 והזנת Webhook."
+    },
     {
       "type": "text",
       "id": "webhook_url",
       "label": "Webhook URL (Make.com → חשבונית ירוקה)",
-      "info": "להשאיר ריק עד אישור חיבור הסליקה (G3). ריק = מצב הדגמה."
+      "info": "ריק = מצב הדגמה גם אם mode=live."
+    },
+    { "type": "text", "id": "success_path", "label": "נתיב עמוד תודה", "default": "/pages/b2b-thank-you" },
+    {
+      "type": "number",
+      "id": "min_order_ils",
+      "label": "מינימום הזמנה בש\"ח",
+      "info": "ריק או 0 = ללא מינימום. [טום]"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp",
+      "label": "מספר וואטסאפ (פורמט בינלאומי)",
+      "default": "9725XXXXXXXX",
+      "info": "ל-fallback בתקלת תשלום. [טום] להחליף למספר אמיתי."
     },
     {
       "type": "text",
@@ -343,7 +248,8 @@
       "type": "group",
       "settings": [
         { "type": "text", "id": "title", "label": "שם הקבוצה", "default": "קבוצה" },
-        { "type": "text", "id": "subtitle", "label": "תיאור קצר" }
+        { "type": "text", "id": "subtitle", "label": "תיאור קצר" },
+        { "type": "text", "id": "nav_label", "label": "תווית בניווט המהיר", "info": "ריק = הקבוצה לא תופיע בניווט העליון" }
       ]
     },
     {

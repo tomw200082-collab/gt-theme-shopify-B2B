@@ -1,0 +1,94 @@
+{
+  "sections": {
+    "main": {
+      "type": "section",
+      "name": "B2B Thank You",
+      "blocks": {
+        "icon": {
+          "type": "icon",
+          "settings": {
+            "icon": "check_box",
+            "width": 44
+          }
+        },
+        "title": {
+          "type": "text",
+          "settings": {
+            "text": "<h1>ההזמנה התקבלה!</h1>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "h2",
+            "font": "var(--font-primary--family)",
+            "wrap": "pretty"
+          }
+        },
+        "sub": {
+          "type": "text",
+          "settings": {
+            "text": "<p>תודה שבחרתם ב-GT Everyday. חשבונית המס בדרך למייל שלכם.</p>",
+            "width": "100%",
+            "max_width": "narrow",
+            "alignment": "center",
+            "type_preset": "rte",
+            "font": "var(--font-primary--family)",
+            "wrap": "pretty"
+          }
+        },
+        "next": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>מה הלאה?</strong> ניצור איתכם קשר בהקדם לתיאום האספקה. יש שאלה דחופה? אנחנו זמינים בוואטסאפ.</p>",
+            "width": "100%",
+            "max_width": "narrow",
+            "alignment": "center",
+            "type_preset": "rte",
+            "font": "var(--font-primary--family)",
+            "wrap": "pretty"
+          }
+        },
+        "wa": {
+          "type": "button",
+          "settings": {
+            "label": "דברו איתנו בוואטסאפ",
+            "link": "https://wa.me/9725XXXXXXXX",
+            "open_in_new_tab": true,
+            "style_class": "button",
+            "width": "fit-content",
+            "width_mobile": "fit-content"
+          }
+        },
+        "again": {
+          "type": "button",
+          "settings": {
+            "label": "להזמנה נוספת",
+            "link": "/pages/b2b-landing",
+            "style_class": "button-secondary",
+            "width": "fit-content",
+            "width_mobile": "fit-content"
+          }
+        }
+      },
+      "block_order": [
+        "icon",
+        "title",
+        "sub",
+        "next",
+        "wa",
+        "again"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "horizontal_alignment_flex_direction_column": "center",
+        "gap": 18,
+        "section_width": "page-width",
+        "color_scheme": "scheme-3",
+        "padding-block-start": 96,
+        "padding-block-end": 96
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
