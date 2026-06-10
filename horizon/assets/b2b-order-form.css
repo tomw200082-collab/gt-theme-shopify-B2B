@@ -75,7 +75,12 @@ main[data-template*="b2b-thank-you"] h1, main[data-template*="b2b-thank-you"] h2
 .b2bof__media{ position:relative; aspect-ratio:1/1; background:#f0f2ec; overflow:hidden; }
 .b2bof__media img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s ease; }
 .b2bof__card:hover .b2bof__media img{ transform:scale(1.04); }
-.b2bof__media--empty{ display:flex; align-items:center; justify-content:center; color:var(--faint); }
+.b2bof__media--empty{ display:flex; align-items:center; justify-content:center; color:var(--faint);
+  background:radial-gradient(125% 120% at 50% 0%, #f1f5ed 0%, #e5ecdd 100%); }
+.b2bof__ph{ display:flex; flex-direction:column; align-items:center; gap:7px; padding:12px; color:#aabd9c; }
+.b2bof__ph svg{ width:40px; height:40px; opacity:.9; }
+.b2bof__ph-tx{ font-family:'Rubik','Assistant',sans-serif; font-size:11.5px; font-weight:600;
+  letter-spacing:.1em; color:#9cb38d; }
 .b2bof__badge{ position:absolute; inset-block-start:10px; inset-inline-start:10px;
   background:var(--g); color:#fff; font-size:12px; font-weight:700; border-radius:var(--r-pill);
   min-width:24px; height:24px; padding:0 8px; display:none; align-items:center; justify-content:center;
