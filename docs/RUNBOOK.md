@@ -148,6 +148,23 @@ Ube, Frother, Measuring Cup + 5 אביזרי מאצ'ה + 2 סנגריה 3.85L. (
   - **חסר packshot ייעודי** ל: אביזרי מאצ'ה (מטרפה/כף/מעמד/כלי/בקבוק/כוס מדידה), ODK ×3, סנגריה 3.85L ×2.
     → טום לכוון/לספק, או להשתמש ב-cutouts לעקביות קו התה. עד אז — placeholder ממותג.
 
+### G3 — חיווט סליקה (2026-06-11, סשן 3)
+**צד ה-theme חווט 100% (אומת חי, mode=demo):**
+- `webhook_url` = `https://hook.eu1.make.com/x79d7cvn81tetwbxogpb7p75968nwhan` (URL חדש מטום; קודם vc6pf7f4).
+- payload: `income[]` = `{description:"<title> (<sku>)", quantity, price, currency:"ILS", vatType:0}` (לפי מפרט טום)
+  + `client{}` + `items[]` + `customer{}` + `totalILS` + `idempotencyKey` + `createdAt` + `source:"b2b-landing"`.
+- fetch: POST, `Content-Type: application/json`, timeout 10s. הצלחה→redirect `data.paymentUrl`+clearCart+reset key.
+  כשל→fallback וואטסאפ (972543982444). **mode=demo** — לא יורה עד הפעלה ידנית.
+
+**מה חסר לסיום (Make / חשבונית ירוקה / הפעלה — טום):**
+1. תרחיש Make על ה-webhook החדש: Webhook → `POST /account/token` (KEY_ID+KEY_SECRET) → `POST /payments/form`
+   (מיפוי income→income, client→client, amount=totalILS, successUrl=`/pages/b2b-thank-you`) → **Webhook Response 200 `{"paymentUrl":"..."}`**.
+2. **מפתחות API חשבונית ירוקה** במודול token (סוד — ב-Make, לא בצ'אט).
+3. **CORS**: fetch מהדפדפן ל-hook.eu1.make.com חוצה-origin → תגובת Webhook חייבת `Access-Control-Allow-Origin`.
+   אם Make לא מחזיר header → הדפדפן חוסם והמשתמש מקבל fallback. לבדוק בריצת הבדיקה (או proxy/HMAC).
+4. **redirect** מחשבונית ירוקה ל-`/pages/b2b-thank-you` אחרי תשלום.
+5. **בדיקה**: Make Run-once + הזמנת בדיקה מהדף → round-trip תקין → ואז `mode`→`live`.
+
 ---
 
 
