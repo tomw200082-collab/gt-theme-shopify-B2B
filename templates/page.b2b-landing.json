@@ -1,0 +1,400 @@
+{
+  "sections": {
+    "b2b_hero": {
+      "type": "custom-html",
+      "settings": {
+        "wide_display": false,
+        "custom_html": "<div class=\"b2b-hero\">\n<style>\n.b2b-hero{--g:#457439;--ink:#1c1c1c;--muted:#555;text-align:center;padding:64px 16px 56px;background:#fff}\n.b2b-hero__overline{display:inline-block;color:var(--g);font-size:14px;font-weight:700;letter-spacing:.12em;border:1px solid #dfe7dc;border-radius:999px;padding:6px 18px;margin:0 0 18px}\n.b2b-hero__title{font-size:clamp(34px,6vw,56px);font-weight:800;color:var(--ink);margin:0 0 14px;line-height:1.1}\n.b2b-hero__sub{font-size:clamp(16px,2.4vw,20px);color:var(--muted);max-width:640px;margin:0 auto 28px;line-height:1.6}\n.b2b-hero__cta{display:inline-block;background:var(--g);color:#fff;font-size:17px;font-weight:700;padding:15px 44px;border-radius:10px;text-decoration:none;transition:background .2s}\n.b2b-hero__cta:hover{background:#38602e;color:#fff;text-decoration:none}\n.b2b-hero__props{list-style:none;display:flex;justify-content:center;gap:28px;flex-wrap:wrap;max-width:980px;margin:44px auto 0;padding:28px 0 0;border-top:1px solid #ececec}\n.b2b-hero__props li{flex:1 1 240px;max-width:300px;text-align:center}\n.b2b-hero__props li::before{content:'';display:block;width:34px;height:34px;margin:0 auto 10px;border-radius:50%;background:var(--g);-webkit-mask:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E\") center/20px no-repeat,linear-gradient(#000 0 0);mask:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E\") center/20px no-repeat;mask-composite:exclude;background:var(--g);border-radius:50%}\n.b2b-hero__props strong{display:block;color:var(--ink);font-size:17px;margin-bottom:4px}\n.b2b-hero__props span{color:var(--muted);font-size:14px;line-height:1.5}\n@media(max-width:767px){.b2b-hero{padding:44px 16px 40px}.b2b-hero__props{gap:18px}}\n</style>\n<p class=\"b2b-hero__overline\">מכירות לעסקים · B2B</p>\n<h1 class=\"b2b-hero__title\">GT Everyday לעסקים</h1>\n<p class=\"b2b-hero__sub\">משקאות טבעיים לבתי קפה, מסעדות ואירועים — ישירות מהיצרן, במחיר אחיד ושקוף</p>\n<a class=\"b2b-hero__cta\" href=\"#b2b-order\">להרכבת הזמנה</a>\n<ul class=\"b2b-hero__props\">\n<li><strong>טבעי וישיר מהיצרן</strong><span>תוצרת טבעית באיכות גבוהה, בלי מתווכים ובלי הפתעות</span></li>\n<li><strong>הכל מספק אחד</strong><span>תמציות תה, סנגריה, מאצ&#39;ה, סמודי ואביזרים — בהזמנה אחת</span></li>\n<li><strong>נוחות תפעולית לעסק</strong><span>הזמנה מהירה, קישור לתשלום מאובטח וחשבונית מס מסודרת</span></li>\n</ul>\n</div>"
+      }
+    },
+    "b2b_order": {
+      "type": "b2b-order-form",
+      "blocks": {
+        "g1": {
+          "type": "group",
+          "settings": {
+            "title": "תמציות תה · 1 ליטר",
+            "subtitle": "הליין המלא של תמציות התה שלנו"
+          }
+        },
+        "a1": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-תה-ירוק-לואיזה-ונענע-1-ל-detox-copy"
+          }
+        },
+        "a2": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-תה-ירוק-לואיזה-ונענע-ללא-סוכר-1-ל-detox-sugar-free-copy"
+          }
+        },
+        "a3": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-היביסקוס-וליים-1-ל-fresh-copy"
+          }
+        },
+        "a4": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-היביסקוס-וליים-ללא-סוכר-1-ל-fresh-sugar-free-copy"
+          }
+        },
+        "a5": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-תה-ירוק-ולמון-גראס-1-ל-energy-copy"
+          }
+        },
+        "a6": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-תה-ירוק-יסמין-וליצי-1-ל-consciousness-copy"
+          }
+        },
+        "a7": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-קמומיל-תפוח-וציפורן-1-ל-calm-copy"
+          }
+        },
+        "a8": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-תה-ירוק-סנצה-ופסיפלורה-1-ל-revive-copy"
+          }
+        },
+        "a9": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-צאי-מסאלה-1-ל-namastea-copy"
+          }
+        },
+        "a10": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-צאי-מסאלה-1-ל-namastea-copy-2"
+          }
+        },
+        "g2": {
+          "type": "group",
+          "settings": {
+            "title": "תמציות תה · 0.5 ליטר",
+            "subtitle": "אריזה קומפקטית לשירות מהיר"
+          }
+        },
+        "b1": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-תה-ירוק-לואיזה-ונענע-0-5-ל-detox"
+          }
+        },
+        "b2": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-תה-ירוק-לואיזה-ונענע-ללא-סוכר-0-5-ל-detox-sugar-free"
+          }
+        },
+        "b3": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-היביסקוס-וליים-0-5-ל-fresh"
+          }
+        },
+        "b4": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-היביסקוס-וליים-ללא-סוכר-0-5-ל-fresh-sugar-free"
+          }
+        },
+        "b5": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-תה-ירוק-ולמון-גראס-0-5-ל-energy"
+          }
+        },
+        "b6": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-תה-ירוק-יסמין-וליצי-0-5-ל-consciousness"
+          }
+        },
+        "b7": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-קמומיל-תפוח-וציפורן-0-5-ל-calm"
+          }
+        },
+        "b8": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-תה-ירוק-סנצה-ופסיפלורה-0-5-ל-revive"
+          }
+        },
+        "b9": {
+          "type": "product",
+          "settings": {
+            "product": "namastea-500ml"
+          }
+        },
+        "g3": {
+          "type": "group",
+          "settings": {
+            "title": "סנגריה",
+            "subtitle": "מוכן להגשה — לבר, למסעדה ולאירוע"
+          }
+        },
+        "e1": {
+          "type": "product",
+          "settings": {
+            "product": "קוקטייל-סנגריה-לבנה-1-ל-white-sangria"
+          }
+        },
+        "e2": {
+          "type": "product",
+          "settings": {
+            "product": "קוקטייל-סנגריה-ורודה-1-ל-pink-sangria"
+          }
+        },
+        "e6": {
+          "type": "product",
+          "settings": {
+            "product": "red-sangria-3-85l"
+          }
+        },
+        "e7": {
+          "type": "product",
+          "settings": {
+            "product": "white-sangria-3-85l"
+          }
+        },
+        "g4": {
+          "type": "group",
+          "settings": {
+            "title": "סמודי ODK",
+            "subtitle": "בסיס סמודי פירות · 1 ליטר"
+          }
+        },
+        "s1": {
+          "type": "product",
+          "settings": {
+            "product": "strawberry-odk-מארז-תות-6-יחידות-copy"
+          }
+        },
+        "s2": {
+          "type": "product",
+          "settings": {
+            "product": "mango-odk-מארז-מנגו-6-יחידות-copy"
+          }
+        },
+        "s3": {
+          "type": "product",
+          "settings": {
+            "product": "peach-odk-מארז-אפרסק-6-יחידות-copy"
+          }
+        },
+        "g5": {
+          "type": "group",
+          "settings": {
+            "title": "מאצ'ה ואבקות",
+            "subtitle": "מאצ'ה טקסית יפנית ואבקות פרימיום"
+          }
+        },
+        "h1": {
+          "type": "product",
+          "settings": {
+            "product": "maruei-טקסית"
+          }
+        },
+        "h2": {
+          "type": "product",
+          "settings": {
+            "product": "gt-maruei-ceremonial-box-with-30-aluminium-bags-maruei-טקסית-copy"
+          }
+        },
+        "h4": {
+          "type": "product",
+          "settings": {
+            "product": "gt-shizuoka-ceremonial-קופסה-עם-30-שקיות-אלומיניום-shizuoka-טקסית-copy"
+          }
+        },
+        "h6": {
+          "type": "product",
+          "settings": {
+            "product": "קיט-מלא-למאצה"
+          }
+        },
+        "h8": {
+          "type": "product",
+          "settings": {
+            "product": "ube-powder"
+          }
+        },
+        "g6": {
+          "type": "group",
+          "settings": {
+            "title": "אביזרי הכנה והגשה",
+            "subtitle": "כל מה שצריך להכנת מאצ'ה מושלמת"
+          }
+        },
+        "i1": {
+          "type": "product",
+          "settings": {
+            "product": "matcha-whisker"
+          }
+        },
+        "i2": {
+          "type": "product",
+          "settings": {
+            "product": "bamboo-matcha-whisk"
+          }
+        },
+        "i3": {
+          "type": "product",
+          "settings": {
+            "product": "bamboo-matcha-scoop"
+          }
+        },
+        "i4": {
+          "type": "product",
+          "settings": {
+            "product": "matcha-whisk-stand"
+          }
+        },
+        "i5": {
+          "type": "product",
+          "settings": {
+            "product": "כלי-הכנת-מאצה-זכוכית-600-מל"
+          }
+        },
+        "i6": {
+          "type": "product",
+          "settings": {
+            "product": "בקבוק-מאצה-רב-פעמי"
+          }
+        },
+        "i7": {
+          "type": "product",
+          "settings": {
+            "product": "כוס-מדידה"
+          }
+        }
+      },
+      "block_order": [
+        "g1",
+        "a1",
+        "a2",
+        "a3",
+        "a4",
+        "a5",
+        "a6",
+        "a7",
+        "a8",
+        "a9",
+        "a10",
+        "g2",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8",
+        "b9",
+        "g3",
+        "e1",
+        "e2",
+        "e6",
+        "e7",
+        "g4",
+        "s1",
+        "s2",
+        "s3",
+        "g5",
+        "h1",
+        "h2",
+        "h4",
+        "h6",
+        "h8",
+        "g6",
+        "i1",
+        "i2",
+        "i3",
+        "i4",
+        "i5",
+        "i6",
+        "i7"
+      ],
+      "settings": {
+        "title": "הרכיבו הזמנה לעסק",
+        "sub_title": "בחרו כמויות, מלאו את פרטי העסק והמשיכו לתשלום מאובטח",
+        "accent": "#457439",
+        "submit_label": "המשך לתשלום",
+        "webhook_url": "",
+        "demo_note": "מערכת התשלום בהקמה — ההזמנה תוצג לסיכום בלבד ולא תחויב."
+      }
+    },
+    "b2b_faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": {
+          "type": "faq_item",
+          "settings": {
+            "title": "למי מיועדת ההזמנה העסקית?",
+            "content": "<p>לבתי קפה, מסעדות, ברים, מלונות, משרדים ומפיקי אירועים — כל עסק שרוצה משקאות טבעיים באיכות גבוהה, ישירות מהיצרן.</p>"
+          }
+        },
+        "q2": {
+          "type": "faq_item",
+          "settings": {
+            "title": "האם המחירים שונים בין עסקים?",
+            "content": "<p>לא. המחיר באתר אחיד ושקוף לכל העסקים — בלי מיקוח ובלי מחירונים נסתרים.</p>"
+          }
+        },
+        "q3": {
+          "type": "faq_item",
+          "settings": {
+            "title": "איך מתבצע התשלום ומה לגבי חשבונית?",
+            "content": "<p>לאחר שליחת ההזמנה תועברו לדף תשלום מאובטח. חשבונית מס מופקת אוטומטית ונשלחת אליכם במייל.</p>"
+          }
+        },
+        "q4": {
+          "type": "faq_item",
+          "settings": {
+            "title": "שלחתי הזמנה — מה הלאה?",
+            "content": "<p>ניצור איתכם קשר לתיאום האספקה. לכל שאלה אפשר לפנות אלינו דרך טופס יצירת הקשר שבתחתית הדף.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+      ],
+      "settings": {
+        "full_width": false,
+        "hidden_xs": false
+      }
+    },
+    "b2b_contact": {
+      "type": "contact",
+      "settings": {
+        "title": "דברו איתנו",
+        "form_title": "שאלות על הזמנה עסקית? כתבו לנו ונחזור אליכם",
+        "show_info": false,
+        "show_map": false,
+        "opening_enable": false,
+        "full_width": false
+      }
+    }
+  },
+  "order": [
+    "b2b_hero",
+    "b2b_order",
+    "b2b_faq",
+    "b2b_contact"
+  ]
+}
