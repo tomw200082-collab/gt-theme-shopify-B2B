@@ -85,6 +85,35 @@ products לא נוגעים). דפדפן אמיתי (Chrome DevTools MCP) זמי�
 | Placeholders | whatsapp, min_order, mode→live | ⚠️ [טום] למלא | settings |
 | קונסול | goodav + ERR_NAME_NOT_RESOLVED (אפליקציית צד-ג', לא הקוד שלנו) | ℹ️ רעש קיים | console |
 
+### שינויים שבוצעו ועלו ל-Horizon (2026-06-11, מהמחשב)
+
+**אישור מפורש מטום לחרוג מ"אין מוטציה על products" — לפעולות אדיטיביות בלבד:** פרסום לערוץ +
+הוספת featured image. שום שינוי נתונים אחר במוצרים/קולקציות לא בוצע. MAIN לא נגענו. אין סליקה חיה.
+
+1. **מע״מ (בקשת טום):** "כולל" → "אינם כוללים מע״מ · מע״מ יתווסף בחשבונית" — קפסולה דביקה,
+   quick-view (JS), והערה חדשה במודאל הסיכום (`.b2bof__sum-vat`). אומת חי.
+2. **Hero מפוצל עם תמונה אמיתית:** `b2b-hero.liquid` שוכתב ל-2 עמודות (טקסט+תמונה), value-props
+   מתחת, `image_picker` + ברירת מחדל. assets: `gt-hero-energy.jpg/.webp` (קרף ENERGY מ-02_tea,
+   4:5, webp 53KB, eager+fetchpriority). פונט כותרות נשאר Rubik (החלטת טום).
+3. **פרסום 7 מוצרים** לערוץ Online Store (publishablePublish) — 38/38 מתרנדרים. ⚠️ צד-לוואי:
+   גלויים גם בחנות הציבורית (ערוץ OS גלובלי).
+4. **featured image ל-2 מוצרים** (התאמת SKU 100%): Desert Infusion (GT DESERT.png), NAMASTEA 500ml
+   (GT NAMASTEA.png מתיקיית 1L). productCreateMedia → גלוי בכרטיס ובמוצר.
+5. **Placeholder ממותג** (`.b2bof__ph`) במקום אייקון apparel — לכרטיסים ללא תמונה (~15).
+6. **לוקליזציה לעברית:** באנר עליון + פוטר (newsletter + "Sign up") + יישור RTL.
+   `header-group.json` + `footer-group.json` נלכדו לריפו ועלו (chrome גלובלי).
+
+**QA סבב 1 (פונקציונלי+ויזואלי):** עבר. flow מלא נבדק חי: כמות→סכום (3×65=195)→טופס→ולידציה
+(מוצר חסר / אישור חסר)→מודאל סיכום (כולל הערת מע״מ)→demo (אין חיוב, אין ניווט). RTL: dir=rtl,
+lang=he, standards-mode. קונסול: אפס שגיאות מהקוד שלנו.
+
+**תמונות חסרות — [טום] לספק (תיקיות SHOTS_NEEDED ריקות):** ODK ×3, Maruei bags, Complete Matcha Kit,
+Ube, Frother, Measuring Cup + 5 אביזרי מאצ'ה + 2 סנגריה 3.85L. (אין packshot בפרויקט ל: Maruei
+`GT-MAR-CER-18*22`, Ube `UBE-POWDER-1-KG`, בקבוק `GT-MAT-BTL-RU`.) עד אז — placeholder ממותג.
+
+**[לבירור] מחירים בפומבי:** הדף מציג מחירי סיטונאות ב-URL ציבורי. כלל GT הכללי = "מחירים לא גלויים
+ללא התחברות". לאשר שזה מכוון לדף הנחיתה הזה, או לשקול הגנה (סיסמת דף / לוגין / noindex).
+
 ---
 
 
