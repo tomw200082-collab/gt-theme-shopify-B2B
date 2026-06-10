@@ -32,13 +32,14 @@
       <div class="b2bhero__figure">
         <span class="b2bhero__figure-glow" aria-hidden="true"></span>
         {%- if section.settings.hero_image != blank -%}
+          {%- assign hero_alt = section.settings.image_alt | default: section.settings.title -%}
           {{ section.settings.hero_image | image_url: width: 1040 | image_tag:
              widths: '420,560,720,1040',
              sizes: '(max-width: 860px) 92vw, 480px',
              class: 'b2bhero__img',
              loading: 'eager',
              fetchpriority: 'high',
-             alt: section.settings.image_alt | default: section.settings.title }}
+             alt: hero_alt }}
         {%- else -%}
           <picture>
             <source type="image/webp" srcset="{{ 'gt-hero-energy.webp' | asset_url }}">

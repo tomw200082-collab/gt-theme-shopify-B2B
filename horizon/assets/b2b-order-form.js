@@ -130,7 +130,7 @@
       ['company','business_id','contact_name','phone','email','city','street','notes']
         .forEach(function (k) { if (form.elements[k]) form.elements[k].value = ''; });
       restoring = false;
-      clearCart(); restoreBar.hidden = true; refresh(false);
+      clearCart(); idempotencyKey = null; restoreBar.hidden = true; refresh(false);
     });
   }
 
@@ -158,10 +158,8 @@
   function applyFilter() {
     var q = (searchInput.value || '').trim().toLowerCase();
     var anyVisible = false;
-    var groups = root.querySelectorAll('.b2bof__group-head');
-    groups.forEach(function (head) {
-      var grid = head.nextElementSibling;
-      if (!grid || !grid.classList.contains('b2bof__grid')) return;
+    var grids = root.querySelectorAll('.b2bof__grid');
+    grids.forEach(function (grid) {
       var visibleInGroup = 0;
       grid.querySelectorAll('.b2bof__card').forEach(function (c) {
         var hit = !q ||
@@ -170,8 +168,9 @@
         c.hidden = !hit;
         if (hit) visibleInGroup++;
       });
-      head.hidden = visibleInGroup === 0;
       grid.hidden = visibleInGroup === 0;
+      var head = grid.previousElementSibling;
+      if (head && head.classList.contains('b2bof__group-head')) head.hidden = visibleInGroup === 0;
       if (visibleInGroup) anyVisible = true;
     });
     if (emptyNote) emptyNote.hidden = anyVisible;
@@ -320,11 +319,16 @@
     overlay.querySelector('.b2bof__demo-flag').hidden = CONFIG.mode === 'live';
     setModalError('');
     setModalBusy(false);
+    var pw = overlay.querySelector('.b2bof__payload-wrap');
+    if (pw) { pw.hidden = true; pw.open = false; }
+    var pp = overlay.querySelector('.b2bof__payload'); if (pp) pp.textContent = '';
     overlay.hidden = false;
+    document.body.style.overflow = 'hidden';
     overlay.querySelector('.b2bof__dialog').focus();
   }
   function closeModal() {
     overlay.hidden = true;
+    document.body.style.overflow = '';
     if (lastFocused) lastFocused.focus();
   }
   function setModalError(html) {
@@ -398,6 +402,7 @@
     }).then(function (data) {
       if (!data || !data.paymentUrl) throw new Error('missing paymentUrl');
       clearCart();
+      idempotencyKey = null;
       window.location.href = data.paymentUrl;
     }).catch(function () {
       clearTimeout(timer);
@@ -462,7 +467,15 @@
       }
     });
     qv.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') closeQuick();
+      if (e.key === 'Escape') { closeQuick(); return; }
+      if (e.key !== 'Tab') return;
+      var dlg = qv.querySelector('.b2bof__qv') || qv;
+      var focusables = dlg.querySelectorAll('button, input, [tabindex="0"], a[href]');
+      var list = Array.prototype.filter.call(focusables, function (el) { return !el.disabled && el.offsetParent !== null; });
+      if (!list.length) return;
+      var first = list[0], last = list[list.length - 1];
+      if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
+      else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
     });
     qv.querySelector('.b2bof__qv-qty').addEventListener('focus', function () { this.select(); });
   }
