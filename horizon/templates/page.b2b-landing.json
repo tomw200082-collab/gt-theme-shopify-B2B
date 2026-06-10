@@ -1,0 +1,787 @@
+{
+  "sections": {
+    "hero": {
+      "type": "section",
+      "name": "B2B Hero",
+      "blocks": {
+        "overline": {
+          "type": "text",
+          "settings": {
+            "text": "<p>מכירות לעסקים · B2B</p>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "h6",
+            "font": "var(--font-primary--family)",
+            "wrap": "pretty"
+          }
+        },
+        "title": {
+          "type": "text",
+          "settings": {
+            "text": "<h1>GT Everyday לעסקים</h1>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "h1",
+            "font": "var(--font-primary--family)",
+            "wrap": "pretty"
+          }
+        },
+        "subtitle": {
+          "type": "text",
+          "settings": {
+            "text": "<p>משקאות טבעיים לבתי קפה, מסעדות ואירועים — ישירות מהיצרן, במחיר אחיד ושקוף</p>",
+            "width": "100%",
+            "max_width": "narrow",
+            "alignment": "center",
+            "type_preset": "rte",
+            "font": "var(--font-primary--family)",
+            "wrap": "pretty"
+          }
+        },
+        "cta": {
+          "type": "button",
+          "settings": {
+            "label": "להרכבת הזמנה",
+            "link": "#b2b-order",
+            "style_class": "button",
+            "width": "fit-content",
+            "width_mobile": "fit-content"
+          }
+        },
+        "props": {
+          "type": "group",
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "center",
+            "vertical_alignment": "flex-start",
+            "gap": 32,
+            "width": "fill",
+            "inherit_color_scheme": true,
+            "padding-block-start": 24
+          },
+          "blocks": {
+            "p1": {
+              "type": "group",
+              "settings": {
+                "content_direction": "column",
+                "horizontal_alignment_flex_direction_column": "center",
+                "gap": 8,
+                "width": "custom",
+                "custom_width": 30,
+                "width_mobile": "fill",
+                "inherit_color_scheme": true,
+                "padding-block-start": 8,
+                "padding-block-end": 8
+              },
+              "blocks": {
+                "icon": {
+                  "type": "icon",
+                  "settings": {
+                    "icon": "leaf",
+                    "width": 28
+                  }
+                },
+                "ttl": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<h5>טבעי וישיר מהיצרן</h5>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "center",
+                    "type_preset": "h5",
+                    "font": "var(--font-primary--family)",
+                    "wrap": "pretty"
+                  }
+                },
+                "dsc": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>תוצרת טבעית באיכות גבוהה, בלי מתווכים ובלי הפתעות</p>",
+                    "width": "100%",
+                    "max_width": "narrow",
+                    "alignment": "center",
+                    "type_preset": "rte",
+                    "font": "var(--font-primary--family)",
+                    "wrap": "pretty"
+                  }
+                }
+              },
+              "block_order": [
+                "icon",
+                "ttl",
+                "dsc"
+              ]
+            },
+            "p2": {
+              "type": "group",
+              "settings": {
+                "content_direction": "column",
+                "horizontal_alignment_flex_direction_column": "center",
+                "gap": 8,
+                "width": "custom",
+                "custom_width": 30,
+                "width_mobile": "fill",
+                "inherit_color_scheme": true,
+                "padding-block-start": 8,
+                "padding-block-end": 8
+              },
+              "blocks": {
+                "icon": {
+                  "type": "icon",
+                  "settings": {
+                    "icon": "box",
+                    "width": 28
+                  }
+                },
+                "ttl": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<h5>הכל מספק אחד</h5>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "center",
+                    "type_preset": "h5",
+                    "font": "var(--font-primary--family)",
+                    "wrap": "pretty"
+                  }
+                },
+                "dsc": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>תמציות תה, סנגריה, מאצ'ה, סמודי ואביזרים — בהזמנה אחת</p>",
+                    "width": "100%",
+                    "max_width": "narrow",
+                    "alignment": "center",
+                    "type_preset": "rte",
+                    "font": "var(--font-primary--family)",
+                    "wrap": "pretty"
+                  }
+                }
+              },
+              "block_order": [
+                "icon",
+                "ttl",
+                "dsc"
+              ]
+            },
+            "p3": {
+              "type": "group",
+              "settings": {
+                "content_direction": "column",
+                "horizontal_alignment_flex_direction_column": "center",
+                "gap": 8,
+                "width": "custom",
+                "custom_width": 30,
+                "width_mobile": "fill",
+                "inherit_color_scheme": true,
+                "padding-block-start": 8,
+                "padding-block-end": 8
+              },
+              "blocks": {
+                "icon": {
+                  "type": "icon",
+                  "settings": {
+                    "icon": "truck",
+                    "width": 28
+                  }
+                },
+                "ttl": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<h5>נוחות תפעולית לעסק</h5>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "center",
+                    "type_preset": "h5",
+                    "font": "var(--font-primary--family)",
+                    "wrap": "pretty"
+                  }
+                },
+                "dsc": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>הזמנה מהירה, תשלום מאובטח וחשבונית מס מסודרת</p>",
+                    "width": "100%",
+                    "max_width": "narrow",
+                    "alignment": "center",
+                    "type_preset": "rte",
+                    "font": "var(--font-primary--family)",
+                    "wrap": "pretty"
+                  }
+                }
+              },
+              "block_order": [
+                "icon",
+                "ttl",
+                "dsc"
+              ]
+            }
+          },
+          "block_order": [
+            "p1",
+            "p2",
+            "p3"
+          ]
+        }
+      },
+      "block_order": [
+        "overline",
+        "title",
+        "subtitle",
+        "cta",
+        "props"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "horizontal_alignment_flex_direction_column": "center",
+        "gap": 16,
+        "section_width": "page-width",
+        "color_scheme": "scheme-3",
+        "padding-block-start": 72,
+        "padding-block-end": 64
+      }
+    },
+    "b2b_order": {
+      "type": "b2b-order-form",
+      "name": "B2B Order Form",
+      "blocks": {
+        "g1": {
+          "type": "group",
+          "settings": {
+            "title": "תמציות תה · 1 ליטר",
+            "subtitle": "הליין המלא של תמציות התה שלנו"
+          }
+        },
+        "a1": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-תה-ירוק-לואיזה-ונענע-1-ל-detox-copy"
+          }
+        },
+        "a2": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-תה-ירוק-לואיזה-ונענע-ללא-סוכר-1-ל-detox-sugar-free-copy"
+          }
+        },
+        "a3": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-היביסקוס-וליים-1-ל-fresh-copy"
+          }
+        },
+        "a4": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-היביסקוס-וליים-ללא-סוכר-1-ל-fresh-sugar-free-copy"
+          }
+        },
+        "a5": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-תה-ירוק-ולמון-גראס-1-ל-energy-copy"
+          }
+        },
+        "a6": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-תה-ירוק-יסמין-וליצי-1-ל-consciousness-copy"
+          }
+        },
+        "a7": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-קמומיל-תפוח-וציפורן-1-ל-calm-copy"
+          }
+        },
+        "a8": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-תה-ירוק-סנצה-ופסיפלורה-1-ל-revive-copy"
+          }
+        },
+        "a9": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-צאי-מסאלה-1-ל-namastea-copy"
+          }
+        },
+        "a10": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-צאי-מסאלה-1-ל-namastea-copy-2"
+          }
+        },
+        "g2": {
+          "type": "group",
+          "settings": {
+            "title": "תמציות תה · 0.5 ליטר",
+            "subtitle": "אריזה קומפקטית לשירות מהיר"
+          }
+        },
+        "b1": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-תה-ירוק-לואיזה-ונענע-0-5-ל-detox"
+          }
+        },
+        "b2": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-תה-ירוק-לואיזה-ונענע-ללא-סוכר-0-5-ל-detox-sugar-free"
+          }
+        },
+        "b3": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-היביסקוס-וליים-0-5-ל-fresh"
+          }
+        },
+        "b4": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-היביסקוס-וליים-ללא-סוכר-0-5-ל-fresh-sugar-free"
+          }
+        },
+        "b5": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-תה-ירוק-ולמון-גראס-0-5-ל-energy"
+          }
+        },
+        "b6": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-תה-ירוק-יסמין-וליצי-0-5-ל-consciousness"
+          }
+        },
+        "b7": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-קמומיל-תפוח-וציפורן-0-5-ל-calm"
+          }
+        },
+        "b8": {
+          "type": "product",
+          "settings": {
+            "product": "תמצית-תה-ירוק-סנצה-ופסיפלורה-0-5-ל-revive"
+          }
+        },
+        "b9": {
+          "type": "product",
+          "settings": {
+            "product": "namastea-500ml"
+          }
+        },
+        "g3": {
+          "type": "group",
+          "settings": {
+            "title": "סנגריה",
+            "subtitle": "מוכן להגשה — לבר, למסעדה ולאירוע"
+          }
+        },
+        "e1": {
+          "type": "product",
+          "settings": {
+            "product": "קוקטייל-סנגריה-לבנה-1-ל-white-sangria"
+          }
+        },
+        "e2": {
+          "type": "product",
+          "settings": {
+            "product": "קוקטייל-סנגריה-ורודה-1-ל-pink-sangria"
+          }
+        },
+        "e6": {
+          "type": "product",
+          "settings": {
+            "product": "red-sangria-3-85l"
+          }
+        },
+        "e7": {
+          "type": "product",
+          "settings": {
+            "product": "white-sangria-3-85l"
+          }
+        },
+        "g4": {
+          "type": "group",
+          "settings": {
+            "title": "סמודי ODK",
+            "subtitle": "בסיס סמודי פירות · 1 ליטר"
+          }
+        },
+        "s1": {
+          "type": "product",
+          "settings": {
+            "product": "strawberry-odk-מארז-תות-6-יחידות-copy"
+          }
+        },
+        "s2": {
+          "type": "product",
+          "settings": {
+            "product": "mango-odk-מארז-מנגו-6-יחידות-copy"
+          }
+        },
+        "s3": {
+          "type": "product",
+          "settings": {
+            "product": "peach-odk-מארז-אפרסק-6-יחידות-copy"
+          }
+        },
+        "g5": {
+          "type": "group",
+          "settings": {
+            "title": "מאצ'ה ואבקות",
+            "subtitle": "מאצ'ה טקסית יפנית ואבקות פרימיום"
+          }
+        },
+        "h1": {
+          "type": "product",
+          "settings": {
+            "product": "maruei-טקסית"
+          }
+        },
+        "h2": {
+          "type": "product",
+          "settings": {
+            "product": "gt-maruei-ceremonial-box-with-30-aluminium-bags-maruei-טקסית-copy"
+          }
+        },
+        "h4": {
+          "type": "product",
+          "settings": {
+            "product": "gt-shizuoka-ceremonial-קופסה-עם-30-שקיות-אלומיניום-shizuoka-טקסית-copy"
+          }
+        },
+        "h6": {
+          "type": "product",
+          "settings": {
+            "product": "קיט-מלא-למאצה"
+          }
+        },
+        "h8": {
+          "type": "product",
+          "settings": {
+            "product": "ube-powder"
+          }
+        },
+        "g6": {
+          "type": "group",
+          "settings": {
+            "title": "אביזרי הכנה והגשה",
+            "subtitle": "כל מה שצריך להכנת מאצ'ה מושלמת"
+          }
+        },
+        "i1": {
+          "type": "product",
+          "settings": {
+            "product": "matcha-whisker"
+          }
+        },
+        "i2": {
+          "type": "product",
+          "settings": {
+            "product": "bamboo-matcha-whisk"
+          }
+        },
+        "i3": {
+          "type": "product",
+          "settings": {
+            "product": "bamboo-matcha-scoop"
+          }
+        },
+        "i4": {
+          "type": "product",
+          "settings": {
+            "product": "matcha-whisk-stand"
+          }
+        },
+        "i5": {
+          "type": "product",
+          "settings": {
+            "product": "כלי-הכנת-מאצה-זכוכית-600-מל"
+          }
+        },
+        "i6": {
+          "type": "product",
+          "settings": {
+            "product": "בקבוק-מאצה-רב-פעמי"
+          }
+        },
+        "i7": {
+          "type": "product",
+          "settings": {
+            "product": "כוס-מדידה"
+          }
+        }
+      },
+      "block_order": [
+        "g1",
+        "a1",
+        "a2",
+        "a3",
+        "a4",
+        "a5",
+        "a6",
+        "a7",
+        "a8",
+        "a9",
+        "a10",
+        "g2",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8",
+        "b9",
+        "g3",
+        "e1",
+        "e2",
+        "e6",
+        "e7",
+        "g4",
+        "s1",
+        "s2",
+        "s3",
+        "g5",
+        "h1",
+        "h2",
+        "h4",
+        "h6",
+        "h8",
+        "g6",
+        "i1",
+        "i2",
+        "i3",
+        "i4",
+        "i5",
+        "i6",
+        "i7"
+      ],
+      "settings": {
+        "title": "הרכיבו הזמנה לעסק",
+        "sub_title": "בחרו כמויות, מלאו את פרטי העסק והמשיכו לתשלום מאובטח",
+        "accent": "#457439",
+        "submit_label": "המשך לתשלום",
+        "webhook_url": "",
+        "demo_note": "מערכת התשלום בהקמה — ההזמנה תוצג לסיכום בלבד ולא תחויב."
+      }
+    },
+    "faq": {
+      "type": "section",
+      "name": "B2B FAQ",
+      "blocks": {
+        "heading": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>שאלות נפוצות</h2>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "h3",
+            "font": "var(--font-primary--family)",
+            "wrap": "pretty"
+          }
+        },
+        "acc": {
+          "type": "accordion",
+          "settings": {
+            "icon": "caret",
+            "dividers": true,
+            "type_preset": "h5",
+            "inherit_color_scheme": true
+          },
+          "blocks": {
+            "q1": {
+              "type": "_accordion-row",
+              "settings": {
+                "heading": "למי מיועדת ההזמנה העסקית?",
+                "open_by_default": true,
+                "icon": "none"
+              },
+              "blocks": {
+                "t": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>לבתי קפה, מסעדות, ברים, מלונות, משרדים ומפיקי אירועים — כל עסק שרוצה משקאות טבעיים באיכות גבוהה, ישירות מהיצרן.</p>",
+                    "width": "100%",
+                    "alignment": "right",
+                    "type_preset": "rte"
+                  }
+                }
+              },
+              "block_order": [
+                "t"
+              ]
+            },
+            "q2": {
+              "type": "_accordion-row",
+              "settings": {
+                "heading": "האם המחירים שונים בין עסקים?",
+                "open_by_default": false,
+                "icon": "none"
+              },
+              "blocks": {
+                "t": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>לא. המחיר באתר אחיד ושקוף לכל העסקים — בלי מיקוח ובלי מחירונים נסתרים.</p>",
+                    "width": "100%",
+                    "alignment": "right",
+                    "type_preset": "rte"
+                  }
+                }
+              },
+              "block_order": [
+                "t"
+              ]
+            },
+            "q3": {
+              "type": "_accordion-row",
+              "settings": {
+                "heading": "איך מתבצע התשלום ומה לגבי חשבונית?",
+                "open_by_default": false,
+                "icon": "none"
+              },
+              "blocks": {
+                "t": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>לאחר שליחת ההזמנה תועברו לדף תשלום מאובטח. חשבונית מס מופקת אוטומטית ונשלחת אליכם במייל.</p>",
+                    "width": "100%",
+                    "alignment": "right",
+                    "type_preset": "rte"
+                  }
+                }
+              },
+              "block_order": [
+                "t"
+              ]
+            },
+            "q4": {
+              "type": "_accordion-row",
+              "settings": {
+                "heading": "שלחתי הזמנה — מה הלאה?",
+                "open_by_default": false,
+                "icon": "none"
+              },
+              "blocks": {
+                "t": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>ניצור איתכם קשר לתיאום האספקה. לכל שאלה אפשר לפנות אלינו דרך טופס יצירת הקשר שבתחתית הדף.</p>",
+                    "width": "100%",
+                    "alignment": "right",
+                    "type_preset": "rte"
+                  }
+                }
+              },
+              "block_order": [
+                "t"
+              ]
+            }
+          },
+          "block_order": [
+            "q1",
+            "q2",
+            "q3",
+            "q4"
+          ]
+        }
+      },
+      "block_order": [
+        "heading",
+        "acc"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "horizontal_alignment_flex_direction_column": "center",
+        "gap": 24,
+        "section_width": "page-width",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
+    },
+    "contact": {
+      "type": "section",
+      "name": "B2B Contact",
+      "blocks": {
+        "heading": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>דברו איתנו</h2>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "h3",
+            "font": "var(--font-primary--family)",
+            "wrap": "pretty"
+          }
+        },
+        "sub": {
+          "type": "text",
+          "settings": {
+            "text": "<p>שאלות על הזמנה עסקית? כתבו לנו ונחזור אליכם</p>",
+            "width": "100%",
+            "max_width": "narrow",
+            "alignment": "center",
+            "type_preset": "rte",
+            "font": "var(--font-primary--family)",
+            "wrap": "pretty"
+          }
+        },
+        "form": {
+          "type": "contact-form",
+          "settings": {
+            "width": "custom",
+            "custom_width": 50,
+            "width_mobile": "custom",
+            "custom_width_mobile": 100,
+            "inherit_color_scheme": true
+          },
+          "blocks": {
+            "submit-button": {
+              "type": "contact-form-submit-button",
+              "static": true,
+              "settings": {
+                "label": "שליחה",
+                "style_class": "button",
+                "width": "fit-content",
+                "width_mobile": "fit-content"
+              }
+            }
+          },
+          "block_order": []
+        }
+      },
+      "block_order": [
+        "heading",
+        "sub",
+        "form"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "horizontal_alignment_flex_direction_column": "center",
+        "gap": 24,
+        "section_width": "page-width",
+        "color_scheme": "scheme-2",
+        "padding-block-start": 48,
+        "padding-block-end": 84
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "b2b_order",
+    "faq",
+    "contact"
+  ]
+}
