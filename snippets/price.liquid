@@ -1,0 +1,7 @@
+<span  data-sale-price  bss-b2b-product-id="{{ product.id }}" data-sale-price bss-b2b-product-price bss-b2b-product-parent-price class="money"  >
+
+{%- if settings.currency_format == 'money_format' -%}
+  {{ price | money  }}
+{%- else -%}
+  {{ price | money_with_currency  }}{%- endif -%}
+</span>

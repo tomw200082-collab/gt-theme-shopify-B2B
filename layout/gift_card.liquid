@@ -1,0 +1,93 @@
+{%- liquid 
+  unless settings.enable_rtl and settings.rtl_language_codes contains request.locale.iso_code
+    assign enable_rtl = false
+    assign left_holder = 'left'
+    assign right_holder = 'right'
+  else
+    assign enable_rtl = true
+    assign left_holder = 'right'
+    assign right_holder = 'left'
+  endunless
+  assign root_url = routes.root_url | append: '/' | replace: '//', '/'
+  assign base_font = settings.body_font
+  assign base_font_bolder = base_font | font_modify: 'weight', 'bolder'
+  assign base_font_bold = base_font | font_modify: 'weight', 'bold'
+  assign base_font_italic = base_font | font_modify: 'style', 'italic'
+  assign base_font_bold_italic = base_font_bold | font_modify: 'style', 'italic'
+  assign heading_font = settings.heading_font
+  assign heading_font_bold = heading_font | font_modify: 'weight', 'bolder'  
+-%}
+<!doctype html>
+<!--[if IE 9]> <html class="ie9 no-js" lang="{{ request.locale.iso_code }}"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js" lang="{{ request.locale.iso_code }}"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="{{ settings.color_general_hover }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  {% if settings.favicon != blank %}
+    <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+  {% endif %}
+
+  {%- assign formatted_initial_value = gift_card.initial_value | money_without_trailing_zeros: gift_card.currency -%}
+  {%- assign formatted_initial_value_stripped = formatted_initial_value | strip_html -%}
+  <title>{{ 'gift_cards.issued.title_html' | t: value: formatted_initial_value_stripped, shop: shop.name }}</title>
+
+  <meta name="description" content="{{ 'gift_cards.issued.subtext' | t }}">
+
+  {%- render 'css-variables' with enable_rtl: enable_rtl, base_font: base_font, base_font_bolder: base_font_bolder, base_font_bold: base_font_bold, base_font_italic: base_font_italic, base_font_bold_italic: base_font_bold_italic, heading_font: heading_font, heading_font_bold: heading_font_bold -%}
+  {%- render 'css-variables-password' with base_font: base_font, base_font_bolder: base_font_bolder, base_font_bold: base_font_bold, base_font_italic: base_font_italic, base_font_bold_italic: base_font_bold_italic, header_font: heading_font, heading_font_bold: heading_font_bold -%}
+  {%- render 'styles-inline' with enable_rtl: enable_rtl, left_holder: left_holder, right_holder: right_holder, base_font: base_font, base_font_bolder: base_font_bolder, base_font_bold: base_font_bold, base_font_italic: base_font_italic, base_font_bold_italic: base_font_bold_italic, heading_font: heading_font, heading_font_bold: heading_font_bold -%}
+  {%- render 'theme-styles' with enable_rtl: enable_rtl, left_holder: left_holder, right_holder: right_holder -%}
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+  {{ 'gift-card.css' | asset_url | stylesheet_tag }}
+  {%- render 'script-inline' with enable_rtl: enable_rtl, left_holder: left_holder, right_holder: right_holder, root_url: root_url -%}
+
+  <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'match-media.min.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+  <!--[if lte IE 9]><script src="{{ 'match-media.min.js' | asset_url }}"></script><![endif]-->
+
+  <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'vendor.min.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+  <!--[if lte IE 9]><script src="{{ 'vendor.min.js' | asset_url }}"></script><![endif]-->
+
+  <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'vendor/qrcode.js' | shopify_asset_url }}" defer="defer"></script><!--<![endif]-->
+  <!--[if lte IE 9]><script src="{{ 'vendor/qrcode.js' | shopify_asset_url }}"></script><![endif]-->
+
+  <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'gift-card.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+  <!--[if lte IE 9]><script src="{{ 'gift-card.js' | asset_url }}"></script><![endif]-->
+
+  {{ content_for_header }}
+</head>
+
+<body class="template-giftcard">
+  {{ content_for_layout }}
+  <div class="overlay transition"></div>
+  <div class="loading-full" style="display: none;"><i class="loading-ajax"></i></div>
+  <div class="alert alert-success notify text-center" role="alert" style="display:none;">
+  </div>
+  {%- if content_for_layout contains 'product-single-deal' or request.design_mode -%}
+    {%- render 'single-deal-countdown' -%}
+  {%- endif -%}
+  {%- if content_for_layout contains 'rb__countdown-wrap' or request.design_mode -%}
+    {%- render 'rich-banner-countdown' -%}
+  {%- endif -%}
+  {%- render 'popups' -%}
+  {%- render 'back-top-button' with enable_rtl: enable_rtl, left_holder: left_holder, right_holder: right_holder -%}
+  {%- render 'search-full' -%}
+  {%- render 'currency-plus-form' -%}
+  
+  {%- if settings.enable_review -%}
+    {%- if settings.review_app == 'loox' -%}
+      {{ shop.metafields.loox["global_html_body"] }}
+    {%- elsif settings.review_app == 'ali_reviews' -%}
+      {%- render 'alireviews_core' -%}
+    {%- elsif settings.review_app == 'judge.me' -%}
+      {%- render 'judgeme_core' -%}
+    {%- endif -%}  
+  {%- endif -%}
+  {%- if settings.news_platform == 'klaviyo' -%}
+    {{ settings.klaviyo_install_script }}
+  {%- endif -%}
+</body>
+</html>

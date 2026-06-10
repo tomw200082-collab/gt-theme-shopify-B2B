@@ -1,0 +1,14 @@
+{%- if collection.image != blank -%}
+  <div class="collection__image ratio-container js lazyload{% if block.settings.hide_collection_image_mobile %} hidden-xs hidden-sm{% endif %} w100"
+       data-bgset="{% render 'bgset', image: collection.image %}"
+       data-sizes="auto"
+       data-parent-fit="cover"
+       style="background-image: url({{ collection.image | img_url: '300x300' }}); height:300px;background-position: 50% 50%;background-repeat: no-repeat;background-size: cover; margin-bottom: 60px;"></div>
+  <noscript>
+    <div class="collection-hero__image{% if block.settings.hide_collection_image_mobile %} hidden-xs hidden-sm{% endif %}" style="background-image: url({{ collection.image | img_url: '2048x600', crop: 'top' }});"></div>
+  </noscript>
+  {%- unless has_lcp -%}
+    {%- assign has_lcp = true -%}
+    {%- render 'lcp-mark' with image: collection.image -%}
+  {%- endunless -%}
+{%- endif -%}

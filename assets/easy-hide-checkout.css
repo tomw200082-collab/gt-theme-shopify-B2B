@@ -1,0 +1,18 @@
+/* Hide all express buttons from cart page/sidebar */
+.additional-checkout-buttons {
+  display: none !important;
+}
+
+/* hide on minimal theme */
+.cart__additional_checkout {
+  display: none !important;
+}
+
+.additional_checkout_buttons {
+  display: none !important;
+}
+
+/* Hide dynamic paypal button on cart */
+#dynamic-checkout-cart {
+  display: none !important;
+}

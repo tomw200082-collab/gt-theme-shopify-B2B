@@ -1,0 +1,136 @@
+<div class="collection__products">
+  {%- capture current_filter_inline -%}
+    {%- for filter in collection.filters -%}
+      {%- if filter.type == 'list' and filter.active_values.size > 0 -%}
+        {%- for value in filter.active_values -%}
+          <li class="cf__item-current">
+            <a class="cf__link--current cf__link por current" href="{{ value.url_to_remove }}" title="{{ value.label | escape }}">
+              <span class="cf__link--current__content">
+                {{ value.label | escape }}
+              </span>
+            </a>
+          </li>
+        {%- endfor -%}  
+      {%- endif -%}
+      {%- if filter.type == 'price_range' -%}
+        {%- assign has_price_current = false -%}
+        {%- if filter.min_value.value and filter.min_value.value > 0 -%}
+          {%- assign has_price_current = true -%}
+        {%- endif -%}
+        {%- if filter.max_value.value and filter.max_value.value < filter.range_max -%}
+          {%- assign has_price_current = true -%}
+        {%- endif -%}
+        {%- if has_price_current -%}
+          <li class="cf__item-current">
+            <a class="cf__link--current cf__link por current" href="{{ filter.url_to_remove }}" title="{{ filter.label | escape }}">
+              <span class="cf__price cf__price-from dib">
+                {%- if filter.min_value.value -%}
+                  {%- render 'price' with price: filter.min_value.value -%}
+                {%- else -%}
+                  {%- render 'price' with price: 0 -%}
+                {%- endif -%}
+              </span>
+              <span class="cf__price__sep">-</span>
+              <span class="cf__price cf__price-to dib">
+                {%- if filter.max_value.value -%}
+                  {%- render 'price' with price: filter.max_value.value -%}
+                {%- else -%}
+                  {%- render 'price' with price: filter.range_max -%}
+                {%- endif -%}
+              </span>
+            </a>
+            </li>  
+        {%- endif -%}
+      {%- endif -%}  
+    {%- endfor -%}
+  {%- endcapture -%}
+  <div class="cf__current-inline w100 hidden-lg">
+    {%- if current_filter_inline != '' -%}
+      <ul class="list--inline cf__current-list gutter-bottom" role="list">
+        <li class="cf__item-current">
+          <a href="{{ collection.url }}{% if collection.sort_by != blank %}?sort_by={{ collection.sort_by }}{% endif %}" class="cf__link--current cf__link--current-all cf__link por current" title="{{ 'collections.general.filter_clear_all_button' | t | escape }}">
+            <span class="cf__link--current__content">{{ 'collections.general.filter_clear_all_button' | t }}</span>
+          </a>
+        </li>
+        {{ current_filter_inline }}
+      </ul>
+    {%- endif -%}
+  </div>
+  {%- assign item_size = section.settings.item_size -%}
+  {%- assign is_list_mode = false -%}
+  {%- if item_size == 'list' -%}
+    {%- assign is_list_mode = true -%}
+  {%- endif -%}
+  {%- if collection.products.size > 0 -%}
+  	{%- assign limit = section.settings.limit | divided_by : 1 -%}
+  	
+  	{%- if item_size == 'small' -%}
+  	  {%- assign column_count = 5 -%}
+  	{%- elsif item_size == 'medium' -%}
+  	  {%- assign column_count = 4 -%}
+  	{%- elsif item_size == 'large' -%}
+  	  {%- assign column_count = 3 -%}
+  	{%- else -%}
+  	  {%- assign column_count = 2 -%}  
+  	{%- endif -%}
+  	{%- assign lazy_index = 999 -%}
+    {%- if section.settings.use_lazyload and template.suffix == blank -%}
+      {%- assign lazy_index = column_count | times: 3 -%}
+    {%- endif -%}
+
+    {%- assign is_lcp = false -%}
+    {%- paginate collection.products by limit -%}
+    	<div class="grid grid--{{ item_size }} grid--products products grid--not-empty">
+    	{%- for product in collection.products -%}{% comment %}start BSS Commerce Hide Price{% endcomment %}{% assign bsshp = product | default: prod | default: item | default: recommendation %}{% assign collec = 0 %}{% if collection %}{% assign collec = collection %}{% elsif block.settings.collection %}{% assign collec = block.settings.collection %}{% else if section.settings.collection %}{% assign collec = section.settings.collection %}{% endif %}{% capture hide_product %}{% render 'bsscommerce-hide-product', product: bsshp, collection: collec %}{% endcapture %}{% if hide_product contains "true" %}{% continue %}{% endif %}{% comment %}end BSS Commerce Hide Price{% endcomment %}
+        {%- unless has_lcp -%}
+          {%- if forloop.first -%}
+            {%- if section.settings.main_thumbnail == 'product_image' or product.first_available_variant.featured_image == blank -%}
+              {%- assign featured_image = product.featured_image -%}
+            {%- else -%}
+              {%- assign featured_image = product.first_available_variant.featured_image -%}
+            {%- endif -%}
+            {%- render 'lcp-mark-webp' with image: featured_image, sizes: '(max-width: 767px) 50vw, 25vw' -%}
+          {%- endif -%}
+          {%- assign is_lcp = forloop.first -%}
+        {%- endunless -%}
+      	{%- render 'product-grid-item' with 
+          product: product,
+          use_slider: false, 
+          limit_first: 0, 
+          item_size: item_size, 
+          index: forloop.index, 
+          lazy_index: lazy_index,
+          column_count: column_count, 
+          main_thumbnail: section.settings.main_thumbnail, 
+          image_size: '50x', 
+          truncate_count: section.settings.product_name_size, enable_product_options: section.settings.enable_product_options, 
+          show_review_stars: section.settings.show_review_stars,
+          enable_small_images: false,
+          show_wishlist_btn: section.settings.show_wishlist_btn,
+          small_image: '1x',
+          show_label : section.settings.show_label,
+          show_cart_btn: section.settings.show_cart_btn,
+          show_compare_btn: section.settings.show_compare_btn,
+          show_qs_btn: section.settings.show_qs_btn,
+          show_desc: is_list_mode,
+          show_countdown_timer: section.settings.show_countdown_timer,
+          show_vendor: section.settings.show_vendor,
+          withinCollection: collection,
+          is_lcp: is_lcp,
+          left_holder: left_holder -%}
+    	{%- endfor -%}
+    	</div>
+      {%- if section.settings.enable_infinity_loading -%}
+        {%- render 'pagination-infinity' with infinity_action: section.settings.infinity_action, paginate: paginate -%}
+      {%- else -%}
+        {%- render 'pagination' with paginate: paginate -%}
+      {%- endif -%}  
+    {%- endpaginate -%}
+  {%- else -%}
+  <div class="grid grid--{{ item_size }} grid--products grid--full products">
+    <div class="grid__item" style="width:100%;">
+      <div class="alert alert-danger w100">{{ 'collections.general.no_matches' | t }}</div>
+    </div>
+  </div>  
+  {%- endif -%}
+</div>  

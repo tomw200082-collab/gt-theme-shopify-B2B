@@ -1,0 +1,131 @@
+<div id="faq-{{ section.id }}" class="container{% if section.settings.full_width %}-fluid{% endif %} faq" data-section-id="{{ section.id }}"{% if request.design_mode %} data-section-type="faq"{% endif %}>
+  {%- if section.blocks.size > 0 -%}
+  	{%- for block in section.blocks -%}
+  		<div class="{% unless forloop.last %}gutter-ele-bottom {% endunless %}{% unless forloop.first %} gutter-ele-top{% endunless %}" {{ block.shopify_attributes }}>
+		      <label class="faq__trigger h3 expand-trigger{% if forloop.first %} open{% endif %} db w100 gutter-ele-small-bottom faq__trigger--{{ section.id }} por">{{ block.settings.title }}</label>
+			    <div class="expand-content gutter-ele-top gutter-ele-bottom"{% unless forloop.first %} style="display:none;"{% endunless %}>
+			      <div class="rte">{{ block.settings.content }}</div>
+			    </div>
+			</div>
+  	{%- endfor -%}
+  {%- endif -%}
+</div>
+{%- if section.blocks.size > 0 -%}
+  {%- liquid
+    unless settings.enable_rtl and settings.rtl_language_codes contains request.locale.iso_code
+      assign right_holder = 'right'
+    else
+      assign right_holder = 'left'
+    endunless
+  -%}
+  <style>
+    .faq__trigger--{{ section.id }}{
+      border-bottom:1px solid rgba(var(--color_general_rgb),0.1);
+      cursor: pointer;
+    }
+    .faq__trigger--{{ section.id }}:after{
+      position: absolute;
+      {{ right_holder }}: 0;
+      top: 0;
+      bottom: 0;
+      font-family: 'BTVodoma';
+      content: '\e874';
+      font-size: 0.8em;
+      transition: transform 0.75s cubic-bezier(.19,1,.22,1);
+      width: 20px;
+      height: 20px;
+    }
+    .faq__trigger--{{ section.id }}:not(.open){
+      border-color: var(--color_general);
+    }
+    .faq__trigger--{{ section.id }}.open:after{
+      transform: rotate(180deg);
+    }
+  </style>
+{%- endif -%}
+{% schema %}
+  {
+    "name": "FAQ",
+    "tag": "section",
+    "max_blocks": 60,
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "[View the guide for this section](https://vodoma-docs.boostheme.com/static-sections/faq)"
+      },
+      {
+        "type": "checkbox",
+        "id": "full_width",
+        "label": "Full Width",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "hidden_xs",
+        "label": "Hide on mobile",
+        "default" : true
+      }
+    ],
+    "blocks": [
+      {
+        "type": "faq_item",
+        "name": "Item",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "html",
+            "id": "content",
+            "label": "Content"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "FAQ",
+        "category": "Text",
+        "blocks": [
+          {
+            "type": "faq_item",
+            "settings": {
+              "title": "This is the item's title",
+              "content": "Type your content"
+            }
+          },
+          {
+            "type": "faq_item",
+            "settings": {
+              "title": "This is the item's title",
+              "content": "Type your content"
+            }
+          },
+          {
+            "type": "faq_item",
+            "settings": {
+              "title": "This is the item's title",
+              "content": "Type your content"
+            }
+          },
+          {
+            "type": "faq_item",
+            "settings": {
+              "title": "This is the item's title",
+              "content": "Type your content"
+            }
+          },
+          {
+            "type": "faq_item",
+            "settings": {
+              "title": "This is the item's title",
+              "content": "Type your content"
+            }
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

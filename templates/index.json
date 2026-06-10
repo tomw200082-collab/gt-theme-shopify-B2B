@@ -1,0 +1,190 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "custom_html_KyF7f4": {
+      "type": "custom-html",
+      "name": "Custom HTML",
+      "settings": {
+        "wide_display": false,
+        "custom_html": "<h2 style=\"text-align: center; font-family: 'Heebo', sans-serif; font-size: 32px; font-weight: 800; color: #000000; letter-spacing: 1px; margin: 20px 0;\">\n  <a href=\"https://elitaofek.co.il/product-category/gt/\" style=\"color: inherit; text-decoration: none;\">\n    ללקוחות פרטיים\n  </a>\n</h2>"
+      }
+    },
+    "layer_banner_MKzHrP": {
+      "type": "layer-banner",
+      "blocks": {
+        "layer_banner_parent_XLd3qq": {
+          "type": "layer-banner-parent",
+          "settings": {
+            "title": "ללקוחות פרטיים",
+            "item_size": 12,
+            "item_size_mobile": 12,
+            "box_wrap": false,
+            "item_gutter_top": false,
+            "item_gutter_bottom": true,
+            "item_gutter_left": true,
+            "item_gutter_right": true,
+            "item_gutter_top_mb": true,
+            "item_gutter_bottom_mb": true,
+            "item_gutter_left_mb": true,
+            "item_gutter_right_mb": true,
+            "image": "shopify://shop_images/iScreen_Shoter_-_TapRecord_-_250630113515.jpg",
+            "image_link": "https://elitaofek.co.il/product-category/gt/",
+            "image_link_new_tab": false,
+            "image_alignment": "center",
+            "hide_on_mobile": false,
+            "hide_on_desktop": false,
+            "bkg_banner_enable": false,
+            "bkg_banner": "",
+            "effect_enable": false,
+            "effect_trans_zoom": true,
+            "effect_trans_slide": true,
+            "effect_trans_border": true,
+            "effect_color": "none"
+          }
+        }
+      },
+      "block_order": [
+        "layer_banner_parent_XLd3qq"
+      ],
+      "name": "Layer Banner",
+      "settings": {
+        "bkg_enable": false,
+        "section_bkg": "",
+        "section_bkg_gutter": "high",
+        "section_bkg_style": "cover",
+        "top_gutter": false,
+        "bottom_gutter": false,
+        "title": "ללקוחות פרטיים",
+        "heading": "",
+        "sub_title": "",
+        "full_width": false,
+        "full_wide": false,
+        "hidden_mobile": false,
+        "revert_in_rtl": true,
+        "enable_slider": false,
+        "item_size": "medium",
+        "autoplay_slider": false,
+        "autoplay_speed_slider": 7,
+        "arrow_slider": false,
+        "arrow_dots": false,
+        "ver_banner_enable": false,
+        "ver_banner_width": 3,
+        "ver_banner_pos": "right",
+        "ver_banner_no_distance": false,
+        "ver_effect_enable": true,
+        "ver_effect_trans_zoom": true,
+        "ver_effect_trans_slide": true,
+        "ver_effect_trans_border": true,
+        "ver_effect_color": "none",
+        "ver_banner_1": "shopify://shop_images/iScreen_Shoter_-_TapRecord_-_250630113515.jpg",
+        "ver_banner_url_1": "https://elitaofek.co.il/product-category/gt/",
+        "ver_banner_url_2": "",
+        "ver_banner_url_3": ""
+      }
+    },
+    "custom_html_9E7XiP": {
+      "type": "custom-html",
+      "name": "Custom HTML",
+      "settings": {
+        "wide_display": false,
+        "custom_html": "<h2 style=\"text-align: center; font-family: 'Heebo', sans-serif; font-size: 32px; font-weight: 800; color: #000000; letter-spacing: 1px; margin: 20px 0;\">\n  <a href=\"/pages/for-business\" style=\"color: inherit; text-decoration: none;\">\n    ללקוחות עסקיים\n  </a>\n</h2>"
+      }
+    },
+    "17512789400940810a": {
+      "type": "apps",
+      "blocks": {
+        "vizup_shoppable_video_carousel_banner_block_Qn8GTX": {
+          "type": "shopify://apps/vizup-shoppable-video-carousel/blocks/banner-block/eaecaa7b-ab6b-40ae-8ddf-50daa867f3eb",
+          "settings": {
+            "sg_banner_id": ""
+          }
+        }
+      },
+      "block_order": [
+        "vizup_shoppable_video_carousel_banner_block_Qn8GTX"
+      ],
+      "settings": {
+        "top_gutter": false,
+        "bottom_gutter": true
+      }
+    },
+    "custom_html_UYghDf": {
+      "type": "custom-html",
+      "name": "Custom HTML",
+      "settings": {
+        "wide_display": false,
+        "custom_html": "<h2 style=\"text-align: center; font-family: 'Heebo', sans-serif; font-size: 32px; font-weight: 800; color: #000000; letter-spacing: 1px; margin: 20px 0;\">\n  <a href=\"/pages/for-business\" style=\"color: inherit; text-decoration: none;\">\n    וגם מאצ'ה\n  </a>\n</h2>"
+      }
+    },
+    "1751293464777caafa": {
+      "type": "apps",
+      "blocks": {
+        "vizup_shoppable_video_carousel_videos_block_Vke74n": {
+          "type": "shopify://apps/vizup-shoppable-video-carousel/blocks/videos-block/eaecaa7b-ab6b-40ae-8ddf-50daa867f3eb",
+          "settings": {
+            "videoc_widget_id": ""
+          }
+        }
+      },
+      "block_order": [
+        "vizup_shoppable_video_carousel_videos_block_Vke74n"
+      ],
+      "settings": {
+        "top_gutter": false,
+        "bottom_gutter": false
+      }
+    },
+    "custom_html_wLFmK7": {
+      "type": "custom-html",
+      "name": "Custom HTML",
+      "settings": {
+        "wide_display": false,
+        "custom_html": "<div style=\"font-family: 'Heebo', sans-serif; text-align: right; direction: rtl; margin-bottom: 30px;\">\n  <h3 style=\"font-size: 20px; font-weight: bold; color: #000000; margin-bottom: 12px;\">\n    מאצ'ה טקסית מרואי (Maruei Ceremonial Matcha)\n  </h3>\n  <p style=\"font-size: 16px; color: #333333; margin: 0; line-height: 1.6;\">\n    מקורו בקיото, יפן, מאצ'ה זו מיוצרת בשיטת טחינה מסורתית באמצעות אבני ריחיים. האבקה מציגה גוון ירוק חי וארומה מתוקה המזכירה מתוקים. בעת ההכנה משתחררת ארומה טרייה ודשאית, והטעם מאוזן עם אומאמי הרמוני, מרירות עדינה ומתיקות טבעית קלה. המרקם הקטיפתי והחלק שלה הופך אותה לאידיאלית למשקאות פרימיום ולחגיגות טקסיות.\n  </p>\n</div>"
+      }
+    },
+    "custom_html_XbVUKA": {
+      "type": "custom-html",
+      "name": "Custom HTML",
+      "settings": {
+        "wide_display": false,
+        "custom_html": "<div style=\"font-family: 'Heebo', sans-serif; text-align: right; direction: rtl; margin-bottom: 30px;\">\n  <h3 style=\"font-size: 20px; font-weight: bold; color: #000000; margin-bottom: 12px;\">\n    מאצ'ה טקסית שיזואוקה (Shizuoka Ceremonial Matcha)\n  </h3>\n  <p style=\"font-size: 16px; color: #333333; margin: 0; line-height: 1.6;\">\n    מקורה באזור שיזואוקה, הידוע באדמות הוולקניות הפוריות שלו ובאקלים הנוח. מאצ'ה זו מתאפיינת בארומה רעננה ומעט מלוחה ובצבע ירוק תוסס. טעמה מודגש על ידי אומאמי ונגיעות של מליחות, עם סיומת מתוקה שמופיעה בהדרגה על החיך. מתאימה במיוחד להכנת לאטה מאצ'ה ולמשקאות ייחודיים נוספים.\n  </p>\n</div>"
+      }
+    },
+    "custom_html_VjMKPx": {
+      "type": "custom-html",
+      "name": "Custom HTML",
+      "settings": {
+        "wide_display": false,
+        "custom_html": "<div style=\"font-family: 'Heebo', sans-serif; text-align: right; direction: rtl; margin-bottom: 30px;\">\n  <h3 style=\"font-size: 20px; font-weight: bold; color: #000000; margin-bottom: 12px;\">\n    מאצ'ה טקסית פרימיום מרואי (Maruei Ceremonial Premium Matcha)\n  </h3>\n  <p style=\"font-size: 16px; color: #333333; margin: 0; line-height: 1.6;\">\n    מאצ'ה פרימיום זו מגיעה מאיסוף שבמחוז מיאז, ומתאפיינת בצבע ירוק אזמרגד ובארומה מתוקה המזכירה מרשמלו. החליטה חושפת ניחוח המזכיר אצות ים ומפיקה קצף סמיך ויציב. טעמה עשיר באומאמי, ללא מרירות כלל, והיא מציעה מרקם חלק ואבקתי. אידיאלית להגשה במוסדות יוקרתיים המחפשים חוויית מאצ'ה מעודנת ואיכותית.\n  </p>\n</div>"
+      }
+    },
+    "custom_html_LbLidq": {
+      "type": "custom-html",
+      "name": "Custom HTML",
+      "settings": {
+        "wide_display": false,
+        "custom_html": "<div style=\"font-family: 'Heebo', sans-serif; text-align: right; direction: rtl; margin-bottom: 30px;\">\n  <h3 style=\"font-size: 20px; font-weight: bold; color: #000000; margin-bottom: 12px;\">\n    מאצ'ה אורגנית קוגאמו (Kogamo Organic Matcha)\n  </h3>\n  <p style=\"font-size: 16px; color: #333333; margin: 0; line-height: 1.6;\">\n    מגודלת באזור טנרי שבשיזואוקה, מאצ'ה אורגנית זו עוברת תהליך אידוי וקלייה עדין בשבעה שלבים. היא מציגה ארומת אגוזים קלויים וצבע ירוק עז. הטעם נועז ועשיר, עם נוכחות בולטת של אומאמי — מתאים במיוחד לשילובים קולינריים ולמשקאות הדורשים טעם מאצ'ה עוצמתי ומובחן.\n  </p>\n</div>"
+      }
+    }
+  },
+  "order": [
+    "custom_html_KyF7f4",
+    "layer_banner_MKzHrP",
+    "custom_html_9E7XiP",
+    "17512789400940810a",
+    "custom_html_UYghDf",
+    "1751293464777caafa",
+    "custom_html_wLFmK7",
+    "custom_html_XbVUKA",
+    "custom_html_VjMKPx",
+    "custom_html_LbLidq"
+  ]
+}

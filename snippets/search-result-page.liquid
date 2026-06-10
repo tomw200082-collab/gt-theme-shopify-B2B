@@ -1,0 +1,17 @@
+<div class="collection__products">
+{% paginate search.results by section.settings.limit %}
+<ul class="w100 margin0 no-gutter products grid--products grid--full">
+    {% for item in search.results %}{% comment %}start BSS Commerce Hide Price{% endcomment %}{% assign bsshp = product | default: prod | default: item | default: recommendation %}{% assign collec = 0 %}{% if collection %}{% assign collec = collection %}{% elsif block.settings.collection %}{% assign collec = block.settings.collection %}{% else if section.settings.collection %}{% assign collec = section.settings.collection %}{% endif %}{% capture hide_product %}{% render 'bsscommerce-hide-product', product: bsshp, collection: collec %}{% endcapture %}{% if hide_product contains "true" %}{% continue %}{% endif %}{% comment %}end BSS Commerce Hide Price{% endcomment %}
+        <li class="gutter-ele-top grid__item">
+          <h4><a href="{{ item.url }}" title="{{ item.title | escape }}">
+            {{ item.title | highlight: search.terms }}
+          </a></h4>
+          <p>
+            {{ item.content | strip_html | truncatewords: 40 | highlight: search.terms }}
+          </p>
+        </li>
+    {% endfor %}
+</ul>
+{%- render 'search-result-pagination' with paginate: paginate -%}
+{% endpaginate %}
+</div>

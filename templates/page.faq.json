@@ -1,0 +1,128 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "1c1359b0-0527-4202-80eb-48a685dcf409": {
+          "type": "faq_item",
+          "settings": {
+            "title": "What is Lorem Ipsum?",
+            "content": "<p>So how did the classical Latin become so incoherent?:</p>\n               <ol>\n                  <li>Lorem ipsum was purposefully</li>\n                  <li>Designed to have no meaning</li>\n                  <li>But appear like real text.</li>\n               </ol>\n               <br>\n               <p>See <a href=\"https://help.shopify.com/manual/sell-online/online-store/translate-theme\" target=\"_top\">making it </a> the perfect placeholder.</p>"
+          }
+        },
+        "0b5d215c-5d32-4629-94b8-f95e81dd4336": {
+          "type": "faq_item",
+          "settings": {
+            "title": "What does LOREM mean?",
+            "content": "De Finibus Bonorum et Malorum for use in a type specimen book. It usually begins with:<br>\n\n<blockquote>“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.”</blockquote>"
+          }
+        },
+        "5ceac37f-b901-48b0-b653-a4d04992b44b": {
+          "type": "faq_item",
+          "settings": {
+            "title": "Why is Lorem Ipsum?",
+            "content": "<p>So how did the classical Latin become so incoherent?:</p>\n               <ul>\n                  <li>Lorem ipsum was purposefully</li>\n                  <li>Designed to have no meaning</li>\n                  <li>But appear like real text.</li>\n               </ul>\n               <br>\n               <p>See <a href=\"https://help.shopify.com/manual/sell-online/online-store/translate-theme\" target=\"_top\">making it </a> the perfect placeholder.</p>"
+          }
+        },
+        "8c9dfa41-2f16-4b92-87a8-e5b720168d2d": {
+          "type": "faq_item",
+          "settings": {
+            "title": "Where does it come from?",
+            "content": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source."
+          }
+        },
+        "3b1d6fdb-241e-499e-9987-78ce41e0e070": {
+          "type": "faq_item",
+          "settings": {
+            "title": "Why do we use it?",
+            "content": "It is a long <a href=\"#\">established fact that a reader will be distracted </a>by the readable content of a page when looking at its layout.\nThe point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.<br>\nMany desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
+          }
+        },
+        "ae739893-0369-4968-b4bc-53625bcce343": {
+          "type": "faq_item",
+          "settings": {
+            "title": "Where can I get some?",
+            "content": "There are many variations of passages of Lorem Ipsum available<br>\n<table width=\"100%\" border=\"1\">\n<thead>\n<tr>\n<th align=\"left\">Table Size</th>\n<th align=\"left\">Seats</th>\n<th align=\"left\">Floor Length Linen</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"left\">6ft Banquet : 30″ x 72″</td>\n<td align=\"left\">6-8</td>\n<td align=\"left\">6ft Banquet Linen : 90″ x 132″</td>\n</tr>\n<tr>\n<td align=\"left\">8ft Banquet : 30″ x 96″</td>\n<td align=\"left\">8-10</td>\n<td align=\"left\">8ft Banquet Linen : 90″ x 156″</td>\n</tr>\n<tr>\n<td align=\"left\">King Table : 48″ x 96″</td>\n<td align=\"left\">8-12</td>\n<td align=\"left\">King Drape : 108″ x 156″</td>\n</tr>\n<tr>\n<td align=\"left\">48″ Round</td>\n<td align=\"left\">6</td>\n<td align=\"left\">108″ Round</td>\n</tr>\n<tr>\n<td align=\"left\">60″ Round</td>\n<td align=\"left\">8</td>\n<td align=\"left\">120″ Round</td>\n</tr>\n<tr>\n<td align=\"left\">72″ Round</td>\n<td align=\"left\">10</td>\n<td align=\"left\">132″ Round</td>\n</tr>\n</tbody>\n</table>"
+          }
+        },
+        "b7ea3b26-daef-48c6-b6eb-ee25e67fab13": {
+          "type": "faq_item",
+          "settings": {
+            "title": "Where can I subscribe to your newsletter?",
+            "content": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\""
+          }
+        },
+        "e997000b-ee46-4b6b-aaaf-f6e285ed2f2d": {
+          "type": "faq_item",
+          "settings": {
+            "title": "Where can in edit my address?",
+            "content": "\"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?\""
+          }
+        },
+        "2a90c860-e182-44b6-8f19-7f80d53391be": {
+          "type": "faq_item",
+          "settings": {
+            "title": "Can I order a free copy of a magazine to sample?",
+            "content": "\"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?\""
+          }
+        },
+        "f652f66d-3cc4-49ad-9f2f-8267bf370af4": {
+          "type": "faq_item",
+          "settings": {
+            "title": "Do you accept orders via Phone or E-mail?",
+            "content": "No, we are an online shop and we do not take orders via Phone, E-mail or Social Media."
+          }
+        },
+        "b0709c9d-37c1-4988-b474-7210c99233a9": {
+          "type": "faq_item",
+          "settings": {
+            "title": "Can I reserve a magazine via Phone or E-mail?",
+            "content": "No, this isn’t possible. We want all of our magazines to be available for all customers. So you have to order the magazine."
+          }
+        },
+        "edb095be-afea-49f9-944d-9748fa0b634d": {
+          "type": "faq_item",
+          "settings": {
+            "title": "Where on your website can I open a customer account?",
+            "content": "<p>You can create a new account at the end of the order process or on the following page: <a href=\"#\">Create new account</a>. You can view all of your orders and subscriptions in your customer account. You can also change your addresses and your password.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "1c1359b0-0527-4202-80eb-48a685dcf409",
+        "0b5d215c-5d32-4629-94b8-f95e81dd4336",
+        "5ceac37f-b901-48b0-b653-a4d04992b44b",
+        "8c9dfa41-2f16-4b92-87a8-e5b720168d2d",
+        "3b1d6fdb-241e-499e-9987-78ce41e0e070",
+        "ae739893-0369-4968-b4bc-53625bcce343",
+        "b7ea3b26-daef-48c6-b6eb-ee25e67fab13",
+        "e997000b-ee46-4b6b-aaaf-f6e285ed2f2d",
+        "2a90c860-e182-44b6-8f19-7f80d53391be",
+        "f652f66d-3cc4-49ad-9f2f-8267bf370af4",
+        "b0709c9d-37c1-4988-b474-7210c99233a9",
+        "edb095be-afea-49f9-944d-9748fa0b634d"
+      ],
+      "settings": {
+        "full_width": false,
+        "hidden_xs": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "faq"
+  ]
+}

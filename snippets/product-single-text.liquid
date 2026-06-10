@@ -1,0 +1,9 @@
+{%- if text != blank -%}
+	{%- if text_style == 'title' -%}
+		{%- render 'product-single-name' with product: product, custom_text: text, block: block -%}
+	{%- elsif text_style == 'vendor' -%}
+		{%- render 'product-single-vendor' with product: product, custom_text: text, block: block -%}
+	{%- else -%}
+		<span class="db w100" {{ block.shopify_attributes }}>{{- text -}}</span>		
+	{%- endif -%}
+{%- endif -%}

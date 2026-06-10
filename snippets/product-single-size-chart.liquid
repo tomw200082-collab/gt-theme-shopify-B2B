@@ -1,0 +1,6 @@
+{%- if sizechart -%}
+{%- assign style = 'padding-' | append: right_holder | append: ':5px;' -%}
+<div class="product_single__size-chart gutter-ele-top gutter-ele-bottom" {{ block.shopify_attributes }}>
+	<a class="sizechart-trigger{% if sizechart == 'inline' %} sizechart-trigger--inline{% endif %}" href="javascript:void(0);" data-modal-id="sizeChartModal{{ section.id }}">{%- render 'icon-ruler' with add_style: style -%}{{ 'products.product.size_chart' | t }}</a>
+</div>
+{%- endif -%}

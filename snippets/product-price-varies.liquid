@@ -1,0 +1,11 @@
+{%- unless product.price_varies == false or product.selected_variant -%}
+	<div class="product-price" bss-b2b-product-id="{{ product.id | default:variant.id }}"  bss-b2b-product-price>
+		<span class="dib product-price__starting">{{ 'products.product.starting_price' | t }}&nbsp;</span><span class="product-price__price">{%- render 'price', price: product.price_min -%}</span>
+		{%- unless product.available -%}
+	    <span class="product-price__sold-out">{{ 'products.product.sold_out' | t }}</span>
+	  {%- endunless -%}
+	  {%- render 'product-price-unit' with variant: product.first_available_variant -%}
+	</div>
+{%- else -%}
+	{%- render 'product-variant-price', variant: product.selected_or_first_available_variant, product: product -%}
+{%- endunless -%}

@@ -1,0 +1,43 @@
+{%- capture img_alt -%}{%- render 'alt-img-shortcode-ign', str: media.alt -%}{%- endcapture -%}
+<div class="pg__main{% if is_active %} active{% endif %}{% unless no_gutter %}{% if use_slider %}{% if lazyload %} hide-in-loading{% endif %}{% else %}{% if lazyload %} gutter-top{% endif %} gutter-ele-bottom{% endif %}{% endunless %}{% if custom_class %} {{ custom_class }}{% endif %}">
+	{%- case media.media_type -%}
+    {%- when 'external_video' -%}
+    	{%- if use_slider -%}
+				{%- render 'product-single-main-video' with video_type: media.host, video_id: media.external_id, video_ratio: ratio, media: media -%}
+			{%- else -%}
+				{%- render 'product-single-main-video-iframe' with video_type: media.host, video_id: media.external_id, media: media -%}	
+			{%- endif -%}
+    {%- when 'video' -%}
+      {%- if use_slider -%}
+				{%- render 'product-single-main-video' with video_type: media.media_type, video_url: media.sources[0].url, media: media -%}
+			{%- else -%}
+				{%- render 'product-single-main-video-iframe' with video_type: media.media_type, media: media -%}	
+			{%- endif -%}
+    {%- when 'model' -%}
+    	<div style="padding-top: 100%" data-image-id="{{ media.id }}" data-product-media-type-model class="pg__main__link pg__main__link--model ignore-lightbox por">
+        {{ media | model_viewer_tag: image_size: '720x720', reveal: 'interaction', toggleable: true, data-model-id: media.id }}
+      </div>
+    {%- else -%}
+     	{%- unless media.alt contains '{{video' or media.alt contains '{{youtube' or media.alt contains '{{vimeo' -%}
+				<a href="{{ media.preview_image.src | image_url: width: media.preview_image.width }}" class="pg__main__link img-container{% if section.settings.enable_zoom %} pg__main__link--zoom{% endif %}" title="{{ img_alt | escape }}" data-image-id="{{ media.id }}" style="padding-top:{{ 1 | divided_by: media.aspect_ratio | times: 100 }}%;" data-width="{{ media.width }}" data-height="{{ media.height }}">
+					<img srcset="{% render 'img-srcset-webp' with image: media.preview_image %}"
+					  sizes="(min-width: 992px) 50vw, 100vw"
+					  src="{{ media.preview_image | image_url: width: 180, format: 'webp' }}"
+					  alt="{{ media.alt | escape }}"{% unless is_active %} loading="lazy"{% endunless %}
+					  width="{{ media.preview_image.width }}"
+					  height="{{ media.preview_image.height }}"
+					  class="w100 img-responsive img-abs"
+					>
+			  </a>
+			{%- else -%}
+				{%- if use_slider -%}
+					{%- render 'alt-img-shortcode' with media: media -%}
+				{%- else -%}
+					{%- render 'alt-img-shortcode-iframe' with media: media -%}	
+				{%- endif -%}
+			{%- endunless -%}
+  {%- endcase -%} 
+</div>
+{%- if is_active and template.name == 'product' -%}
+	{%- render 'lcp-mark-webp' with image: media.preview_image, sizes: '(min-width: 992px) 50vw, 100vw' -%}
+{%- endif -%}

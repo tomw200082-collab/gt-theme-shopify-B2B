@@ -1,0 +1,63 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "contact",
+      "blocks": {
+        "block-1": {
+          "type": "contact_info",
+          "settings": {
+            "title": "New York",
+            "phone": "1-800-333-42-63",
+            "address": "67 2nd House RD Montauk, NY, 11954",
+            "email": "sf@woodstock.com"
+          }
+        },
+        "block-2": {
+          "type": "contact_info",
+          "settings": {
+            "title": "San Francisco",
+            "phone": "1-800-444-23-54",
+            "address": "1 Infinite Loop Cupertino, CA 95014",
+            "email": "sf@woodstock.com"
+          }
+        }
+      },
+      "block_order": [
+        "block-1",
+        "block-2"
+      ],
+      "settings": {
+        "bkg_enable": false,
+        "section_bkg": "#ffffff",
+        "title": "צור קשר",
+        "form_title": "נהיה בקשר",
+        "show_info": false,
+        "show_map": false,
+        "show_map_before_form": false,
+        "map_address": "80 Spadina Ave, Toronto",
+        "api_key": "AIzaSyA5LUAy0j8LymAxt6EBn7S9WGzAiu6tCgs",
+        "background_image_position": "center center",
+        "opening_enable": false,
+        "opening_name1": "Monday to Friday",
+        "opening_time1": "10am to 6pm",
+        "opening_name2": "Saturday",
+        "opening_time2": "10am to 4pm",
+        "opening_name3": "Sunday",
+        "opening_time3": "12am t0 4pm",
+        "full_width": false
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,0 +1,150 @@
+{%- if section.blocks.size > 0 or section.settings.use_link_list -%}
+{%- liquid
+	capture icon_arrow
+		unless settings.enable_rtl and settings.rtl_language_codes contains request.locale.iso_code
+			render 'icon-angle-right' with add_class: 'nav__item__angle-ver'
+		else
+			render 'icon-angle-left' with add_class: 'nav__item__angle-ver'
+		endunless
+	endcapture
+-%}
+{%- assign style = '' -%}
+<nav class="main-nav main-nav--ver no-gutter">
+	{%- unless section.settings.use_link_list and section.settings.menu_link_list != blank -%}
+		<ul class="no-gutter flex main-nav__ver-list" style="margin:0;">
+			{%- for item in section.blocks -%}
+				<li class="nav__item nav__item--ver nav__item--{{ item.id }} flex h100{% if item.settings.parent_custom_class %} {{ item.settings.parent_custom_class | escape }}{% endif %}{% if item.type != 'menu_item_no_dropdown' %} nav__item--parent{% endif %}" id="nav-item-{{ item.id }}" {{ item.shopify_attributes }}>
+					<a title="{{ item.settings.title | escape }}" href="{% render 'route-link', link: item.settings.link %}" class="nav__item__link--{{ item.id }} w100 por">
+						{%- if item.settings.color != blank -%}
+							{%- assign style = style | append: '.nav__item__link--' | append: item.id | append: '{color:' | append: item.settings.color | append: ';}' -%}
+						{%- endif -%}
+						{%- if item.settings.icon != blank -%}
+							<i class="{{ item.settings.icon | escape }} nav__icon dib"></i>
+						{%- endif -%}
+						<span class="por">
+							{{ item.settings.title | escape }}
+							{%- if item.settings.label != blank -%}
+								<span class="nav__item__label" style="color: {{ item.settings.color_label }};background: {{ item.settings.bkg_label }}"><span class="ver-sub">{{ item.settings.label }}</span></span>
+							{%- endif -%}
+						</span>
+						{%- if item.type != 'menu_item_no_dropdown' -%}
+							{{ icon_arrow }}
+						{%- endif -%}
+					</a>
+					{%- if request.design_mode or template.suffix == 'ajax' -%}
+						{%- if item.type != 'menu_item_no_dropdown' -%}
+							<div class="nav__item__dropdown nav__item__dropdown--ver nav__item__dropdown--{{ section.id }}{% if item.settings.drop_width > 0 %} col-md-{{ item.settings.drop_width | divided_by: 100 }}{% endif %}">
+								<div class="row">
+									{%- assign column_count = 0 -%}
+									{%- case item.type -%}
+									{%- when 'menu_item_dropdown_1_col' -%}
+										{%- assign total_columns = 1 -%}
+									{%- when 'menu_item_dropdown_2_col' -%}	
+										{%- assign total_columns = 2 -%}
+									{%- when 'menu_item_dropdown_3_col' -%}	
+										{%- assign total_columns = 3 -%}
+									{%- when 'menu_item_dropdown_4_col' -%}	
+										{%- assign total_columns = 4 -%}
+									{%- when 'menu_item_dropdown_5_col' -%}	
+										{%- assign total_columns = 5 -%}
+									{%- when 'menu_item_dropdown_6_col' -%}	
+										{%- assign total_columns = 6 -%}		
+									{%- endcase -%}
+									{% for i in (1..total_columns) %}
+										{%- if column_count >= 12 -%}
+											<div class="clearfix"></div>
+											{%- assign column_count = 0 -%}
+										{%- endif -%}
+										{%- assign drop_col_width_index = 'drop_col_width_' | append: i -%}
+										{%- assign dropdown_column_title_index = 'dropdown_column_title_' | append: i -%}
+										{%- assign link_list_index = 'link_list_' | append: i -%}
+										{%- assign dropdown_color_label_index = 'dropdown_color_label_' | append: i -%}
+										{%- assign dropdown_bkg_label_index = 'dropdown_bkg_label_' | append: i -%}
+										{%- assign product_index = 'product_' | append: i -%}
+										{%- assign image_index = 'image_' | append: i -%}
+										{%- assign image_link_index = 'image_link_' | append: i -%}
+										{%- assign image_new_tab_index = 'image_new_tab_' | append: i -%}
+										{%- assign html_index = 'html_' | append: i -%}
+										<div class="nav__item__column{% if item.settings[drop_col_width_index] %} col-md-{{ item.settings[drop_col_width_index] }}{% endif %}">
+											{%- if item.settings[dropdown_column_title_index] != blank -%}
+											<span class="nav__item__dropdown-title fw-bold nav__item__dropdown-title--{{ section.id }} w100 db text-uppercase text-{{ section.settings.align_dropdown_title }}">
+												{{ item.settings[dropdown_column_title_index] }}
+											</span>
+											{%- endif -%}
+											<div class="nav__item__dropdown-column-content">
+												{%- render 'nav-dropdown-link-list' with link_list: item.settings[link_list_index], color_label: item.settings[dropdown_color_label_index], bkg_label: item.settings[dropdown_bkg_label_index] -%}
+												{%- render 'nav-dropdown-product' with product_handle: item.settings[product_index] -%}
+												{%- render 'nav-dropdown-image' with image: item.settings[image_index], image_link: item.settings[image_link_index], image_new_tab: item.settings[image_new_tab_index] -%}
+												{%- render 'nav-dropdown-html' with html: item.settings[html_index] -%}
+											</div>
+										</div>
+										{%- if item.settings[drop_col_width_index] -%}
+											{%- assign column_count = column_count | plus: item.settings[drop_col_width_index] -%}
+										{%- endif -%}
+									{%- endfor -%}
+								</div>
+							</div>	
+						{%- endif -%}
+					{%- endif -%}
+				</li>
+			{%- endfor -%}
+		</ul>
+	{%- else -%}
+		{%- assign menu_link_list = section.settings.menu_link_list -%}
+		{%- if menu_link_list and linklists[menu_link_list].links.size > 0 -%}
+		{%- assign style = style | append: '.nav__item__link--' | append: section.id | append: '{color:' | append: section.settings.top_item_link_list_color | append: ';}'  -%}
+		<ul class="no-gutter flex main-nav__ver-list" style="margin:0;">
+			{%- for l in linklists[menu_link_list].links -%}
+			<li class="nav__item nav__item--ver flex h100{% if l.links != blank %} nav__item--parent{% endif %}">
+				<a title="{%- render 'nav-shortcode-ign', str: l.title -%}" href="{% render 'route-link', link: l.url %}"{% if section.settings.top_item_link_list_color != blank %} style="color: {{ section.settings.top_item_link_list_color }};"{% endif %} class="nav__item__link nav__item__link--{{ section.id }} w100 por">
+					<span class="por">
+						{%- render 'nav-shortcode', color: section.settings.top_item_link_list_color, str: l.title, custom_label_class: 'nav__item__label' -%}
+					</span>
+					{%- if l.links != blank -%}
+						{{ icon_arrow }}
+					{%- endif -%}
+				</a>
+				<div class="nav__item__dropdown nav__item__dropdown--ver nav__item__dropdown--{{ section.id }}">
+					{%- if l.links != blank -%}
+						<div class="row">
+							<div class="nav__item__column nav__item__link-list">
+								<ul class="link-list link-list--nav text-left">
+									{%- for childlink in l.links -%}
+										<li class="link-list__item level0 {% if childlink.links != blank %} link-list__item--parent{% endif %}">
+											{%- if childlink.links != blank -%}
+												<div class="dib por">
+											{%- endif -%}
+											<a class="link-list__item__link nav__item__dropdown-link--{{ section.id }}{% if childlink.active %} active{% endif %}" href="{{ childlink.url }}" title="{%- render 'nav-shortcode-ign' with str: childlink.title -%}">{%- render 'nav-shortcode', str: childlink.title, custom_label_class: 'fw-bold' -%}</a>
+											{%- if childlink.links != blank -%}
+												<ul class="link-list__item__dropdown link-list__item__dropdown--nav link-list__item__dropdown--nav-{{ section.id }}">
+													{%- for grandchildlink in childlink.links -%}
+														<li class="link-list__item level2">
+															<a class="link-list__item__link nav__item__dropdown-link--{{ section.id }}{% if grandchildlink.active %} active{% endif %}" href="{{ grandchildlink.url }}" title="{%- render 'nav-shortcode-ign', str: grandchildlink.title -%}">{{ grandchildlink.title | escape }}</a>
+														</li>	
+													{%- endfor -%}
+												</ul>
+											{%- endif -%}
+											{%- if childlink.links != blank -%}
+												</div>
+											{%- endif -%}
+										</li>
+									{%- endfor -%}
+								</ul>
+							</div>
+						</div>
+					{%- endif -%}
+				</div>
+			</li>
+			{%- endfor -%}
+		</ul>
+		{%- endif -%}
+	{%- endunless -%}	
+</nav>
+<style rel="stylesheet" media="all and (min-width:992px)">
+	{{ style  }}
+	.nav__item__dropdown--{{ section.id }},.link-list__item__dropdown--nav-{{ section.id }}{background:{{ section.settings.bkg_color_dropdown }};}
+	.nav__item__dropdown-title--{{ section.id }}{font-size:{{ section.settings.fs_dropdown_title }}px;color:{{ section.settings.color_dropdown_title }};}
+	.nav__item__dropdown-link--{{ section.id }},.nav__item__dropdown-html--{{ section.id }}{font-size:{{ section.settings.fs_dropdown_content }}px;color:{{ section.settings.color_dropdown_content }};}
+	.nav__item__dropdown-html--{{ section.id }} a{color:{{ section.settings.color_dropdown_content }};}
+</style>
+{%- endif -%}

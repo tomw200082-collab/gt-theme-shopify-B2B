@@ -1,0 +1,1079 @@
+{%- render 'navigation-mobile' with section: section -%}
+{% schema %}
+{
+  "name": "Powerful Mobile Megamenu",
+  "class": "flex",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "[View the guide for this section](https://beloria-docs.boostheme.com/static-sections/powerful-mobile-megamenu-section)"
+    },
+    {
+      "type": "header",
+      "content": "Global font size settings"
+    },
+    {
+      "type": "range",
+      "id": "level1_fs",
+      "label": "Level 1",
+      "default": 18,
+      "min": 10,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "level2_fs",
+      "label": "Level 2",
+      "default": 13,
+      "min": 10,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "level3_fs",
+      "label": "Level 3",
+      "default": 13,
+      "min": 10,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "label_fs",
+      "label": "Label",
+      "default": 9,
+      "min": 5,
+      "max": 30,
+      "step": 1,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "mm_top_items",
+      "name": "Top items by link list",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "This is a \"Top items by link list\" item. You can refer to [this guide](https://beloria-docs.boostheme.com/static-sections/powerful-mobile-megamenu-section#top-items-by-link-list) for more details about it."
+        },
+        {
+          "type": "header",
+          "content": "General settings"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Menu Name",
+          "info": "This field is only used to help you find the items in Theme Settings easily. It will not be shown at the storefront.",
+          "default": "Top items by link list"
+        },
+        {
+          "type": "link_list",
+          "id": "link_list",
+          "label": "Pick a Shopify Navigation"
+        },
+        {
+          "type": "select",
+          "id": "children_style",
+          "label": "Children style",
+          "options": [
+            {
+              "value": "style1",
+              "label": "Style1"
+            },
+            {
+              "value": "style2",
+              "label": "Style2"
+            }
+          ],
+          "default": "style1"
+        },
+        {
+          "type": "header",
+          "content": "Layout Settings"
+        },
+        {
+          "type": "checkbox",
+          "id": "two_columns",
+          "label": "Show the link list in 2 columns",
+          "default": false,
+          "info": "Only apply in the children style 1."
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "level1_color",
+          "label": "Level 1",
+          "default": "#000"
+        },
+        {
+          "type": "color",
+          "id": "level2_color",
+          "label": "Level 2",
+          "default": "#1c1c1c"
+        },
+        {
+          "type": "color",
+          "id": "level3_color",
+          "label": "Level 3",
+          "default": "#1c1c1c"
+        },
+        {
+          "type": "color",
+          "id": "color_label",
+          "label": "Label color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "bkg_label",
+          "label": "Label backgorund",
+          "default": "#d9121f"
+        }
+      ]
+    },
+    {
+      "type": "mm_item",
+      "name": "Menu item",
+      "settings": [
+        {
+          "type": "header",
+          "content": "General Settings"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Type your item title"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "URL"
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "level1_color",
+          "label": "Item title ( Level 1 )",
+          "default": "#000"
+        },
+        {
+          "type": "color",
+          "id": "level2_color",
+          "label": "Level 2",
+          "default": "#1c1c1c"
+        },
+        {
+          "type": "color",
+          "id": "level3_color",
+          "label": "Level 3",
+          "default": "#1c1c1c"
+        },
+        {
+          "type": "color",
+          "id": "color_label",
+          "label": "Label color ( for Level 1 )",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "bkg_label",
+          "label": "Label backgorund ( for Level 1 )",
+          "default": "#d9121f"
+        },
+        {
+          "type": "color",
+          "id": "level3_bkg",
+          "label": "Text overlay background",
+          "default": "#fff",
+          "info": "Apply on text overlay in the \"child item with Image\" items."
+        },
+        {
+          "type": "header",
+          "content": "For Developer"
+        },
+        {
+          "type": "text",
+          "id": "custom_class",
+          "label": "Custom HTML Class"
+        },
+        {
+          "type": "header",
+          "content": "Child item 1"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_child_1",
+          "label": "Enable",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "title_1",
+          "label": "Title",
+          "info": "Display it as Level 2"
+        },
+        {
+          "type": "url",
+          "id": "url_1",
+          "label": "URL"
+        },
+        {
+          "type": "radio",
+          "id": "width_1",
+          "label": "Item's width",
+          "options": [
+            {
+              "value": "6",
+              "label": "Half"
+            },
+            {
+              "value": "12",
+              "label": "Full"
+            }
+          ],
+          "default": "12"
+        },
+        {
+          "type": "paragraph",
+          "content": "------- Link list -------"
+        },
+        {
+          "type": "link_list",
+          "id": "link_list_1",
+          "label": "Pick a link list",
+          "info": "Display it as Level 3"
+        },
+        {
+          "type": "checkbox",
+          "id": "link_list_two_columns_1",
+          "label": "Show the link list in 2 columns",
+          "default": false
+        },
+        {
+          "type": "color",
+          "id": "color_label_1",
+          "label": "Label color",
+          "default": "#fff",
+          "info": "Set color for labels in the link list"
+        },
+        {
+          "type": "color",
+          "id": "bkg_label_1",
+          "label": "Label backgorund",
+          "default": "#d9121f",
+          "info": "Set background for labels in the link list"
+        },
+        {
+          "type": "paragraph",
+          "content": "----- Image with text -----"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_text_1",
+          "label": "The text overlay",
+          "info": "Display it as Level 3"
+        },
+        {
+          "type": "url",
+          "id": "image_url_1",
+          "label": "URL"
+        },
+        {
+          "type": "paragraph",
+          "content": "----- Custom HTML -----"
+        },
+        {
+          "type": "html",
+          "id": "html_1",
+          "label": "Your text or HTML",
+          "info": "Display it as Level 3"
+        },
+        {
+          "type": "header",
+          "content": "Child item 2"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_child_2",
+          "label": "Enable",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "title_2",
+          "label": "Title",
+          "info": "Display it as Level 2"
+        },
+        {
+          "type": "url",
+          "id": "url_2",
+          "label": "URL"
+        },
+        {
+          "type": "radio",
+          "id": "width_2",
+          "label": "Item's width",
+          "options": [
+            {
+              "value": "6",
+              "label": "Half"
+            },
+            {
+              "value": "12",
+              "label": "Full"
+            }
+          ],
+          "default": "12"
+        },
+        {
+          "type": "paragraph",
+          "content": "------- Link list -------"
+        },
+        {
+          "type": "link_list",
+          "id": "link_list_2",
+          "label": "Pick a link list",
+          "info": "Display it as Level 3"
+        },
+        {
+          "type": "checkbox",
+          "id": "link_list_two_columns_2",
+          "label": "Show the link list in 2 columns",
+          "default": false
+        },
+        {
+          "type": "color",
+          "id": "color_label_2",
+          "label": "Label color",
+          "default": "#fff",
+          "info": "Set color for labels in the link list"
+        },
+        {
+          "type": "color",
+          "id": "bkg_label_2",
+          "label": "Label backgorund",
+          "default": "#d9121f",
+          "info": "Set background for labels in the link list"
+        },
+        {
+          "type": "paragraph",
+          "content": "----- Image with text -----"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_text_2",
+          "label": "The text overlay",
+          "info": "Display it as Level 3"
+        },
+        {
+          "type": "url",
+          "id": "image_url_2",
+          "label": "URL"
+        },
+        {
+          "type": "paragraph",
+          "content": "----- Custom HTML -----"
+        },
+        {
+          "type": "html",
+          "id": "html_2",
+          "label": "Your text or HTML",
+          "info": "Display it as Level 3"
+        },
+        {
+          "type": "header",
+          "content": "Child item 3"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_child_3",
+          "label": "Enable",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "title_3",
+          "label": "Title",
+          "info": "Display it as Level 2"
+        },
+        {
+          "type": "url",
+          "id": "url_3",
+          "label": "URL"
+        },
+        {
+          "type": "radio",
+          "id": "width_3",
+          "label": "Item's width",
+          "options": [
+            {
+              "value": "6",
+              "label": "Half"
+            },
+            {
+              "value": "12",
+              "label": "Full"
+            }
+          ],
+          "default": "12"
+        },
+        {
+          "type": "paragraph",
+          "content": "------- Link list -------"
+        },
+        {
+          "type": "link_list",
+          "id": "link_list_3",
+          "label": "Pick a link list",
+          "info": "Display it as Level 3"
+        },
+        {
+          "type": "checkbox",
+          "id": "link_list_two_columns_3",
+          "label": "Show the link list in 2 columns",
+          "default": false
+        },
+        {
+          "type": "color",
+          "id": "color_label_3",
+          "label": "Label color",
+          "default": "#fff",
+          "info": "Set color for labels in the link list"
+        },
+        {
+          "type": "color",
+          "id": "bkg_label_3",
+          "label": "Label backgorund",
+          "default": "#d9121f",
+          "info": "Set background for labels in the link list"
+        },
+        {
+          "type": "paragraph",
+          "content": "----- Image with text -----"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_3",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_text_3",
+          "label": "The text overlay",
+          "info": "Display it as Level 3"
+        },
+        {
+          "type": "url",
+          "id": "image_url_3",
+          "label": "URL"
+        },
+        {
+          "type": "paragraph",
+          "content": "----- Custom HTML -----"
+        },
+        {
+          "type": "html",
+          "id": "html_3",
+          "label": "Your text or HTML",
+          "info": "Display it as Level 3"
+        },
+        {
+          "type": "header",
+          "content": "Child item 4"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_child_4",
+          "label": "Enable",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "title_4",
+          "label": "Title",
+          "info": "Display it as Level 2"
+        },
+        {
+          "type": "url",
+          "id": "url_4",
+          "label": "URL"
+        },
+        {
+          "type": "radio",
+          "id": "width_4",
+          "label": "Item's width",
+          "options": [
+            {
+              "value": "6",
+              "label": "Half"
+            },
+            {
+              "value": "12",
+              "label": "Full"
+            }
+          ],
+          "default": "12"
+        },
+        {
+          "type": "paragraph",
+          "content": "------- Link list -------"
+        },
+        {
+          "type": "link_list",
+          "id": "link_list_4",
+          "label": "Pick a link list",
+          "info": "Display it as Level 3"
+        },
+        {
+          "type": "checkbox",
+          "id": "link_list_two_columns_4",
+          "label": "Show the link list in 2 columns",
+          "default": false
+        },
+        {
+          "type": "color",
+          "id": "color_label_4",
+          "label": "Label color",
+          "default": "#fff",
+          "info": "Set color for labels in the link list"
+        },
+        {
+          "type": "color",
+          "id": "bkg_label_4",
+          "label": "Label backgorund",
+          "default": "#d9121f",
+          "info": "Set background for labels in the link list"
+        },
+        {
+          "type": "paragraph",
+          "content": "----- Image with text -----"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_4",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_text_4",
+          "label": "The text overlay",
+          "info": "Display it as Level 3"
+        },
+        {
+          "type": "url",
+          "id": "image_url_4",
+          "label": "URL"
+        },
+        {
+          "type": "paragraph",
+          "content": "----- Custom HTML -----"
+        },
+        {
+          "type": "html",
+          "id": "html_4",
+          "label": "Your text or HTML",
+          "info": "Display it as Level 3"
+        },
+        {
+          "type": "header",
+          "content": "Child item 5"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_child_5",
+          "label": "Enable",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "title_5",
+          "label": "Title",
+          "info": "Display it as Level 2"
+        },
+        {
+          "type": "url",
+          "id": "url_5",
+          "label": "URL"
+        },
+        {
+          "type": "radio",
+          "id": "width_5",
+          "label": "Item's width",
+          "options": [
+            {
+              "value": "6",
+              "label": "Half"
+            },
+            {
+              "value": "12",
+              "label": "Full"
+            }
+          ],
+          "default": "12"
+        },
+        {
+          "type": "paragraph",
+          "content": "------- Link list -------"
+        },
+        {
+          "type": "link_list",
+          "id": "link_list_5",
+          "label": "Pick a link list",
+          "info": "Display it as Level 3"
+        },
+        {
+          "type": "checkbox",
+          "id": "link_list_two_columns_5",
+          "label": "Show the link list in 2 columns",
+          "default": false
+        },
+        {
+          "type": "color",
+          "id": "color_label_5",
+          "label": "Label color",
+          "default": "#fff",
+          "info": "Set color for labels in the link list"
+        },
+        {
+          "type": "color",
+          "id": "bkg_label_5",
+          "label": "Label backgorund",
+          "default": "#d9121f",
+          "info": "Set background for labels in the link list"
+        },
+        {
+          "type": "paragraph",
+          "content": "----- Image with text -----"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_5",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_text_5",
+          "label": "The text overlay",
+          "info": "Display it as Level 3"
+        },
+        {
+          "type": "url",
+          "id": "image_url_5",
+          "label": "URL"
+        },
+        {
+          "type": "paragraph",
+          "content": "----- Custom HTML -----"
+        },
+        {
+          "type": "html",
+          "id": "html_5",
+          "label": "Your text or HTML",
+          "info": "Display it as Level 3"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "mm_item",
+        "settings": {
+          "title": "{{icon lnr-gift}} Shop {{label new}}",
+          "url": "shopify:\/\/collections",
+          "level1_color": "#000000",
+          "level2_color": "#1c1c1c",
+          "level3_color": "#1c1c1c",
+          "color_label": "#ffffff",
+          "bkg_label": "#d9121f",
+          "level3_bkg": "#ffffff",
+          "custom_class": "",
+          "enable_child_1": true,
+          "title_1": "Men's",
+          "url_1": "shopify:\/\/collections\/all",
+          "width_1": "6",
+          "link_list_1": "all-collection",
+          "link_list_two_columns_1": false,
+          "color_label_1": "#ffffff",
+          "bkg_label_1": "#d9121f",
+          "image_text_1": "",
+          "image_url_1": "",
+          "html_1": "",
+          "enable_child_2": true,
+          "title_2": "Women's",
+          "url_2": "shopify:\/\/collections\/all",
+          "width_2": "6",
+          "link_list_2": "all-collection",
+          "link_list_two_columns_2": false,
+          "color_label_2": "#ffffff",
+          "bkg_label_2": "#d9121f",
+          "image_text_2": "",
+          "image_url_2": "",
+          "html_2": "",
+          "enable_child_3": true,
+          "title_3": "",
+          "url_3": "",
+          "width_3": "12",
+          "link_list_3": "",
+          "link_list_two_columns_3": false,
+          "color_label_3": "#ffffff",
+          "bkg_label_3": "#d9121f",
+          "image_3": "shopify:\/\/shop_images\/banner-menu2.jpg",
+          "image_text_3": "",
+          "image_url_3": "shopify:\/\/collections",
+          "html_3": "",
+          "enable_child_4": false,
+          "title_4": "",
+          "url_4": "",
+          "width_4": "12",
+          "link_list_4": "",
+          "link_list_two_columns_4": false,
+          "color_label_4": "#ffffff",
+          "bkg_label_4": "#d9121f",
+          "image_text_4": "",
+          "image_url_4": "",
+          "html_4": "",
+          "enable_child_5": false,
+          "title_5": "",
+          "url_5": "",
+          "width_5": "12",
+          "link_list_5": "",
+          "link_list_two_columns_5": false,
+          "color_label_5": "#ffffff",
+          "bkg_label_5": "#d9121f",
+          "image_text_5": "",
+          "image_url_5": "",
+          "html_5": ""
+        }
+      },
+      {
+        "type": "mm_item",
+        "settings": { 
+          "title": "{{icon lnr-skirt}} Fashion {{label bestseller}}",
+          "url": "shopify:\/\/collections\/all",
+          "level1_color": "#000000",
+          "level2_color": "#1c1c1c",
+          "level3_color": "#1c1c1c",
+          "color_label": "#ffffff",
+          "bkg_label": "#12d915",
+          "level3_bkg": "#ffffff",
+          "custom_class": "",
+          "enable_child_1": true,
+          "title_1": "Clothing",
+          "url_1": "shopify:\/\/collections\/all",
+          "width_1": "6",
+          "link_list_1": "all-collection",
+          "link_list_two_columns_1": false,
+          "color_label_1": "#ffffff",
+          "bkg_label_1": "#d9121f",
+          "image_text_1": "",
+          "image_url_1": "",
+          "html_1": "",
+          "enable_child_2": true,
+          "title_2": "Featured",
+          "url_2": "shopify:\/\/collections\/all",
+          "width_2": "6",
+          "link_list_2": "",
+          "link_list_two_columns_2": false,
+          "color_label_2": "#ffffff",
+          "bkg_label_2": "#d9121f",
+          "image_2": "shopify:\/\/shop_images\/mobile-2_b8d3c9e1-eed8-4786-a5cd-b0a7e0d92a24.jpg",
+          "image_text_2": "T'shirt",
+          "image_url_2": "shopify:\/\/collections\/all",
+          "html_2": "",
+          "enable_child_3": false,
+          "title_3": "",
+          "url_3": "",
+          "width_3": "12",
+          "link_list_3": "",
+          "link_list_two_columns_3": false,
+          "color_label_3": "#ffffff",
+          "bkg_label_3": "#d9121f",
+          "image_text_3": "",
+          "image_url_3": "",
+          "html_3": "",
+          "enable_child_4": false,
+          "title_4": "",
+          "url_4": "",
+          "width_4": "12",
+          "link_list_4": "",
+          "link_list_two_columns_4": false,
+          "color_label_4": "#ffffff",
+          "bkg_label_4": "#d9121f",
+          "image_text_4": "",
+          "image_url_4": "",
+          "html_4": "",
+          "enable_child_5": false,
+          "title_5": "",
+          "url_5": "",
+          "width_5": "12",
+          "link_list_5": "",
+          "link_list_two_columns_5": false,
+          "color_label_5": "#ffffff",
+          "bkg_label_5": "#d9121f",
+          "image_text_5": "",
+          "image_url_5": "",
+          "html_5": ""
+        }
+      },
+      {
+        "type": "mm_item",
+        "settings": {
+          "title": "{{icon lnr-picture}} Models",
+          "url": "shopify:\/\/collections\/all",
+          "level1_color": "#000000",
+          "level2_color": "#1c1c1c",
+          "level3_color": "#1c1c1c",
+          "color_label": "#ffffff",
+          "bkg_label": "#d9121f",
+          "level3_bkg": "#ffffff",
+          "custom_class": "",
+          "enable_child_1": true,
+          "title_1": "Street style",
+          "url_1": "shopify:\/\/collections\/all",
+          "width_1": "12",
+          "link_list_1": "",
+          "link_list_two_columns_1": false,
+          "color_label_1": "#ffffff",
+          "bkg_label_1": "#d9121f",
+          "image_1": "shopify:\/\/shop_images\/3_33e18c8b-6c1c-46f3-ab96-37ed53a43925.jpg",
+          "image_text_1": "Shop Now",
+          "image_url_1": "shopify:\/\/collections\/all",
+          "html_1": "",
+          "enable_child_2": true,
+          "title_2": "Women's",
+          "url_2": "shopify:\/\/collections\/all",
+          "width_2": "6",
+          "link_list_2": "",
+          "link_list_two_columns_2": false,
+          "color_label_2": "#ffffff",
+          "bkg_label_2": "#d9121f",
+          "image_2": "shopify:\/\/shop_images\/2_1d8b2dbf-3bb8-4715-b915-b83313450e08.jpg",
+          "image_text_2": "Shop Now",
+          "image_url_2": "shopify:\/\/collections\/all",
+          "html_2": "",
+          "enable_child_3": true,
+          "title_3": "Men's",
+          "url_3": "shopify:\/\/collections\/all",
+          "width_3": "6",
+          "link_list_3": "",
+          "link_list_two_columns_3": false,
+          "color_label_3": "#ffffff",
+          "bkg_label_3": "#d9121f",
+          "image_3": "shopify:\/\/shop_images\/1_c9b18ee6-d0c1-4293-85b7-2bb2532bf694.jpg",
+          "image_text_3": "Shop Now",
+          "image_url_3": "shopify:\/\/collections\/all",
+          "html_3": "",
+          "enable_child_4": false,
+          "title_4": "",
+          "url_4": "",
+          "width_4": "12",
+          "link_list_4": "",
+          "link_list_two_columns_4": false,
+          "color_label_4": "#ffffff",
+          "bkg_label_4": "#d9121f",
+          "image_text_4": "",
+          "image_url_4": "",
+          "html_4": "",
+          "enable_child_5": false,
+          "title_5": "",
+          "url_5": "",
+          "width_5": "12",
+          "link_list_5": "",
+          "link_list_two_columns_5": false,
+          "color_label_5": "#ffffff",
+          "bkg_label_5": "#d9121f",
+          "image_text_5": "",
+          "image_url_5": "",
+          "html_5": ""
+        }
+      },
+      {
+        "type": "mm_item",
+        "settings": {
+          "title": "{{icon lnr-ruler}} Designer {{label trending}}",
+          "url": "shopify:\/\/collections",
+          "level1_color": "#000000",
+          "level2_color": "#1c1c1c",
+          "level3_color": "#1c1c1c",
+          "color_label": "#ffffff",
+          "bkg_label": "#124ad9",
+          "level3_bkg": "#ffffff",
+          "custom_class": "",
+          "enable_child_1": true,
+          "title_1": "",
+          "url_1": "",
+          "width_1": "12",
+          "link_list_1": "",
+          "link_list_two_columns_1": false,
+          "color_label_1": "#ffffff",
+          "bkg_label_1": "#d9121f",
+          "image_1": "shopify:\/\/shop_images\/banner-menu2.jpg",
+          "image_text_1": "",
+          "image_url_1": "shopify:\/\/collections",
+          "html_1": "",
+          "enable_child_2": true,
+          "title_2": "New Collection",
+          "url_2": "shopify:\/\/collections\/all",
+          "width_2": "12",
+          "link_list_2": "all-collection",
+          "link_list_two_columns_2": true,
+          "color_label_2": "#ffffff",
+          "bkg_label_2": "#d9121f",
+          "image_text_2": "",
+          "image_url_2": "",
+          "html_2": "",
+          "enable_child_3": true,
+          "title_3": "",
+          "url_3": "",
+          "width_3": "12",
+          "link_list_3": "all-collection",
+          "link_list_two_columns_3": true,
+          "color_label_3": "#ffffff",
+          "bkg_label_3": "#d9121f",
+          "image_text_3": "",
+          "image_url_3": "",
+          "html_3": "",
+          "enable_child_4": true,
+          "title_4": "Best seller",
+          "url_4": "",
+          "width_4": "6",
+          "link_list_4": "all-collection",
+          "link_list_two_columns_4": false,
+          "color_label_4": "#ffffff",
+          "bkg_label_4": "#d9121f",
+          "image_text_4": "",
+          "image_url_4": "",
+          "html_4": "",
+          "enable_child_5": true,
+          "title_5": "&nbsp;",
+          "url_5": "",
+          "width_5": "6",
+          "link_list_5": "all-collection",
+          "link_list_two_columns_5": false,
+          "color_label_5": "#ffffff",
+          "bkg_label_5": "#d9121f",
+          "image_text_5": "",
+          "image_url_5": "",
+          "html_5": ""
+        }
+      },
+      {
+        "type": "mm_top_items",
+        "settings": {
+          "title": "Top items by link list",
+          "link_list": "main-menu",
+          "children_style": "style1",
+          "two_columns": false,
+          "level1_color": "#000000",
+          "level2_color": "#1c1c1c",
+          "level3_color": "#1c1c1c",
+          "color_label": "#ffffff",
+          "bkg_label": "#d9121f"
+        }
+      },
+      {
+        "type": "mm_item",
+        "settings": {
+          "title": "{{icon lnr-thumbs-up}} Our Shopping",
+          "url": "shopify:\/\/collections",
+          "level1_color": "#000000",
+          "level2_color": "#1c1c1c",
+          "level3_color": "#1c1c1c",
+          "color_label": "#ffffff",
+          "bkg_label": "#d9121f",
+          "level3_bkg": "#ffffff",
+          "custom_class": "",
+          "enable_child_1": true,
+          "title_1": "",
+          "url_1": "",
+          "width_1": "12",
+          "link_list_1": "",
+          "link_list_two_columns_1": false,
+          "color_label_1": "#ffffff",
+          "bkg_label_1": "#d9121f",
+          "image_1": "shopify:\/\/shop_images\/map-bryggegata.png",
+          "image_text_1": "",
+          "image_url_1": "shopify:\/\/collections",
+          "html_1": "",
+          "enable_child_2": false,
+          "title_2": "",
+          "url_2": "",
+          "width_2": "12",
+          "link_list_2": "",
+          "link_list_two_columns_2": false,
+          "color_label_2": "#ffffff",
+          "bkg_label_2": "#d9121f",
+          "image_text_2": "",
+          "image_url_2": "",
+          "html_2": "",
+          "enable_child_3": false,
+          "title_3": "",
+          "url_3": "",
+          "width_3": "12",
+          "link_list_3": "",
+          "link_list_two_columns_3": false,
+          "color_label_3": "#ffffff",
+          "bkg_label_3": "#d9121f",
+          "image_text_3": "",
+          "image_url_3": "",
+          "html_3": "",
+          "enable_child_4": false,
+          "title_4": "",
+          "url_4": "",
+          "width_4": "12",
+          "link_list_4": "",
+          "link_list_two_columns_4": false,
+          "color_label_4": "#ffffff",
+          "bkg_label_4": "#d9121f",
+          "image_text_4": "",
+          "image_url_4": "",
+          "html_4": "",
+          "enable_child_5": false,
+          "title_5": "",
+          "url_5": "",
+          "width_5": "12",
+          "link_list_5": "",
+          "link_list_two_columns_5": false,
+          "color_label_5": "#ffffff",
+          "bkg_label_5": "#d9121f",
+          "image_text_5": "",
+          "image_url_5": "",
+          "html_5": ""
+        }
+      }
+    ],
+    "settings": {
+      "level1_fs": 18,
+      "level2_fs": 13,
+      "level3_fs": 13,
+      "label_fs": 9
+    }
+  }
+}
+{% endschema %}

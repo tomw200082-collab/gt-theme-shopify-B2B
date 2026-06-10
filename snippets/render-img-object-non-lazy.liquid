@@ -1,0 +1,8 @@
+<img srcset="{% render 'img-srcset-webp' with image: image %}"
+  sizes="{{ sizes | default: '(min-width: 750px) 50vw, 100vw' }}"
+  src="{{ image | image_url: width: 180, format: 'webp' }}"
+  alt="{{ image.alt | escape }}"
+  width="{{ image.width }}"
+  height="{{ image.height }}"
+  class="{{ css_classes }}"
+>

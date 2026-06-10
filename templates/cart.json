@@ -1,0 +1,63 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "cart-template": {
+      "type": "cart-template",
+      "settings": {
+        "cart_notes_enable": true,
+        "cart_hold_enable": false,
+        "cart_hold_hour": 0,
+        "cart_hold_minute": 15
+      }
+    },
+    "cart-crosssell": {
+      "type": "cart-crosssell",
+      "disabled": true,
+      "settings": {
+        "top_gutter": true,
+        "bottom_gutter": true,
+        "title": "",
+        "sub_title": "",
+        "rule": "manual",
+        "limit": 4,
+        "main_thumbnail": "product_image",
+        "show_label": true,
+        "show_cart_btn": true,
+        "show_qs_btn": true,
+        "show_compare_btn": true,
+        "show_wishlist_btn": true,
+        "show_review_stars": true,
+        "enable_product_options": true,
+        "product_name_size": 5
+      }
+    },
+    "1648545119b95b3201": {
+      "type": "custom-html",
+      "settings": {
+        "wide_display": false,
+        "custom_html": "<div class=\"yotpo yotpo-reviews-carousel\" data-header-customisation-enabled=\"1\" data-header-customisation-color=\"#56575f\" data-header-customisation-font-size=\"18\" data-header-customisation-text=\"\" data-header-customisation-alignment=\"left\" data-background-color=\"transparent\" data-mode=\"top_rated\" data-type=\"both\" data-count=\"9\" data-show-bottomline=\"1\" data-autoplay-enabled=\"1\" data-autoplay-speed=\"3000\" data-testimonials-page-enabled=\"1\" data-testimonials-page-text=\"כל הביקורות\" data-testimonials-page-link=\"https://greentea-everyday.com/pages/reviews\"> </div>"
+      }
+    },
+    "54b2cf8f-89f5-472f-b2b6-a68833e867b4": {
+      "type": "custom-html",
+      "settings": {
+        "wide_display": false,
+        "custom_html": "<script>\n      (function(d,t) {\n        var BASE_URL=\"https://online.99digital.co.il\";\n        var s = document.createElement('script');\n        s.type = 'text/javascript';\n        s.async = true;\n        s.src = BASE_URL+\"/packs/js/wa_widget.js\";\n        var options = {\n          baseUrl: BASE_URL,\n          phoneNumber:\"972723941061\",\n        };\n        s.onload = function() {\n          window.onlineWaWidget.run(options);\n        };\n        var x = document.getElementsByTagName('script')[0];\n        x.parentNode.insertBefore(s, x);\n      })(document,\"script\");\n    </script>"
+      }
+    }
+  },
+  "order": [
+    "cart-template",
+    "cart-crosssell",
+    "1648545119b95b3201",
+    "54b2cf8f-89f5-472f-b2b6-a68833e867b4"
+  ]
+}

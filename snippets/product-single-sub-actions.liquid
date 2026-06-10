@@ -1,0 +1,8 @@
+{%- capture sub_action -%}
+	{%- render 'product-single-compare-btn' with product: product -%}
+{%- endcapture -%}
+{%- if sub_action != '' -%}
+<div class="distance-top-ele">
+	{{ sub_action }}
+</div>
+{%- endif -%}

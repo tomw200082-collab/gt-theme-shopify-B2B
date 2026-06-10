@@ -1,0 +1,10 @@
+{%- if block.settings.show_discount_text and block.settings.discount_text != blank -%}
+<div class="pg__discount-text dib text-right lb-item--sale{% if variant.compare_at_price and variant.compare_at_price > product.price %}{% else %} hide{% endif %}" style="color:{{ settings.color_discount_text_single }};margin-{{ left_holder }}:10px;">
+		{% if block.settings.discount_text contains '[percent]' %}
+			{%- capture percent -%}<strong class="lb__percent lb__percent--abs">{%- if variant.compare_at_price and variant.compare_at_price > product.price -%}{{ variant.compare_at_price | minus: variant.price | times: 100 | divided_by: variant.compare_at_price | floor }}%{%- else -%}0{%- endif -%}</strong>{%- endcapture -%}
+			{{ block.settings.discount_text | replace: '[percent]', percent }}
+		{% else %}
+			{{ block.settings.discount_text }}
+		{% endif %}
+</div>
+{%- endif -%}

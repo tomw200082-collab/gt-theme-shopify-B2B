@@ -1,0 +1,318 @@
+{%- liquid
+  unless settings.enable_rtl and settings.rtl_language_codes contains request.locale.iso_code
+    assign left_holder = 'left'
+    assign right_holder = 'right'
+    assign enable_rtl = false
+  else
+    assign left_holder = 'right'
+    assign right_holder = 'left'
+    assign enable_rtl = true
+  endunless
+%}
+<div data-section-id="{{ section.id }}" data-section-type="collection-template" id="collection-template" class="collection-template-section">
+  {%- render 'search-result' with enable_rtl: enable_rtl, left_holder: left_holder, right_holder: right_holder -%}
+</div>
+{%- render 'bottom-mobile-toolbar' with enable_rtl: enable_rtl, left_holder: left_holder, right_holder: right_holder, has_collection_filter: section.settings.enable_filter -%}
+{%- style -%}
+  .cf__item__title{font-size:{{ section.settings.filter_title_fs }}px;line-height:{{ section.settings.filter_title_fs }}px;}
+  .cf__link--option{font-size:{{ section.settings.filter_option_fs }}px;}
+  .cf__link--current{font-size:{{ section.settings.filter_current_fs }}px;}
+{%- endstyle -%}
+{% schema %}
+  {
+    "name": "Search result page",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "[View the guide for this section](https://vodoma-docs.boostheme.com/static-sections/search-result-page)"
+      },
+      {
+        "type": "header",
+        "content": "General settings"
+      },
+      {
+        "type": "range",
+        "id": "limit",
+        "label": "Limit",
+        "min": 4,
+        "max": 50,
+        "step": 1,
+        "default": 20,
+        "info": "The number of items per page."
+      },
+      {
+        "type": "select",
+        "id": "item_size_product",
+        "label": "Products layout",
+        "options": [
+          {
+            "value": "list",
+            "label": "List"
+          },
+          {
+            "value": "small",
+            "label": "Small"
+          },
+          {
+            "value": "medium",
+            "label": "Medium Grid"
+          },
+          {
+            "value": "large",
+            "label": "Large Grid"
+          },
+          {
+            "value": "very-large",
+            "label": "Very Large Grid"
+          }
+        ],
+        "default": "medium"
+      },
+      {
+        "type": "select",
+        "id": "item_size_article",
+        "label": "Articles layout",
+        "options": [
+          {
+            "value": "list",
+            "label": "List"
+          },
+          {
+            "value": "large",
+            "label": "Large Grid"
+          },
+          {
+            "value": "very-large",
+            "label": "Very Large Grid"
+          }
+        ],
+        "default": "list"
+      },
+      {
+        "type": "header",
+        "content": "Blog article item"
+      },
+      {
+        "type": "checkbox",
+        "id": "blog_show_author_search",
+        "label": "Show author",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "blog_show_date_search",
+        "label": "Show date",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Toolbar"
+      },
+      {
+        "type": "checkbox",
+        "id": "toolbar_enable",
+        "label": "Enable toolbar",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "toolbar_sort_enable",
+        "label": "Enable sorting",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Infinity loading products"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_infinity_loading",
+        "label": "Enable",
+        "default": false
+      },
+      {
+        "type": "radio",
+        "id": "infinity_action",
+        "label": "Load products when customer:",
+        "options": [
+          {
+            "value": "scroll",
+            "label": "Scroll to load more button"
+          },
+          {
+            "value": "click",
+            "label": "Click load more button"
+          }
+        ],
+        "default": "scroll"
+      },
+      {
+        "type": "header",
+        "content": "Filter settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_filter",
+        "label": "Enable filter feature",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "filter_item_format",
+        "label": "Item format",
+        "options": [
+          {
+            "value": "square",
+            "label": "Square"
+          },
+          {
+            "value": "circle",
+            "label": "Circle"
+          }
+        ],
+        "default": "circle"
+      },
+      {
+        "type": "select",
+        "id": "filter_default_expand",
+        "label": "Expand/Collapse state",
+        "options": [
+          {
+            "value": "expand",
+            "label": "Expand"
+          },
+          {
+            "value": "collapse",
+            "label": "Collapse"
+          }
+        ],
+        "default": "expand"
+      },
+      {
+        "type": "paragraph",
+        "content": "---------- Font sizes ----------"
+      },
+      {
+        "type": "range",
+        "id": "filter_title_fs",
+        "label": "Item title",
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "filter_option_fs",
+        "label": "Product option",
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "default": 12
+      },
+      {
+        "type": "range",
+        "id": "filter_current_fs",
+        "label": "Active item",
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "default": 12
+      },
+      {
+        "type": "header",
+        "content" : "Product item"
+      },
+      {
+        "type": "select",
+        "id": "main_thumbnail",
+        "label": "Show main thumbnail by",
+        "options": [
+          {
+            "value": "product_image",
+            "label": "Featured product image"
+          },
+          {
+            "value": "variant_image",
+            "label": "First available variant image"
+          }
+        ],
+        "default": "product_image"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_label",
+        "label": "Show label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_cart_btn",
+        "label": "Show Add to cart button",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_qs_btn",
+        "label": "Show Quick Shop button",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_compare_btn",
+        "label": "Show Compare button",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_wishlist_btn",
+        "label": "Show wishlist button",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_review_stars",
+        "label": "Show review stars",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "use_lazyload",
+        "label": "Use lazy loading image",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_product_options",
+        "label": "Enable Product Options",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_countdown_timer",
+        "label": "Show countdown timer",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_vendor",
+        "label": "Show product vendors",
+        "default": false
+      },
+      {
+        "type": "range",
+        "id": "product_name_size",
+        "label": "Product name's size",
+        "info": "Use this configuration to make product name shorted if your product name is too long.Unit : word(wor)",
+        "min": 3,
+        "max": 30,
+        "default": 5,
+        "step": 1
+      }
+    ]
+  }
+{% endschema %}

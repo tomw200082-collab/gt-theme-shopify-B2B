@@ -1,0 +1,22 @@
+{%- capture fre_bought_content -%}{%- render 'product-single-fre-bought-content' with fre_handles: fre_handles -%}{%- endcapture -%}
+{%- if fre_bought_content != '' or section.settings.rule == 'auto' -%}
+<div class="fre-bought freb">
+  <div class="freb__border gutter-ele-small-top">
+		<div class="row freb__inner freb__inner-js margin0 flex gutter-ele-top">
+			{%- if fre_bought_content != '' -%}
+				{{ fre_bought_content }}
+			{%- elsif section.settings.rule == 'auto' -%}
+				{%- unless recommendations.performed -%}
+					<div class="loading-not-full load-crossell" data-view="recommendation_widget" style="margin-top:50px;" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.limit | plus: cart.item_count }}">
+	          <i class="loading-ajax"></i>
+	        </div>
+	      {%- else -%}
+        	<div class="empty-products"></div>  	
+        {%- endunless -%}
+      {%- else -%}  
+      	<div class="empty-products"></div>  
+			{%- endif -%}
+		</div>
+	</div>
+</div>
+{%- endif %}

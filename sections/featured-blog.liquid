@@ -1,0 +1,265 @@
+{%- render 'section-background-start' -%}
+<div id="featured-blog_{{ section.id }}" class="container{% if section.settings.full_width %}-fluid{% endif %}{% render 'section-gutters-nobkg' %}" data-section-id="{{ section.id }}" data-section-type="featured-blog">
+  <div class="row">
+    <div class="section__inner col-xs-12">
+      {%- render 'section-heading' -%}
+      <div class="section__content">
+        {%- assign blog = blogs[section.settings.blog] -%}
+        {%- assign column_count = section.settings.column_count | times: 1 -%}
+        {%- assign column_count_mobile = 1 -%}
+        {%- assign post_limit = section.settings.post_limit -%}
+        {%- assign data_slider = '{"adaptiveHeight":true,"slidesToShow": ' | append: column_count | append: ',"slidesToScroll":1,"infinite":true,"autoplay":true,"pauseOnHover":true,"autoplaySpeed":5000,"responsive":[{"breakpoint": 992,"settings": {"slidesToShow":2}},{"breakpoint": 768,"settings": {"slidesToShow":1}}]}' -%}
+        {%- unless blog == blank -%}
+          {%- unless blog.articles_count == 0 -%}
+            <div class="grid grid--{% if column_count == 2 %}very-large{% elsif column_count == 3 %}large{% else %}medium{% endif %} use-slider" data-slider='{{ data_slider }}'>
+              {%- for article in blog.articles limit: post_limit -%}
+                <div class="grid__item item{% if forloop.index > column_count %} ov-slider-tb{% endif %}{% if forloop.index > column_count_mobile %} ov-slider-mb{% endif %} effect-hover article-feature__item-{{ section.id }}">
+                  <div class="article-feature__inner por">
+                    {% if article.image %}
+                      {%- assign img_url = article.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                      <a href="{{ article.url }}" style="padding-top:{{ 1 | divided_by: article.image.aspect_ratio | times: 100}}%;" class="article__image-container img-container loading" title="{{ article.title | escape }}">
+                        <img class="article__image lazyload zoom-fade-slider img-abs w100"
+                             alt="{{ article.image.alt | escape }}"
+                             data-sizes="auto"
+                             data-src="{{ img_url }}"{% render 'img-one-pixel' %}>
+                      </a>
+                    {% endif %}
+                    <div class="effect-hover__content article-feature__bottom gutter-top">
+                      {%- if section.settings.blog_show_date -%}
+                        <span class="article__date article__date--{{ section.id }} db gutter-ele-bottom w100">
+                          {{ article.published_at | time_tag: format: 'month_day_year' }}
+                        </span>
+                      {%- endif -%}
+                      <a href="{{ article.url }}" class="article-feature__title article-feature__title--{{ section.id }} fw-bold" title="{{ article.title | escape }}">{{ article.title }}</a>
+                    </div>
+                  </div>
+                </div>
+              {%- endfor -%}
+            </div>
+          {%- else -%}
+            {% render 'no-blocks' %}
+          {%- endunless -%}
+        {%- else -%}
+          <div class="grid grid--{% if column_count == 2 %}very-large{% elsif column_count == 3 %}large{% else %}medium{% endif %} use-slider" data-slider='{{ data_slider }}'>
+            {% for i in (1..post_limit) %}
+            <div class="grid__item item{% if forloop.index > column_count %} ov-slider-tb{% endif %}{% if forloop.index > column_count_mobile %} ov-slider-mb{% endif %} effect-hover article-feature__item-{{ section.id }}">
+              <div class="article-feature__inner por">
+                {% if article.image %}
+                  <a href="#" class="article__image-container img-container loading" title="{{ 'homepage.onboarding.blog_title' | t | escape }}">
+                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                  </a>
+                {% endif %}
+                <div class="effect-hover__content article-feature__bottom gutter-top">
+                  {%- if section.settings.blog_show_date -%}
+                    <span class="article__date article__date--{{ section.id }} db gutter-ele-bottom w100">
+                      {{ "now" | time_tag: format: 'month_day_year' }}
+                    </span>
+                  {%- endif -%}
+                  <a href="#" class="article-feature__title article-feature__title--{{ section.id }} fw-bold" title="{{ 'homepage.onboarding.blog_title' | t | escape }}">{{ 'homepage.onboarding.blog_title' | t }}</a>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>  
+        {%- endunless -%}       
+      </div>
+    </div>
+  </div>
+</div>
+{%- render 'section-background-end' -%}
+{%- style -%}.article__date--{{ section.id }}{color:{{ section.settings.color_date }};font-size:{{ section.settings.fs_date }}px;}.article-feature__title--{{ section.id }}{color:{{ section.settings.color_title }};font-size:{{ section.settings.fs_title }}px;line-height:1.7em;}@media(min-width:1200px){.article-feature__bottom{top:100%;left:0;right:0;background:{{ settings.body_bkg_color }};} .article-feature__item-{{ section.id }}:hover .article-feature__bottom{transform:translateY(-100%);} }{%- endstyle -%}
+{% schema %}
+  {
+    "name": "Blog posts",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "[View the guide for this section](https://vodoma-docs.boostheme.com/dynamic-sections/marketing-and-others/featured-blog)"
+      },
+      {
+        "type": "header",
+        "content": "Background"
+      },
+      {
+        "type": "checkbox",
+        "id": "bkg_enable",
+        "label": "Enable",
+        "default": false
+      },
+      {
+        "type": "color",
+        "id": "section_bkg",
+        "label": "Pick a color"
+      },
+      {
+        "type": "image_picker",
+        "id": "section_bkg_image",
+        "label": "Background image"
+      },
+      {
+        "type": "radio",
+        "id": "section_bkg_gutter",
+        "label": "Background size",
+        "options": [
+          {
+            "value": "small",
+            "label": "Small"
+          },
+          {
+            "value": "medium",
+            "label": "medium"
+          },
+          {
+            "value": "high",
+            "label": "High"
+          }
+        ],
+        "default": "high"
+      },
+      {
+        "type": "radio",
+        "id": "section_bkg_style",
+        "label": "Background image style",
+        "options": [
+          {
+            "value": "cover",
+            "label": "Cover"
+          },
+          {
+            "value": "contain",
+            "label": "Contain"
+          }
+        ],
+        "default": "cover"
+      },
+      {
+        "type": "header",
+        "content": "Section Gutters"
+      },
+      {
+        "type": "checkbox",
+        "id": "top_gutter",
+        "label": "Enable top gutter",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "bottom_gutter",
+        "label": "Enable bottom gutter",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "General Settings"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Blog posts"
+      },
+      {
+        "type": "text",
+        "id": "sub_title",
+        "label": "Sub heading"
+      },
+      {
+        "id": "blog",
+        "type": "blog",
+        "label": "Blog"
+      },
+      {
+        "type": "radio",
+        "id": "column_count",
+        "label": "The number of posts per slide",
+        "options": [
+          {
+            "value": "2",
+            "label": "2"
+          },
+          {
+            "value": "3",
+            "label": "3"
+          },
+          {
+            "value": "4",
+            "label": "4"
+          }
+        ],
+        "default": "2",
+        "info": "Only apply on the desktop screen."
+      },
+      {
+        "type": "range",
+        "id": "post_limit",
+        "label": "Posts",
+        "min": 3,
+        "max": 12,
+        "step": 1,
+        "default": 3
+      },
+      {
+        "type": "checkbox",
+        "id": "blog_show_date",
+        "label": "Show date",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "full_width",
+        "label": "Wide display"
+      },
+      {
+        "type": "header",
+        "content": "Colors"
+      },
+      {
+        "type": "color",
+        "id": "color_date",
+        "label": "Date",
+        "default": "#424242"
+      },
+      {
+        "type": "color",
+        "id": "color_title",
+        "label": "Title",
+        "default": "#000"
+      },
+      {
+        "type": "header",
+        "content": "Font sizes"
+      },
+      {
+        "type": "range",
+        "id": "fs_date",
+        "label": "Date",
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "default": 12
+      },
+      {
+        "type": "range",
+        "id": "fs_title",
+        "label": "Title",
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "default": 15
+      }
+    ],
+    "presets": [
+      {
+        "name": "Blog posts",
+        "category": "Blog",
+        "settings": {
+          "blog": "News",
+          "post_limit": 3
+        }
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,50 @@
+{%- if section.settings.toolbar_enable -%}
+<div class="collection__toolbar ct row big-gutter-bottom gutter-ele-top-tbs gutter-ele-bottom-mb">
+	<div class="flex flex-wrap w100 flex-align-ver flex-align-space-between">
+		<div class="ct__total col-xs-3 gutter-ele-bottom-tbs text-uppercase fw-bold">{{ 'collections.general.items_with_count' | t: count: search.results_count }}</div>
+		<div class="col-xs-9 flex flex-wrap flex-align-ver cf__filter__toolbar gutter-ele-top-mb gutter-ele-bottom-mb">
+			{%- if section.settings.toolbar_sort_enable -%}
+				{%- unless section.settings.enable_filter -%}
+	    		<form class="cf__form">
+	    	{%- endunless -%}
+				<div class="ct__sort bt-dropdown{% unless section.settings.enable_filter %} ct__sort--no-sidebar{% endunless %} flex flex-align-ver">
+					{%- assign sort_by = search.sort_by | default: search.default_sort_by -%}
+					{%- assign filter_url = canonical_url | remove_first: shop.url -%}
+					{%- capture sort_by_list -%}
+						<ul>
+							{%- for option in search.sort_options -%}
+							<li class="gutter-ele-bottom{% if sort_by == option.value %} active alternative{% endif %}">
+								{%- if sort_by == option.value -%}
+									{{ option.name }}
+									{%- assign current_sort_title = option.name -%}
+								{%- else -%}
+									<a href="#" data-value="{{ option.value }}" class="ct__sort__link" rel="noreferrer">{{ option.name }}</a>
+								{%- endif -%}
+							</li>
+							{%- endfor -%}
+						</ul>
+					{%- endcapture -%}
+					<span class="hidden-xs">{{ 'collections.sorting.title' | t }}</span>
+					<a href="javascript:void(0);" class="bt-dropdown__trigger bt-dropdown__trigger--sort bt-dropdown__trigger--arrow db" title="{{ 'collections.sorting.title' | t | escape }}" rel="nofollow">{{ current_sort_title }}</a>
+					<div class="bt-dropdown__content bt-dropdown__content--sort">
+						{{ sort_by_list }}
+					</div>
+				</div>
+				{%- unless section.settings.enable_filter -%}
+		      <select name="sort_by" class="hide cf__sort-by" aria-describedby="a11y-refresh-page-message">
+		        {%- for option in search.sort_options -%}
+		          <option value="{{ option.value | escape }}"{% if option.value == sort_by %} selected="selected"{% endif %}>{{ option.name | escape }}</option>
+		        {%- endfor -%}
+		      </select>
+	  		</form>
+	    	{%- endunless -%}
+			{%- endif -%}
+			{%- if section.settings.enable_filter -%}
+			<div class="ct__filter--trigger visible-sm visible-md">
+				<a class="bt-sidebar-btn ct__filter--btn flex flex-align-ver flex-align-hoz" href="#" data-target="#sidebar-filter" data-placement="{{ left_holder }}" data-placement-mobile="up" title="{{ 'collections.general.filter' | t | escape }}">{%- render 'icon-filter' with add_class: 'lh1 ver-sub' -%}<span class="lh1 ver-sub">{{ 'collections.general.filter' | t }}</span></a>
+			</div>
+			{%- endif -%}
+		</div>
+	</div>
+</div>
+{%- endif -%}

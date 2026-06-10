@@ -1,0 +1,66 @@
+
+	{{ 'bss-b2b-state.js' | asset_url | script_tag }}
+	<script id="bss-b2b-wholesaler-form">
+    if (typeof BSS_B2B == 'undefined') {
+      var BSS_B2B = {};
+    }
+    BSS_B2B.formDataRender = [{"type":"text","required":true,"label":"שם החברה","className":"form-control company-field","name":"company-field","access":false,"subtype":"text","placement":"bottom"},{"type":"text","required":true,"label":"שם עסק","className":"form-control","name":"text-1680963896818-0","access":false,"subtype":"text","placement":"bottom"},{"type":"text","required":true,"label":"ח.פ/ע.מ","className":"form-control","name":"text-1680963949205-0","access":false,"subtype":"text","placement":"bottom"},{"type":"text","required":true,"label":"נייד","className":"form-control phone-field","name":"phone-field","access":false,"subtype":"text","placement":"bottom"},{"type":"text","required":true,"label":"כתובת","className":"form-control address-field","name":"address-field","access":false,"subtype":"text","placement":"bottom"}];
+    BSS_B2B.formId = 12997;
+    BSS_B2B.reCAPCHA = 0;
+    BSS_B2B.CAPCHA_SITE_KEY = "6LcYPEgbAAAAAKEQdimI1PPA4vuOJHxNb5p6eLUo";
+    BSS_B2B.status = 1;
+    BSS_B2B.created_account = 3;
+    BSS_B2B.redirect_url = "/";
+    BSS_B2B.taxExempt = 0;
+    BSS_B2B.formPrivacyPolicyStatus = 0;
+    BSS_B2B.formPrivacyPolicyContent = `<p>By clicking Create, I confirm that I have read and accepted the <a href="/">privacy policy</a></p>`;
+    </script>
+	<style>.grid{
+   flex-direction: column;
+}
+#RegisterForm{
+  width: 550px;
+  margin: 0 auto;
+}
+@media screen and (max-width: 580px) {
+   
+#RegisterForm{
+width: 90%;
+
+}}
+#RegisterForm input {
+    width: 100%;
+    height: 45px;
+    padding: 12px;
+    border: solid 1px #ccc;
+}
+.field {
+  margin-bottom: 15px
+}
+input[type="submit"]{
+background: rgb(69, 116, 57) !important;
+color: white;
+font-family: Poppins !important;
+    font-size: 18px !important;
+}
+input[type="submit"]:hover{
+background: black !important;
+}
+.page-width {
+  overflow: hidden
+}</style>
+	
+    {% assign bss-b2b-include-password = true %}
+<div class="page-width">
+  <div class="grid">
+    <div class="grid__item medium-up--five-sixths medium-up--push-one-twelfth">
+      <div class="section-header text-center">
+        <h1>{{ page.title }}</h1>
+      </div>
+      <div class="rte">
+        {{ page.content }}
+      </div>
+    </div>
+    {% section 'bss-b2b-wholesaler-form-12997' %}
+  </div>
+</div>

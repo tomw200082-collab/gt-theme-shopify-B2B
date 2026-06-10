@@ -1,0 +1,217 @@
+<script>let enable = false; let listSubUser = ["eduardshteringarts@gmail.com"];let shareCartText = "Share to company"; const orderMarkingType = 0;const CompanyOrderMarkingType = Object.freeze({
+    MANUAL: 0,
+    AUTO: 1
+});
+
+// Adding share cart buttons to checkout buttons or cart popup and mini cart
+if (enable && orderMarkingType === CompanyOrderMarkingType.MANUAL && listSubUser.indexOf("{{customer.email}}") != -1) {
+    let BSSCPcheckoutBtn1 = document.querySelectorAll(
+        'form[action*="/cart"] [name="checkout"],' +
+        "#dropdown-cart button.btn.btn-checkout.show," +
+        'a.button.checkout-button[href="/checkout"],' +
+        'form[action*="/checkout"] .add_to_cart,' +
+        'form[action*="/cart"]#cart_form #checkout,' +
+        'form[action*="/cart"] button.Cart__Checkout,' +
+        'form[action*="/cart"] button.cart__checkout,' +
+        'a.btn.disabled.ttmodalbtn[href="/checkout"],' +
+        'form[action*="/cart"] [name="checkout"][type="submit"],' +
+        "button.Cart__Checkout.Button.Button--primary.Button--full," +
+        ".baskettop button.mini-cart-checkout," +
+        ".tt-dropdown-menu .btn.itemCheckout," +
+        ".bss-btn-checkout-mini-cart," +
+        'button[name="checkout"].btn,' +
+        'form[action*="/checkout"] [name="checkout"],' +
+        ".cart__footer .cart__checkout-button.button," +
+        "#cartform #checkout," +
+        `#slidedown-cart button[onclick="window.location='/checkout'"],` +
+        "#dropdown-cart button.btn.btn-checkout," +
+        'form[action*="/cart"] button[type="submit"].c-btn.c-btn--light.cart__button-update.update-cart,' +
+        'form[action*="/cart"] .sp-proceed-to-checkout a[href="/checkout/"]'
+    );
+    
+    if (Shopify.shop === "thorkitchenvendorportal-com.myshopify.com" && window.location.pathname === "/cart") {
+        BSSCPcheckoutBtn1 = document.querySelectorAll('input.btn.btn-checkout[type="submit"]')
+    }
+
+    let bssShareCartBtnText = shareCartText ? shareCartText : "Share to company";
+    
+    // Create default share cart button
+    const btnTextShareCartDefault = document.createTextNode(bssShareCartBtnText);
+    let defaultShareCartBtn = document.createElement("button");
+    defaultShareCartBtn.className = "bss-b2b-customer-portal-share-cart-btn-default";
+    defaultShareCartBtn.style.width = "130px";
+    defaultShareCartBtn.style.height = "40px";
+    defaultShareCartBtn.type = "button";
+    defaultShareCartBtn.appendChild(btnTextShareCartDefault);
+    defaultShareCartBtn.onclick = function () {
+        window.location = "/apps/customer-portal/company-account/share-cart";
+    };
+
+    // Add share cart button to checkout buttons
+    const addShareCartBtnToCheckoutButtons = (buttons) => {
+        if (buttons.length) {
+            for (let i = 0; i < buttons.length; i++) {
+                const shareCartBtn = document.createElement(buttons[i].tagName);
+                shareCartBtn.className = `${buttons[i].className || ""} bss-b2b-customer-portal-share-cart-btn`;
+                shareCartBtn.value = bssShareCartBtnText;
+                shareCartBtn.id = buttons[i].id;
+                shareCartBtn.type = "button";
+                shareCartBtn.appendChild(document.createTextNode(bssShareCartBtnText));
+                shareCartBtn.onclick = () => {
+                window.location = "/apps/customer-portal/company-account/share-cart";
+                };
+                buttons[i].after(shareCartBtn);
+            }
+        }
+    };
+
+    const url = "/cart.js";
+    let options = {
+        method: "GET",
+    };
+    let getCartDataReq = fetch(url, options);
+    getCartDataReq
+        .then(function (response) {
+            if (!response.ok) {
+                throw new Error("HTTP error, status = " + response.status);
+            }
+            let dataJSON_promise = response.json();
+            return dataJSON_promise;
+        })
+        .then(function (cartData) {
+            const hasItemInCart = cartData.items.length;
+            if (hasItemInCart) {
+                let BSSCPCustomCheckoutBtn2 = document.querySelectorAll("span.bss-b2b-customer-portal-share-cart");
+
+                if (BSSCPcheckoutBtn1.length) {
+                   addShareCartBtnToCheckoutButtons(BSSCPcheckoutBtn1);
+                } else if (BSSCPCustomCheckoutBtn2.length) {
+                   addShareCartBtnToCheckoutButtons(BSSCPCustomCheckoutBtn2);
+                }
+            }
+        })
+        .catch(function (error) {
+            console.log("error:");
+            console.log(error);
+        });
+
+    // Add share cart button to cart popup and mini cart
+    let BSSCPAjaxCartElement1 = document.querySelectorAll(
+        '[id^="AddToCart"]:not(form), ' +
+        '[id^="addToCart"]:not(form):not(span),' +
+        'button[aria-controls="CartDrawer"],' +
+        'a[aria-controls="CartDrawer"], ' +
+        'button[name="add"].product-form__add-to-cart,' +
+        'button[name="add"].product__add-to-cart-button,' +
+        'button[name="add"].add-to-cart,' +
+        "a.ajax-cart__toggle," +
+        "span.icon__fallback-text," +
+        "button#add-to-cart.add-to-cart," +
+        "a.cart-toggle," +
+        ".mini-cart-wrap[data-cart-mini-toggle]," +
+        ".addtocart-button-active[data-product-submit]," +
+        "button.product-form--atc-button," +
+        "button.productitem--action-atc," +
+        "#add-to-cart-product-template," +
+        '.product-form__add-button[data-action="add-to-cart"],' +
+        '.header__cart-toggle[data-action="toggle-mini-cart"],' +
+        'button[type="submit"][data-action="add-to-cart"],' +
+        "button.btn-addtocart," +
+        'form[action*="/cart/add"] input.AddtoCart,' +
+        "a[data-cart-toggle][data-dropdown-menu]," +
+        "input[data-btn-addtocart]," +
+        ".cart-block-click," +
+        "button[data-btn-addtocart]," +
+        'a.js-cart-trigger[href="/cart"],' +
+        "form.js-product-form," +
+        'form[action*="/cart/add"] button.single_add_to_cart_button.button,' +
+        '.Header__Wrapper .Header__FlexItem a[data-drawer-id="sidebar-cart"],' +
+        "button.product-form__cart-submit," +
+        ".add-to-cart-box .add-to-cart," +
+        "a.header-cart-btn.cart-toggle," +
+        ".product-page--submit-action .btn," +
+        ".ajax-submit.action_button.add_to_cart," +
+        ".site-header__cart.cart-modal," +
+        'form[action*="/cart/add"] button.ajax-submit.button--add-to-cart,' +
+        'form[action*="/cart/add"] div.add-to-cart button.button[type="submit"],' +
+        "a.add-cart-btn," +
+        "button.tt-dropdown-toggle," +
+        ".quick-view button.add-to-cart-btn.btn," +
+        "button.add.font--secondary-button," +
+        'button[type="submit"].gf_add-to-cart.product-form-product-template,' +
+        "a.header--cart-link.font--accent," +
+        ".cart-container," +
+        ".icon-bag.mini_cart.dropdown_link," +
+        "a.my-cart-link," +
+        ".product-form--button-container button.product-form--add-to-cart," +
+        ".product-form--submit span.price," +
+        "a.push_side.pr.cb.chp.db," +
+        ".ProductForm__AddToCart," +
+        ".slideout__trigger-mobile-menu.js-mini-cart-trigger.js-slideout-open," +
+        "button.btn.btn--full.btn--status.btn--animated.js-product-button-add-to-cart," +
+        "a.header__btn-cart.js-popup-button," +
+        ".payment-buttons button[data-add-to-cart]," +
+        "a.js-product-button-add-to-cart," +
+        ".js-drawer-open-cart," +
+        "button.btn.btn--tertiary.add-to-cart," +
+        ".cart-link," +
+        ".mini-cart a.icon-link," +
+        ".quick-cart__indicator," +
+        ".add-to-cart-box," +
+        ".header-wrapper .mini-cart," +
+        ".header-middle .mini-cart"
+    );
+
+    const addShareCartBtn = (btnElement) => {
+        const btnText = document.createTextNode(bssShareCartBtnText);
+        const btn = document.createElement(btnElement.tagName);
+        btn.className = `${btnElement.className || ''} bss-b2b-customer-portal-ca-checkout-btn`;
+        btn.value = bssShareCartBtnText;
+        btn.id = btnElement.id;
+        btn.type = 'button';
+        btn.appendChild(btnText);
+        btn.onclick = () => {
+            window.location = '/apps/customer-portal/company-account/share-cart';
+        };
+        btnElement.after(btn);
+    };
+
+    const checkAndAddShareCartBtn = () => {
+        const cartButtons = document.querySelectorAll(
+            '.cart-popup a[href*="/cart"], #CartDrawer button[type="submit"], #ajaxifyCart button[type="submit"], .header-wrapper .mini-cart a[href*="/checkout"], .header-middle .mini-cart a[href*="/checkout"]'
+        );
+        if (cartButtons.length) {
+            for (let i = 0; i < cartButtons.length; i++) {
+                const btnParent = cartButtons[i].parentElement.querySelectorAll(`.${cartButtons[i].parentElement.className.split(' ').join('.')} .bss-b2b-customer-portal-ca-checkout-btn`);
+                if (!btnParent.length) {
+                    addShareCartBtn(cartButtons[i]);
+                }
+            }
+        }
+    };
+
+    const addShareCartBtnToAjaxCart = () => {
+        const ajaxCartElements = document.querySelectorAll('.icon-cart-header');
+        ajaxCartElements.forEach((element) => {
+            element.addEventListener('mouseover', () => {
+                setTimeout(() => {
+                    checkAndAddShareCartBtn();
+                }, 200);
+            });
+        });
+    };
+
+    const addShareCartBtnToAjaxCartOnClick = () => {
+        const ajaxCartElements = BSSCPAjaxCartElement1;
+        ajaxCartElements.forEach((element) => {
+            element.addEventListener('click', () => {
+                setTimeout(() => {
+                    checkAndAddShareCartBtn();
+                }, 2000);
+            });
+        });
+    };
+
+    addShareCartBtnToAjaxCart();
+    addShareCartBtnToAjaxCartOnClick();
+}</script>

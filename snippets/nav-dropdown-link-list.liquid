@@ -1,0 +1,39 @@
+{%- if link_list and linklists[link_list].links.size > 0 -%}
+<ul class="link-list link-list--nav text-{{ section.settings.align_dropdown_content }}">
+{%- for l in linklists[link_list].links -%}
+	<li class="link-list__item level0 {% if l.links != blank %} link-list__item--parent{% endif %}">
+		{%- if l.links != blank -%}
+		<div class="dib por">
+		{%- endif -%}
+		<a class="link-list__item__link nav__item__dropdown-link--{{ section.id }}{% if l.active %} active{% endif %} inline-color" href="{{ l.url }}" title="{%- render 'nav-shortcode-ign', str: l.title -%}">{%- render 'nav-shortcode', color: color_label, bkg: bkg_label, str: l.title, custom_label_class: 'fw-bold' -%}</a>
+		{%- if l.links != blank -%}
+		<ul class="link-list__item__dropdown link-list__item__dropdown--nav link-list__item__dropdown--nav-{{ section.id }}">
+			{%- for childlink in l.links -%}
+			<li class="link-list__item level1 {% if childlink.links != blank %} link-list__item--parent{% endif %}">
+				{%- if childlink.links != blank -%}
+				<div class="dib por w100">
+				{%- endif -%}
+				<a class="link-list__item__link nav__item__dropdown-link--{{ section.id }}{% if childlink.active %} active{% endif %} inline-color" href="{{ childlink.url }}" title="{{ childlink.title | escape }}">{{ childlink.title | escape }}</a>
+				{% if childlink.links != blank %}
+				<ul class="link-list__item__dropdown link-list__item__dropdown--nav link-list__item__dropdown--nav-{{ section.id }}">
+					{%- for grandchildlink in childlink.links -%}
+						<li class="link-list__item level2">
+							<a class="link-list__item__link nav__item__dropdown-link--{{ section.id }}{% if grandchildlink.active %} active{% endif %} inline-color" href="{{ grandchildlink.url }}" title="{{ grandchildlink.title | escape }}">{{ grandchildlink.title | escape }}</a>
+						</li>	
+					{%- endfor -%}
+				</ul>
+				{%- endif -%}
+				{%- if childlink.links != blank -%}
+				</div>
+				{%- endif -%}
+			</li>
+			{%- endfor -%}
+		</ul>
+		{%- endif -%}
+		{%- if l.links != blank -%}
+		</div>
+		{%- endif -%}
+	</li>
+{%- endfor -%}
+</ul>
+{%- endif -%}

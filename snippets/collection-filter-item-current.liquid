@@ -1,0 +1,57 @@
+{%- for filter in object.filters -%}
+  {%- if filter.type == 'list' and filter.active_values.size > 0 -%}
+    <li class="gutter-ele-top">
+      <strong class="db cf__item-current-label gutter-ele-small-bottom">{{ filter.label | escape }}</strong>
+      <div class="w100 gutter-ele-small-top gutter-ele-bottom">
+        <ul class="list--inline cf__current-list">
+          {%- for value in filter.active_values -%}
+            <li class="cf__item-current">
+                <a href="{{ value.url_to_remove }}" class="cf__link cf__link--current por current">
+                  <span class="cf__link--current__content">
+                    {{ value.label | escape }}
+                  </span>
+                </a>
+              </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    </li>
+  {%- endif -%}
+  {%- if filter.type == 'price_range' -%}
+    {%- assign has_price_current = false -%}
+    {%- if filter.min_value.value and filter.min_value.value > 0 -%}
+      {%- assign has_price_current = true -%}
+    {%- endif -%}
+    {%- if filter.max_value.value and filter.max_value.value < filter.range_max -%}
+      {%- assign has_price_current = true -%}
+    {%- endif -%}
+    {%- if has_price_current -%}
+      <li class="gutter-ele-top">
+        <strong class="db cf__item-current-label gutter-ele-small-bottom">{{ filter.label | escape }}</strong>
+        <div class="w100 gutter-ele-small-top gutter-ele-bottom">
+          <ul class="list--inline cf__current-list">
+            <li class="cf__item-current">
+              <a href="{{ filter.url_to_remove }}" class="cf__link cf__link--current por current" title="{{ filter.label | escape }}">
+                <span class="cf__price cf__price-from dib">
+                  {%- if filter.min_value.value -%}
+                    {%- render 'price' with price: filter.min_value.value -%}
+                  {%- else -%}
+                    {%- render 'price' with price: 0 -%}
+                  {%- endif -%}
+                </span>
+                <span class="cf__price__sep">-</span>
+                <span class="cf__price cf__price-to dib">
+                  {%- if filter.max_value.value -%}
+                    {%- render 'price' with price: filter.max_value.value -%}
+                  {%- else -%}
+                    {%- render 'price' with price: filter.range_max -%}
+                  {%- endif -%}
+                </span>
+               </a> 
+            </li>
+          </ul>
+        </div>
+      </li>
+    {%- endif -%}      
+  {%- endif -%}
+{%- endfor -%}

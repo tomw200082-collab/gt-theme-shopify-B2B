@@ -1,0 +1,190 @@
+{%- unless request.design_mode -%}
+<div>
+	{{ content_for_layout }}
+</div>
+{%- else -%}
+{%- liquid 
+  unless settings.enable_rtl and settings.rtl_language_codes contains request.locale.iso_code
+    assign enable_rtl = false
+    assign left_holder = 'left'
+    assign right_holder = 'right'
+  else
+    assign enable_rtl = true
+    assign left_holder = 'right'
+    assign right_holder = 'left'
+  endunless
+  assign root_url = routes.root_url | append: '/' | replace: '//', '/'
+  assign base_font = settings.body_font
+  assign base_font_bolder = base_font | font_modify: 'weight', 'bolder'
+  assign base_font_bold = base_font | font_modify: 'weight', 'bold'
+  assign base_font_italic = base_font | font_modify: 'style', 'italic'
+  assign base_font_bold_italic = base_font_bold | font_modify: 'style', 'italic'
+  assign heading_font = settings.heading_font
+  assign heading_font_bold = heading_font | font_modify: 'weight', 'bolder'  
+-%}
+<!doctype html>
+<!--[if IE 9]> <html class="ie9 no-js" lang="{{ request.locale.iso_code }}"{% if enable_rtl %} dir="rtl"{% endif %}> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js" lang="{{ request.locale.iso_code }}"{% if enable_rtl %} dir="rtl"{% endif %}> <!--<![endif]-->
+<head>
+  {%- if settings.enable_review and settings.review_app == 'yotpo' -%}
+  <script type="text/javascript">
+  (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/{{ settings.yotpo_app_key }}/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+  </script>
+  {%- endif -%}
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="{{ settings.color_general_hover }}">
+  {%- if template contains 'collection' and current_tags -%}<meta name="robots" content="noindex"><link rel="canonical" href="{{ shop.url }}{{ collection.url }}"> {%- else -%}<link rel="canonical" href="{{ canonical_url }}">{%- endif -%}
+
+  <link rel="preconnect" href="//cdn.shopify.com" crossorigin>
+  {%- if settings.enable_currency_auto and settings.currency_converter_engine == 'shopify' -%}
+    <link rel="dns-prefetch" href="https://ipinfo.io">
+  {%- endif -%}
+  {%- assign lcp_preload_html = '' -%}
+  {%- if template.name == 'index' or template.name == 'collection' or template.name == 'product' -%}
+    {%- if content_for_layout contains 'END_PRELOAD_LCP' -%}
+      {%- assign lcp_preload_html = content_for_layout | split: 'END_PRELOAD_LCP' | first | split: 'LCP_PRELOAD' | last -%}
+      {{ lcp_preload_html }}
+      {%- assign lcp_preload_html = lcp_preload_html | prepend: '<!-- LCP_PRELOAD' | append: 'END_PRELOAD_LCP-->' -%}
+    {%- endif -%}
+  {%- endif -%}
+  <link rel="preload" as="font" href="{{ base_font | font_url }}" type="font/woff2" crossorigin>
+  {%- if base_font != base_font_bold -%}
+  <link rel="preload" as="font" href="{{ base_font_bold | font_url }}" type="font/woff2" crossorigin>
+  {%- endif -%}
+  <link rel="preload" as="font" href="{{ heading_font | font_url }}" type="font/woff2" crossorigin>
+  {%- if heading_font != heading_font_bold -%}
+  <link rel="preload" as="font" href="{{ heading_font_bold | font_url }}" type="font/woff2" crossorigin>
+  {%- endif -%}
+  <link rel="preload" href="{{ 'bt-icons.min.css' | asset_url }}" as="style">
+  <link rel="preload" href="{{ 'styles.min.css' | asset_url }}" as="style">
+  <link rel="preload" href="{{ 'bootstrap.min.css' | asset_url }}" as="style">
+  {%- if template.name == 'product' -%}
+    <link rel="preload" href="{{ 'cloudzoom.min.css' | asset_url }}" as="style">
+    <link rel="preload" href="{{ 'quick-view.min.css' | asset_url }}" as="style">
+    <link rel="preload" href="{{ 'product-single.min.css' | asset_url }}" as="style">
+  {%- endif -%}
+  {%- if template.name == 'collection' or template.name == 'search' -%}
+    <link rel="preload" href="{{ 'styles-collection-page.min.css' | asset_url }}" as="style">
+  {%- endif -%}
+  <link rel="preload" href="{{ "BTVodoma.woff2" | asset_url }}" as="font" type="font/woff2" crossorigin/>
+  <link rel="preload" href="{{ 'vendor.min.js' | asset_url }}" as="script">
+  <link rel="preload" href="{{ 'bt-libs.js' | asset_url }}" as="script">
+  <link rel="preload" href="{{ 'theme.js' | asset_url }}" as="script">
+  <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'lazysizes.min.js' | asset_url }}" async="async"></script><!--<![endif]-->
+  <!--[if lte IE 9]><script src="{{ 'lazysizes.min.js' | asset_url }}"></script><![endif]-->
+
+  {%- if settings.favicon != blank -%}
+    <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+  {%- endif -%}
+
+  {%- capture seo_title -%}
+    {%- if request.page_type == 'search' and search.performed == true -%}
+      {{ 'general.search.heading' | t: count: search.results_count }}: {{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
+    {%- elsif request.page_type == 'list-collections' -%}
+      {{ settings.list_collection_meta_title | default: page_title }}
+    {%- else -%}
+      {{ page_title }}
+    {%- endif -%}
+    {%- if current_tags -%}
+      {%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}
+    {%- endif -%}
+    {%- if current_page != 1 -%}
+      &ndash; {{ 'general.meta.page' | t: page: current_page }}
+    {%- endif -%}
+    {%- if settings.append_side_name_page_title -%}
+      {%- assign escaped_page_title = page_title | escape -%}
+      {%- unless escaped_page_title contains shop.name -%}
+        &ndash; {{ shop.name }}
+      {%- endunless -%}
+    {%- endif -%}
+  {%- endcapture -%}
+  <title>{{ seo_title | strip }}</title>
+
+  {%- unless request.page_type == 'list-collections' -%}
+    {%- if page_description -%}
+      <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+  {%- else -%}
+    <meta name="description" content="{{ settings.list_collection_meta_description | escape }}">
+  {%- endunless -%}
+  {%- render 'social-meta-tags' -%}
+  {%- render 'css-variables' with enable_rtl: enable_rtl, base_font: base_font, base_font_bolder: base_font_bolder, base_font_bold: base_font_bold, base_font_italic: base_font_italic, base_font_bold_italic: base_font_bold_italic, heading_font: heading_font, heading_font_bold: heading_font_bold -%}
+  {%- render 'styles-inline' with enable_rtl: enable_rtl, left_holder: left_holder, right_holder: right_holder, base_font: base_font, base_font_bolder: base_font_bolder, base_font_bold: base_font_bold, base_font_italic: base_font_italic, base_font_bold_italic: base_font_bold_italic, heading_font: heading_font, heading_font_bold: heading_font_bold -%}
+  {%- render 'script-inline' with enable_rtl: enable_rtl, left_holder: left_holder, right_holder: right_holder, root_url: root_url -%}
+  {%- capture header_script -%}
+  {{ content_for_header }}
+  {%- endcapture -%}
+  {%- assign header_script = header_script | replace: 'data-source-attribution="shopify.loadfeatures" defer="defer" src=', 'data-source-attribution="shopify.loadfeatures" defer="defer" data-src=' | replace: 'data-source-attribution="shopify.dynamic-checkout" defer="defer" src=', 'data-source-attribution="shopify.dynamic-checkout" defer="defer" data-src=' | replace: "window.attachEvent('onload', asyncLoad);", "window.attachEvent('onload', function(){});" | replace: "window.addEventListener('load', asyncLoad, false);", "window.addEventListener('load', function(){}, false);" | replace: 'if(window.attachEvent) {', "document.addEventListener('ShopifyAsyncLoading', function(event){asyncLoad();});if(window.attachEvent) {" -%}
+  {{ header_script }}
+  {%- if settings.enable_review and settings.review_app == 'loox' -%}
+    {{ shop.metafields.loox["global_html_head"] }}
+  {%- endif -%}
+  {%- if template.name == 'cart' -%}
+    {{ 'styles-remain-pages.min.css' | asset_url | stylesheet_tag }}
+    {%- unless settings.shipping_calculator == 'Disabled' or cart.item_count == 0 -%}
+      {{ 'shipping-calculator.min.css' | asset_url | stylesheet_tag }}
+    {%- endunless -%}
+  {%- endif -%}
+  {%- if settings.enable_review and settings.review_app == 'ryviu' -%}
+    <!-- RYVIU APP :: Settings global --> 
+      <script>
+          var ryviu_global_settings = {{shop.metafields.ryviu.user_settings }};
+      </script>
+    <!-- RYVIU APP -->
+  {%- endif -%}
+</head>
+
+<body class="template-{{ template | split: '.' | first }}{% if enable_rtl %} rtl{% endif %}{% if template.name == 'product' or template.name == 'collection' %} has-ele-fixed{% endif %} modal-open">
+  <div class="modal fade quickViewPopup in" tabindex="-1" role="dialog" style="display:block;" id="quickViewPopup">
+    <div class="modal-dialog modal-lg modal-full" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" data-dismiss="modal" aria-label="Close" class="close">{% render 'icon-close' with add_class: 'flex flex-align-hoz' %}</button>
+        </div>
+        <div class="modal-body">
+          <div class="row product-section-content">
+						{{ content_for_layout }}
+					</div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+  <div class="overlay transition"></div>
+  <div class="loading-full" style="display: none;"><i class="loading-ajax"></i></div>
+  <div class="alert alert-success notify text-center" role="alert" style="display:none;">
+  </div>
+  <style>.product-template-section{width:100%;padding:0;}</style>
+  {%- if content_for_layout contains 'product-single-deal' or request.design_mode -%}
+    {%- render 'single-deal-countdown' -%}
+  {%- endif -%}
+  {%- if content_for_layout contains 'rb__countdown-wrap' or request.design_mode -%}
+    {%- render 'rich-banner-countdown' -%}
+  {%- endif -%}
+  {%- render 'popups' -%}
+  {%- if template.name != 'collection' and template.name != 'search' -%}
+    {%- render 'bottom-mobile-toolbar' with enable_rtl: enable_rtl, left_holder: left_holder, right_holder: right_holder, has_collection_filter: false, has_search_filter: false, root_url: root_url -%}
+  {%- endif -%}
+  {%- render 'back-top-button' with enable_rtl: enable_rtl, left_holder: left_holder, right_holder: right_holder -%}
+  {%- render 'search-full' -%}
+  {%- render 'currency-plus-form' -%}
+  {%- render 'theme-scripts' -%}
+  {%- render 'theme-styles' with enable_rtl: enable_rtl, left_holder: left_holder, right_holder: right_holder -%}
+  
+  {%- if settings.enable_review -%}
+    {%- if settings.review_app == 'loox' -%}
+      {{ shop.metafields.loox["global_html_body"] }}
+    {%- elsif settings.review_app == 'ali_reviews' -%}
+      {%- render 'alireviews_core' -%}
+    {%- elsif settings.review_app == 'judge.me' -%}
+      {%- render 'judgeme_core' -%}
+    {%- endif -%}  
+	{%- endif -%}
+  {%- if settings.news_platform == 'klaviyo' -%}
+    {{ settings.klaviyo_install_script }}
+  {%- endif -%}
+  <div class="modal-backdrop fade in"></div>
+</body>
+</html>
+{%- endunless -%}

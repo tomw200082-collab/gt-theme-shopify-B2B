@@ -1,0 +1,47 @@
+{%- assign item_size = section.settings.item_size_product -%}
+{%- if item_size == 'small' -%}
+  {%- assign column_count = 5 -%}
+{%- elsif item_size == 'medium' -%}
+  {%- assign column_count = 4 -%}
+{%- elsif item_size == 'large' -%}
+  {%- assign column_count = 3 -%}
+{%- else -%}
+  {%- assign column_count = 2 -%}  
+{%- endif -%}
+{%- assign lazy_index = 999 -%}
+{%- if section.settings.use_lazyload and template.suffix == blank -%}
+  {%- assign lazy_index = column_count | times: 3 -%}
+{%- endif -%}
+<div class="collection__products">
+{% paginate search.results by section.settings.limit %}
+<div class="grid grid--{{ item_size }} products grid--products">
+  {% for item in search.results %}{% comment %}start BSS Commerce Hide Price{% endcomment %}{% assign bsshp = product | default: prod | default: item | default: recommendation %}{% assign collec = 0 %}{% if collection %}{% assign collec = collection %}{% elsif block.settings.collection %}{% assign collec = block.settings.collection %}{% else if section.settings.collection %}{% assign collec = section.settings.collection %}{% endif %}{% capture hide_product %}{% render 'bsscommerce-hide-product', product: bsshp, collection: collec %}{% endcapture %}{% if hide_product contains "true" %}{% continue %}{% endif %}{% comment %}end BSS Commerce Hide Price{% endcomment %}
+    {%- render 'product-grid-item' with
+      product: item, 
+      use_slider: false, 
+      limit_first: 0, 
+      index: forloop.index, 
+      lazy_index: lazy_index,
+      column_count: column_count, 
+      main_thumbnail: section.settings.main_thumbnail, 
+      image_size: '1x', 
+      truncate_count: section.settings.product_name_size, enable_product_options: section.settings.enable_product_options,
+      show_review_stars: section.settings.show_review_stars,
+      enable_small_images: false,
+      show_wishlist_btn: section.settings.show_wishlist_btn,
+      small_image: '1x',
+      show_label : section.settings.show_label,
+      show_cart_btn: section.settings.show_cart_btn,
+      show_wishlist : false,
+      show_compare_btn: section.settings.show_compare_btn,
+      show_qs_btn: section.settings.show_qs_btn,
+      show_desc: true,
+      additional_classes: 'transition',
+      highlight_text: search.terms,
+      left_holder: left_holder
+    -%}
+  {% endfor %}
+</div>
+{%- render 'search-result-pagination' with paginate: paginate -%}
+{% endpaginate %}
+</div>

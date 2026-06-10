@@ -1,0 +1,50 @@
+<div class="bt-sidebar bt-sidebar--full-mobile bt-sidebar--collection hide">
+  <div id="sidebar-filter" class="bt-sidebar__inner bt-sidebar__inner--{% unless enable_rtl %}left{% else %}right{% endunless %} bt-sidebar__inner--collection-sidebar">
+    <div class="bt-sidebar__header bt-sidebar__header--collection-filter flex{% if enable_rtl %} bt-sidebar__header--right{% endif %} hidden-lg">
+      {%- render 'sidebar-close-btn' -%}
+      <h4 class="bt-sidebar__title">{{ 'collections.general.filter' | t }}</h4>
+    </div>
+    <div class="bt-sidebar__content bt-sidebar__content--collection-sidebar">
+      <div class="collection__filter cf" id="cf_filter_desktop">
+        <div class="cf__content">
+          <form class="cf__form" novalidate>
+            {%- assign current_label = 'collections.general.active_filters' | t -%}
+            {%- render 'search-filter-item-display' with block: block, type: 'current', label: current_label, enable_rtl: enable_rtl, left_holder: left_holder, right_holder: right_holder -%}
+            {%- assign total_active_values = 0 -%}
+            {%- for filter in search.filters -%}
+              {%- assign filtering_price = false -%}
+              {%- if filter.type == 'list' -%}
+                {%- assign total_active_values = total_active_values | plus: filter.active_values.size -%}
+              {%- endif -%}
+              {%- if filter.type == 'price_range' -%}
+                {%- if filter.min_value.value and filter.min_value.value > 0 -%}
+                  {%- assign filtering_price = true -%}
+                {%- endif -%}
+                {%- if filter.max_value.value and filter.max_value.value < filter.range_max -%}
+                  {%- assign filtering_price = true -%}
+                {%- endif -%}
+                {%- if filtering_price -%}
+                  {%- assign total_active_values = total_active_values | plus: 1 -%}
+                {%- endif -%}
+              {%- endif -%}
+              {%- render 'search-filter-item-display' with block: block, filter: filter, type: filter.type, label: filter.label, enable_rtl: enable_rtl, filtering_price: filtering_price, left_holder: left_holder, right_holder: right_holder -%}
+            {%- endfor -%}
+            {%- assign sort_by = search.sort_by | default: search.default_sort_by -%}
+            <select name="sort_by" class="hide cf__sort-by" aria-describedby="a11y-refresh-page-message">
+              {%- for option in search.sort_options -%}
+                <option value="{{ option.value | escape }}"{% if option.value == sort_by %} selected="selected"{% endif %}>{{ option.name | escape }}</option>
+              {%- endfor -%}
+            </select>
+            {%- render 'collection-filter-action-mobile' with total_active_values: total_active_values -%}
+            <input type="hidden" name="q" value="{{ search.terms }}">
+            <input type="hidden" name="options[prefix]" value="last">
+            <input type="hidden" name="type" value="product">
+          </form>
+        </div>
+      </div>
+      {%- if layout_name != 'no_sidebar' -%}
+        {%- render 'collection-recently-viewed' -%}
+      {%- endif -%}
+    </div>
+  </div>
+</div>

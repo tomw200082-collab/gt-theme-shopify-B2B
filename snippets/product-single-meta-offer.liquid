@@ -1,0 +1,71 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign variant_count = product.variants | size -%}
+{%- assign count = 1 -%}
+{%- assign priceValidUntil = 'now' | date: '%s' | plus: 31536000 | date: '%Y-%m-%d' | url_encode | replace: '+', '%20' -%}
+{%- assign product_id_alpha2_code = section.settings.target_country_structure | default: localization.country.iso_code -%}
+{%- assign product_id_format = section.settings.item_id_structure -%}
+
+{%- if product_id_format == 'default' -%}
+{%- capture product_id_value -%}shopify_{{ product_id_alpha2_code }}_{{ product.id }}_{{ current_variant.id }}{%- endcapture -%}
+{%- elsif product_id_format == 'variantId' -%}
+{%- capture product_id_value -%}{{ current_variant.id }}{%- endcapture -%}
+{%- elsif product_id_format == 'productId' -%}
+{%- capture product_id_value -%}{{product.id }}{%- endcapture -%}
+{%- elsif product_id_format == 'sku' -%}
+{%- capture product_id_value -%}{{ current_variant.sku | escape }}{%- endcapture -%}
+{%- endif -%}
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org/",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  "url": "{{ shop.url }}{{ product.url }}",
+  {%- if product.featured_media -%}
+    {%- assign media_size = product.featured_media.preview_image.width | append: 'x' -%}
+    "image": [
+      {{ product.featured_media | img_url: media_size | prepend: "https:" | json }}
+    ],
+  {%- endif -%}
+  "description": {{ product.description | strip_html | json }},
+  "sku": "{{ product_id_value }}",
+  "mpn": "{{ current_variant.barcode | default: current_variant.sku | default: current_variant.id }}",
+  "productID": "{{ product.id }}",
+  "brand": {
+    "@type": "Brand",
+    "name": {{ product.vendor | json }}
+  },
+  "offers": {
+    "@type" : "Offer",
+    "sku": "{{ product_id_value }}",
+    "availability" : "http://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}",
+    "price": {{ current_variant.price | money_without_currency | json }},
+    "priceCurrency" : {{ cart.currency.iso_code | json }},
+    "itemCondition": "https://schema.org/NewCondition",
+    "priceValidUntil": "{{ priceValidUntil }}",
+    "mpn": "{{ current_variant.barcode | default: current_variant.sku | default: current_variant.id }}",
+    {%- if current_variant.barcode.size == 12 -%}
+      "gtin12": {{ current_variant.barcode }},
+    {%- endif -%}
+    {%- if current_variant.barcode.size == 13 -%}
+      "gtin13": {{ current_variant.barcode }},
+    {%- endif -%}
+    {%- if current_variant.barcode.size == 14 -%}
+      "gtin14": {{ current_variant.barcode }},
+    {%- endif -%}
+    "url": "{{ shop.url }}{{ current_variant.url }}"
+    {%- if variant_count > 1 -%}
+      {%- for option in product.options -%}
+      ,{{ option | json }}: {{ current_variant.options[forloop.index0] | json }}
+      {%- endfor -%}
+    {%- endif -%}
+  }
+    {%- if variant_count > 1 -%}
+      ,"additionalProperty": [{
+        "@type": "PropertyValue",
+        "propertyID": "item_group_id",
+        "value": "{{ product.id }}"
+      }]
+    {%- endif -%}
+  {%- render 'product-single-meta-review' with product: product -%}
+}
+</script>

@@ -1,0 +1,28 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "blog-template",
+      "settings": {
+        "layout": "very-large",
+        "limit": 16,
+        "blog_show_date": false,
+        "enable_sidebar": false,
+        "show_recent_posts": true,
+        "recent_post_limit": 5,
+        "show_filter_tags": false
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

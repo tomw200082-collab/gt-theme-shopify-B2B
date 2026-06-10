@@ -1,0 +1,55 @@
+<div class="product-single__photos por">
+	<div id="zoom-{{ section.id }}"></div>
+	{%- assign thumbs_layout = 'hoz_slider' -%}
+	{%- if template.suffix != 'quick_view' -%}
+		{%- assign thumbs_layout = section.settings.thumbs_layout -%}
+	{%- endif -%}
+	{%- assign first_3d_model = product.media | where: "media_type", "model" | first -%}
+	{%- if thumbs_layout == 'ver_slider' -%}
+		<div class="row product-single__photos__row">
+			<div class="col-xs-12 col-md-10 {% unless enable_rtl %}f-right{% else %}f-left{% endunless %} no-gutter-left-mb no-gutter-right-mb">
+				<div class="por">
+					{%- render 'product-single-mains' with product: product, featured_media: featured_media, use_slider: true -%}
+					{%- if first_3d_model -%}
+		        <button
+		          aria-label="{{ 'products.product.view_in_space_label' | t }}"
+		          class="product-single__view-in-space button button--style1 w100"
+		          data-shopify-xr
+		          data-shopify-model3d-id="{{ first_3d_model.id }}"
+		          data-shopify-title="{{ product.title | escape }}"
+		          data-shopify-xr-hidden
+		        >
+		          {% render 'icon-3d-badge-full-color' %}<span class='product-single__view-in-space-text'>{{ 'products.product.view_in_space' | t }}</span>
+		        </button>
+		      {%- endif -%}
+					{%- render 'product-single-media-btn' with product: product, show_media_btn: section.settings.show_media_btn, btn_style_classes: 'button--media-single button--style2', hide_media_text: true -%}
+					{%- if section.settings.show_label -%}
+						{%- render 'product-single-label' with product: product, use_padding_left_right: true -%}
+					{%- endif -%}
+				</div>
+			</div>	
+			<div class="col-xs-12 col-md-2 pg__thumbs-wap--single-ver-slider gutter-ele-top-tbs{% if product.media.size > 5 %} no-gutter-left-mb no-gutter-right-mb{% endif %}">
+				{%- render 'product-single-thumbs' with product: product, thumbs_layout: thumbs_layout, featured_media: featured_media -%}		
+			</div>	
+		</div>
+	{%- else -%}
+	  {%- render 'product-single-mains' with product: product, featured_media: featured_media, use_slider: true -%}
+	  {%- if first_3d_model -%}
+      <button
+        aria-label="{{ 'products.product.view_in_space_label' | t }}"
+        class="product-single__view-in-space button button--style1 w100"
+        data-shopify-xr
+        data-shopify-model3d-id="{{ first_3d_model.id }}"
+        data-shopify-title="{{ product.title | escape }}"
+        data-shopify-xr-hidden
+      >
+        {% render 'icon-3d-badge-full-color' %}<span class='product-single__view-in-space-text'>{{ 'products.product.view_in_space' | t }}</span>
+      </button>
+    {%- endif -%}
+	  {%- render 'product-single-media-btn' with product: product, show_media_btn: section.settings.show_media_btn, btn_style_classes: 'button--media-single button--style2', hide_media_text: true -%}
+	  {%- if section.settings.show_label -%}
+			{%- render 'product-single-label' with product: product -%}
+		{%- endif -%}
+	  {%- render 'product-single-thumbs' with product: product, thumbs_layout: thumbs_layout, featured_media: featured_media -%}
+  {%- endif -%}
+</div>

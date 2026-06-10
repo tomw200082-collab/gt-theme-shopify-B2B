@@ -1,0 +1,19 @@
+{%- liquid 
+  unless settings.enable_rtl and settings.rtl_language_codes contains request.locale.iso_code
+    assign enable_rtl = false
+  else
+    assign enable_rtl = true
+  endunless  
+-%}
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1 class="page-title text-center gutter-ele-bottom-tbs">{{ 'customer.register.title' | t }}</h1>
+      <div class="page-content w100">
+        <div class="center-block col-xs-12 col-sm-5 no-gutter" style="float:none;">
+          {% render "customer-fields", form_id: "8btzYy" %}  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>{% include 'bss-b2b-wholesaler-default-login-form' %}

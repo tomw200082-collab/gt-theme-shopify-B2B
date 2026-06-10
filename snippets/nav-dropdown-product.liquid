@@ -1,0 +1,31 @@
+{%- if product_handle != blank -%}
+  {%- assign product = all_products[product_handle] -%}
+  <div class="grid grid--full">
+    {%- if product != blank -%}
+      {%- render 'product-grid-item' with
+        product: product, 
+        use_slider: false, 
+        index: 1, 
+        lazy_index: -1,
+        column_count: 1, 
+        main_thumbnail: section.settings.main_thumbnail, 
+        truncate_count: section.settings.product_name_size,
+        enable_product_options: section.settings.enable_product_options, 
+        show_review_stars: section.settings.show_review_stars,
+        enable_small_images: false,
+        show_wishlist_btn: section.settings.show_wishlist_btn,
+        small_image: '1x',
+        show_label : section.settings.show_label,
+        show_cart_btn: section.settings.show_cart_btn,
+        show_compare_btn: section.settings.show_compare_btn,
+        show_qs_btn: section.settings.show_qs_btn,
+        small_image_slider: false,
+        show_countdown_timer: section.settings.show_countdown_timer,
+        show_vendor: section.settings.show_vendor,
+        left_holder: left_holder 
+      -%}
+    {%- else -%}
+      {%- render 'product-grid-item-placeholder' -%}
+    {%- endif -%}
+  </div>
+{%- endif -%}

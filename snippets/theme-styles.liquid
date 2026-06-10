@@ -1,0 +1,23 @@
+{%- if template.name == 'collection' or template.name == 'search' -%}
+  <link rel="stylesheet" href="{{ 'styles-collection-page.min.css' | asset_url }}">
+{%- endif -%}
+<link rel="stylesheet" href="{{ 'bootstrap.min.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'bt-icons.min.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'styles.min.css' | asset_url }}">
+{%- if template.name == 'product' -%}
+  <link rel="stylesheet" href="{{ 'quick-view.min.css' | asset_url }}">
+  <link rel="stylesheet" href="{{ 'product-single.min.css' | asset_url }}">
+{%- endif -%}
+{%- if template.name != 'index' and template.name != 'collection' and template.name != 'product' and template.name != 'cart' -%}
+	<link rel="stylesheet" href="{{ 'styles-remain-pages.min.css' | asset_url }}">
+{%- endif -%}
+{%- if enable_rtl -%}
+  <link rel="stylesheet" href="{{ 'bootstrap-rtl.min.css' | asset_url }}">
+  <link rel="stylesheet" href="{{ 'styles-rtl.min.css' | asset_url }}">
+{%- endif -%}
+{%- if request.path contains 'challenge' -%}
+  <link rel="stylesheet" href="{{ 'challenge.min.css' | asset_url }}">
+{%- endif -%}
+{%- if settings.load_custom_css -%}
+	<link rel="stylesheet" href="{{ 'custom-css.scss.css' | asset_url }}">
+{%- endif -%}

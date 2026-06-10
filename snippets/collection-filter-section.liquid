@@ -1,0 +1,81 @@
+{%- liquid
+  unless settings.enable_rtl and settings.rtl_language_codes contains request.locale.iso_code
+    assign right_holder = 'right'
+  else
+    assign right_holder = 'left'
+  endunless
+  assign has_active = false
+  assign after_active_index = 0
+-%}
+<div class="section__content">
+  <form class="w100 flex flex-align-ver flex-align-hoz" action="{{ routes.all_products_collection_url }}">
+    {%- assign index = 1 -%}
+    {%- for filter in collection.filters -%}
+      {%- if filter.type == 'list' -%}
+        {%- if filter.active_values.size > 0 -%}
+          {%- assign has_active = true -%}
+          {%- assign after_active_index = after_active_index | plus: 1 -%}
+        {%- else -%}
+          {%- assign has_active = false -%} 
+        {%- endif -%}
+        {%- assign has_values = false -%}
+        {%- if has_active or after_active_index > 0 or index == 1 -%}
+          {%- capture values_html -%}
+            {%- for value in filter.values -%}
+              {%- if value.count > 0 -%}
+                <li>
+                  <label for="cfs-{{ filter.label | escape | handleize }}-{{ forloop.index }}" class="cfs__label w100 db{% if value.active %} selected{% endif %}">{{ value.label | escape }}</label>
+                  <input type="radio"
+                    name="{{ value.param_name }}"
+                    value="{{ value.value }}"
+                    id="cfs-{{ filter.label | escape | handleize }}-{{ forloop.index }}"
+                    {% if value.active %}checked{% endif %}
+                   class="hide cfs__input">
+                </li>
+                {%- assign has_values = true -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endcapture -%}
+        {%- else -%}
+          {%- for value in filter.values -%}
+            {%- if value.count > 0 -%}
+              {%- assign has_values = true -%}
+              {%- break -%}
+            {%- endif -%}
+          {%- endfor -%}    
+        {%- endif -%}
+        {%- if has_values -%}
+          <div class="cfs__item col-xs-12 col-sm-6 col-md-3 gutter-ele-top gutter-ele-bottom">
+            <div class="cfs__dropdown-wrap por">
+              <div class="cfs__dropdown w100{% if has_active == false and after_active_index > 0 %} active{% endif %}">
+                <div class="cfs__dropdown__trigger cfs__item__title flex flex-align-ver">
+                  <span class="cfs__item__index cfs__item__index--{{ right_holder }}-border">{{ index }}</span>
+                  <div class="cfs__item__title-value">
+                    <span class="cfs__dropdown__title{% if has_active %} cfs__dropdown__title--top{% endif %} transition w100 db text-uppercase lh1">{{ filter.label | escape }}</span>
+                    <span class="cfs__dropdown__value w100 db fw-bold lh1 gutter-ele-small-top">{%- if has_active -%}{%- assign active_filter = filter.active_values | first -%}{{ active_filter.label }}{%- endif -%}</span>
+                  </div>
+                  {%- render 'icon-arrow-down' with add_classes: 'cfs__item__arrow transition' -%}
+                </div>
+                {%- if has_active or after_active_index > 0 or index == 1 -%}
+                  <div class="cfs__dropdown__content transition custom-scrollbar custom-scrollbar--thick">
+                    <ul class="no-gutter margin0">
+                      {{ values_html }}
+                    </ul>
+                  </div>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+        {%- if has_active == false and after_active_index > 0 and has_values -%}
+          {%- assign after_active_index = -1 -%}
+        {%- endif -%}
+        {%- assign index = index | plus: 1 -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- assign no_center_btn_align = index | modulo: 2 -%}
+    <div class="gutter-ele-top-mb{% if no_center_btn_align != 1 %} col-xs-12 col-sm-6 col-md-3{% else %} col-xs-12 col-sm-3 {% if index > 4 %}gutter-top{% else %}gutter-ele-top-tbs{% endif %}{% endif %} cfs__item--btn distance-top-ele">
+      <a class="button button--style1 cfs__btn w100" href="#" title="{{ 'layout.navigation.search' | t | escape }}">{{ 'layout.navigation.search' | t }}</a>
+    </div>
+  </form>
+</div>

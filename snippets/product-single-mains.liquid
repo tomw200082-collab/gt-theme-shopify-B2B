@@ -1,0 +1,31 @@
+{%- assign youtubeCapture = '' -%}
+{%- assign vimeoCapture = '' -%}
+<div class="pg__mains w100 {% if use_slider %} pg__mains--slider re-calc-index{% if featured_media.media_type != 'image' %} no-light-box-icon{% endif %}{% endif %}">{%- comment -%}add class pg__thumbs--slider to display thumbs as slider{%- endcomment -%}
+	{%- assign ratio = 1 | divided_by: featured_media.aspect_ratio | times: 100 -%}
+	{%- render 'product-single-main' with product: product, media: featured_media, lazyload: false, ratio: ratio, use_slider: use_slider, is_active: true -%}
+	{%- if featured_media.media_type == 'external_video' -%}
+		{%- if featured_media.host == 'youtube' -%}
+			{%- capture yt -%}{%- render 'product-single-capture-youtube' with product: product, media: featured_media, ratio: ratio -%}{%- endcapture -%}
+			{%- assign youtubeCapture = youtubeCapture | append: yt -%}
+		{%- elsif featured_media.host == 'vimeo' -%}
+			{%- capture vim -%}{%- render 'product-single-capture-vimeo' with product: product, media: featured_media, video_id: featured_media.external_id -%}{%- endcapture -%}
+			{%- assign vimeoCapture = vimeoCapture | append: vim -%}	
+		{%- endif -%}
+	{%- endif -%}
+	{%- for media in product.media -%}
+		{%- if media != featured_media -%}
+			{%- render 'product-single-main' with product: product, media: media, lazyload: true, ratio: ratio, use_slider: use_slider, is_active: false -%}
+			{%- if media.media_type == 'external_video' -%}
+				{%- if media.host == 'youtube' -%}
+					{%- capture yt -%}{%- render 'product-single-capture-youtube' with product: product, media: media, ratio: ratio -%}{%- endcapture -%}
+					{%- assign youtubeCapture = youtubeCapture | append: yt -%}
+				{%- elsif media.host == 'vimeo' -%}
+					{%- capture vim -%}{%- render 'product-single-capture-vimeo' with product: product, media: media, video_id: media.external_id -%}{%- endcapture -%}
+					{%- assign vimeoCapture = vimeoCapture | append: vim -%}	
+				{%- endif -%}
+			{%- endif -%}
+		{%- endif -%}
+	{%- endfor -%}
+</div>
+{{ youtubeCapture }}
+{{ vimeoCapture }}

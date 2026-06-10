@@ -1,0 +1,180 @@
+{%- render 'section-background-start' -%}
+<div class="main-product-tabs-section container{% render 'wide-css-class' %}{% render 'section-gutters-nobkg' %}" id="main-product-tabs-{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="main-product-tabs">
+  {%- if section.blocks.size > 0 or product.metafields.btt.customtabs != blank -%}
+    {%- render 'product-single-tabs-content' -%}
+  {%- endif -%}
+</div>
+{%- render 'section-background-end' -%}
+{%- style -%}
+  @media(min-width: 992px) {
+    .nav-tabs--single {
+      justify-content: center;
+    }
+  }
+{%- endstyle -%}
+{% schema %}
+{
+	"name": "Main product - Tabs",
+	"tag": "section",
+	"templates": ["product"],
+  "settings": [
+  	{
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "checkbox",
+      "id": "bkg_enable",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "section_bkg",
+      "label": "Pick a color"
+    },
+    {
+      "type": "image_picker",
+      "id": "section_bkg_image",
+      "label": "Background image"
+    },
+    {
+      "type": "radio",
+      "id": "section_bkg_gutter",
+      "label": "Background size",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "medium"
+        },
+        {
+          "value": "high",
+          "label": "High"
+        }
+      ],
+      "default": "high"
+    },
+    {
+      "type": "radio",
+      "id": "section_bkg_style",
+      "label": "Background image style",
+      "options": [
+        {
+          "value": "cover",
+          "label": "Cover"
+        },
+        {
+          "value": "contain",
+          "label": "Contain"
+        }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "header",
+      "content": "Section Gutters"
+    },
+    {
+      "type": "checkbox",
+      "id": "top_gutter",
+      "label": "Enable top gutter",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "bottom_gutter",
+      "label": "Enable bottom gutter",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Product description tab",
+      "type": "tab_item_desc",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tab title",
+          "default": "Description"
+        },
+        {
+          "type": "paragraph",
+          "content": "This tab item will show the product description automatically."
+        }
+      ]
+    },
+    {
+      "name": "Review tab",
+      "type": "tab_item_review",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tab title",
+          "default": "Reviews"
+        },
+        {
+          "type": "paragraph",
+          "content": "This tab item will show the product review automatically base on your configuration in Theme Settings > Product Settings > Review app."
+        }
+      ]
+    },
+    {
+      "name": "Text tab",
+      "type": "tab_item_text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tab title",
+          "default": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "t:sections.main-product.blocks.collapsible_tab.settings.content.label"
+        },
+        {
+          "type": "page",
+          "id": "page",
+          "label": "t:sections.main-product.blocks.collapsible_tab.settings.page.label"
+        }
+      ]
+    },
+    {
+      "name": "From Toolkit app",
+      "type": "tab_item_toolkit",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Show the tabs for a certain product. These tabs have been managed in the Boostheme Toolkit app. Please refer to [this guide](https://vodoma-docs.boostheme.com/shopify-apps/boostheme-toolkit-app#4-edit-custom-tabs) for more details."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Main product - Tabs",
+      "blocks": [
+        {
+          "type": "tab_item_desc"
+        },
+        {
+          "type": "tab_item_review"
+        },
+        {
+          "type": "tab_item_text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,2388 @@
+{%- render 'navigation' with section: section -%}
+{% schema %}
+{
+  "name": "Powerful Megamenu",
+  "class": "hidden-xs flex",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "[View the guide for this section](https://beloria-docs.boostheme.com/static-sections/powerful-megamenu-section)"
+    },
+    {
+      "type": "header",
+      "content": "Simple Menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_link_list",
+      "label": "Show a link list as menu",
+      "info": "Tick the checkbox and pick a link list in below field to display a menu as a linked list instead of a mega menu",
+      "default": false
+    },
+    {
+      "type": "link_list",
+      "id": "menu_link_list",
+      "label": "Pick a link list"
+    },
+    {
+      "type": "color",
+      "id": "top_item_link_list_color",
+      "label": "Top item color",
+      "default": "#000"
+    },
+    {
+      "type": "header",
+      "content": "Dropdown background color"
+    },
+    {
+      "type": "color",
+      "id": "bkg_color_dropdown",
+      "label": "Background Color",
+      "default": "#fafafa"
+    },
+    {
+      "type": "header",
+      "content": "Dropdown column title"
+    },
+    {
+      "type": "color",
+      "id": "color_dropdown_title",
+      "label": "Title color",
+      "default": "#000"
+    },
+    {
+      "type": "range",
+      "id": "fs_dropdown_title",
+      "label": "Column title's font size",
+      "min": 10,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "align_dropdown_title",
+      "label": "Align column title",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    }, 
+    {
+      "type": "header",
+      "content": "Dropdown content"
+    },
+    {
+      "type": "color",
+      "id": "color_dropdown_content",
+      "label": "Text color",
+      "default": "#000"
+    },
+    {
+      "type": "range",
+      "id": "fs_dropdown_content",
+      "label": "Font size",
+      "min": 10,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    }, 
+    {
+      "type": "select",
+      "id": "align_dropdown_content",
+      "label": "Align content",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Product settings"
+    },
+    {
+      "type": "select",
+      "id": "main_thumbnail",
+      "label": "Show main thumbnail by",
+      "options": [
+        {
+          "value": "product_image",
+          "label": "Featured product image"
+        },
+        {
+          "value": "variant_image",
+          "label": "First available variant image"
+        }
+      ],
+      "default": "product_image"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_label",
+      "label": "Show label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart_btn",
+      "label": "Show Add to cart button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_qs_btn",
+      "label": "Show Quick Shop button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_compare_btn",
+      "label": "Show Compare button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wishlist_btn",
+      "label": "Show wishlist button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_review_stars",
+      "label": "Show review stars",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_product_options",
+      "label": "Enable Product Options",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_countdown_timer",
+      "label": "Show countdown timer",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show product vendors",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "product_name_size",
+      "label": "Product name's size",
+      "info": "Use this configuration to make product name is shorter if your product name is too long. Leave zero if you want to dislpay full product name. Unit: word(wor)",
+      "min": 0,
+      "max": 30,
+      "default": 5,
+      "step": 1
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu_item_no_dropdown",
+      "name": "Item without dropdown",
+      "settings": [
+        {
+          "type": "header",
+          "content": "General settings"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Item Link"
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon Class",
+          "info": "You can refer [this page](https://boostheme.com/beloria/icons), copy icon class and paste it into this field."
+        },
+        {
+          "type": "header",
+          "content": "Text color"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Color",
+          "default": "#000"
+        },
+        {
+          "type": "header",
+          "content": "Label settings"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Name"
+        },
+        {
+          "type": "color",
+          "id": "color_label",
+          "label": "Text color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "bkg_label",
+          "label": "Backgorund color",
+          "default": "#d9121f"
+        },
+        {
+          "type": "header",
+          "content": "For developer"
+        },
+        {
+          "type": "text",
+          "id": "parent_custom_class",
+          "label": "Custom class"
+        }
+      ]
+    },
+    {
+      "type": "menu_item_dropdown_1_col",
+      "name": "Item - Dropdown 1 column",
+      "settings": [
+        {
+          "type": "header",
+          "content": "General settings"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Item Link"
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon Class",
+          "info": "You can refer [this page](https://boostheme.com/beloria/icons), copy icon class and paste it into this field."
+        },
+        {
+          "type": "header",
+          "content": "Top item"
+        },
+        {
+          "type": "color",
+          "id": "top_item_color",
+          "label": "Color",
+          "default": "#000"
+        },
+        {
+          "type": "color",
+          "id": "top_item_color_hover",
+          "label": "Color hover",
+          "default": "#d9121f"
+        },
+        {
+          "type": "range",
+          "id": "top_item_fs",
+          "label": "Font size",
+          "min": 10,
+          "max": 50,
+          "step": 1,
+          "unit": "px",
+          "default": 17
+        },
+        {
+          "type": "header",
+          "content": "Label settings"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Name"
+        },
+        {
+          "type": "color",
+          "id": "color_label",
+          "label": "Text color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "bkg_label",
+          "label": "Backgorund color",
+          "default": "#d9121f"
+        },
+        {
+          "type": "header",
+          "content": "For developer"
+        },
+        {
+          "type": "text",
+          "id": "parent_custom_class",
+          "label": "Custom class"
+        },
+        {
+          "type": "header",
+          "content": "Dropdown's general settings"
+        },
+        {
+          "type": "range",
+          "id": "drop_width",
+          "min": 0,
+          "max": 1200,
+          "step": 100,
+          "unit": "px",
+          "label": "Dropdown Width",
+          "default": 300,
+          "info": "Leave 0 to display auto width."
+        },
+        {
+          "type": "header",
+          "content": "Dropdown's content"
+        },
+        {
+          "type": "link_list",
+          "id": "link_list_1",
+          "label": "Link list"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_color_label_1",
+          "label": "Label text color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_bkg_label_1",
+          "label": "Label background color",
+          "default": "#d9121f"
+        },
+        {
+          "type": "product",
+          "id": "product_1",
+          "label": "Pick a product"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Pick an image"
+        },
+        {
+          "type": "url",
+          "id": "image_link_1",
+          "label": "The link for image"
+        },
+        {
+          "type": "checkbox",
+          "id": "image_new_tab_1",
+          "label": "Open the link in a new tab",
+          "default": false
+        },
+        {
+          "type": "html",
+          "id": "html_1",
+          "label": "Add your html"
+        }
+      ]
+    },
+    {
+      "type": "menu_item_dropdown_2_col",
+      "name": "Item - Dropdown 2 columns",
+      "settings": [
+        {
+          "type": "header",
+          "content": "General settings"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Item Link"
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon Class",
+          "info": "You can refer [this page](https://boostheme.com/beloria/icons), copy icon class and paste it into this field."
+        },
+        {
+          "type": "header",
+          "content": "Text color"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Color",
+          "default": "#000"
+        },
+        {
+          "type": "header",
+          "content": "Label settings"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Name"
+        },
+        {
+          "type": "color",
+          "id": "color_label",
+          "label": "Text color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "bkg_label",
+          "label": "Backgorund color",
+          "default": "#d9121f"
+        },
+        {
+          "type": "header",
+          "content": "For developer"
+        },
+        {
+          "type": "text",
+          "id": "parent_custom_class",
+          "label": "Custom class"
+        },
+        {
+          "type": "header",
+          "content": "Dropdown's general settings"
+        },
+        {
+          "type": "range",
+          "id": "drop_width",
+          "min": 100,
+          "max": 1200,
+          "step": 100,
+          "unit": "px",
+          "label": "Dropdown Width",
+          "default": 600
+        },
+        {
+          "type": "header",
+          "content": "Dropdown's column 1"
+        },
+        {
+          "type": "range",
+          "id": "drop_col_width_1",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "col",
+          "label": "Column's width",
+          "default": 6
+        },
+        {
+          "type": "text",
+          "id": "dropdown_column_title_1",
+          "label": "Column title"
+        },
+        {
+          "type": "link_list",
+          "id": "link_list_1",
+          "label": "Link list"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_color_label_1",
+          "label": "Label text color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_bkg_label_1",
+          "label": "Label background color",
+          "default": "#d9121f"
+        },
+        {
+          "type": "product",
+          "id": "product_1",
+          "label": "Pick a product"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Pick an image"
+        },
+        {
+          "type": "url",
+          "id": "image_link_1",
+          "label": "The link for image"
+        },
+        {
+          "type": "checkbox",
+          "id": "image_new_tab_1",
+          "label": "Open the link in a new tab",
+          "default": false
+        },
+        {
+          "type": "html",
+          "id": "html_1",
+          "label": "Add your html"
+        },
+        {
+          "type": "header",
+          "content": "Dropdown's column 2"
+        },
+        {
+          "type": "range",
+          "id": "drop_col_width_2",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "col",
+          "label": "Column's width",
+          "default": 6
+        },
+        {
+          "type": "text",
+          "id": "dropdown_column_title_2",
+          "label": "Column title"
+        },
+        {
+          "type": "link_list",
+          "id": "link_list_2",
+          "label": "Link list"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_color_label_2",
+          "label": "Label text color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_bkg_label_2",
+          "label": "Label background color",
+          "default": "#d9121f"
+        },
+        {
+          "type": "product",
+          "id": "product_2",
+          "label": "Pick a product"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Pick an image"
+        },
+        {
+          "type": "url",
+          "id": "image_link_2",
+          "label": "The link for image"
+        },
+        {
+          "type": "checkbox",
+          "id": "image_new_tab_2",
+          "label": "Open the link in a new tab",
+          "default": false
+        },
+        {
+          "type": "html",
+          "id": "html_2",
+          "label": "Add your html"
+        }
+      ]
+    },
+    {
+      "type": "menu_item_dropdown_3_col",
+      "name": "Item - Dropdown 3 columns",
+      "settings": [
+        {
+          "type": "header",
+          "content": "General settings"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Item Link"
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon Class",
+          "info": "You can refer [this page](https://boostheme.com/beloria/icons), copy icon class and paste it into this field."
+        },
+        {
+          "type": "header",
+          "content": "Text color"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Color",
+          "default": "#000"
+        },
+        {
+          "type": "header",
+          "content": "Label settings"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Name"
+        },
+        {
+          "type": "color",
+          "id": "color_label",
+          "label": "Text color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "bkg_label",
+          "label": "Backgorund color",
+          "default": "#d9121f"
+        },
+        {
+          "type": "header",
+          "content": "For developer"
+        },
+        {
+          "type": "text",
+          "id": "parent_custom_class",
+          "label": "Custom class"
+        },
+        {
+          "type": "header",
+          "content": "Dropdown's general settings"
+        },
+        {
+          "type": "range",
+          "id": "drop_width",
+          "min": 100,
+          "max": 1200,
+          "step": 100,
+          "unit": "px",
+          "label": "Dropdown Width",
+          "default": 900
+        },
+        {
+          "type": "header",
+          "content": "Dropdown's column 1"
+        },
+        {
+          "type": "range",
+          "id": "drop_col_width_1",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "col",
+          "label": "Column's width",
+          "default": 4
+        },
+        {
+          "type": "text",
+          "id": "dropdown_column_title_1",
+          "label": "Column title"
+        },
+        {
+          "type": "link_list",
+          "id": "link_list_1",
+          "label": "Link list"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_color_label_1",
+          "label": "Label text color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_bkg_label_1",
+          "label": "Label background color",
+          "default": "#d9121f"
+        },
+        {
+          "type": "product",
+          "id": "product_1",
+          "label": "Pick a product"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Pick an image"
+        },
+        {
+          "type": "url",
+          "id": "image_link_1",
+          "label": "The link for image"
+        },
+        {
+          "type": "checkbox",
+          "id": "image_new_tab_1",
+          "label": "Open the link in a new tab",
+          "default": false
+        },
+        {
+          "type": "html",
+          "id": "html_1",
+          "label": "Add your html"
+        },
+        {
+          "type": "header",
+          "content": "Dropdown's column 2"
+        },
+        {
+          "type": "range",
+          "id": "drop_col_width_2",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "col",
+          "label": "Column's width",
+          "default": 4
+        },
+        {
+          "type": "text",
+          "id": "dropdown_column_title_2",
+          "label": "Column title"
+        },
+        {
+          "type": "link_list",
+          "id": "link_list_2",
+          "label": "Link list"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_color_label_2",
+          "label": "Label text color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_bkg_label_2",
+          "label": "Label background color",
+          "default": "#d9121f"
+        },
+        {
+          "type": "product",
+          "id": "product_2",
+          "label": "Pick a product"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Pick an image"
+        },
+        {
+          "type": "url",
+          "id": "image_link_2",
+          "label": "The link for image"
+        },
+        {
+          "type": "checkbox",
+          "id": "image_new_tab_2",
+          "label": "Open the link in a new tab",
+          "default": false
+        },
+        {
+          "type": "html",
+          "id": "html_2",
+          "label": "Add your html"
+        },
+        {
+          "type": "header",
+          "content": "Dropdown's column 3"
+        },
+        {
+          "type": "range",
+          "id": "drop_col_width_3",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "col",
+          "label": "Column's width",
+          "default": 4
+        },
+        {
+          "type": "text",
+          "id": "dropdown_column_title_3",
+          "label": "Column title"
+        },
+        {
+          "type": "link_list",
+          "id": "link_list_3",
+          "label": "Link list"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_color_label_3",
+          "label": "Label text color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_bkg_label_3",
+          "label": "Label background color",
+          "default": "#d9121f"
+        },
+        {
+          "type": "product",
+          "id": "product_3",
+          "label": "Pick a product"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_3",
+          "label": "Pick an image"
+        },
+        {
+          "type": "url",
+          "id": "image_link_3",
+          "label": "The link for image"
+        },
+        {
+          "type": "checkbox",
+          "id": "image_new_tab_3",
+          "label": "Open the link in a new tab",
+          "default": false
+        },
+        {
+          "type": "html",
+          "id": "html_3",
+          "label": "Add your html"
+        }
+      ]
+    },
+    {
+      "type": "menu_item_dropdown_4_col",
+      "name": "Item - Dropdown 4 columns",
+      "settings": [
+        {
+          "type": "header",
+          "content": "General settings"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Item Link"
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon Class",
+          "info": "You can refer [this page](https://boostheme.com/beloria/icons), copy icon class and paste it into this field."
+        },
+        {
+          "type": "header",
+          "content": "Text color"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Color",
+          "default": "#000"
+        },
+        {
+          "type": "header",
+          "content": "Label settings"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Name"
+        },
+        {
+          "type": "color",
+          "id": "color_label",
+          "label": "Text color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "bkg_label",
+          "label": "Backgorund color",
+          "default": "#d9121f"
+        },
+        {
+          "type": "header",
+          "content": "For developer"
+        },
+        {
+          "type": "text",
+          "id": "parent_custom_class",
+          "label": "Custom class"
+        },
+        {
+          "type": "header",
+          "content": "Dropdown's general settings"
+        },
+        {
+          "type": "range",
+          "id": "drop_width",
+          "min": 100,
+          "max": 1200,
+          "step": 100,
+          "unit": "px",
+          "label": "Dropdown Width",
+          "default": 1200
+        },
+        {
+          "type": "header",
+          "content": "Dropdown's column 1"
+        },
+        {
+          "type": "range",
+          "id": "drop_col_width_1",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "col",
+          "label": "Column's width",
+          "default": 3
+        },
+        {
+          "type": "text",
+          "id": "dropdown_column_title_1",
+          "label": "Column title"
+        },
+        {
+          "type": "link_list",
+          "id": "link_list_1",
+          "label": "Link list"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_color_label_1",
+          "label": "Label text color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_bkg_label_1",
+          "label": "Label background color",
+          "default": "#d9121f"
+        },
+        {
+          "type": "product",
+          "id": "product_1",
+          "label": "Pick a product"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Pick an image"
+        },
+        {
+          "type": "url",
+          "id": "image_link_1",
+          "label": "The link for image"
+        },
+        {
+          "type": "checkbox",
+          "id": "image_new_tab_1",
+          "label": "Open the link in a new tab",
+          "default": false
+        },
+        {
+          "type": "html",
+          "id": "html_1",
+          "label": "Add your html"
+        },
+        {
+          "type": "header",
+          "content": "Dropdown's column 2"
+        },
+        {
+          "type": "range",
+          "id": "drop_col_width_2",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "col",
+          "label": "Column's width",
+          "default": 3
+        },
+        {
+          "type": "text",
+          "id": "dropdown_column_title_2",
+          "label": "Column title"
+        },
+        {
+          "type": "link_list",
+          "id": "link_list_2",
+          "label": "Link list"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_color_label_2",
+          "label": "Label text color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_bkg_label_2",
+          "label": "Label background color",
+          "default": "#d9121f"
+        },
+        {
+          "type": "product",
+          "id": "product_2",
+          "label": "Pick a product"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Pick an image"
+        },
+        {
+          "type": "url",
+          "id": "image_link_2",
+          "label": "The link for image"
+        },
+        {
+          "type": "checkbox",
+          "id": "image_new_tab_2",
+          "label": "Open the link in a new tab",
+          "default": false
+        },
+        {
+          "type": "html",
+          "id": "html_2",
+          "label": "Add your html"
+        },
+        {
+          "type": "header",
+          "content": "Dropdown's column 3"
+        },
+        {
+          "type": "range",
+          "id": "drop_col_width_3",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "col",
+          "label": "Column's width",
+          "default": 3
+        },
+        {
+          "type": "text",
+          "id": "dropdown_column_title_3",
+          "label": "Column title"
+        },
+        {
+          "type": "link_list",
+          "id": "link_list_3",
+          "label": "Link list"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_color_label_3",
+          "label": "Label text color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_bkg_label_3",
+          "label": "Label background color",
+          "default": "#d9121f"
+        },
+        {
+          "type": "product",
+          "id": "product_3",
+          "label": "Pick a product"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_3",
+          "label": "Pick an image"
+        },
+        {
+          "type": "url",
+          "id": "image_link_3",
+          "label": "The link for image"
+        },
+        {
+          "type": "checkbox",
+          "id": "image_new_tab_3",
+          "label": "Open the link in a new tab",
+          "default": false
+        },
+        {
+          "type": "html",
+          "id": "html_3",
+          "label": "Add your html"
+        },
+        {
+          "type": "header",
+          "content": "Dropdown's column 4"
+        },
+        {
+          "type": "range",
+          "id": "drop_col_width_4",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "col",
+          "label": "Column's width",
+          "default": 3
+        },
+        {
+          "type": "text",
+          "id": "dropdown_column_title_4",
+          "label": "Column title"
+        },
+        {
+          "type": "link_list",
+          "id": "link_list_4",
+          "label": "Link list"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_color_label_4",
+          "label": "Label text color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_bkg_label_4",
+          "label": "Label background color",
+          "default": "#d9121f"
+        },
+        {
+          "type": "product",
+          "id": "product_4",
+          "label": "Pick a product"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_4",
+          "label": "Pick an image"
+        },
+        {
+          "type": "url",
+          "id": "image_link_4",
+          "label": "The link for image"
+        },
+        {
+          "type": "checkbox",
+          "id": "image_new_tab_4",
+          "label": "Open the link in a new tab",
+          "default": false
+        },
+        {
+          "type": "html",
+          "id": "html_4",
+          "label": "Add your html"
+        }
+      ]
+    },
+    {
+      "type": "menu_item_dropdown_5_col",
+      "name": "Item - Dropdown 5 columns",
+      "settings": [
+        {
+          "type": "header",
+          "content": "General settings"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Item Link"
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon Class",
+          "info": "You can refer [this page](https://boostheme.com/beloria/icons), copy icon class and paste it into this field."
+        },
+        {
+          "type": "header",
+          "content": "Text color"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Color",
+          "default": "#000"
+        },
+        {
+          "type": "header",
+          "content": "Label settings"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Name"
+        },
+        {
+          "type": "color",
+          "id": "color_label",
+          "label": "Text color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "bkg_label",
+          "label": "Backgorund color",
+          "default": "#d9121f"
+        },
+        {
+          "type": "header",
+          "content": "For developer"
+        },
+        {
+          "type": "text",
+          "id": "parent_custom_class",
+          "label": "Custom class"
+        },
+        {
+          "type": "header",
+          "content": "Dropdown's general settings"
+        },
+        {
+          "type": "range",
+          "id": "drop_width",
+          "min": 100,
+          "max": 1200,
+          "step": 100,
+          "unit": "px",
+          "label": "Dropdown Width",
+          "default": 1200
+        },
+        {
+          "type": "header",
+          "content": "Dropdown's column 1"
+        },
+        {
+          "type": "range",
+          "id": "drop_col_width_1",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "col",
+          "label": "Column's width",
+          "default": 3
+        },
+        {
+          "type": "text",
+          "id": "dropdown_column_title_1",
+          "label": "Column title"
+        },
+        {
+          "type": "link_list",
+          "id": "link_list_1",
+          "label": "Link list"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_color_label_1",
+          "label": "Label text color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_bkg_label_1",
+          "label": "Label background color",
+          "default": "#d9121f"
+        },
+        {
+          "type": "product",
+          "id": "product_1",
+          "label": "Pick a product"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Pick an image"
+        },
+        {
+          "type": "url",
+          "id": "image_link_1",
+          "label": "The link for image"
+        },
+        {
+          "type": "checkbox",
+          "id": "image_new_tab_1",
+          "label": "Open the link in a new tab",
+          "default": false
+        },
+        {
+          "type": "html",
+          "id": "html_1",
+          "label": "Add your html"
+        },
+        {
+          "type": "header",
+          "content": "Dropdown's column 2"
+        },
+        {
+          "type": "range",
+          "id": "drop_col_width_2",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "col",
+          "label": "Column's width",
+          "default": 3
+        },
+        {
+          "type": "text",
+          "id": "dropdown_column_title_2",
+          "label": "Column title"
+        },
+        {
+          "type": "link_list",
+          "id": "link_list_2",
+          "label": "Link list"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_color_label_2",
+          "label": "Label text color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_bkg_label_2",
+          "label": "Label background color",
+          "default": "#d9121f"
+        },
+        {
+          "type": "product",
+          "id": "product_2",
+          "label": "Pick a product"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Pick an image"
+        },
+        {
+          "type": "url",
+          "id": "image_link_2",
+          "label": "The link for image"
+        },
+        {
+          "type": "checkbox",
+          "id": "image_new_tab_2",
+          "label": "Open the link in a new tab",
+          "default": false
+        },
+        {
+          "type": "html",
+          "id": "html_2",
+          "label": "Add your html"
+        },
+        {
+          "type": "header",
+          "content": "Dropdown's column 3"
+        },
+        {
+          "type": "range",
+          "id": "drop_col_width_3",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "col",
+          "label": "Column's width",
+          "default": 2
+        },
+        {
+          "type": "text",
+          "id": "dropdown_column_title_3",
+          "label": "Column title"
+        },
+        {
+          "type": "link_list",
+          "id": "link_list_3",
+          "label": "Link list"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_color_label_3",
+          "label": "Label text color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_bkg_label_3",
+          "label": "Label background color",
+          "default": "#d9121f"
+        },
+        {
+          "type": "product",
+          "id": "product_3",
+          "label": "Pick a product"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_3",
+          "label": "Pick an image"
+        },
+        {
+          "type": "url",
+          "id": "image_link_3",
+          "label": "The link for image"
+        },
+        {
+          "type": "checkbox",
+          "id": "image_new_tab_3",
+          "label": "Open the link in a new tab",
+          "default": false
+        },
+        {
+          "type": "html",
+          "id": "html_3",
+          "label": "Add your html"
+        },
+        {
+          "type": "header",
+          "content": "Dropdown's column 4"
+        },
+        {
+          "type": "range",
+          "id": "drop_col_width_4",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "col",
+          "label": "Column's width",
+          "default": 2
+        },
+        {
+          "type": "text",
+          "id": "dropdown_column_title_4",
+          "label": "Column title"
+        },
+        {
+          "type": "link_list",
+          "id": "link_list_4",
+          "label": "Link list"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_color_label_4",
+          "label": "Label text color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_bkg_label_4",
+          "label": "Label background color",
+          "default": "#d9121f"
+        },
+        {
+          "type": "product",
+          "id": "product_4",
+          "label": "Pick a product"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_4",
+          "label": "Pick an image"
+        },
+        {
+          "type": "url",
+          "id": "image_link_4",
+          "label": "The link for image"
+        },
+        {
+          "type": "checkbox",
+          "id": "image_new_tab_4",
+          "label": "Open the link in a new tab",
+          "default": false
+        },
+        {
+          "type": "html",
+          "id": "html_4",
+          "label": "Add your html"
+        },
+        {
+          "type": "header",
+          "content": "Dropdown's column 5"
+        },
+        {
+          "type": "range",
+          "id": "drop_col_width_5",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "col",
+          "label": "Column's width",
+          "default": 2
+        },
+        {
+          "type": "text",
+          "id": "dropdown_column_title_5",
+          "label": "Column title"
+        },
+        {
+          "type": "link_list",
+          "id": "link_list_5",
+          "label": "Link list"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_color_label_5",
+          "label": "Label text color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_bkg_label_5",
+          "label": "Label background color",
+          "default": "#d9121f"
+        },
+        {
+          "type": "product",
+          "id": "product_5",
+          "label": "Pick a product"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_5",
+          "label": "Pick an image"
+        },
+        {
+          "type": "url",
+          "id": "image_link_5",
+          "label": "The link for image"
+        },
+        {
+          "type": "checkbox",
+          "id": "image_new_tab_5",
+          "label": "Open the link in a new tab",
+          "default": false
+        },
+        {
+          "type": "html",
+          "id": "html_5",
+          "label": "Add your html"
+        }
+      ]
+    },
+    {
+      "type": "menu_item_dropdown_6_col",
+      "name": "Item - Dropdown 6 columns",
+      "settings": [
+        {
+          "type": "header",
+          "content": "General settings"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Item Link"
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon Class",
+          "info": "You can refer [this page](https://boostheme.com/beloria/icons), copy icon class and paste it into this field."
+        },
+        {
+          "type": "header",
+          "content": "Text color"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Color",
+          "default": "#000"
+        },
+        {
+          "type": "header",
+          "content": "Label settings"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Name"
+        },
+        {
+          "type": "color",
+          "id": "color_label",
+          "label": "Text color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "bkg_label",
+          "label": "Backgorund color",
+          "default": "#d9121f"
+        },
+        {
+          "type": "header",
+          "content": "For developer"
+        },
+        {
+          "type": "text",
+          "id": "parent_custom_class",
+          "label": "Custom class"
+        },
+        {
+          "type": "header",
+          "content": "Dropdown's general settings"
+        },
+        {
+          "type": "range",
+          "id": "drop_width",
+          "min": 100,
+          "max": 1200,
+          "step": 100,
+          "unit": "px",
+          "label": "Dropdown Width",
+          "default": 1200
+        },
+        {
+          "type": "header",
+          "content": "Dropdown's column 1"
+        },
+        {
+          "type": "range",
+          "id": "drop_col_width_1",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "col",
+          "label": "Column's width",
+          "default": 2
+        },
+        {
+          "type": "text",
+          "id": "dropdown_column_title_1",
+          "label": "Column title"
+        },
+        {
+          "type": "link_list",
+          "id": "link_list_1",
+          "label": "Link list"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_color_label_1",
+          "label": "Label text color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_bkg_label_1",
+          "label": "Label background color",
+          "default": "#d9121f"
+        },
+        {
+          "type": "product",
+          "id": "product_1",
+          "label": "Pick a product"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Pick an image"
+        },
+        {
+          "type": "url",
+          "id": "image_link_1",
+          "label": "The link for image"
+        },
+        {
+          "type": "checkbox",
+          "id": "image_new_tab_1",
+          "label": "Open the link in a new tab",
+          "default": false
+        },
+        {
+          "type": "html",
+          "id": "html_1",
+          "label": "Add your html"
+        },
+        {
+          "type": "header",
+          "content": "Dropdown's column 2"
+        },
+        {
+          "type": "range",
+          "id": "drop_col_width_2",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "col",
+          "label": "Column's width",
+          "default": 2
+        },
+        {
+          "type": "text",
+          "id": "dropdown_column_title_2",
+          "label": "Column title"
+        },
+        {
+          "type": "link_list",
+          "id": "link_list_2",
+          "label": "Link list"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_color_label_2",
+          "label": "Label text color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_bkg_label_2",
+          "label": "Label background color",
+          "default": "#d9121f"
+        },
+        {
+          "type": "product",
+          "id": "product_2",
+          "label": "Pick a product"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Pick an image"
+        },
+        {
+          "type": "url",
+          "id": "image_link_2",
+          "label": "The link for image"
+        },
+        {
+          "type": "checkbox",
+          "id": "image_new_tab_2",
+          "label": "Open the link in a new tab",
+          "default": false
+        },
+        {
+          "type": "html",
+          "id": "html_2",
+          "label": "Add your html"
+        },
+        {
+          "type": "header",
+          "content": "Dropdown's column 3"
+        },
+        {
+          "type": "range",
+          "id": "drop_col_width_3",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "col",
+          "label": "Column's width",
+          "default": 2
+        },
+        {
+          "type": "text",
+          "id": "dropdown_column_title_3",
+          "label": "Column title"
+        },
+        {
+          "type": "link_list",
+          "id": "link_list_3",
+          "label": "Link list"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_color_label_3",
+          "label": "Label text color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_bkg_label_3",
+          "label": "Label background color",
+          "default": "#d9121f"
+        },
+        {
+          "type": "product",
+          "id": "product_3",
+          "label": "Pick a product"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_3",
+          "label": "Pick an image"
+        },
+        {
+          "type": "url",
+          "id": "image_link_3",
+          "label": "The link for image"
+        },
+        {
+          "type": "checkbox",
+          "id": "image_new_tab_3",
+          "label": "Open the link in a new tab",
+          "default": false
+        },
+        {
+          "type": "html",
+          "id": "html_3",
+          "label": "Add your html"
+        },
+        {
+          "type": "header",
+          "content": "Dropdown's column 4"
+        },
+        {
+          "type": "range",
+          "id": "drop_col_width_4",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "col",
+          "label": "Column's width",
+          "default": 2
+        },
+        {
+          "type": "text",
+          "id": "dropdown_column_title_4",
+          "label": "Column title"
+        },
+        {
+          "type": "link_list",
+          "id": "link_list_4",
+          "label": "Link list"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_color_label_4",
+          "label": "Label text color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_bkg_label_4",
+          "label": "Label background color",
+          "default": "#d9121f"
+        },
+        {
+          "type": "product",
+          "id": "product_4",
+          "label": "Pick a product"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_4",
+          "label": "Pick an image"
+        },
+        {
+          "type": "url",
+          "id": "image_link_4",
+          "label": "The link for image"
+        },
+        {
+          "type": "checkbox",
+          "id": "image_new_tab_4",
+          "label": "Open the link in a new tab",
+          "default": false
+        },
+        {
+          "type": "html",
+          "id": "html_4",
+          "label": "Add your html"
+        },
+        {
+          "type": "header",
+          "content": "Dropdown's column 5"
+        },
+        {
+          "type": "range",
+          "id": "drop_col_width_5",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "col",
+          "label": "Column's width",
+          "default": 2
+        },
+        {
+          "type": "text",
+          "id": "dropdown_column_title_5",
+          "label": "Column title"
+        },
+        {
+          "type": "link_list",
+          "id": "link_list_5",
+          "label": "Link list"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_color_label_5",
+          "label": "Label text color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_bkg_label_5",
+          "label": "Label background color",
+          "default": "#d9121f"
+        },
+        {
+          "type": "product",
+          "id": "product_5",
+          "label": "Pick a product"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_5",
+          "label": "Pick an image"
+        },
+        {
+          "type": "url",
+          "id": "image_link_5",
+          "label": "The link for image"
+        },
+        {
+          "type": "checkbox",
+          "id": "image_new_tab_5",
+          "label": "Open the link in a new tab",
+          "default": false
+        },
+        {
+          "type": "html",
+          "id": "html_5",
+          "label": "Add your html"
+        },
+        {
+          "type": "header",
+          "content": "Dropdown's column 6"
+        },
+        {
+          "type": "range",
+          "id": "drop_col_width_6",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "col",
+          "label": "Column's width",
+          "default": 2
+        },
+        {
+          "type": "text",
+          "id": "dropdown_column_title_6",
+          "label": "Column title"
+        },
+        {
+          "type": "link_list",
+          "id": "link_list_6",
+          "label": "Link list"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_color_label_6",
+          "label": "Label text color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "dropdown_bkg_label_6",
+          "label": "Label background color",
+          "default": "#d9121f"
+        },
+        {
+          "type": "product",
+          "id": "product_6",
+          "label": "Pick a product"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_6",
+          "label": "Pick an image"
+        },
+        {
+          "type": "url",
+          "id": "image_link_6",
+          "label": "The link for image"
+        },
+        {
+          "type": "checkbox",
+          "id": "image_new_tab_6",
+          "label": "Open the link in a new tab",
+          "default": false
+        },
+        {
+          "type": "html",
+          "id": "html_6",
+          "label": "Add your html"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "menu_item_dropdown_4_col",
+        "settings": {
+          "title": "Home",
+          "link": "#",
+          "icon": "lnr-home",
+          "color": "#000000",
+          "label": "",
+          "color_label": "#ffffff",
+          "bkg_label": "#d9121f",
+          "parent_custom_class": "",
+          "drop_width": 1200,
+          "drop_col_width_1": 3,
+          "dropdown_column_title_1": "Multi Skins",
+          "link_list_1": "home-styles",
+          "dropdown_color_label_1": "#ffffff",
+          "dropdown_bkg_label_1": "#d9121f",
+          "product_1": "",
+          "image_link_1": "",
+          "image_new_tab_1": false,
+          "html_1": "",
+          "drop_col_width_2": 3,
+          "dropdown_column_title_2": "&nbsp;",
+          "link_list_2": "home-style-2",
+          "dropdown_color_label_2": "#ffffff",
+          "dropdown_bkg_label_2": "#d9121f",
+          "product_2": "",
+          "image_link_2": "",
+          "image_new_tab_2": false,
+          "html_2": "",
+          "drop_col_width_3": 3,
+          "dropdown_column_title_3": "&nbsp;",
+          "link_list_3": "home-style-3",
+          "dropdown_color_label_3": "#ffffff",
+          "dropdown_bkg_label_3": "#d9121f",
+          "product_3": "",
+          "image_link_3": "",
+          "image_new_tab_3": false,
+          "html_3": "",
+          "drop_col_width_4": 3,
+          "dropdown_column_title_4": "&nbsp;",
+          "link_list_4": "home-style-4",
+          "dropdown_color_label_4": "#ffffff",
+          "dropdown_bkg_label_4": "#d9121f",
+          "product_4": "",
+          "image_link_4": "",
+          "image_new_tab_4": false,
+          "html_4": ""
+        }
+      },
+      {
+        "type": "menu_item_dropdown_6_col",
+        "settings": {
+          "title": "Features",
+          "link": "shopify:\/\/collections",
+          "icon": "",
+          "color": "#000000",
+          "label": "",
+          "color_label": "#ffffff",
+          "bkg_label": "#d9121f",
+          "parent_custom_class": "",
+          "drop_width": 1200,
+          "drop_col_width_1": 2,
+          "dropdown_column_title_1": "Shop pages",
+          "link_list_1": "all-collection",
+          "dropdown_color_label_1": "#ffffff",
+          "dropdown_bkg_label_1": "#d9121f",
+          "product_1": "",
+          "image_link_1": "",
+          "image_new_tab_1": false,
+          "html_1": "",
+          "drop_col_width_2": 2,
+          "dropdown_column_title_2": "Shop Styles",
+          "link_list_2": "collection-styles",
+          "dropdown_color_label_2": "#ffffff",
+          "dropdown_bkg_label_2": "#d9121f",
+          "product_2": "",
+          "image_link_2": "",
+          "image_new_tab_2": false,
+          "html_2": "",
+          "drop_col_width_3": 2,
+          "dropdown_column_title_3": "Product layouts",
+          "link_list_3": "product-styles",
+          "dropdown_color_label_3": "#ffffff",
+          "dropdown_bkg_label_3": "#d9121f",
+          "product_3": "",
+          "image_link_3": "",
+          "image_new_tab_3": false,
+          "html_3": "",
+          "drop_col_width_4": 2,
+          "dropdown_column_title_4": "Product types",
+          "link_list_4": "product-types",
+          "dropdown_color_label_4": "#ffffff",
+          "dropdown_bkg_label_4": "#d9121f",
+          "product_4": "",
+          "image_link_4": "",
+          "image_new_tab_4": false,
+          "html_4": "",
+          "drop_col_width_5": 2,
+          "dropdown_column_title_5": "New product's",
+          "link_list_5": "",
+          "dropdown_color_label_5": "#ffffff",
+          "dropdown_bkg_label_5": "#d9121f",
+          "product_5": "",
+          "image_5": "shopify:\/\/shop_images\/nav4.jpg",
+          "image_link_5": "shopify:\/\/collections\/best-seller",
+          "image_new_tab_5": false,
+          "html_5": "",
+          "drop_col_width_6": 2,
+          "dropdown_column_title_6": "Hot under $49",
+          "link_list_6": "",
+          "dropdown_color_label_6": "#ffffff",
+          "dropdown_bkg_label_6": "#d9121f",
+          "product_6": "",
+          "image_6": "shopify:\/\/shop_images\/nva5.jpg",
+          "image_link_6": "shopify:\/\/collections\/accessories",
+          "image_new_tab_6": false,
+          "html_6": ""
+        }
+      },
+      {
+        "type": "menu_item_dropdown_3_col",
+        "settings": {
+          "title": "Shop",
+          "link": "shopify:\/\/collections",
+          "icon": "",
+          "color": "#000000",
+          "label": "trending",
+          "color_label": "#ffffff",
+          "bkg_label": "#1239d9",
+          "parent_custom_class": "",
+          "drop_width": 500,
+          "drop_col_width_1": 6,
+          "dropdown_column_title_1": "Pages",
+          "link_list_1": "pages",
+          "dropdown_color_label_1": "#ffffff",
+          "dropdown_bkg_label_1": "#d9121f",
+          "product_1": "",
+          "image_link_1": "",
+          "image_new_tab_1": false,
+          "html_1": "",
+          "drop_col_width_2": 6,
+          "dropdown_column_title_2": "About us",
+          "link_list_2": "footer",
+          "dropdown_color_label_2": "#ffffff",
+          "dropdown_bkg_label_2": "#d9121f",
+          "product_2": "",
+          "image_link_2": "",
+          "image_new_tab_2": false,
+          "html_2": "",
+          "drop_col_width_3": 12,
+          "dropdown_column_title_3": "Our brands",
+          "link_list_3": "",
+          "dropdown_color_label_3": "#ffffff",
+          "dropdown_bkg_label_3": "#d9121f",
+          "product_3": "",
+          "image_3": "shopify:\/\/shop_images\/nav6.jpg",
+          "image_link_3": "shopify:\/\/collections",
+          "image_new_tab_3": true,
+          "html_3": ""
+        }
+      },
+      {
+        "type": "menu_item_dropdown_2_col",
+        "settings": {
+          "title": "Toolkit App",
+          "link": "shopify:\/\/collections",
+          "icon": "",
+          "color": "#000000",
+          "label": "",
+          "color_label": "#ffffff",
+          "bkg_label": "#d9121f",
+          "parent_custom_class": "",
+          "drop_width": 600,
+          "drop_col_width_1": 6,
+          "dropdown_column_title_1": "Toolkits",
+          "link_list_1": "boostheme-toolkit-app",
+          "dropdown_color_label_1": "#ffffff",
+          "dropdown_bkg_label_1": "#d9121f",
+          "product_1": "",
+          "image_link_1": "",
+          "image_new_tab_1": false,
+          "html_1": "",
+          "drop_col_width_2": 6,
+          "dropdown_column_title_2": "",
+          "link_list_2": "",
+          "dropdown_color_label_2": "#ffffff",
+          "dropdown_bkg_label_2": "#d9121f",
+          "product_2": "",
+          "image_2": "shopify:\/\/shop_images\/menu_logo_install.png",
+          "image_link_2": "https:\/\/toolkit.boostheme.com\/installation",
+          "image_new_tab_2": false,
+          "html_2": ""
+        }
+      },
+      {
+        "type": "menu_item_dropdown_5_col",
+        "settings": {
+          "title": "Sales",
+          "link": "shopify:\/\/collections",
+          "icon": "",
+          "color": "#000000",
+          "label": "new",
+          "color_label": "#ffffff",
+          "bkg_label": "#d9121f",
+          "parent_custom_class": "",
+          "drop_width": 1200,
+          "drop_col_width_1": 3,
+          "dropdown_column_title_1": "",
+          "link_list_1": "",
+          "dropdown_color_label_1": "#ffffff",
+          "dropdown_bkg_label_1": "#d9121f",
+          "product_1": "exterbloom-puffer-hat",
+          "image_link_1": "",
+          "image_new_tab_1": false,
+          "html_1": "",
+          "drop_col_width_2": 3,
+          "dropdown_column_title_2": "",
+          "link_list_2": "",
+          "dropdown_color_label_2": "#ffffff",
+          "dropdown_bkg_label_2": "#d9121f",
+          "product_2": "moonlight-shirt-bay",
+          "image_link_2": "",
+          "image_new_tab_2": false,
+          "html_2": "",
+          "drop_col_width_3": 2,
+          "dropdown_column_title_3": "Top collections",
+          "link_list_3": "collection-styles",
+          "dropdown_color_label_3": "#ffffff",
+          "dropdown_bkg_label_3": "#d9121f",
+          "product_3": "",
+          "image_link_3": "",
+          "image_new_tab_3": false,
+          "html_3": "",
+          "drop_col_width_4": 2,
+          "dropdown_column_title_4": "Top Products",
+          "link_list_4": "product-types",
+          "dropdown_color_label_4": "#ffffff",
+          "dropdown_bkg_label_4": "#d9121f",
+          "product_4": "",
+          "image_link_4": "",
+          "image_new_tab_4": false,
+          "html_4": "",
+          "drop_col_width_5": 2,
+          "dropdown_column_title_5": "Top brands",
+          "link_list_5": "",
+          "dropdown_color_label_5": "#ffffff",
+          "dropdown_bkg_label_5": "#d9121f",
+          "product_5": "",
+          "image_5": "shopify:\/\/shop_images\/nav7.jpg",
+          "image_link_5": "shopify:\/\/collections",
+          "image_new_tab_5": false,
+          "html_5": ""
+        }
+      },
+      {
+        "type": "menu_item_dropdown_3_col",
+        "settings": {
+          "title": "Blog",
+          "link": "shopify:\/\/blogs\/news",
+          "icon": "",
+          "color": "#000000",
+          "label": "",
+          "color_label": "#ffffff",
+          "bkg_label": "#d9121f",
+          "parent_custom_class": "",
+          "drop_width": 900,
+          "drop_col_width_1": 4,
+          "dropdown_column_title_1": "New in collection",
+          "link_list_1": "",
+          "dropdown_color_label_1": "#ffffff",
+          "dropdown_bkg_label_1": "#d9121f",
+          "product_1": "",
+          "image_1": "shopify:\/\/shop_images\/banner-menu1.jpg",
+          "image_link_1": "shopify:\/\/blogs\/news",
+          "image_new_tab_1": false,
+          "html_1": "",
+          "drop_col_width_2": 4,
+          "dropdown_column_title_2": "Offer collection",
+          "link_list_2": "",
+          "dropdown_color_label_2": "#ffffff",
+          "dropdown_bkg_label_2": "#d9121f",
+          "product_2": "",
+          "image_2": "shopify:\/\/shop_images\/banner-menu2_a84f94c0-aee4-4e77-bba5-a6a48a8dcf72.jpg",
+          "image_link_2": "shopify:\/\/blogs\/journal",
+          "image_new_tab_2": false,
+          "html_2": "",
+          "drop_col_width_3": 4,
+          "dropdown_column_title_3": "Summer collection",
+          "link_list_3": "",
+          "dropdown_color_label_3": "#ffffff",
+          "dropdown_bkg_label_3": "#d9121f",
+          "product_3": "",
+          "image_3": "shopify:\/\/shop_images\/banner-menu4.jpg",
+          "image_link_3": "shopify:\/\/blogs\/blog",
+          "image_new_tab_3": false,
+          "html_3": ""
+        }
+      }
+    ],
+    "settings": {
+      "use_link_list": false,
+      "menu_link_list": "",
+      "top_item_link_list_color": "#000000",
+      "bkg_color_dropdown": "#fafafa",
+      "color_dropdown_title": "#000000",
+      "fs_dropdown_title": 12,
+      "align_dropdown_title": "left",
+      "color_dropdown_content": "#000000",
+      "fs_dropdown_content": 13,
+      "align_dropdown_content": "left",
+      "main_thumbnail": "product_image",
+      "show_label": true,
+      "show_cart_btn": true,
+      "show_qs_btn": true,
+      "show_compare_btn": true,
+      "show_wishlist_btn": true,
+      "show_review_stars": true,
+      "enable_product_options": true,
+      "show_countdown_timer": true,
+      "show_vendor": false,
+      "product_name_size": 5
+    }
+  }
+}
+{% endschema %}

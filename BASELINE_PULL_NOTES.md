@@ -1,0 +1,15 @@
+# Baseline pull notes
+
+Pulled from live theme **HE-RU Vodoma 2024** (id 131669328113, role MAIN)
+via Shopify Admin GraphQL `theme.files` (Shopify MCP server). Shopify CLI
+could not be used: this environment's network policy blocks all Shopify hosts.
+
+- Text files written: 731
+- Binary (base64) files written: 16
+- URL-only assets NOT downloadable here (CDN host blocked): 3
+
+## URL-only assets (re-fetch via CLI/admin when on an allowed network)
+
+- `assets/bss-b2b-js.js` -> https://shopify-shop-assets.storage.googleapis.com/s/files/1/d/4e89/0484/4319/5552/t/91/assets/bss-b2b-js.js?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=merchant-assets%40shopify-tiers.iam.gserviceaccount.com%2F20260610%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260610T180509Z&X-Goog-Expires=300&X-Goog-SignedHeaders=host&X-Goog-Signature=1c235b39e9644928a681c92cc5a39235851dae9683821166f4b361ad8d8cbdba2844a6c639d03a325cf9383f7939725395a3c8fa7eafa42d747708cdc6aaa53b18386e7a6b9075aae57defad59de1c24e44642b27d63cedc22439747ad4ce864a4659976ce5312faec43695d0054ee774a114607a4811277ef00a539e773ef4cb296ead95c6dfeb6031458c58693d66ad6e572e84cbfd355ee9cf4161b4b959f4355cf2bc6a6c7310037643bd35ba7fb12cb053df19c1c9659c54e064e54d0a89b5c06bccc4cbd66cfc5eee677b856add8d79b70a110bbe68ad8d5342e2c0ac38d060b8e92542b226ccd412c4c56f9d7f7b8ec58509981d1b9602ebc8217a5c1
+- `assets/customer-fields.js` -> https://shopify-shop-assets.storage.googleapis.com/s/files/1/d/233b/0484/4319/5552/t/91/assets/customer-fields.js?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=merchant-assets%40shopify-tiers.iam.gserviceaccount.com%2F20260610%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260610T180509Z&X-Goog-Expires=300&X-Goog-SignedHeaders=host&X-Goog-Signature=196bf34dd290af46a86a741ad0e801bb2bbd6a6c0e3da42c9689b4f99555691fa2fbcd51dd57d77780cd745f8b3475582bbda92d1dfcdbcf97dbee9aef26e76aed6159e9fe548acc4ae23a22a66c2186f9d6d63bbd3885c80cc1802641d5f2e13b1fec7e2feca2ddc4fac72e15b01cda1a7a746cf2339d4c323758aa1581758ae17098d5c96f370c83af3f6ce96fcd565afd2b3e8c37cbddb1dd648004322ccf6866f3fb34aabbbc3484042b22d15ebee56c035430fc775640e0ae21b5b73fc1410a0a68210e8633a9d6bf0b3fd02d5415449d39ec4b0162493131f7dbc58545a12dbfd9a53e7d1034c4947179b8c2eac862ba12d0ebf0b91a74f0b0773b2d29
+- `assets/vendor.js` -> https://shopify-shop-assets.storage.googleapis.com/s/files/1/d/d89e/0484/4319/5552/t/91/assets/vendor.js?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=merchant-assets%40shopify-tiers.iam.gserviceaccount.com%2F20260610%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260610T180509Z&X-Goog-Expires=300&X-Goog-SignedHeaders=host&X-Goog-Signature=a85651e5433ac15d8120e2f0c037bd0f93c8048fdfb7523fa58ee3112f0fa0bcdb1e25c4c340bb790e855a4bdc6a2ba68027161b4fafcd1ed426540fc217709bb838407966f1c0369e7d3b32f22d5a82bdaf360b1fb47758d16089198207303da68009165ddbf23fef48eecbaca68fb4dc26415fe70a0dc4b88bae85cad97933cfd4a80b4b35df7aefe8ef3f6bfa81dc40bd1d5dbbade4127d7adff133a3ea55ab3068ea3c873ee4543286f42cb87021225d3b3db02709d2cb59bdd78478a232a72a6ce79fa3ec2f04e89cf4ac5d015507a29ba6c8640eab7a40ff27e393562ef999b469001e2290bdde43a5c93187347c155c826c81f60cc94e75f9cf1a5264

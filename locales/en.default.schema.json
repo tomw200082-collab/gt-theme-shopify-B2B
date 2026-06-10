@@ -1,0 +1,201 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-product": {
+      "name": "Product information",
+      "blocks": {
+        "text": {
+          "name": "Text",
+          "settings": {
+            "text": {
+              "label": "Text"
+            },
+            "text_style": {
+              "label": "Text style",
+              "options__1": {
+                "label": "Normal"
+              },
+              "options__2": {
+                "label": "Title"
+              },
+              "options__3": {
+                "label": "Vendor"
+              }
+            }
+          }
+        },
+        "title": {
+          "name": "Title"
+        },
+        "price": {
+          "name": "Price"
+        },
+        "sku": {
+          "name": "SKU"
+        },
+        "quantity_selector": {
+          "name": "Quantity selector"
+        },
+        "variant_picker": {
+          "name": "Variant picker",
+          "settings": {
+            "picker_type": {
+              "label": "Type",
+              "options__1": {
+                "label": "Dropdown"
+              },
+              "options__2": {
+                "label": "Button"
+              }
+            }
+          }
+        },
+        "quantity_buy_buttons": {
+          "name": "Quantity & buy buttons",
+          "settings": {
+            "show_dynamic_checkout": {
+              "label": "Show dynamic checkout buttons",
+              "info": "Using the payment methods available on your store, customers see their preferred option, like PayPal or Apple Pay. [Learn more](https:\/\/help.shopify.com\/manual\/using-themes\/change-the-layout\/dynamic-checkout)"
+            }
+          }
+        },
+        "pickup_availability": {
+          "name": "Pickup availability"
+        },
+        "description": {
+          "name": "Description"
+        },
+        "share": {
+          "name": "Share",
+          "settings": {
+            "featured_image_info": {
+              "content": "If you include a link in social media posts, the page’s featured image will be shown as the preview image. [Learn more](https:\/\/help.shopify.com\/en\/manual\/online-store\/images\/showing-social-media-thumbnail-images)."
+            },
+            "title_info": {
+              "content": "A store title and description are included with the preview image. [Learn more](https:\/\/help.shopify.com\/en\/manual\/promoting-marketing\/seo\/adding-keywords#set-a-title-and-description-for-your-online-store)."
+            }
+          }
+        },
+        "random_sold_number": {
+          "name": "Random sold number",
+          "settings": {
+            "sold_min": "Min sold number",
+            "sold_max": "Max sold number",
+            "sold_hour_min": "Min hour number",
+            "sold_hour_max": "Min hour number"
+          }
+        },
+        "countdown_timer": {
+          "name": "Countdown timer",
+          "settings": {
+            "countdown_text": "Text"
+          }
+        },
+        "payment_badge": {
+          "name": "Trusted payment badge",
+          "settings": {
+            "image": {
+              "label": "Trusted payment badge",
+              "info": "Leave empty to display the payment icons based on your payment settings."
+            }
+          }
+        },
+        "size_chart": {
+          "name": "Size chart"
+        },
+        "collapsible_tab": {
+          "name_custom_text": "Collapsible tab - Custom text",
+          "name_description": "Collapsible tab - Description",
+          "name_reviews": "Collapsible tab - Reviews form",
+          "name_toolkit": "Collapsible tab - Toolkit app",
+          "settings": {
+            "heading": {
+              "info": "Include a heading that explains the content.",
+              "label": "Heading"
+            },
+            "content": {
+              "label": "Tab content"
+            },
+            "page": {
+              "label": "Tab content from page"
+            }
+          }
+        },
+        "popup": {
+          "name": "Pop-up",
+          "settings": {
+            "link_label": {
+              "label": "Link label"
+            },
+            "page": {
+              "label": "Page"
+            }
+          }
+        },
+        "group": {
+          "name_1": "Group of 2 texts, SKU",
+          "name_2": "Group of review stars, price, countdown",
+          "name_3": "Group of collections, product tags, sharing icons, payment badge",
+          "settings": {
+            "show_review_stars": "Show review stars",
+            "text_1": "Text 1",
+            "text_2": "Text 2",
+            "show_sku": "Show SKU",
+            "show_price": "Show price",
+            "show_countdown": "Show countdown",
+            "show_collections": "Show collections",
+            "show_product_tags": "Show product tags",
+            "show_sharing_icons": "Show sharing icons",
+            "show_payment_badge": "Show payment badge"
+          }
+        }
+      }
+    },
+    "product-crosssell": {
+      "name": "Product Crosssell"
+    },
+    "product-recommendations": {
+      "name": "Product recommendations",
+      "settings": {
+        "heading": {
+          "label": "Heading"
+        },
+        "paragraph__1": {
+          "content": "Dynamic recommendations use order and product information to change and improve over time. [Learn more](https:\/\/help.shopify.com\/en\/themes\/development\/recommended-products)"
+        },
+        "header__2": {
+          "content": "Product card"
+        },
+        "image_ratio": {
+          "label": "Image ratio",
+          "options__1": {
+            "label": "Adapt to image"
+          },
+          "options__2": {
+            "label": "Portrait"
+          },
+          "options__3": {
+            "label": "Square"
+          }
+        },
+        "show_secondary_image": {
+          "label": "Show second image on hover"
+        },
+        "add_image_padding": {
+          "label": "Add image padding"
+        },
+        "show_vendor": {
+          "label": "Show vendor"
+        }
+      }
+    }
+  }
+}

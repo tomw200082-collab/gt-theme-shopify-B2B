@@ -1,0 +1,58 @@
+<div class="row pg pg--freb{% if fre_current_variant.available %} selected{% endif %}{% if fre_show > 0 %} {% unless fre_show > 3 %}{% if fre_show != 1 %}gutter-ele-top-tbs{% else %}gutter-ele-top-mb{% endif %}{% else %}gutter-ele-top{% endunless %}{% endif %} gutter-ele-bottom-tbs" data-product-handle="{{ fre_product.handle }}">
+	<div class="col-xs-4">
+		<div class="por">
+			{%- assign fre_featured_image = fre_current_variant.featured_image | default: fre_product.featured_image -%}
+			{%- assign img_url = fre_featured_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+      <a href="{{ fre_product.url }}" class="item__image{% if fre_product.images.size > 1 %} item__image--alt-img{% endif %} pg__sync-url img-container loading" title="{{ fre_product.title | escape }}" style="padding-top:{{ 1 | divided_by: fre_featured_image.aspect_ratio | times: 100 }}%;">
+        <img data-aspectratio="{{ fre_featured_image.aspect_ratio }}"
+            data-src="{{ img_url }}"
+            data-sizes="auto" class="w100 pg__main-image img-responsive center-block img-abs center-abs lazyload"{% render 'img-one-pixel' %} alt="{{ fre_featured_image.alt | escape }}" data-image-size="1x1" width="{{ fre_featured_image.width }}" height="{{ fre_featured_image.height }}" />
+      {%- if fre_product.images.size > 1 -%}
+        {%- assign image = fre_product.images[1] -%}
+        {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <img data-aspectratio="{{ image.aspect_ratio }}"
+          data-src="{{ img_url }}"
+          data-sizes="auto" class="w100 pg__main-alt-image img-responsive center-block img-abs center-abs lazyload ignore-effect"{% render 'img-one-pixel' %} alt="{{ image.alt | escape }}" data-image-size="1x1" width="{{ image.width }}" height="{{ image.height }}"/>
+      {%- endif -%}    
+      </a>
+      <button type="button" class="pg__fre-check flex flex-align-hoz flex-align-ver"{% unless fre_current_variant.available %} disabled="disabled"{% endunless %}>{%- render 'icon-check' -%}</button>
+		</div>
+  </div>
+  <div class="col-xs-8">
+  	<a class="item__name pg__sync-url pg__name" href="{{ fre_product.url }}" title="{{ fre_product.title | escape }}">
+      {{ fre_product.title | truncatewords: 5 }}
+    </a>
+    {%- capture fre_product_review -%}{%- render 'product-review' with product: fre_product -%}{%- endcapture -%}
+    {%- if fre_product_review != '' -%}
+    <div class="gutter-ele-top">
+    	{{ fre_product_review }}
+    </div>
+    {%- endif -%}
+    <div class="gutter-ele-top">
+      {%- render 'product-variant-price' with fre_current_variant as variant, fre_product as product -%}
+    </div>
+
+  	{%- unless fre_product.has_only_default_variant -%}
+		<div class="pg__options pg__options--fre gutter-ele-top-tb">
+			{%- render 'product-group-variants' with product: fre_product, enable_product_options: true, color_size: '60x', is_single_view: true, is_show_sub_info: true, is_single_sticky: true, force_dropdown_all: true -%}
+    </div>
+    {%- endunless -%}
+    <select name="id" class="variant-id hide">
+      {%- for variant in fre_product.variants -%}
+        <option {% if variant.id == fre_current_variant.id %} selected="selected" {% endif %} value="{{ variant.id }}" data-price="{{ variant.price }}" data-compare-price="{% if variant.compare_at_price and variant.compare_at_price > variant.price %}{{ variant.compare_at_price }}{% else %}{{ variant.price }}{% endif %}" data-available="{{ variant.available }}">
+          {{ variant.title }}
+        </option>
+      {%- endfor -%}
+    </select>	
+    
+    <div class="qty-box qty-box--small flex flex-align-ver flex-align-space-between distance-top-ele">
+	    <a href="#" class="qty-box__ctrl qty-box__ctrl--descrease flex flex-align-hoz flex-align-ver" aria-label="button">
+	      {%- render 'icon-minus' -%}
+	    </a>
+	    <input type="number" name="quantity" value="1" min="1" class="qty-box__input text-center h100 qty-box__input--fre qty-box__input--sync" aria-label="form" style="font-size:18px;">
+	    <a href="#" class="qty-box__ctrl qty-box__ctrl--increase flex flex-align-hoz flex-align-ver" aria-label="button">
+	      {%- render 'icon-plus' -%}
+	    </a>
+	  </div>
+  </div>
+</div>

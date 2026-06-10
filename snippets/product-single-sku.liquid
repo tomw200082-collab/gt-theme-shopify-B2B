@@ -1,0 +1,4 @@
+<p class="gutter-ele-top margin0{% if current_variant.sku == blank %} hide{% endif %}" style="font-size:12px;" {{ block.shopify_attributes }}>
+  <span class="dib text-uppercase blur-color" style="margin-{{ right_holder }}: 10px;">{{ 'customer.order.sku' | t }}:</span>
+  <span class="dib pg__sku">{{ current_variant.sku }}</span>
+</p>

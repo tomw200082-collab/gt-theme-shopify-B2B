@@ -1,0 +1,157 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "group_1": {
+          "type": "group_1",
+          "settings": {
+            "text_1": "",
+            "text_style_1": "title",
+            "text_2": "{{ product.title }}",
+            "text_style_2": "title",
+            "show_sku": false
+          }
+        },
+        "judge_me_reviews_preview_badge_X6k8DD": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "group_2": {
+          "type": "group_2",
+          "settings": {
+            "show_review_stars": false,
+            "show_price": true,
+            "show_discount_text": true,
+            "discount_text": "חסוך [percent]",
+            "show_shipping_policy_link": true,
+            "show_countdown": false,
+            "countdown_text": "Limited time only!"
+          }
+        },
+        "quantity_buy_buttons": {
+          "type": "quantity_buy_buttons",
+          "settings": {
+            "show_quantity_selector": true,
+            "show_dynamic_checkout": false,
+            "show_compare_btn": false,
+            "show_wishlist_btn": false,
+            "enable_shop_pay_banner": false
+          }
+        },
+        "collapsible-tab-desc": {
+          "type": "collapsible_tab_desc",
+          "settings": {
+            "heading": "תיאור",
+            "default_state": "expand",
+            "show_bottom_line": true
+          }
+        },
+        "88e9bcca-ac67-4681-ae4e-e86670a51cba": {
+          "type": "collapsible_tab_toolkit",
+          "settings": {
+            "default_state": "expand",
+            "show_bottom_line": true
+          }
+        },
+        "0c1ef825-6d53-415e-b1fe-ec92b03d0415": {
+          "type": "collapsible_tab_text",
+          "disabled": true,
+          "settings": {
+            "heading": "רכיבים וערכים תזונתיים",
+            "content": "<p><strong>ידעת ששתיית תה ירוק טבעי באופן קבוע, שומרת על הגוף והמוח שלנו מאוזנים ? מרגיע את הנפש ומחזק את המערכת החיסונית</strong></p><p><strong>?</strong>תכירו את גרינטי, תה ירוק בכבישה קרה. מבקבוק אחד של גרינטי אפשר להכין 30 כוסות תה קר או חם, 100% טבעי. קטגוריה חדשה לגמרי בתפריט המשקאות שלכם. 4 טעמים שונים, ללא חומר משמר, צבעי מאכל, תמציות טעם וריח. משקה דיטוקס אמיתי.<br/><a href=\"https://greentea-everyday.com/collections/%D7%9C%D7%9B%D7%9C-%D7%94%D7%9E%D7%95%D7%A6%D7%A8%D7%99%D7%9D-1/products/detox-%D7%9C%D7%95%D7%90%D7%99%D7%96%D7%94-%D7%95%D7%A0%D7%A2%D7%A0%D7%A2-%D7%9C%D7%9C%D7%90-%D7%A1%D7%95%D7%9B%D7%A8-500-%D7%9E%D7%9C\" title=\"DETOX לואיזה ונענע ללא סוכר - 500 מ&quot;ל\"><span style=\"text-decoration:underline\"><strong>לואיזה ונענע ללא סוכר - DETOX</strong></span></a></p><p>גרינטי לואיזה שלנו מורכב מ50% תה ירוק, 50% לואיזה, נענע וליים. זהו גרינטי הנמכר ביותר שלנו בגלל הטעם הישראלי והאהוב. התה הירוק שלנו מגיע מסין. לואיזה ונענע ממצרים. עד לפני שנה עוד הינו קונים לואיזה ונענע ממגדלי ישראלים אבל לצערי כבר לא מגדלים צמחים אלו בישראל. משקה שמושלם לכל שעות היום. <br/><a href=\"https://greentea-everyday.com/collections/%D7%9C%D7%9B%D7%9C-%D7%94%D7%9E%D7%95%D7%A6%D7%A8%D7%99%D7%9D-1/products/%D7%92%D7%A8%D7%99%D7%A0%D7%98%D7%99-detox-%D7%9C%D7%95%D7%90%D7%99%D7%96%D7%94-%D7%95%D7%A0%D7%A2%D7%A0%D7%A2-500-%D7%9E%D7%9C\" title=\"DETOX לואיזה ונענע מופחת סוכר - 500 מ&quot;ל\"><span style=\"text-decoration:underline\"><strong>לואיזה ונענע מופחת סוכר - DETOX</strong></span></a></p><p>גרינטי לואיזה שלנו מורכב מ50% תה ירוק, 50% לואיזה, נענע וליים. זהו גרינטי הנמכר ביותר שלנו בגלל הטעם הישראלי והאהוב. התה הירוק שלנו מגיע מסין. לואיזה ונענע ממצרים. עד לפני שנה עוד הינו קונים לואיזה ונענע ממגדלי ישראלים אבל לצערי כבר לא מגדלים צמחים אלו בישראל. משקה שמושלם לכל שעות היום. <br/><a href=\"https://greentea-everyday.com/collections/%D7%9C%D7%9B%D7%9C-%D7%94%D7%9E%D7%95%D7%A6%D7%A8%D7%99%D7%9D-1/products/energy-%D7%9C%D7%9E%D7%95%D7%9F-%D7%92%D7%A8%D7%90%D7%A1-%D7%9C%D7%9C%D7%90-%D7%A1%D7%95%D7%9B%D7%A8-500-%D7%9E%D7%9C\" title=\"ENERGY למון גראס ללא סוכר - 500 מ&quot;ל\"> <span style=\"text-decoration:underline\"><strong>למון גראס נענע ולימון ללא סוכר - ENERGY</strong></span></a></p><p>גרינטי למון גראס שלנו מורכב מהמון תה ירוק, למון גראס, מנטה , נענע ולימון. זהו. כמה תה ירוק ? אם בתיון רגיל יש 1.5 גרם של תה, כוס של גרינטי מכילה 4-5 גרם של עלי תה איכותיים שנחלטו בשיטות מסורתיות ממש, על מנת לשמר את הסגולות של התה הירוק וגם להגיע לטעם המושלם. הוא מעורר מאוד ! לא מומלץ לשתות 6 שעות לפני השינה. לא בגלל הקפאין (תה ירוק מכיל קפאין אבל רק 25% מכמות הקפאין שיש בקפה) החומר המעורר בתה ירוק נקרא טנין והוא משפיע על המוח ולא על מערכת העצבים. מומלץ להתחיל איתו את הבוקר. אנחנו משתמשים מחיות לימון קפואות 100% טבעיות! ללא חומר משמר.<br/><a href=\"https://greentea-everyday.com/collections/%D7%9C%D7%9B%D7%9C-%D7%94%D7%9E%D7%95%D7%A6%D7%A8%D7%99%D7%9D-1/products/%D7%92%D7%A8%D7%99%D7%A0%D7%98%D7%99-energy-%D7%9C%D7%9E%D7%95%D7%9F-%D7%92%D7%A8%D7%90%D7%A1-500-%D7%9E%D7%9C\" title=\"ENERGY למון גראס מופחת סוכר - 500 מ&quot;ל\"><span style=\"text-decoration:underline\"><strong>למון גראס נענע ולימון מופחת סוכר - ENERGY</strong></span></a></p><p>גרינטי למון גראס שלנו מורכב מהמון תה ירוק, למון גראס, מנטה , נענע ולימון. זהו. כמה תה ירוק ? אם בתיון רגיל יש 1.5 גרם של תה, כוס של גרינטי מכילה 4-5 גרם של עלי תה איכותיים שנחלטו בשיטות מסורתיות ממש, על מנת לשמר את הסגולות של התה הירוק וגם להגיע לטעם המושלם. הוא מעורר מאוד ! לא מומלץ לשתות 6 שעות לפני השינה. לא בגלל הקפאין (תה ירוק מכיל קפאין אבל רק 25% מכמות הקפאין שיש בקפה) החומר המעורר בתה ירוק נקרא טנין והוא משפיע על המוח ולא על מערכת העצבים. מומלץ להתחיל איתו את הבוקר. אנחנו משתמשים מחיות לימון קפואות 100% טבעיות! ללא חומר משמר.<br/><a href=\"https://greentea-everyday.com/collections/%D7%9C%D7%9B%D7%9C-%D7%94%D7%9E%D7%95%D7%A6%D7%A8%D7%99%D7%9D-1/products/copy-of-skinny-%D7%A4%D7%95-%D7%90%D7%A8-%D7%95%D7%9C%D7%99%D7%9E%D7%95%D7%9F-%D7%9E%D7%95%D7%A4%D7%97%D7%AA-%D7%A1%D7%95%D7%9B%D7%A8-500-%D7%9E%D7%9C\" title=\"SKINNY פו-אר ולימון ללא סוכר - 500 מ&quot;ל\"><span style=\"text-decoration:underline\"><strong>פו-אר ולימון ללא סוכר - SKINNY</strong></span></a></p><p>גרינטי פו-אר נולד בגל הראשון של קורונה. עד אז היה לנו 3 סוגים של גרינטי והיה חסר טעם שמתאים לאנשים שפשוט אוהבים תה, תה שחור. אגב,כל סוגי התה עשויים מתה ירוק, צמח בשם Camellia sinensis . צורת היייבוש, התססה, יישון הן אלה שקובעות את האיכויות וסוגי של תה. מכיוון שלא רצינו לעשות תה שחור פשוט, מצאנו את פו-אר. תה ירוק הגדל במחוז יונאן שעובר תהליך עיבוד שכולל מספר שלבים, ביניהם טיגון וצלייה. בסופו של תהליך הוא מתיישן מספר שנים ומגיע אלינו בבלוקים דחוסים שמתפרקים לאחר שטיפה במים קרים. תה שחור בעל טעם עמוק וייחודי. מאוד מומלץ להגיש עם סודה והרבה לימון! אה...הכי חשוב, גרינטי פו-אר מיוצר מפו-אר ולימון. וזהו.<br/><a href=\"https://greentea-everyday.com/collections/%D7%9C%D7%9B%D7%9C-%D7%94%D7%9E%D7%95%D7%A6%D7%A8%D7%99%D7%9D-1/products/%D7%92%D7%A8%D7%99%D7%A0%D7%98%D7%99-skinny-%D7%A4%D7%95-%D7%90%D7%A8-%D7%95%D7%9C%D7%99%D7%9E%D7%95%D7%9F-500-%D7%9E%D7%9C\" title=\"SKINNY פו-אר ולימון מופחת סוכר - 500 מ&quot;ל\"><span style=\"text-decoration:underline\"><strong>פו-אר ולימון מופחת סוכר - SKINNY</strong></span></a></p><p>גרינטי פו-אר נולד בגל הראשון של קורונה. עד אז היה לנו 3 סוגים של גרינטי והיה חסר טעם שמתאים לאנשים שפשוט אוהבים תה, תה שחור. אגב,כל סוגי התה עשויים מתה ירוק, צמח בשם Camellia sinensis . צורת היייבוש, התססה, יישון הן אלה שקובעות את האיכויות וסוגי של תה. מכיוון שלא רצינו לעשות תה שחור פשוט, מצאנו את פו-אר. תה ירוק הגדל במחוז יונאן שעובר תהליך עיבוד שכולל מספר שלבים, ביניהם טיגון וצלייה. בסופו של תהליך הוא מתיישן מספר שנים ומגיע אלינו בבלוקים דחוסים שמתפרקים לאחר שטיפה במים קרים. תה שחור בעל טעם עמוק וייחודי. מאוד מומלץ להגיש עם סודה והרבה לימון! אה...הכי חשוב, גרינטי פו-אר מיוצר מפו-אר ולימון. וזהו.<br/><a href=\"https://greentea-everyday.com/collections/%D7%9C%D7%9B%D7%9C-%D7%94%D7%9E%D7%95%D7%A6%D7%A8%D7%99%D7%9D-1/products/fresh-%D7%94%D7%99%D7%91%D7%99%D7%A1%D7%A7%D7%95%D7%A1-%D7%9C%D7%99%D7%99%D7%9D-%D7%9C%D7%9C%D7%90-%D7%A1%D7%95%D7%9B%D7%A8-500-%D7%9E%D7%9C\" title=\"FRESH היביסקוס ליים ללא סוכר - 500 מ&quot;ל\"><span style=\"text-decoration:underline\"><strong>היביסקוס וליים ללא סוכר - FRESH</strong></span></a></p><p>גרינטי היביסקוס מיוצר מהיביסקוס וליים. לראשונה גיליתי אותו במצריים. מסתבר שבדואים שותים תה היביסקוס כבר מאות שנים על מנת לקרר את הגוף במדבר הרותח. משרים אותו במהלך הלילה במי בארות ושותים במהלך היום. אחרי שטעמתי היביסקוס מכמה מדינות המסקנה היתה חד משמעית. ההיביסקוס הטוב ביותר מגיע מתאילנד. משם מגיע ההיביסקוס שלנו. פרחים שלמים ולא גרוסים. כל פרח נראה כמו יצירת אומנות של הטבע. הוא עשיר מאוד בויטאמין C. בעל טעם חמצמץ. מומלץ לשתות אותו אחרי פעילות גופנית. הוכח מחקרית ששתיית תה מפרח ההיביסקוס מסייעת להתאוששות מהירה יותר וצינון הגוף.<br/><a href=\"https://greentea-everyday.com/collections/%D7%9C%D7%9B%D7%9C-%D7%94%D7%9E%D7%95%D7%A6%D7%A8%D7%99%D7%9D-1/products/%D7%92%D7%A8%D7%99%D7%A0%D7%98%D7%99-fresh-%D7%94%D7%99%D7%91%D7%99%D7%A1%D7%A7%D7%95%D7%A1-%D7%9C%D7%99%D7%99%D7%9D-500-%D7%9E%D7%9C\" title=\"FRESH היביסקוס ליים מופחת סוכר - 500 מ&quot;ל\"><span style=\"text-decoration:underline\"><strong>היביסקוס וליים מופחת סוכר - FRESH</strong></span></a></p><p>גרינטי היביסקוס מיוצר מהיביסקוס וליים. לראשונה גיליתי אותו במצריים. מסתבר שבדואים שותים תה היביסקוס כבר מאות שנים על מנת לקרר את הגוף במדבר הרותח. משרים אותו במהלך הלילה במי בארות ושותים במהלך היום. אחרי שטעמתי היביסקוס מכמה מדינות המסקנה היתה חד משמעית. ההיביסקוס הטוב ביותר מגיע מתאילנד. משם מגיע ההיביסקוס שלנו. פרחים שלמים ולא גרוסים. כל פרח נראה כמו יצירת אומנות של הטבע. הוא עשיר מאוד בויטאמין C. בעל טעם חמצמץ. מומלץ לשתות אותו אחרי פעילות גופנית. הוכח מחקרית ששתיית תה מפרח ההיביסקוס מסייעת להתאוששות מהירה יותר וצינון הגוף.<br/></p>",
+            "page": "",
+            "default_state": "collapse",
+            "show_bottom_line": true
+          }
+        },
+        "ea0a409a-e7ef-43d2-8171-8f1492eb5de5": {
+          "type": "collapsible_tab_text",
+          "disabled": true,
+          "settings": {
+            "heading": "טיפים לשימוש",
+            "content": "<p><strong>כמה פשוט ככה טעים!</strong></p><p>התחילו ב- 30 מ\"ל של של תמצית צה ירוק בטעם שבחרתם (במידה ואין באפשרותכם למדוד 30 מ\"ל תמדדו בערך 1 ס\"מ בכוס רגילה - ממש כמו שמוסיפים פטל). זוהי הכמות המומלצת אבל כמובן שניתן לשים יותר או פחות לפי הטעם.הוסיפו מים קרים, חמים או סודה לפי בחירתכם עד ל-250 מ\"ל משקה (כוס בינונית). במידה ואתם מכינים גרינטי קר עם קרח, מומלץ להשתמש בכוס גדולה יותר.הוסיפו קרח, צמחים, פירות או בעצם כל מה שבא לכם על מנת להוסיף טעם או לקשט את הגרינטי שלכם!במידה ואתם מכינים קנקן של גרינטי, הכפילו את הכמויות לפי כמות הכוסות.</p><p>שלושה שלבים פשוטים להכנת משקה בריא, טרי והכי חשוב טעים!</p><p>תהינו מלא! צוות גרינטי</p>",
+            "page": "",
+            "default_state": "collapse",
+            "show_bottom_line": true
+          }
+        },
+        "27851d79-c98e-42e3-a04c-049273abc74d": {
+          "type": "collapsible_tab_text",
+          "settings": {
+            "heading": "משלוחים",
+            "content": "<p>משלוח חינם מעל 250 ש\"ח.</p><p>30 שח משלוח לכל הארץ.</p><p>הספקה לאיזור המרכז תוך 4 ימים עסקים.</p><p>הספקה צפונית לחדרה, דרומית לרחובות וירושלים, תוך 7 ימי עסקים. יום הזמנת המוצר לא נחשב כיום עסקים.</p><p>ב90% ברגע שאנחנו שולחים את המוצר תתקבל הודעת SMS עם פרטי מעקב מדויקים ישירות אל הנייד שלכם!</p>",
+            "page": "",
+            "default_state": "collapse",
+            "show_bottom_line": true
+          }
+        },
+        "32e84af8-cc1f-4c6c-8f2c-725e9ce44a3f": {
+          "type": "collapsible_tab_text",
+          "settings": {
+            "heading": "אמצעי תשלום",
+            "content": "<p>ניתן לשלם באתר בכרטיס אשראי או בפייפל. במידה וברצונכם לשלם בביט, דיירקט או העברה בנקאית ניתן להזמין טלפונית בין השעות 9:00 ל-17:00 בימים א' עד ה' למספר 072-3939395</p>",
+            "page": "",
+            "default_state": "collapse",
+            "show_bottom_line": true
+          }
+        }
+      },
+      "block_order": [
+        "group_1",
+        "judge_me_reviews_preview_badge_X6k8DD",
+        "group_2",
+        "quantity_buy_buttons",
+        "collapsible-tab-desc",
+        "88e9bcca-ac67-4681-ae4e-e86670a51cba",
+        "0c1ef825-6d53-415e-b1fe-ec92b03d0415",
+        "ea0a409a-e7ef-43d2-8171-8f1492eb5de5",
+        "27851d79-c98e-42e3-a04c-049273abc74d",
+        "32e84af8-cc1f-4c6c-8f2c-725e9ce44a3f"
+      ],
+      "settings": {
+        "show_next_prev_products": true,
+        "show_label": true,
+        "enable_zoom": true,
+        "enable_small_images": true,
+        "show_media_btn": true,
+        "thumbs_layout": "hoz_slider",
+        "sticky_images": true,
+        "sc_enable": true,
+        "collapse_tab_fs_mb": 14,
+        "collapse_tab_fs_gk": 15,
+        "item_id_structure": "default",
+        "target_country_structure": ""
+      }
+    },
+    "1714292292d649799e": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_XigYJM": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_XigYJM"
+      ],
+      "settings": {
+        "top_gutter": false,
+        "bottom_gutter": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "1714292292d649799e"
+  ]
+}

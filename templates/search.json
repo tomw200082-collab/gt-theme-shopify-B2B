@@ -1,0 +1,48 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "search-result",
+      "settings": {
+        "limit": 20,
+        "item_size_product": "small",
+        "item_size_article": "list",
+        "blog_show_author_search": false,
+        "blog_show_date_search": false,
+        "toolbar_enable": false,
+        "toolbar_sort_enable": false,
+        "enable_infinity_loading": false,
+        "infinity_action": "scroll",
+        "enable_filter": false,
+        "filter_item_format": "circle",
+        "filter_default_expand": "expand",
+        "filter_title_fs": 20,
+        "filter_option_fs": 12,
+        "filter_current_fs": 12,
+        "main_thumbnail": "product_image",
+        "show_label": true,
+        "show_cart_btn": true,
+        "show_qs_btn": false,
+        "show_compare_btn": false,
+        "show_wishlist_btn": false,
+        "show_review_stars": true,
+        "use_lazyload": true,
+        "enable_product_options": false,
+        "show_countdown_timer": false,
+        "show_vendor": false,
+        "product_name_size": 5
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

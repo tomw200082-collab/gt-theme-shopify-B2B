@@ -1,0 +1,7 @@
+{%- if request.design_mode -%}
+<div class="w100" {{ block.shopify_attributes }}>
+{%- endif -%}	
+{%- render 'product-group-variants' with product: product, enable_product_options: true, color_size: '60x', is_single_view: true, is_show_sub_info: true -%}
+{%- if request.design_mode -%}
+</div>
+{%- endif -%}

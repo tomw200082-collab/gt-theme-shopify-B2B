@@ -1,0 +1,26 @@
+{%- assign color_label = 'products.product.color' | t | downcase -%}
+{%- assign filter_label_downcase = filter.label | downcase -%}
+{%- if filter_label_downcase == color_label -%}
+	{%- assign is_color_filter = true -%}
+{%- else -%}
+	{%- assign is_color_filter = false -%}	
+{%- endif -%}
+{%- for value in filter.values -%}
+	{%- if value.count > 0 or value.active -%}
+		<li class="w100 cf__item__link">
+			<input type="checkbox"
+		    name="{{ value.param_name }}"
+		    value="{{ value.value }}"
+		    id="Filter-{{ filter.label | escape }}-{{ forloop.index }}"
+		    {% if value.active %}checked{% endif %}
+		   class="hide cf__link__input">
+			<label for="Filter-{{ filter.label | escape }}-{{ forloop.index }}" class="cf__link--option{% if value.active %} current{% endif %} flex flex-align-ver flex-align-space-between facet-checkbox{% if value.count == 0 and value.active == false %} cf__link--disabled{% endif %}">
+				<span class="cf__link-group">
+			  	<span class="cf__link__box{% if section.settings.filter_item_format == 'circle' %} cf__link__box-circle{% endif %}{% if is_color_filter %} color-load{% endif %}"{% if is_color_filter %} data-color-tag="{{ value.label | escape | handleize }}"{% endif %}></span>
+			  	<span class="cf__link--title">{{ value.label }}</span>
+			  </span>
+		  	<span class="cf__link--count">{{ value.count }}</span>
+			</label>
+		</li>
+	{%- endif -%}
+{%- endfor -%}

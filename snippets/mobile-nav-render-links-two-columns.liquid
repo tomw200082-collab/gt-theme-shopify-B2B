@@ -1,0 +1,20 @@
+{%- if links != blank -%}
+<div class="col-xs-6 {{ no_gutter_left_class }}">
+	<ul class="mobile-nav__level3-list no-gutter w100">
+		{%- assign threshold = links.size | divided_by: 2.00 | ceil -%}
+		{%- for link in links -%}
+			{%- if forloop.index0 == threshold -%}
+				</ul>
+			</div>
+			<div class="col-xs-6 {{ no_gutter_right_class }}">
+				<ul class="mobile-nav__level3-list no-gutter w100">	
+			{%- endif -%}
+			<li class="gutter-ele-small-top gutter-ele-small-bottom">
+				<a href="{{ link.url }}" title="{%- render 'nav-shortcode-ign', str: link.title -%}" class="mobile-nav__level3 mobile-nav__level3--{{ item_id }} dib por">
+					{%- render 'mobile-nav-label' with str: link.title, item_id: item_id, custom_label_classes: custom_label_classes, color_label: color_label, bkg_label: bkg_label -%}
+				</a>
+			</li>
+		{%- endfor -%}
+	</ul>
+</div>
+{%- endif -%}

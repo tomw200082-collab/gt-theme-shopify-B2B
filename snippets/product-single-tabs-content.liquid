@@ -1,0 +1,64 @@
+<div class="pg__tabs">
+  {%- assign product_tab_id = 'product-template-tabs-' | append: section.id -%}
+  {%- assign has_active_tab = false -%}
+  <ul id="{{ product_tab_id }}" class="nav nav-tabs nav-tabs--single flex use-touch-mobile hidden-xs hidden-sm tab-accordion-list no-gutter gutter-bottom">
+    {% for block in section.blocks %}
+      {%- unless block.type == 'tab_item_toolkit' -%}
+        <li class="nav-tab-item nav-tab-item--single{% if has_active_tab == false %} active{% endif %} db por">
+          <a class="nav__link-single data switch db por" data-toggle="tab" href="#{{ product_tab_id }}_{{ forloop.index }}" title="{% unless block.type == 'tab_item_text' %}{{ block.settings.title | escape }}{% else %}{{ block.settings.title | default: block.settings.page.title | escape }}{% endunless %}" rel="noreferrer">
+            <span>{%- unless block.type == 'tab_item_text' -%}{{ block.settings.title }}{%- else -%}{{ block.settings.title | default: block.settings.page.title }}{%- endunless -%}</span>
+          </a>
+        </li>
+        {%- assign has_active_tab = true -%}
+      {%- elsif product.metafields.btt.customtabs -%}
+        {%- assign customTabArray = product.metafields.btt.customtabs | replace: ' ', '' | split: ',' -%}
+        {%- for tab in customTabArray -%}
+          {%- assign tabTitleKey = tab | split: '-' | first -%}
+          <li class="nav-tab-item nav-tab-item--single db por{% if has_active_tab == false %} active{% endif %}">
+            <a class="nav__link-single data switch db por" data-toggle="tab" href="#{{ product_tab_id }}_ct_{{ forloop.index }}" title="{{ block.settings.title | escape }}" title="{{ product.metafields.btt[tabTitleKey] | escape }}" rel="noreferrer">
+              <span>{{ product.metafields.btt[tabTitleKey] }}</span>
+            </a>
+          </li>
+          {%- assign has_active_tab = true -%}
+        {%- endfor -%}  
+      {%- endunless -%}
+    {% endfor %} 
+  </ul>
+  <div class="nav-tab-content tab-content tab-accordion">
+    {%- assign has_active_tab = false -%}
+    {% for block in section.blocks %}
+      {%- unless block.type == 'tab_item_toolkit' -%}
+        <a href="#{{ product_tab_id }}_{{ forloop.index }}" class="nav__link-single hidden-md hidden-lg w100 dib tab-accordion__trigger tab-accordion__trigger{% if has_active_tab == false %} open{% endif %}" title="{% unless block.type == 'tab_item_text' %}{{ block.settings.title | escape }}{% else %}{{ block.settings.title | default: block.settings.page.title | escape }}{% endunless %}" rel="noreferrer">
+          {%- unless block.type == 'tab_item_text' -%}{{ block.settings.title }}{%- else -%}{{ block.settings.title | default: block.settings.page.title }}{%- endunless -%}
+        </a>
+        <div class="tab-pane tab-pane--accordion tab-pane--accor-state{% if has_active_tab == false %} active{% endif %}" id="{{ product_tab_id }}_{{ forloop.index }}" {{ block.shopify_attributes }}>
+          {%- case block.type -%}
+            {%- when 'tab_item_desc' -%}
+              <div class="rte">
+                {{ product.description | replace: '<img src="', '<img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="' }}
+              </div>  
+            {%- when 'tab_item_review' -%}
+              {%- render 'product-review-form' -%}
+            {%- when 'tab_item_text' -%}
+              <div class="rte">
+                {{ block.settings.content }}
+                {{ block.settings.page.content }}
+              </div>
+          {%- endcase -%}
+        </div>
+        {%- assign has_active_tab = true -%}
+      {%- elsif customTabArray -%}
+        {%- for tab in customTabArray -%}
+          {%- assign tabArrayKey = tab | split: '-' -%}
+          {%- assign tabTitleKey = tabArrayKey | first -%}
+          {%- assign tabContentKey = tabArrayKey | last -%}
+          <a href="#{{ product_tab_id }}_ct_{{ forloop.index }}" class="nav__link-single hidden-md hidden-lg w100 dib tab-accordion__trigger{% if has_active_tab == false %} open{% endif %}" title="{{ product.metafields.btt[tabTitleKey] | escape }}" rel="noreferrer">{{ product.metafields.btt[tabTitleKey] }}</a>
+          <div class="tab-pane tab-pane--accordion tab-pane--accor-state{% if section.blocks.size == 0 and forloop.first %} active{% endif %}" id="{{ product_tab_id }}_ct_{{ forloop.index }}" {{ block.shopify_attributes }}>
+            <div class="rte">{{ product.metafields.btt[tabContentKey] }}</div>
+          </div>
+          {%- assign has_active_tab = true -%}
+        {%- endfor -%}  
+      {%- endunless -%}  
+    {%- endfor -%}
+  </div>
+</div>

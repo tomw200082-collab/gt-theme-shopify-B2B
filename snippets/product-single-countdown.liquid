@@ -1,0 +1,19 @@
+{%- assign countdown = false -%}
+{%- if product.metafields.btt.countdown -%}
+  {%- if product.metafields.btt.countdown.type == 'date_time' -%}
+    {%- assign countdown = product.metafields.btt.countdown.value | date: '%Y/%m/%d %H:%M:%S' -%}
+  {%- else -%}
+    {%- assign countdown = product.metafields.btt.countdown -%}
+  {%- endif -%}
+{%- elsif settings.enable_countdown_all and settings.countdown_expression -%}
+{%- assign countdown = settings.countdown_expression -%}
+{%- endif -%}
+{%- if countdown -%}
+<div class="gutter-ele-top gutter-ele-bottom{% if align_countdown_center %} text-center{% endif %} pg__countdown-wrap flex w100" {{ block.shopify_attributes }}>
+  {%- if block.settings.countdown_text != blank -%}
+    <div class="pg__countdown__single-ele">{%- render 'icon-schedule' with add_class: 'dib' -%}&nbsp;<span class="pg__countdown-text dib" style="padding-bottom: 7px;">{{ block.settings.countdown_text }}</span></div>
+  {%- endif -%}
+  
+  <div class="pg__countdown pg__countdown-js pg__countdown--single pg__countdown__single-ele" data-product-id="{{ product.id }}" data-timer="{{ countdown }}"{% if product.metafields.btt.countdown_extend %} data-extend="{{ product.metafields.btt.countdown_extend }}"{% endif %} style="background:none;font-size:{{ settings.product_page_countdown_fs }}px;position:static;"></div>
+</div>
+{%- endif -%}

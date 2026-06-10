@@ -1,0 +1,16 @@
+{%- if image != blank -%}
+	{%- if image_link -%}
+		<a href="{{ image_link }}"{% if image_new_tab %} target="_blank"{% endif %} title="{{ image.alt | escape }}" class="img-container loading" style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100 }}%;">
+	{%- else -%}
+	<div class="img-container loading" style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100 }}%;">
+	{%- endif -%}
+	{%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+  <img data-aspectratio="{{ image.aspect_ratio }}"
+    data-src="{{ img_url }}"
+    data-sizes="auto" class="w100 img-responsive img-abs lazyload zoom-fade"{% render 'img-one-pixel' %} alt="{{ image.alt | escape }}" data-image-size="1x1" width="{{ image.width }}" height="{{ image.height }}"/>
+	{%- if image_link -%}
+	</a>
+	{%- else -%}
+	</div>
+	{%- endif -%}
+{%- endif -%}

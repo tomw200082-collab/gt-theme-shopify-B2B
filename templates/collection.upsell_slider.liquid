@@ -1,0 +1,43 @@
+{%- layout none -%}
+{%- liquid
+  assign cart_items_handle = ','
+  unless settings.enable_rtl and settings.rtl_language_codes contains request.locale.iso_code
+    assign left_holder = 'left'
+  else
+    assign left_holder = 'right'
+  endunless  
+-%}
+<div>
+{%- for item in cart.items -%}
+{%- assign cart_items_handle = cart_items_handle | append: item.product.handle | append: ',' -%}
+{%- endfor -%}
+{%- for product in collection.products -%}{% comment %}start BSS Commerce Hide Price{% endcomment %}{% assign bsshp = product | default: prod | default: item | default: recommendation %}{% assign collec = 0 %}{% if collection %}{% assign collec = collection %}{% elsif block.settings.collection %}{% assign collec = block.settings.collection %}{% else if section.settings.collection %}{% assign collec = section.settings.collection %}{% endif %}{% capture hide_product %}{% render 'bsscommerce-hide-product', product: bsshp, collection: collec %}{% endcapture %}{% if hide_product contains "true" %}{% continue %}{% endif %}{% comment %}end BSS Commerce Hide Price{% endcomment %}
+{%- assign handle_compare = ',' | append: product.handle | append: ',' -%}
+{%- unless cart_items_handle contains handle_compare -%}
+<div class="product-item" data-id="{{ product.id }}" data-handle="{{ product.handle }}">
+	{%- render 'product-grid-item' with 
+    product: product,
+    use_slider: true, 
+    index: forloop.index, 
+    lazy_index: 999,
+    column_count: 2, 
+    main_thumbnail: settings.main_thumbnail_upsell, 
+    image_size: '375x', 
+    truncate_count: settings.product_name_size_upsell,
+    enable_product_options: settings.enable_product_options_upsell, 
+    show_review_stars: settings.show_review_stars_upsell,
+    enable_small_images: false,
+    show_media_btn: settings.show_media_btn_upsell,
+    small_image: 'small',
+    show_label : settings.show_label_upsell,
+    show_cart_btn: settings.show_cart_btn_upsell,
+    show_wishlist_btn : settings.show_wishlist_btn_upsell,
+    show_compare_btn: settings.show_compare_btn_upsell,
+    show_qs_btn: settings.show_qs_btn_upsell,
+    small_image_slider: false,
+    left_holder: left_holder 
+  -%}
+</div>
+{%- endunless -%}
+{%- endfor -%}
+</div>

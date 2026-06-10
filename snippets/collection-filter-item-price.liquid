@@ -1,0 +1,52 @@
+{% liquid
+  assign currencies_using_comma_decimals = 'ANG,ARS,BRL,BYN,BYR,CLF,CLP,COP,CRC,CZK,DKK,EUR,HRK,HUF,IDR,ISK,MZN,NOK,PLN,RON,RUB,SEK,TRY,UYU,VES,VND' | split: ','
+  assign uses_comma_decimals = false
+  if currencies_using_comma_decimals contains cart.currency.iso_code
+    assign uses_comma_decimals = true
+  endif
+%}
+{%- if uses_comma_decimals -%}
+	{%- assign max_value = filter.range_max | money_without_currency | replace: '.', '' | replace: ',', '.' -%}
+	{%- assign start = filter.min_value.value | default: 0 | money_without_currency | replace: '.', '' | replace: ',', '.' -%}
+	{%- assign end = filter.max_value.value | default: filter.range_max | money_without_currency | replace: '.', '' | replace: ',', '.' -%}
+{%- else -%}
+	{%- assign max_value = filter.range_max | money_without_currency | replace: ',', '' -%}
+	{%- assign start = filter.min_value.value | default: 0 | money_without_currency | replace: ',', '' -%}
+	{%- assign end = filter.max_value.value | default: filter.range_max | money_without_currency | replace: ',', '' -%}	
+{%- endif -%}
+<div class="cf__price-slider" id="price-slider-{{ block.id }}" data-min="0" data-max="{{ max_value }}" data-start="{{ start }}" data-end="{{ end }}"></div>
+<div class="gutter-top text-center">
+	<span class="cf__price cf__price-from dib">{%- render 'price' with price: filter.min_value.value -%}</span>
+	<span class="cf__price__sep">-</span>
+	<span class="cf__price cf__price-to dib">{%- render 'price' with price: filter.max_value.value -%}</span>
+</div>
+<input class="hide cf__price-input-min"
+  name="{{ filter.min_value.param_name }}"
+  id="Filter-{{ filter.label | escape | handleize }}-{{ block.id }}-min"
+  {%- if filter.min_value.value -%}
+    {%- if uses_comma_decimals -%}
+      value="{{ filter.min_value.value | money_without_currency | replace: '.', '' | replace: ',', '.' }}"
+    {%- else -%}
+      value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+    {% endif %}
+  {%- endif -%}
+  type="number"
+  placeholder="0"
+  min="0"
+  max="{{ filter.range_max | money_without_currency | replace: ',', '' }}">
+</input>
+<input class="hide cf__price-input-max"
+  name="{{ filter.max_value.param_name }}"
+  id="Filter-{{ filter.label | escape | handleize }}-{{ block.id }}-max"
+  {%- if filter.max_value.value -%}
+    {%- if uses_comma_decimals -%}
+      value="{{ filter.max_value.value | money_without_currency | replace: '.', '' | replace: ',', '.' }}"
+    {%- else -%}
+      value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+    {% endif %}
+  {%- endif -%}
+  type="number"
+  placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+  min="0"
+  max="{{ filter.range_max | money_without_currency | replace: ',', '' }}">
+</input>

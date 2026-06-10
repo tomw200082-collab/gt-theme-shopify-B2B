@@ -1,0 +1,57 @@
+<div class="search-full w100 gutter-top gutter-bottom" style="display:none;">
+	<div class="container por">
+		<h5 class="text-center gutter-bottom">{{ settings.search_suggest_popup_title }}</h5>
+		<form action="{{ routes.search_url }}" method="get" class="center-block por" role="search" style="max-width:600px;margin-bottom:30px;">
+		  <input type="hidden" name="type" value="product">
+		  <input class="search-full__input"
+		    type="search"
+		    name="q"
+		    placeholder="{{ 'general.search.placeholder' | t }}"
+		    aria-label="{{ 'general.search.placeholder' | t }}" data-term="">
+		  <input type="hidden" name="options[prefix]" value="last" />  
+		  <button type="submit" class="search-full__submit">
+		  	{%- render 'icon-search', add_class: 'search-full__loading' -%}
+		  </button> 
+		</form>
+		{%- if settings.search_suggest_collection -%}
+			<div class="search-full__suggest-products">
+			</div>
+		{%- endif -%}
+		<ul class="nav nav-tabs flex flex-align-hoz use-touch-mobile no-gutter search-full__tab-list hide text-uppercase">
+	    <li class="nav-tab-item active db">
+	      <a class="data switch db search-full__tab-title" data-toggle="tab" href="#tab_search_product" title="{{ settings.search_suggest_product_title | escape }}" data-type="product">
+	        <span>{{ settings.search_suggest_product_title }}</span>
+	      </a>
+	    </li>
+	    <li class="nav-tab-item db">
+	      <a class="data switch db search-full__tab-title" data-toggle="tab" href="#tab_search_article" title="{{ settings.search_suggest_article_title | escape }}" data-type="article">
+	        <span>{{ settings.search_suggest_article_title }}</span>
+	      </a>
+	    </li>
+	    <li class="nav-tab-item db">
+	      <a class="data switch db search-full__tab-title" data-toggle="tab" href="#tab_search_page" title="{{ settings.search_suggest_page_title | escape }}" data-type="page">
+	        <span>{{ settings.search_suggest_page_title }}</span>
+	      </a>
+	    </li>
+	  </ul>
+		<div class="search-full__content big-gutter-top hide">
+			<div class="nav-tab-content tab-content">
+				<div class="tab-pane fade in search-full__content__tab search-full__content__product active" id="tab_search_product">
+					<div class="search-full__result"></div>
+					<div class="text-center big-gutter-top search-full__content__loading"><i class="loading-ajax"></i></div>
+				</div>
+				<div class="tab-pane fade in search-full__content__tab search-full__content__article" id="tab_search_article">
+					<div class="search-full__result"></div>
+					<div class="text-center big-gutter-top search-full__content__loading"><i class="loading-ajax"></i></div>
+				</div>
+				<div class="tab-pane fade in search-full__content__tab search-full__content__page" id="tab_search_page">
+					<div class="search-full__result"></div>
+					<div class="text-center big-gutter-top search-full__content__loading"><i class="loading-ajax"></i></div>
+				</div>
+			</div>
+		</div>
+		<a href="#" class="search-full__close search-full__close-js" title="{{ 'general.search.close' | t | escape }}">
+			{%- render 'icon-close' -%}
+		</a>
+	</div>
+</div>

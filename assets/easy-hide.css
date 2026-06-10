@@ -1,0 +1,7 @@
+.shopify-payment-button__button--branded {
+  display: none !important;
+}
+
+.shopify-payment-button__more-options {
+  display: none !important;
+}

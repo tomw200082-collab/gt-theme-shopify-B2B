@@ -1,0 +1,9 @@
+<div class="pg__collapse-tab{% if block.settings.show_bottom_line %} pg__collapse-tab--line{% endif %}" {{ block.shopify_attributes }}>
+	{%- if block.settings.heading != blank -%}
+		<a class="db w100 expand-trigger pg__collapse-tab__title pg__collapse-tab__title--{{ section.id }} gutter-ele-top gutter-ele-bottom{% if block.settings.default_state == 'expand' %} open{% endif %}" href="#" rel="noreferrer">{{ block.settings.heading }}</a>
+	{%- endif -%}
+	<div class="expand-content pg__collapse-tab-content rte gutter-ele-bottom"{% if block.settings.default_state == 'collapse' and block.settings.heading != blank %} style="display:none;"{% endif %}>
+		{{ block.settings.content }}
+		{{ block.settings.page.content }}
+	</div>
+</div>

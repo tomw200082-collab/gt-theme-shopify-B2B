@@ -1,0 +1,44 @@
+{%- capture filter_content -%}
+  {%- case type -%}
+  {%- when 'list' -%}
+    {%- render 'collection-filter-item-list' with filter: filter, enable_rtl: enable_rtl, left_holder: left_holder, right_holder: right_holder -%}
+  {%- when 'price_range' -%}
+    {%- render 'collection-filter-item-price' with filter: filter, enable_rtl: enable_rtl, left_holder: left_holder, right_holder: right_holder -%}
+  {%- when 'current' -%}
+    {%- render 'collection-filter-item-current' with object: search, filter: filter, enable_rtl: enable_rtl, left_holder: left_holder, right_holder: right_holder -%}    
+  {%- endcase -%}
+{%- endcapture -%}
+{%- if filter_content != '' -%}
+<div class="cf__item flex flex-align-space-between flex-align-ver w100">
+  <h2 class="cf__item__title fw-bold margin0">
+    {{ label | escape }}
+  </h2>
+  <a href="#" class="fw-bold expand-trigger{% if section.settings.filter_default_expand == 'expand' or filter.active_values.size > 0 %} open{% endif %}">
+    {%- render 'icon-collapse' with add_classes: 'cf__item__collapse' -%}
+  </a>
+  <div class="w100 cf__item__content expand-content{% if type == 'list' %} cf__item__content--scroll custom-scrollbar{% endif %}"{% unless section.settings.filter_default_expand == 'expand' or filter.active_values.size > 0 %} style="display:none;"{% endunless %}>
+    {%- if type == 'list' or type == 'current' -%}
+      <ul role="list">{{ filter_content }}</ul>
+    {%- else -%}
+      {{ filter_content }}  
+    {%- endif -%}
+  </div>
+  {%- assign has_reset_btn = false -%}
+  {%- if type == 'list' and filter.active_values.size > 0 -%}
+    {%- assign has_reset_btn = true -%}
+  {%- endif -%}
+  {%- if type == 'price_range' and filtering_price %}
+    {%- assign has_reset_btn = true -%}
+  {%- endif -%}
+  {%- if has_reset_btn -%}
+    <div class="w100 gutter-top">
+      <a href="{{ filter.url_to_remove }}" class="button button--style2 cf__link cf__link--clear-all distance-top-ele pull-right" title="{{ 'collections.filters.reset' | t | escape }}">{{ 'collections.filters.reset' | t }}</a>
+    </div>
+  {%- endif -%}
+  {%- if type == 'current' -%}
+    <div class="w100 gutter-top">
+      <a href="{{ routes.search_url }}?q={{ search.terms }}&options%5Bprefix%5D=last&type=product{% if search.sort_by != blank %}&sort_by={{ search.sort_by }}{% endif %}" class="button button--style1 cf__link cf__link--clear-all distance-top-ele pull-right" title="{{ 'collections.general.filter_clear_all_button' | t | escape }}">{{ 'collections.general.filter_clear_all_button' | t }}</a>
+    </div>
+  {%- endif -%}
+</div>
+{%- endif -%}

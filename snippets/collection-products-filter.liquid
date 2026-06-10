@@ -1,0 +1,11 @@
+<div class="row flex">
+	{%- if has_collection_filter -%}
+	<div class="col-xs-12 col-lg-3">
+		{%- render 'collection-filter' with block: block, enable_rtl: enable_rtl, left_holder: left_holder, right_holder: right_holder -%}
+	</div>
+	{%- endif -%}
+	<div class="col-xs-12{% if has_collection_filter %} col-lg-9{% endif %}">
+		{%- render 'collection-toolbar' with block: block, enable_rtl: enable_rtl, left_holder: left_holder, right_holder: right_holder -%}
+		{%- render 'collection-products' with block: block, enable_rtl: enable_rtl, left_holder: left_holder, right_holder: right_holder -%}
+	</div>
+</div>

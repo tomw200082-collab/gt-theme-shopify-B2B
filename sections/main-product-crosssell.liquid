@@ -1,0 +1,328 @@
+{%- render 'section-background-start' -%}
+<div class="cross-sell-product-page-section container{% render 'wide-css-class' %}{% render 'section-gutters-nobkg' %}" id="crosssell-{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="product-crosssell">
+  {%- render 'section-heading' -%}
+  {%- if section.settings.display == 'widget' -%}
+    {%- render 'product-single-fre-bought' with product: product, fre_handles: product.metafields.btt.fre_bought -%}
+  {%- else -%}
+    {%- capture fre_bought_content -%}
+      {%- liquid
+        assign fre_show = 0
+        assign fre_cart_ids = ''
+        assign fre_max_length = section.settings.limit
+        for item in cart.items
+          assign fre_cart_ids = fre_cart_ids | append: item.product.id | append: ' '
+        endfor
+        assign fre_cart_ids = fre_cart_ids | rstrip
+        unless settings.enable_rtl and settings.rtl_language_codes contains request.locale.iso_code
+          assign left_holder = 'left'
+        else
+          assign left_holder = 'right'
+        endunless
+      -%}
+      {%- if product.metafields.btt.fre_bought != blank and recommendations.performed == false -%}
+        {%- assign fre_handles = product.metafields.btt.fre_bought | split: ',' -%}
+        {%- for fre_handle in fre_handles -%}
+          {%- if fre_show < fre_max_length -%}
+            {%- assign fre_product = all_products[fre_handle] -%}
+            {%- unless fre_product == blank or fre_cart_ids contains fre_product.id -%}
+              {%- assign fre_show = fre_show | plus: 1 -%}
+              {%- render 'product-grid-item' with
+                product: fre_product, 
+                use_slider: true, 
+                index: fre_show, 
+                lazy_index: 999,
+                column_count: 4, 
+                main_thumbnail: settings.cross_sell_main_thumbnail, 
+                image_size: '375x', 
+                truncate_count: settings.cross_sell_product_name_size,
+                enable_product_options: settings.cross_sell_enable_product_options, 
+                show_review_stars: settings.cross_sell_show_review_stars,
+                enable_small_images: false,
+                show_wishlist_btn: settings.cross_sell_show_wishlist_btn,
+                small_image: '1x',
+                show_label : settings.cross_sell_show_label,
+                show_cart_btn: settings.cross_sell_show_cart_btn,
+                show_wishlist : false,
+                show_compare_btn: settings.cross_sell_show_compare_btn,
+                show_qs_btn: settings.cross_sell_show_qs_btn,
+                small_image_slider: false,
+                left_holder: left_holder
+              -%}
+            {%- endunless -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+    {%- endcapture -%}
+    <div class="cross-sell-ele load-crossell{% if fre_show > 0 or section.settings.rule == 'manual' %} loaded{% endif %} touch-mobile" data-view="slider" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.limit | plus: cart.item_count }}">
+      <div class="cross-sell-list grid grid--medium slick-shadow freb__inner-js" data-slider='{"slidesToShow": 4, "responsive": [{"breakpoint": 767,"settings":{"slidesToShow":2}}]}'>
+        {%- if fre_show > 0 -%}
+        {{ fre_bought_content }}
+        {%- elsif section.settings.rule == 'auto' -%}
+          {%- if recommendations.performed == false -%}
+            <div class="loading-not-full" style="margin-top:50px;">
+              <i class="loading-ajax"></i>
+            </div>
+          {%- else -%}
+            {%- for fre_product in recommendations.products -%}
+              {%- if fre_show < fre_max_length -%}
+                {%- unless fre_product == blank or fre_cart_ids contains fre_product.id -%}
+                  {%- assign fre_show = fre_show | plus: 1 -%}
+                  {%- render 'product-grid-item' with
+                    product: fre_product, 
+                    use_slider: true, 
+                    index: fre_show, 
+                    lazy_index: 999,
+                    column_count: 4, 
+                    main_thumbnail: section.settings.main_thumbnail, 
+                    image_size: '375x', 
+                    truncate_count: section.settings.product_name_size,
+                    enable_product_options: section.settings.enable_product_options, 
+                    show_review_stars: section.settings.show_review_stars,
+                    enable_small_images: false,
+                    show_wishlist_btn: section.settings.show_wishlist_btn,
+                    small_image: '1x',
+                    show_label : section.settings.show_label,
+                    show_cart_btn: section.settings.show_cart_btn,
+                    show_wishlist : false,
+                    show_compare_btn: section.settings.show_compare_btn,
+                    show_qs_btn: section.settings.show_qs_btn,
+                    small_image_slider: false,
+                    left_holder: left_holder
+                  -%}
+                {%- endunless -%}
+              {%- endif -%}
+            {%- endfor -%}  
+            {%- if fre_show == 0 -%}
+              <div class="empty-products"></div>
+            {%- endif -%}  
+          {%- endif -%}
+        {%- else -%}
+          <div class="empty-products"></div>  
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+{%- render 'section-background-end' -%}
+{% schema %}
+{
+	"name": "Main product - Cross-sell",
+	"tag": "section",
+	"templates": ["product"],
+  "settings": [
+  	{
+      "type": "paragraph",
+      "content": "The Cross-sell that identifies recommended products is based on data about products that were purchased together and products with similar descriptions. It uses this data to provide a mix of those related products as recommendations for a given product."
+    },
+    {
+      "type": "paragraph",
+      "content": "[View the guide for this section](https://vodoma-docs.boostheme.com/dynamic-sections/collection-product/crosssell-product-page-section)"
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "checkbox",
+      "id": "bkg_enable",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "section_bkg",
+      "label": "Pick a color"
+    },
+    {
+      "type": "image_picker",
+      "id": "section_bkg_image",
+      "label": "Background image"
+    },
+    {
+      "type": "radio",
+      "id": "section_bkg_gutter",
+      "label": "Background size",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "medium"
+        },
+        {
+          "value": "high",
+          "label": "High"
+        }
+      ],
+      "default": "high"
+    },
+    {
+      "type": "radio",
+      "id": "section_bkg_style",
+      "label": "Background image style",
+      "options": [
+        {
+          "value": "cover",
+          "label": "Cover"
+        },
+        {
+          "value": "contain",
+          "label": "Contain"
+        }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "header",
+      "content": "Section Gutters"
+    },
+    {
+      "type": "checkbox",
+      "id": "top_gutter",
+      "label": "Enable top gutter",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "bottom_gutter",
+      "label": "Enable bottom gutter",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "General Settings"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "People who bought this product also bought"
+    },
+    {
+      "type": "text",
+      "id": "sub_title",
+      "label": "Sub Title"
+    },
+    {
+      "type": "radio",
+      "id": "rule",
+      "label": "Pick a rule",
+      "options": [
+        {
+          "value": "auto",
+          "label": "Automation"
+        },
+        {
+          "value": "manual",
+          "label": "Manual"
+        }
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "select",
+      "id": "display",
+      "label": "Display as",
+      "options": [
+        {
+          "label": "Calculating widget",
+          "value": "widget"
+        },
+        {
+          "label": "Carousel slider",
+          "value": "slider"
+        }
+      ],
+      "default": "slider"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "Limit",
+      "default": 4,
+      "min": 1,
+      "max": 12,
+      "step": 1
+    },
+    {
+      "type": "header",
+      "content": "Product carousel item settings"
+    },
+    {
+      "type": "select",
+      "id": "main_thumbnail",
+      "label": "Show main thumbnail by",
+      "options": [
+        {
+          "value": "product_image",
+          "label": "Featured product image"
+        },
+        {
+          "value": "variant_image",
+          "label": "First available variant image"
+        }
+      ],
+      "default": "product_image"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_label",
+      "label": "Show label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart_btn",
+      "label": "Show Add to cart button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_qs_btn",
+      "label": "Show Quick Shop button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_compare_btn",
+      "label": "Show Compare button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wishlist_btn",
+      "label": "Show wishlist button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_review_stars",
+      "label": "Show review stars",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_product_options",
+      "label": "Enable Product Options",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "product_name_size",
+      "label": "Product name's size",
+      "info": "Use this configuration to make product name is shorter if your product name is too long. Leave zero if you want to dislpay full product name. Unit: word(wor)",
+      "min": 0,
+      "max": 30,
+      "default": 5,
+      "step": 1
+    }
+  ],
+  "presets": [
+    {
+      "name": "Main product - Cross-sell"
+    }
+  ]
+}
+{% endschema %}

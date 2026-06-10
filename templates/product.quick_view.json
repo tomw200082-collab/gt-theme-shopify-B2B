@@ -1,0 +1,90 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "layout": "quick_view",
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "group_1": {
+          "type": "group_1",
+          "settings": {
+            "text_1": "{{ product.vendor }}",
+            "text_style_1": "vendor",
+            "text_2": "{{ product.title }}",
+            "text_style_2": "title",
+            "show_sku": true
+          }
+        },
+        "group_2": {
+          "type": "group_2",
+          "settings": {
+            "show_review_stars": true,
+            "show_price": true,
+            "show_shipping_policy_link": true,
+            "show_countdown": true
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {}
+        },
+        "quantity_buy_buttons": {
+          "type": "quantity_buy_buttons",
+          "settings": {
+            "show_quantity_selector": true,
+            "show_dynamic_checkout": true,
+            "show_compare_btn": true,
+            "show_wishlist_btn": true
+          }
+        },
+        "store-availability": {
+          "type": "store-availability",
+          "settings": {}
+        },
+        "group_3": {
+          "type": "group_3",
+          "settings": {}
+        },
+        "collapsible-tab-desc": {
+          "type": "collapsible_tab_desc",
+          "settings": {
+            "heading": "Description"
+          }
+        },
+        "collapsible-tab-reviews": {
+          "type": "collapsible_tab_reviews",
+          "settings": {
+            "heading": "Reviews",
+            "default_state": "collapse"
+          }
+        }
+      },
+      "block_order": [
+        "group_1",
+        "group_2",
+        "variant_picker",
+        "quantity_buy_buttons",
+        "store-availability",
+        "group_3",
+        "collapsible-tab-desc",
+        "collapsible-tab-reviews"
+      ],
+      "settings": {
+        "thumbs_layout": "ver_slider",
+        "sticky_images": true,
+        "sc_enable": false
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,0 +1,29 @@
+{%- assign item_size = section.settings.item_size_article -%}
+
+<div class="collection__toolbar ct text-center w100 big-gutter-bottom" style="display: inline-block;">
+  <div class="ct__mode">
+    <ul class="list--inline flex flex-align-hoz">
+      <li class="hidden-sm hidden-md hidden-lg ct__mode__grid-mobile{% if item_size == 'very-large' or item_size == 'large' %} active{% endif %}" style="margin-left: 20px;"><a href="#" data-mode="grid--{% if item_size == 'list' %}large{% else %}{{ item_size }}{% endif %}" class="ct__mode__link" title="{{ 'collections.view_mode.grid' | t | escape }}">{%- render 'collection-mode-large-icon' -%}</a></li>
+      <li class="hidden-xs ct__mode__grid-desktop{% if item_size == 'large' %} active{% endif %}" style="margin-right: 7px;"><a href="#" data-mode="grid--large" class="ct__mode__link" title="{{ 'collections.view_mode.grid_large' | t | escape }}">{%- render 'collection-mode-large-icon' -%}</a></li>
+      <li class="hidden-xs ct__mode__grid-desktop{% if item_size == 'very-large' %} active{% endif %}" style="margin-right: 7px;"><a href="#" data-mode="grid--very-large" class="ct__mode__link" title="{{ 'collections.view_mode.grid_very_large' | t | escape }}">{%- render 'collection-mode-very-large-icon' -%}</a></li>
+      <li class="ct__mode__grid-list{% if item_size == 'list' %} active{% endif %}" style="margin-right: 7px;"><a href="#" data-mode="grid--list" class="ct__mode__link" title="{{ 'collections.view_mode.grid_list' | t | escape }}">{%- render 'collection-mode-list-icon' -%}</a></li>
+    </ul>
+  </div>
+</div>
+<div class="collection__products">
+{% paginate search.results by section.settings.limit %}
+<div class="grid grid--{{ item_size }} products grid--products">
+  {% for item in search.results %}{% comment %}start BSS Commerce Hide Price{% endcomment %}{% assign bsshp = product | default: prod | default: item | default: recommendation %}{% assign collec = 0 %}{% if collection %}{% assign collec = collection %}{% elsif block.settings.collection %}{% assign collec = block.settings.collection %}{% else if section.settings.collection %}{% assign collec = section.settings.collection %}{% endif %}{% capture hide_product %}{% render 'bsscommerce-hide-product', product: bsshp, collection: collec %}{% endcapture %}{% if hide_product contains "true" %}{% continue %}{% endif %}{% comment %}end BSS Commerce Hide Price{% endcomment %}
+    {%- render 'article-grid-item' with 
+    article: item,
+    layout: item_size,
+    blog_show_author: section.settings.blog_show_author,
+    blog_show_date: section.settings.blog_show_date,
+    multi_mode: true,
+    add_classes: 'transition',
+    highlight_text: search.terms -%}
+  {% endfor %}
+</div>
+{%- render 'search-result-pagination' with paginate: paginate -%}
+{% endpaginate %}
+</div>

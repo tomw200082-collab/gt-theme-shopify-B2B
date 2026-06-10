@@ -1,0 +1,18 @@
+{%- if product.metafields.btt.customtabs -%}
+  {%- assign customTabArray = product.metafields.btt.customtabs | replace: ' ', '' | split: ',' -%}
+  {%- if customTabArray -%}
+    {%- for tab in customTabArray -%}
+      {%- assign tabArrayKey = tab | split: '-' -%}
+      {%- assign tabTitleKey = tabArrayKey | first -%}
+      {%- assign tabContentKey = tabArrayKey | last -%}
+      <div class="pg__collapse-tab{% if block.settings.show_bottom_line %} pg__collapse-tab--line{% endif %}"{% if forloop.first %} {{ block.shopify_attributes }}{% endif %}>
+        {%- if product.metafields.btt[tabTitleKey] != blank -%}
+          <a class="db w100 expand-trigger pg__collapse-tab__title pg__collapse-tab__title--{{ section.id }} gutter-ele-top gutter-ele-bottom{% if block.settings.default_state == 'expand' %} open{% endif %}" href="#" rel="noreferrer">{{ product.metafields.btt[tabTitleKey] }}</a>
+        {%- endif -%}
+        <div class="expand-content pg__collapse-tab-content rte gutter-ele-bottom"{% if block.settings.default_state == 'collapse' and product.metafields.btt[tabTitleKey] != blank %} style="display:none;"{% endif %}>
+          {{ product.metafields.btt[tabContentKey] }}
+        </div>
+      </div>
+    {%- endfor -%}
+  {%- endif -%} 
+{%- endif -%}
