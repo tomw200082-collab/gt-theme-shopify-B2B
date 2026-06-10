@@ -423,7 +423,7 @@
     skuEl.textContent = card.dataset.sku ? 'מק"ט ' + card.dataset.sku : '';
     skuEl.hidden = !card.dataset.sku;
     qv.querySelector('.b2bof__qv-price').innerHTML =
-      bdi(fmt.format(parseInt(card.dataset.price, 10) / 100)) + ' <small>ליחידה · המחיר כולל מע״מ</small>';
+      bdi(fmt.format(parseInt(card.dataset.price, 10) / 100)) + ' <small>ליחידה · לא כולל מע״מ</small>';
     var descEl = card.querySelector('.b2bof__desc');
     var desc = descEl ? descEl.textContent.trim() : '';
     qv.querySelector('.b2bof__qv-desc').textContent = desc;
