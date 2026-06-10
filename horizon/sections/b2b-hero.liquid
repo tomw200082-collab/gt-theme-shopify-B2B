@@ -1,51 +1,79 @@
 {%- comment -%}
-  B2B Hero — GT Everyday (Horizon). Self-contained premium hero for the
-  b2b-landing template. Editable via theme editor; value-prop blocks.
+  B2B Hero — GT Everyday (Horizon). Split hero: copy + lifestyle image, with
+  value-prop blocks below. Editable via theme editor.
+  Image source: section setting (image_picker) overrides the bundled asset
+  default (gt-hero-energy.webp/.jpg). Set show_image=false for a centered, text-only hero.
 {%- endcomment -%}
 
 {%- assign sid = section.id -%}
-<section class="b2bhero" data-section-id="{{ sid }}">
+{%- assign show_image = section.settings.show_image -%}
+<section class="b2bhero{% if show_image %} b2bhero--split{% endif %}" data-section-id="{{ sid }}">
   <div class="b2bhero__decor" aria-hidden="true"></div>
   <div class="b2bhero__inner">
-    {%- if section.settings.eyebrow != blank -%}
-      <span class="b2bhero__eyebrow">{{ section.settings.eyebrow }}</span>
-    {%- endif -%}
-    {%- if section.settings.title != blank -%}
-      <h1 class="b2bhero__title">{{ section.settings.title }}</h1>
-    {%- endif -%}
-    {%- if section.settings.subtitle != blank -%}
-      <p class="b2bhero__lede">{{ section.settings.subtitle }}</p>
-    {%- endif -%}
-    {%- if section.settings.cta_label != blank -%}
-      <a class="b2bhero__cta" href="{{ section.settings.cta_link | default: '#b2b-order' }}">
-        {{ section.settings.cta_label }}
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-      </a>
-    {%- endif -%}
+    <div class="b2bhero__copy">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="b2bhero__eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h1 class="b2bhero__title">{{ section.settings.title }}</h1>
+      {%- endif -%}
+      {%- if section.settings.subtitle != blank -%}
+        <p class="b2bhero__lede">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+      {%- if section.settings.cta_label != blank -%}
+        <a class="b2bhero__cta" href="{{ section.settings.cta_link | default: '#b2b-order' }}">
+          {{ section.settings.cta_label }}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        </a>
+      {%- endif -%}
+    </div>
 
-    {%- if section.blocks.size > 0 -%}
-      <ul class="b2bhero__props">
-        {%- for block in section.blocks -%}
-          <li class="b2bhero__prop" {{ block.shopify_attributes }}>
-            <span class="b2bhero__prop-ic">
-              {%- case block.settings.icon -%}
-                {%- when 'leaf' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c0-5 4.5-9 16-9 0 8-4 16-11 16Z"/><path d="M4 20c2-4 5-7 9-9"/></svg>
-                {%- when 'package' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8l9 5 9-5Z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
-                {%- when 'truck' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h11v9H3zM14 9h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg>
-                {%- when 'receipt' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h14v18l-3-2-2 2-2-2-2 2-2-2-3 2Z"/><path d="M8 8h8M8 12h8"/></svg>
-                {%- when 'shield' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6Z"/><path d="m9 12 2 2 4-4"/></svg>
-                {%- else -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18"/></svg>
-              {%- endcase -%}
-            </span>
-            <span class="b2bhero__prop-tx">
-              <strong>{{ block.settings.title }}</strong>
-              {%- if block.settings.text != blank -%}<span>{{ block.settings.text }}</span>{%- endif -%}
-            </span>
-          </li>
-        {%- endfor -%}
-      </ul>
+    {%- if show_image -%}
+      <div class="b2bhero__figure">
+        <span class="b2bhero__figure-glow" aria-hidden="true"></span>
+        {%- if section.settings.hero_image != blank -%}
+          {{ section.settings.hero_image | image_url: width: 1040 | image_tag:
+             widths: '420,560,720,1040',
+             sizes: '(max-width: 860px) 92vw, 480px',
+             class: 'b2bhero__img',
+             loading: 'eager',
+             fetchpriority: 'high',
+             alt: section.settings.image_alt | default: section.settings.title }}
+        {%- else -%}
+          <picture>
+            <source type="image/webp" srcset="{{ 'gt-hero-energy.webp' | asset_url }}">
+            <img class="b2bhero__img" src="{{ 'gt-hero-energy.jpg' | asset_url }}"
+              width="1040" height="1300"
+              alt="{{ section.settings.image_alt | default: 'משקה GT Everyday מוגש בקנקן עם קרח, נענע ופירות טריים' }}"
+              loading="eager" fetchpriority="high">
+          </picture>
+        {%- endif -%}
+      </div>
     {%- endif -%}
   </div>
+
+  {%- if section.blocks.size > 0 -%}
+    <ul class="b2bhero__props">
+      {%- for block in section.blocks -%}
+        <li class="b2bhero__prop" {{ block.shopify_attributes }}>
+          <span class="b2bhero__prop-ic">
+            {%- case block.settings.icon -%}
+              {%- when 'leaf' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c0-5 4.5-9 16-9 0 8-4 16-11 16Z"/><path d="M4 20c2-4 5-7 9-9"/></svg>
+              {%- when 'package' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8l9 5 9-5Z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
+              {%- when 'truck' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h11v9H3zM14 9h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg>
+              {%- when 'receipt' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h14v18l-3-2-2 2-2-2-2 2-2-2-3 2Z"/><path d="M8 8h8M8 12h8"/></svg>
+              {%- when 'shield' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6Z"/><path d="m9 12 2 2 4-4"/></svg>
+              {%- else -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18"/></svg>
+            {%- endcase -%}
+          </span>
+          <span class="b2bhero__prop-tx">
+            <strong>{{ block.settings.title }}</strong>
+            {%- if block.settings.text != blank -%}<span>{{ block.settings.text }}</span>{%- endif -%}
+          </span>
+        </li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
 </section>
 
 {% style %}
@@ -53,17 +81,18 @@
 .b2bhero{ position:relative; overflow:hidden; isolation:isolate;
   background:linear-gradient(165deg,#eaf2e4 0%,#f6f7f2 52%,#fbf2e6 100%);
   font-family:'Assistant',-apple-system,sans-serif; color:#1c2a18;
-  padding:clamp(56px,9vw,104px) 20px clamp(40px,6vw,64px); text-align:center; }
+  padding:clamp(48px,8vw,92px) 20px clamp(40px,6vw,64px); text-align:center; }
 .b2bhero__decor{ position:absolute; inset:0; z-index:-1; pointer-events:none;
   background:
     radial-gradient(40% 55% at 82% 8%, rgba(90,138,77,.16), transparent 70%),
     radial-gradient(38% 50% at 12% 92%, rgba(200,116,46,.12), transparent 70%); }
 .b2bhero__inner{ max-width:860px; margin-inline:auto; }
+.b2bhero__copy{ min-width:0; }
 .b2bhero__eyebrow{ display:inline-block; font-size:13px; font-weight:700; letter-spacing:.14em;
   color:#3f6b34; background:rgba(255,255,255,.7); border:1px solid #d7e4d0; border-radius:999px;
   padding:7px 18px; margin-bottom:22px; backdrop-filter:blur(4px); }
 .b2bhero__title{ font-family:'Rubik','Assistant',sans-serif; font-weight:700;
-  font-size:clamp(34px,6.4vw,62px); line-height:1.04; letter-spacing:-0.025em;
+  font-size:clamp(34px,6vw,60px); line-height:1.04; letter-spacing:-0.025em;
   margin:0 0 18px; color:#19260f; }
 .b2bhero__lede{ font-size:clamp(17px,2.3vw,21px); line-height:1.55; color:#53614b;
   max-width:600px; margin:0 auto 30px; }
@@ -75,8 +104,24 @@
 .b2bhero__cta:hover{ transform:translateY(-2px); box-shadow:0 12px 28px rgba(200,116,46,.42);
   background:linear-gradient(135deg,#c8742e,#a85e20); color:#fff; }
 .b2bhero__cta svg{ width:18px; height:18px; }
+
+/* split layout (copy + lifestyle image) */
+.b2bhero--split{ text-align:start; }
+.b2bhero--split .b2bhero__inner{ max-width:1160px; display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+  gap:clamp(28px,5vw,60px); align-items:center; }
+.b2bhero--split .b2bhero__title{ margin-inline:0; }
+.b2bhero--split .b2bhero__lede{ margin-inline:0; max-width:540px; }
+.b2bhero__figure{ position:relative; }
+.b2bhero__figure-glow{ position:absolute; inset:-7% -5% -5% -7%; z-index:-1; border-radius:34px;
+  background:radial-gradient(58% 58% at 50% 32%, rgba(90,138,77,.22), transparent 72%); filter:blur(8px); }
+.b2bhero__img{ width:100%; height:auto; aspect-ratio:4/5; object-fit:cover; display:block;
+  border-radius:26px; background:#eef0e9;
+  box-shadow:0 22px 54px rgba(28,42,24,.20), 0 4px 12px rgba(28,42,24,.08); }
+
 .b2bhero__props{ list-style:none; margin:clamp(40px,6vw,64px) auto 0; padding:0;
   display:flex; gap:16px; flex-wrap:wrap; justify-content:center; max-width:980px; }
+.b2bhero--split .b2bhero__props{ margin-top:clamp(38px,5vw,58px); max-width:1160px; }
 .b2bhero__prop{ flex:1 1 250px; min-width:0; max-width:320px; display:flex; gap:14px; text-align:start;
   align-items:flex-start; background:rgba(255,255,255,.72); border:1px solid #e2e9da;
   border-radius:18px; padding:18px 20px; box-shadow:0 4px 16px rgba(28,42,24,.05);
@@ -88,6 +133,15 @@
 .b2bhero__prop-tx{ display:flex; flex-direction:column; gap:3px; min-width:0; }
 .b2bhero__prop-tx strong{ font-family:'Rubik',sans-serif; font-weight:600; font-size:16px; color:#1c2a18; }
 .b2bhero__prop-tx span{ font-size:14px; line-height:1.45; color:#5c6a54; }
+
+@media (max-width:860px){
+  .b2bhero--split{ text-align:center; }
+  .b2bhero--split .b2bhero__inner{ grid-template-columns:1fr; gap:26px; }
+  .b2bhero--split .b2bhero__lede{ margin-inline:auto; max-width:600px; }
+  .b2bhero--split .b2bhero__copy{ order:1; }
+  .b2bhero--split .b2bhero__figure{ order:2; width:100%; max-width:420px; margin-inline:auto; }
+  .b2bhero--split .b2bhero__img{ aspect-ratio:5/4; }
+}
 @media (max-width:600px){
   .b2bhero__prop{ flex:1 1 100%; max-width:none; }
 }
@@ -107,7 +161,11 @@
     { "type": "text", "id": "title", "label": "כותרת ראשית", "default": "GT Everyday לעסקים" },
     { "type": "textarea", "id": "subtitle", "label": "תת כותרת", "default": "משקאות טבעיים לבתי קפה, מסעדות ואירועים — ישירות מהיצרן, במחיר אחיד ושקוף" },
     { "type": "text", "id": "cta_label", "label": "טקסט כפתור", "default": "להרכבת הזמנה" },
-    { "type": "text", "id": "cta_link", "label": "קישור כפתור", "default": "#b2b-order" }
+    { "type": "text", "id": "cta_link", "label": "קישור כפתור", "default": "#b2b-order" },
+    { "type": "header", "content": "תמונה" },
+    { "type": "checkbox", "id": "show_image", "label": "הצגת תמונת Hero", "default": true },
+    { "type": "image_picker", "id": "hero_image", "label": "תמונת Hero", "info": "ריק = תמונת ברירת המחדל המצורפת לתבנית. יחס מומלץ 4:5 (לאורך)." },
+    { "type": "text", "id": "image_alt", "label": "טקסט חלופי לתמונה (alt)" }
   ],
   "blocks": [
     {
