@@ -27,6 +27,66 @@
 
 ---
 
+## 🖥️ השתלטות מהמחשב (2026-06-11) — אודיט מקצה-לקצה + טבלת פערים
+
+**סביבה (שדרוג מול הענן):** המחשב המקומי. Shopify Admin API **נגיש** (טוקן GT Build Agent ב-
+`C:\Users\tomw2\.gt-secrets\.env`, scopes כולל write_themes/read_themes/write_files/write_products —
+products לא נוגעים). דפדפן אמיתי (Chrome DevTools MCP) זמין לאימות רינדור. הריפו שוכפל ל-
+`C:\Users\tomw2\gt-theme-shopify-B2B` (מחוץ ל-Dropbox; .git חי בתוך Dropbox = סיכון).
+
+**חוקה:** מסמכי `GT-B2B-Landing-Requirements-G0` ו-`GT-B2B-Master-Prompt-v3` **לא קיימים** בריפו/דיסק
+(כנראה היו ה-brief המשיק לסשן הענן, לא קומטו). לפי הוראת טום עובדים ב"חוקה-נגזרת": דף נחיתה
+**מהיר, יפה, מקצועי, עם תמונות המוצר שבפרויקט**. לא ממציאים DoD/קריטריונים.
+
+**בדיקת זהות (repo `horizon/` מול theme חי 156232417521):**
+- 6/8 קבצים זהים בית-בבית (live=LF, repo=CRLF, תוכן זהה): `b2b-order-form.css/js`, `b2b-hero.liquid`,
+  `b2b-order-form.liquid`, `page.b2b-thank-you.json`, `layout/theme.liquid`.
+- `page.b2b-landing.json` — **תוכן זהה** (38 מוצרים, 6 קבוצות, hero, sections זהים). ההבדל היחיד:
+  `webhook_url` (ריפו מלא, live ריק) + באנר auto-generated של עורך ה-theme + whitespace. טום פתח בעורך
+  אך **לא שינה תוכן**. הריפו = מקור אמת. דריפט-תוכן אמיתי: אין.
+- `config/settings_data.json` — live ≠ repo. **live מנצח** (הגדרות theme גלובליות). נמשך ל-
+  `.pull-pages/live_settings_data.json`. לא דוחפים repo→live; מעדכנים repo מ-live בעת הצורך.
+
+**תקינות תוכן (Admin API על 38 ה-handles):**
+- כל 38 ה-handles תקפים (productByHandle≠null), כולם ACTIVE.
+- **7 מוצרים לא מפורסמים לערוץ Online Store** → לא מתרנדרים (31/38 מוצגים בפועל):
+  Red Sangria 3.85L, White Sangria 3.85L, Bamboo Matcha Whisk, Bamboo Matcha Scoop,
+  Matcha Whisk Stand, Matcha 600ml glass pot, Matcha bottle 500ml. **[טום] לפרסם לערוץ.**
+- **17 מוצרים בלי featured image** (10 מוצגים כ-placeholder): Desert Infusion 1L, NAMASTEA 500,
+  ODK×3, Maruei bags, Complete Kit, Ube, Frother + ה-7 הלא-מפורסמים. תמונות פרויקט קיימות רק לקו התה
+  (`INPUT/photos/02_tea`: Desert Infusion, NAMASTEA 500 ועוד).
+
+### טבלת פערים — מול היעד (מהיר/יפה/מקצועי + תמונות)
+
+| תחום | פריט | מצב | קובץ/עדות |
+|---|---|---|---|
+| Flow | CONFIG דרך הגדרות סקשן (mode/webhook/success/min/whatsapp) | ✅ הושלם | `b2b-order-form.liquid` schema + JSON config |
+| Flow | מודאל סיכום (focus-trap, Esc, אישור, demo-flag) | ✅ הושלם | `b2b-order-form.js` openModal |
+| Flow | מצבי קצה (honeypot, מינימום, חיפוש-ריק, restore) | ✅ הושלם | js validateAll/applyFilter |
+| Flow | עמוד תודה | ✅ הושלם | `page.b2b-thank-you.json` |
+| Flow | demo/live + fallback וואטסאפ | ✅ הושלם (demo) | js submit |
+| טופס | הקלדת כמות ישירה | ✅ הושלם | qty-input text+inputmode |
+| טופס | חיפוש חי (שם+מק"ט, debounce, הסתרת קבוצות ריקות) | ✅ הושלם | js applyFilter |
+| טופס | localStorage (סל + פרטי לקוח) | ✅ הושלם | js saveCart/restoreCart |
+| טופס | שדה כתובת אספקה (עיר/רחוב/הערות) | ✅ הושלם | fieldset biz |
+| ולידציה | ח.פ (9 ספרות), טלפון IL, אימייל, חובה | ✅ הושלם | js validators (ספרת ביקורת — בכוונה לא) |
+| עיצוב | tabular-nums | ✅ הושלם | css `.num` |
+| עיצוב | קפסולת סיכום דביקה | ✅ הושלם | css `.b2bof__bar` |
+| עיצוב | גוף Assistant | ✅ הושלם | css/settings |
+| עיצוב | **כותרות Frank Ruhl Libre** | ❌ לא מומש (כותרות = Rubik) | hero/css |
+| תוכן | **תמונת מוצר ב-Hero** | ❌ חסר (גרדיאנט בלבד) | `b2b-hero.liquid` |
+| תוכן | 7 מוצרים לא מפורסמים → לא מוצגים | ⚠️ חסום [טום: לפרסם] | Admin API |
+| תוכן | 17 מוצרים בלי תמונה (10 placeholder) | ⚠️ חלקי (תמונות רק לקו התה) | Admin API |
+| תקינות | **מע״מ — היה "כולל", המחירים ex-VAT** | ✅ תוקן (deploy ממתין) | liquid/js/css |
+| לוקליזציה | באנר "Welcome to our store" (אנגלית) | ❌ חסר (עברית) | theme settings |
+| לוקליזציה | פוטר "Join our email list" (אנגלית) | ❌ חסר (עברית) | theme settings |
+| לוקליזציה | אין `locales/he.json` (מחרוזות מערכת EN) | ⚠️ חוב ידוע (RTL_DEBT) | לא חוסם נחיתה |
+| G3 | Make + חשבונית ירוקה (סליקה) | ⏸️ חסום [טום: מפתחות GI] | סעיף G3 |
+| Placeholders | whatsapp, min_order, mode→live | ⚠️ [טום] למלא | settings |
+| קונסול | goodav + ERR_NAME_NOT_RESOLVED (אפליקציית צד-ג', לא הקוד שלנו) | ℹ️ רעש קיים | console |
+
+---
+
 
 ## מצב נוכחי
 
@@ -203,3 +263,9 @@ team `1240098` ("My Team") · תכנית Teams (premium apps, credentialRequests
 4. בעורך ה-theme (סקשן B2B Order Form): לוודא `webhook_url` =
    `https://hook.eu1.make.com/vc6pf7f4m6c1mndnddpxmqslqddovhb6` ולהחליף `mode`→`live`.
 5. בחשבונית ירוקה: להגדיר אמצעי סליקה פעיל, ו-redirect הצלחה ל-/pages/b2b-thank-you.
+
+⚠️ **מע״מ (2026-06-11, טום):** המחירים בקטלוג **אינם כוללים מע״מ**. הטקסטים בדף תוקנו ("אינם
+כוללים מע״מ · מע״מ יתווסף בחשבונית"). ב-G3: השדה `income[].vatType` (וגם `vatType` של
+`/payments/form`) בקוד שולח כרגע `0` — זה **ניחוש** שיש לאמת מול ה-API החי של חשבונית ירוקה כך
+שישקף מחיר ללא מע״מ (מע״מ מתווסף). אסור להניח את ה-enum; לאמת בריצת הבדיקה. כמו כן: ה-`amount`
+הנשלח הוא סכום ה-ex-VAT; ודאו שחשבונית ירוקה מוסיפה מע״מ ולא מתייחסת אליו ככולל.
