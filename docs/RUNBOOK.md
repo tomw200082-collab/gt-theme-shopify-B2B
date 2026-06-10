@@ -103,3 +103,20 @@ Payload שנשלח (POST JSON, header ‏`Content-Type: application/json`):
 - Prestige (DEMO) נחסם ע"י Shopify ל-API — הוחלט Horizon.
 - 3 העלאות Horizon: section, template+layout(RTL), settings(פונטים) — הצליחו.
 - page.b2b-thank-you הועלה; שני Pages נוצרו (החריגים המאושרים היחידים).
+
+## יומן QA (סבבים)
+
+**סבב 1 (קוד, סטטי):** אומתו checksums מול ה-theme — CSS/JS/layout תואמים בית-בבית;
+הסקשן אומת בקריאה מלאה (הבדל יחיד: תו חץ בהערת Liquid — חסר השפעה).
+נמצאו ותוקנו: (1) ריפוד פיזי בשדה החיפוש שהתנגש עם מיקום האייקון ב-RTL →
+הוחלף ל-padding-inline-end; (2) ה-toolbar הדביק נתפס מתחת ל-header של Horizon →
+top:var(--header-height). תוקן והועלה.
+
+**סבב 2 (walkthrough לוגי):** זרימות demo/live, שחזור סל, חיפוש-ללא-תוצאות, מינימום
+הזמנה, honeypot, מלכודת פוקוס ו-Esc במודאל — נבדקו מול הקוד שורה-שורה; אין הפניות
+לאלמנטים חסרים (כל הסלקטורים ב-JS קיימים במרקאפ). בדיקת דפדפן אמיתית — אצל טום
+(ראו "מגבלת אימות").
+
+**ביצועים:** CSS ‏11KB, ‏JS ‏17KB (לא ממוזער, קריא בכוונה) — נטען רק בדף הנחיתה,
+script defer, תמונות lazy + width/height + aspect-ratio (אפס CLS צפוי), פונטים
+display=swap + preconnect. אין ספריות חיצוניות, אין קוד מת.

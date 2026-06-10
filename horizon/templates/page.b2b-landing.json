@@ -571,9 +571,11 @@
       "settings": {
         "title": "הרכיבו הזמנה לעסק",
         "sub_title": "בחרו כמויות, מלאו את פרטי העסק והמשיכו לתשלום מאובטח",
-        "accent": "#457439",
         "submit_label": "המשך לתשלום",
+        "mode": "demo",
         "webhook_url": "",
+        "success_path": "/pages/b2b-thank-you",
+        "whatsapp": "9725XXXXXXXX",
         "demo_note": "מערכת התשלום בהקמה — ההזמנה תוצג לסיכום בלבד ולא תחויב."
       }
     },

@@ -22,12 +22,12 @@ main[data-template*="b2b-thank-you"] h1{
 .b2bof__sub{ color:var(--muted); font-size:16px; margin:0; }
 
 /* toolbar: search + family nav (sticky) */
-.b2bof__toolbar{ position:sticky; top:0; z-index:6; background:var(--paper);
+.b2bof__toolbar{ position:sticky; top:var(--header-height, 0px); z-index:6; background:var(--paper);
   padding:10px 0; margin:8px 0 4px; border-bottom:1px solid var(--line);
   display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
 .b2bof__search{ flex:1 1 240px; position:relative; }
 .b2bof__search input{ width:100%; height:44px; border:1px solid var(--line);
-  border-radius:999px; padding:0 44px 0 16px; font:inherit; font-size:15px;
+  border-radius:999px; padding:0 16px; padding-inline-end:44px; font:inherit; font-size:15px;
   background:#fff; color:var(--ink); }
 .b2bof__search input:focus{ outline:2px solid var(--g); outline-offset:1px; border-color:var(--g); }
 .b2bof__search svg{ position:absolute; inset-inline-end:16px; top:50%;
