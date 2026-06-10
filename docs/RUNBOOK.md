@@ -160,8 +160,13 @@ Ube, Frother, Measuring Cup + 5 אביזרי מאצ'ה + 2 סנגריה 3.85L. (
 1. תרחיש Make על ה-webhook החדש: Webhook → `POST /account/token` (KEY_ID+KEY_SECRET) → `POST /payments/form`
    (מיפוי income→income, client→client, amount=totalILS, successUrl=`/pages/b2b-thank-you`) → **Webhook Response 200 `{"paymentUrl":"..."}`**.
 2. **מפתחות API חשבונית ירוקה** במודול token (סוד — ב-Make, לא בצ'אט).
-3. **CORS**: fetch מהדפדפן ל-hook.eu1.make.com חוצה-origin → תגובת Webhook חייבת `Access-Control-Allow-Origin`.
-   אם Make לא מחזיר header → הדפדפן חוסם והמשתמש מקבל fallback. לבדוק בריצת הבדיקה (או proxy/HMAC).
+3. **CORS** ✅ אומת (2026-06-11): preflight OPTIONS ל-`x79d7cvn…` מחזיר `access-control-allow-origin: *`
+   + `access-control-allow-methods: ...POST...` + `access-control-allow-headers: content-type` (Cloudflare edge).
+   כלומר ה-fetch מהדפדפן ל-Make **לא ייחסם** — אין צורך ב-proxy. (מומלץ עדיין secret/HMAC כי ה-URL פומבי.)
+
+**גישת Make מהמחשב הזה:** אין טוקן API ל-Make ב-.gt-secrets ואין Make MCP מחובר. כדי שאוכל לבנות/לאמת
+את התרחיש דרך ה-API צריך `MAKE_API_TOKEN` (zone eu1; scopes: scenarios:read/write, connections:read,
+hooks:read) ב-`.gt-secrets/.env`. בלעדיו — צד ה-Make בידי טום (UI). מפתחות חשבונית ירוקה תמיד אצל טום ב-Make.
 4. **redirect** מחשבונית ירוקה ל-`/pages/b2b-thank-you` אחרי תשלום.
 5. **בדיקה**: Make Run-once + הזמנת בדיקה מהדף → round-trip תקין → ואז `mode`→`live`.
 
