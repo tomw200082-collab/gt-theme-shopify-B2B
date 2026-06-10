@@ -76,15 +76,18 @@
             {%- if p != blank -%}
               {%- unless grid_open -%}<div class="b2bof__grid">{%- assign grid_open = true -%}{%- endunless -%}
               {%- assign v = p.selected_or_first_available_variant | default: p.variants.first -%}
+              {%- assign ov = block.settings.card_image -%}
               <div class="b2bof__card"
                 data-pid="{{ p.id }}" data-vid="{{ v.id }}"
                 data-sku="{{ v.sku | escape }}" data-title="{{ p.title | escape }}"
                 data-price="{{ v.price }}" data-url="{{ p.url }}"
-                data-img="{% if p.featured_image != blank %}{{ p.featured_image | image_url: width: 800, height: 800, crop: 'center' }}{% endif %}"
+                data-img="{% if ov != blank %}{{ ov | asset_url }}{% elsif p.featured_image != blank %}{{ p.featured_image | image_url: width: 800, height: 800, crop: 'center' }}{% endif %}"
                 {{ block.shopify_attributes }}>
                 <div class="b2bof__desc" hidden>{{ p.description | strip_html | truncate: 400 }}</div>
-                <button type="button" class="b2bof__media{% if p.featured_image == blank %} b2bof__media--empty{% endif %} b2bof__open" aria-label="פרטי המוצר — {{ p.title | escape }}">
-                  {%- if p.featured_image != blank -%}
+                <button type="button" class="b2bof__media{% if ov == blank and p.featured_image == blank %} b2bof__media--empty{% endif %} b2bof__open" aria-label="פרטי המוצר — {{ p.title | escape }}">
+                  {%- if ov != blank -%}
+                    <img src="{{ ov | asset_url }}" alt="{{ p.title | escape }}" loading="lazy" width="240" height="240">
+                  {%- elsif p.featured_image != blank -%}
                     <img src="{{ p.featured_image | image_url: width: 480, height: 480, crop: 'center' }}"
                       srcset="{{ p.featured_image | image_url: width: 240, height: 240, crop: 'center' }} 240w, {{ p.featured_image | image_url: width: 480, height: 480, crop: 'center' }} 480w"
                       sizes="(max-width:767px) 45vw, 212px"
@@ -303,6 +306,7 @@
       "type": "product",
       "settings": [
         { "type": "product", "id": "product", "label": "מוצר" },
+        { "type": "text", "id": "card_image", "label": "תמונת כרטיס (override)", "info": "שם קובץ asset, למשל gt-tea-fresh.webp. ריק = תמונת המוצר מ-Shopify." },
         { "type": "text", "id": "note", "label": "הערה (מוצגת ליד המחיר)" }
       ]
     }

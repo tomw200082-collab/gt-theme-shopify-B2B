@@ -57,61 +57,71 @@
         "a1": {
           "type": "product",
           "settings": {
-            "product": "תמצית-תה-ירוק-לואיזה-ונענע-1-ל-detox-copy"
+            "product": "תמצית-תה-ירוק-לואיזה-ונענע-1-ל-detox-copy",
+            "card_image": "gt-tea-detox.webp"
           }
         },
         "a2": {
           "type": "product",
           "settings": {
-            "product": "תמצית-תה-ירוק-לואיזה-ונענע-ללא-סוכר-1-ל-detox-sugar-free-copy"
+            "product": "תמצית-תה-ירוק-לואיזה-ונענע-ללא-סוכר-1-ל-detox-sugar-free-copy",
+            "card_image": "gt-tea-detox-sf.webp"
           }
         },
         "a3": {
           "type": "product",
           "settings": {
-            "product": "תמצית-היביסקוס-וליים-1-ל-fresh-copy"
+            "product": "תמצית-היביסקוס-וליים-1-ל-fresh-copy",
+            "card_image": "gt-tea-fresh.webp"
           }
         },
         "a4": {
           "type": "product",
           "settings": {
-            "product": "תמצית-היביסקוס-וליים-ללא-סוכר-1-ל-fresh-sugar-free-copy"
+            "product": "תמצית-היביסקוס-וליים-ללא-סוכר-1-ל-fresh-sugar-free-copy",
+            "card_image": "gt-tea-fresh-sf.webp"
           }
         },
         "a5": {
           "type": "product",
           "settings": {
-            "product": "תמצית-תה-ירוק-ולמון-גראס-1-ל-energy-copy"
+            "product": "תמצית-תה-ירוק-ולמון-גראס-1-ל-energy-copy",
+            "card_image": "gt-tea-energy.webp"
           }
         },
         "a6": {
           "type": "product",
           "settings": {
-            "product": "תמצית-תה-ירוק-יסמין-וליצי-1-ל-consciousness-copy"
+            "product": "תמצית-תה-ירוק-יסמין-וליצי-1-ל-consciousness-copy",
+            "card_image": "gt-tea-consciousness.webp"
           }
         },
         "a7": {
           "type": "product",
           "settings": {
-            "product": "תמצית-קמומיל-תפוח-וציפורן-1-ל-calm-copy"
+            "product": "תמצית-קמומיל-תפוח-וציפורן-1-ל-calm-copy",
+            "card_image": "gt-tea-calm.webp"
           }
         },
         "a8": {
           "type": "product",
           "settings": {
-            "product": "תמצית-תה-ירוק-סנצה-ופסיפלורה-1-ל-revive-copy"
+            "product": "תמצית-תה-ירוק-סנצה-ופסיפלורה-1-ל-revive-copy",
+            "card_image": "gt-tea-revive.webp"
           }
         },
         "a9": {
           "type": "product",
           "settings": {
-            "product": "תמצית-צאי-מסאלה-1-ל-namastea-copy"
+            "product": "תמצית-צאי-מסאלה-1-ל-namastea-copy",
+            "card_image": "gt-tea-namastea.webp"
           }
         },
         "a10": {
           "type": "product",
           "settings": {
-            "product": "תמצית-צאי-מסאלה-1-ל-namastea-copy-2"
+            "product": "תמצית-צאי-מסאלה-1-ל-namastea-copy-2",
+            "card_image": "gt-tea-desert.webp"
           }
         },
         "g2": {
@@ -124,55 +134,64 @@
         "b1": {
           "type": "product",
           "settings": {
-            "product": "תמצית-תה-ירוק-לואיזה-ונענע-0-5-ל-detox"
+            "product": "תמצית-תה-ירוק-לואיזה-ונענע-0-5-ל-detox",
+            "card_image": "gt-tea-detox.webp"
           }
         },
         "b2": {
           "type": "product",
           "settings": {
-            "product": "תמצית-תה-ירוק-לואיזה-ונענע-ללא-סוכר-0-5-ל-detox-sugar-free"
+            "product": "תמצית-תה-ירוק-לואיזה-ונענע-ללא-סוכר-0-5-ל-detox-sugar-free",
+            "card_image": "gt-tea-detox-sf.webp"
           }
         },
         "b3": {
           "type": "product",
           "settings": {
-            "product": "תמצית-היביסקוס-וליים-0-5-ל-fresh"
+            "product": "תמצית-היביסקוס-וליים-0-5-ל-fresh",
+            "card_image": "gt-tea-fresh.webp"
           }
         },
         "b4": {
           "type": "product",
           "settings": {
-            "product": "תמצית-היביסקוס-וליים-ללא-סוכר-0-5-ל-fresh-sugar-free"
+            "product": "תמצית-היביסקוס-וליים-ללא-סוכר-0-5-ל-fresh-sugar-free",
+            "card_image": "gt-tea-fresh-sf.webp"
           }
         },
         "b5": {
           "type": "product",
           "settings": {
-            "product": "תמצית-תה-ירוק-ולמון-גראס-0-5-ל-energy"
+            "product": "תמצית-תה-ירוק-ולמון-גראס-0-5-ל-energy",
+            "card_image": "gt-tea-energy.webp"
           }
         },
         "b6": {
           "type": "product",
           "settings": {
-            "product": "תמצית-תה-ירוק-יסמין-וליצי-0-5-ל-consciousness"
+            "product": "תמצית-תה-ירוק-יסמין-וליצי-0-5-ל-consciousness",
+            "card_image": "gt-tea-consciousness.webp"
           }
         },
         "b7": {
           "type": "product",
           "settings": {
-            "product": "תמצית-קמומיל-תפוח-וציפורן-0-5-ל-calm"
+            "product": "תמצית-קמומיל-תפוח-וציפורן-0-5-ל-calm",
+            "card_image": "gt-tea-calm.webp"
           }
         },
         "b8": {
           "type": "product",
           "settings": {
-            "product": "תמצית-תה-ירוק-סנצה-ופסיפלורה-0-5-ל-revive"
+            "product": "תמצית-תה-ירוק-סנצה-ופסיפלורה-0-5-ל-revive",
+            "card_image": "gt-tea-revive.webp"
           }
         },
         "b9": {
           "type": "product",
           "settings": {
-            "product": "namastea-500ml"
+            "product": "namastea-500ml",
+            "card_image": "gt-tea-namastea.webp"
           }
         },
         "g3": {
