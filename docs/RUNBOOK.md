@@ -132,6 +132,22 @@ Ube, Frother, Measuring Cup + 5 אביזרי מאצ'ה + 2 סנגריה 3.85L. (
   ב-G3: ה-Webhook ב-Make חייב לאמת secret/HMAC — ה-URL אפקטיבית פומבי. לא לסמוך על mode=demo.
 - **`success_path` לא נקרא בקוד** (live עובר ל-`paymentUrl` מה-webhook). ב-G3: להעביר successUrl ל-Make.
 
+### עדכון לפי תשובות טום (2026-06-11, סשן 2)
+- **וואטסאפ 0543982444** → הוגדר `whatsapp=972543982444` (סקשן) + כפתור עמוד התודה הוחזר עם המספר
+  האמיתי (`wa.me/972543982444`). ה-fallback בתקלת תשלום עובד. אומת חי.
+- **מינימום 800 ₪ (ללא מע״מ)** → `min_order_ils=800` הוגדר ואומת חי: מתחת ל-800 → submit חסום + פס
+  "עוד X למינימום"; מעל → פתוח. ה-JS בודק על בסיס ex-VAT — תואם להחלטת טום.
+- **מחירים בפומבי** → אושר ע"י טום. נשאר גלוי, ה-flag נסגר.
+- **Webhook (Make)** → `webhook_url` חובר לסקשן; **mode עדיין demo** (בטוח). ⚠️ לא להעביר ל-live עד
+  שמפתחות חשבונית ירוקה בתרחיש 6137437 + Run-once. מומלץ secret/HMAC ב-Webhook (ה-URL פומבי ב-HTML).
+- **תמונות — ספריות שאותרו (טום: "שמתי עוד מלא תמונות"):**
+  - `Data Center GT/03_MARKETING_BRAND/תמונות בקבוקים חדשים.zip` — 20 cutout שקופים של בקבוקי התה
+    (FRESH/CALM/DESERT/ENERGY/DETOX/REVIVE/NAMASTEA/CONSCIOUSNESS, 2 זוויות). איכותי, מתאים לכרטיסים.
+  - `eddie work/gt b 2026 new/GT CATALOG/` — צילומי lifestyle לפי משקה (ice tea/lemonade/gazoz/chai/matcha).
+  - `Eduardbakfar (temporary)/gteveryday-photo-download-1of1/` — 216 תמונות שיווק (highlights/menu/cocktails/giftboxes).
+  - **חסר packshot ייעודי** ל: אביזרי מאצ'ה (מטרפה/כף/מעמד/כלי/בקבוק/כוס מדידה), ODK ×3, סנגריה 3.85L ×2.
+    → טום לכוון/לספק, או להשתמש ב-cutouts לעקביות קו התה. עד אז — placeholder ממותג.
+
 ---
 
 
