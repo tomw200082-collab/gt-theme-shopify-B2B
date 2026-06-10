@@ -262,7 +262,7 @@
     /* Green-Invoice-shaped passthrough objects (Make sends these straight to /payments/form).
        Field names per Green Invoice (morning) API — verify against live API on first test. */
     var income = items.map(function (l) {
-      return { catalogNum: l.sku, description: l.title, quantity: l.qty,
+      return { description: l.title + ' (' + l.sku + ')', quantity: l.qty,
         price: l.unitPriceILS, currency: 'ILS', vatType: 0 };
     });
     var client = {
