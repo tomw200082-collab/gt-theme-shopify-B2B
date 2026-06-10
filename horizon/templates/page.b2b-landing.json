@@ -373,8 +373,9 @@
         "mode": "demo",
         "webhook_url": "https://hook.eu1.make.com/vc6pf7f4m6c1mndnddpxmqslqddovhb6",
         "success_path": "/pages/b2b-thank-you",
-        "whatsapp": "9725XXXXXXXX",
-        "demo_note": "מערכת התשלום בהקמה — ההזמנה תוצג לסיכום בלבד ולא תחויב."
+        "whatsapp": "972543982444",
+        "demo_note": "מערכת התשלום בהקמה — ההזמנה תוצג לסיכום בלבד ולא תחויב.",
+        "min_order_ils": 800
       }
     },
     "faq": {

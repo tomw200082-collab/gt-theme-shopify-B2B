@@ -38,13 +38,24 @@
         "next": {
           "type": "text",
           "settings": {
-            "text": "<p><strong>מה הלאה?</strong> ניצור איתכם קשר בהקדם לתיאום האספקה.</p>",
+            "text": "<p><strong>מה הלאה?</strong> ניצור איתכם קשר בהקדם לתיאום האספקה. יש שאלה דחופה? אנחנו זמינים בוואטסאפ.</p>",
             "width": "100%",
             "max_width": "narrow",
             "alignment": "center",
             "type_preset": "rte",
             "font": "var(--font-primary--family)",
             "wrap": "pretty"
+          }
+        },
+        "wa": {
+          "type": "button",
+          "settings": {
+            "label": "דברו איתנו בוואטסאפ",
+            "link": "https://wa.me/972543982444",
+            "open_in_new_tab": true,
+            "style_class": "button",
+            "width": "fit-content",
+            "width_mobile": "fit-content"
           }
         },
         "again": {
@@ -63,6 +74,7 @@
         "title",
         "sub",
         "next",
+        "wa",
         "again"
       ],
       "settings": {
