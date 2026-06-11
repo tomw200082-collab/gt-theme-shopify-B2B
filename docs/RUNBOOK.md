@@ -10,7 +10,8 @@
 | MAIN | `131669328113` — לא נגענו ולא ניגע |
 | עמוד נחיתה | `/pages/b2b-landing` (Page id 132080042225, template `page.b2b-landing`) |
 | עמוד תודה | `/pages/b2b-thank-you` (Page id 132080074993, template `page.b2b-thank-you`) |
-| לינק preview | `https://gteveryday.myshopify.com/pages/b2b-landing?preview_theme_id=156232417521` |
+| לינק preview | `https://gteveryday.com/pages/b2b-landing?preview_theme_id=156232417521` |
+| ⚠️ דומיין | myshopify האמיתי = `greenteaeveryday.myshopify.com` · ראשי חי = `gteveryday.com`. הברीף נקב ב-`gteveryday.myshopify.com` שהוא **שגוי** (חנות לא-זמינה) — אל תשתמש בו ללינקים. |
 | מצב סליקה | **demo** — אין חיווט חי עד G3 |
 
 הערה: שני העמודים פורסמו (isPublished=true) כדי שה-preview יעבוד, אבל הם לא מקושרים
