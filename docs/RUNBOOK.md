@@ -1,6 +1,32 @@
 # RUNBOOK — GT Everyday B2B Landing (Horizon)
 
-עדכון אחרון: 2026-06-10 · ענף: `claude/gt-b2b-landing-page-le88xh`
+עדכון אחרון: 2026-06-11 · ענף: `claude/gt-b2b-landing-page-le88xh` · HEAD `831d5c3`
+
+## ⏸️ נקודת עצירה (2026-06-11) — ממשיכים מהמחשב
+
+**מה הושלם ועלה ל-theme + נדחף לענף:**
+- עיצוב v3.1 + v4: Hero ייעודי (`sections/b2b-hero.liquid`), כרטיסיות אלגנטיות,
+  תיקון גלילה אופקית במובייל, **Quick-View למוצר** (תמונה+תיאור+מק"ט+מחיר+כמות+
+  "הוספה להזמנה"+קישור לדף מוצר), scroll-reveal, עיצוב מחדש ל-FAQ. הכול ב-theme
+  `156232417521` (UNPUBLISHED) וב-git (נקי, מסונכרן עם origin).
+- **Make — שלד בנוי (כבוי):** Webhook `3210551`
+  (`https://hook.eu1.make.com/vc6pf7f4m6c1mndnddpxmqslqddovhb6`) + Scenario
+  `6137437` (Webhook→token→payments/form→response). JS שולח כבר income/client
+  בפורמט GI. `webhook_url` בתבנית-ריפו מולא; ב-theme החי `mode=demo` עדיין.
+
+**מה באמצע / הבא (לפי סדר):**
+1. **המתנה לצילומי מסך מטום** → סבב עיצוב הבא (ריווחים/hero/header+footer של Horizon
+   שכמעט ריקים). אני לא יכול לראות רינדור — ראו "מגבלת אימות".
+2. **שקילה: עיצוב header+footer** של Horizon (כרגע כמעט ריקים — תורם לתחושת "פשטות").
+3. **סיום G3** (חסום במפתחות API של חשבונית ירוקה): להדביק KEY_ID/KEY_SECRET במודול
+   ה-token בתרחיש 6137437, Run once + הזמנת בדיקה, לתקן שמות שדות `/payments/form`
+   מול ה-API החי, להפעיל תרחיש, ובעורך ה-theme להחליף `mode`→`live`. פירוט מלא
+   בסעיף "G3 — שלד Make שנבנה בפועל" למטה.
+
+**מצב סליקה: demo — בטוח. שום דבר לא מחויב/נשלח עד שטום מסיים את שלב 3.**
+
+---
+
 
 ## מצב נוכחי
 
