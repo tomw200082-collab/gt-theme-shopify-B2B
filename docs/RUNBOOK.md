@@ -167,6 +167,20 @@ Ube, Frother, Measuring Cup + 5 אביזרי מאצ'ה + 2 סנגריה 3.85L. (
 **גישת Make מהמחשב הזה:** אין טוקן API ל-Make ב-.gt-secrets ואין Make MCP מחובר. כדי שאוכל לבנות/לאמת
 את התרחיש דרך ה-API צריך `MAKE_API_TOKEN` (zone eu1; scopes: scenarios:read/write, connections:read,
 hooks:read) ב-`.gt-secrets/.env`. בלעדיו — צד ה-Make בידי טום (UI). מפתחות חשבונית ירוקה תמיד אצל טום ב-Make.
+(עדכון טום: טוקן לא נדרש — צד Make מנוהל בערוץ אחר; התרחיש הנכון **6138061** מחובר ל-webhook החדש.)
+
+### QA ויזואלי סופי (2026-06-11, סשן 3) — עבר על העיצוב החדש (Matcha Minimalism)
+נבדק חי (desktop + רוחב צר, demo): Hero (Frank Ruhl Libre + קרף ממוסגר), רשת hairline (4→2 טורים),
+חיפוש, כמות/active/badge, **מינימום 800** (חוסם submit + פס התקדמות), ולידציה ישראלית
+(ח.פ/טלפון/אימייל inline), מודאל סיכום (demo-flag + הערת מע״מ + פרטי עסק + confirm-gate),
+**demo בטוח — אין חיוב ואין ניווט**, עמוד תודה (וואטסאפ 972543982444 + פוטר עברי). קונסול: אפס
+שגיאות מהקוד שלנו (רק רעש צד-ג': bugsnag/goodav/ERR_NAME). **mode=demo מאומת חי.**
+
+**הפעלה ל-live (שורה אחת, אחרי בדיקת תשלום):** `page.b2b-landing.json` → `b2b_order.settings.mode="live"`
+→ deploy. הכול מחווט מראש (webhook 6138061 + income + CORS ✓).
+
+**הערות מינוריות (לא חוסם):** placeholder "Email address" בפוטר באנגלית; רקע grain כבד מעט
+(radial-gradients על דף ארוך — גרם ל-screenshot capture להיתקע, שקול להקל); NAMASTEA 500 מציג צילום 1L.
 4. **redirect** מחשבונית ירוקה ל-`/pages/b2b-thank-you` אחרי תשלום.
 5. **בדיקה**: Make Run-once + הזמנת בדיקה מהדף → round-trip תקין → ואז `mode`→`live`.
 
