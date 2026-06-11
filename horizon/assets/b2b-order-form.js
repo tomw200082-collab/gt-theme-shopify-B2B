@@ -17,7 +17,8 @@
   var form = root.querySelector('.b2bof__form');
   var msg = root.querySelector('.b2bof__msg');
   var bar = root.querySelector('.b2bof__bar');
-  var overlay = root.querySelector('.b2bof__overlay');
+  var overlay = root.querySelector('.b2bof__overlay--sum');
+  var qv = root.querySelector('.b2bof__overlay--quick');
   var restoreBar = root.querySelector('.b2bof__restore');
   var emptyNote = root.querySelector('.b2bof__empty');
   var submitBtn = root.querySelector('.b2bof__submit--bar');
@@ -405,6 +406,79 @@
         (wa ? ', או <a href="' + wa + '" target="_blank" rel="noopener">לשלוח לנו את ההזמנה בוואטסאפ</a>.' : '.'));
     });
   });
+
+  /* ---------- product quick view ---------- */
+  var qvCard = null;
+  function openQuick(card) {
+    if (!qv) return;
+    qvCard = card;
+    lastFocused = document.activeElement;
+    var img = qv.querySelector('.b2bof__qv-media img');
+    var src = card.dataset.img || '';
+    img.src = src; img.alt = card.dataset.title;
+    qv.querySelector('.b2bof__qv-media').hidden = !src;
+    qv.querySelector('.b2bof__qv-title').textContent = card.dataset.title;
+    var skuEl = qv.querySelector('.b2bof__qv-sku');
+    skuEl.textContent = card.dataset.sku ? 'מק"ט ' + card.dataset.sku : '';
+    skuEl.hidden = !card.dataset.sku;
+    qv.querySelector('.b2bof__qv-price').innerHTML =
+      bdi(fmt.format(parseInt(card.dataset.price, 10) / 100)) + ' <small>ליחידה · המחיר כולל מע״מ</small>';
+    var descEl = card.querySelector('.b2bof__desc');
+    var desc = descEl ? descEl.textContent.trim() : '';
+    qv.querySelector('.b2bof__qv-desc').textContent = desc;
+    qv.querySelector('.b2bof__qv-desc').hidden = !desc;
+    var link = qv.querySelector('.b2bof__qv-link');
+    link.href = card.dataset.url || '#';
+    link.hidden = !card.dataset.url;
+    qv.querySelector('.b2bof__qv-qty').value = qtyOf(card) || 1;
+    qv.hidden = false;
+    document.body.style.overflow = 'hidden';
+    qv.querySelector('.b2bof__qv').focus();
+  }
+  function closeQuick() {
+    if (!qv) return;
+    qv.hidden = true;
+    document.body.style.overflow = '';
+    if (lastFocused) lastFocused.focus();
+  }
+  root.addEventListener('click', function (e) {
+    var opener = e.target.closest('.b2bof__open');
+    if (opener) { var card = opener.closest('.b2bof__card'); if (card) openQuick(card); }
+  });
+  if (qv) {
+    qv.addEventListener('click', function (e) {
+      if (e.target === qv || e.target.closest('.b2bof__qv-close')) closeQuick();
+      var step = e.target.closest('.b2bof__qv-step');
+      if (step) {
+        var inp = qv.querySelector('.b2bof__qv-qty');
+        inp.value = clampQty((parseInt(inp.value, 10) || 0) + parseInt(step.dataset.step, 10));
+      }
+      if (e.target.closest('.b2bof__qv-add') && qvCard) {
+        var q = clampQty(qv.querySelector('.b2bof__qv-qty').value);
+        qvCard.querySelector('.b2bof__qty-input').value = q;
+        refresh(q > 0);
+        closeQuick();
+      }
+    });
+    qv.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeQuick();
+    });
+    qv.querySelector('.b2bof__qv-qty').addEventListener('focus', function () { this.select(); });
+  }
+
+  /* ---------- scroll reveal ---------- */
+  if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    root.classList.add('js-reveal');
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('in-view'); io.unobserve(en.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    root.querySelectorAll('.b2bof__card, .b2bof__group-head, .b2bof__biz').forEach(function (el, i) {
+      el.style.transitionDelay = Math.min(i % 8 * 45, 320) + 'ms';
+      io.observe(el);
+    });
+  }
 
   /* ---------- init ---------- */
   restoreCart();

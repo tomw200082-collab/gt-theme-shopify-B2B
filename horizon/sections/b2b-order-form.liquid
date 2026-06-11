@@ -79,8 +79,11 @@
               <div class="b2bof__card"
                 data-pid="{{ p.id }}" data-vid="{{ v.id }}"
                 data-sku="{{ v.sku | escape }}" data-title="{{ p.title | escape }}"
-                data-price="{{ v.price }}" {{ block.shopify_attributes }}>
-                <div class="b2bof__media{% if p.featured_image == blank %} b2bof__media--empty{% endif %}">
+                data-price="{{ v.price }}" data-url="{{ p.url }}"
+                data-img="{% if p.featured_image != blank %}{{ p.featured_image | image_url: width: 800, height: 800, crop: 'center' }}{% endif %}"
+                {{ block.shopify_attributes }}>
+                <div class="b2bof__desc" hidden>{{ p.description | strip_html | truncate: 400 }}</div>
+                <button type="button" class="b2bof__media{% if p.featured_image == blank %} b2bof__media--empty{% endif %} b2bof__open" aria-label="פרטי המוצר — {{ p.title | escape }}">
                   {%- if p.featured_image != blank -%}
                     <img src="{{ p.featured_image | image_url: width: 480, height: 480, crop: 'center' }}"
                       srcset="{{ p.featured_image | image_url: width: 240, height: 240, crop: 'center' }} 240w, {{ p.featured_image | image_url: width: 480, height: 480, crop: 'center' }} 480w"
@@ -91,9 +94,13 @@
                     {{ 'product-apparel-1' | placeholder_svg_tag: 'b2bof__placeholder' }}
                   {%- endif -%}
                   <span class="b2bof__badge num" aria-hidden="true">0</span>
-                </div>
+                  <span class="b2bof__zoomhint" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg>
+                    פרטים
+                  </span>
+                </button>
                 <div class="b2bof__body">
-                  <h4 class="b2bof__name">{{ p.title }}</h4>
+                  <h4 class="b2bof__name"><button type="button" class="b2bof__open b2bof__name-btn">{{ p.title }}</button></h4>
                   {%- if v.sku != blank -%}<span class="b2bof__sku"><bdi>{{ v.sku }}</bdi></span>{%- endif -%}
                   <div class="b2bof__priceline">
                     <span class="b2bof__price num"><bdi>{{ v.price | money }}</bdi> <small>ליחידה{% if block.settings.note != blank %} · {{ block.settings.note }}{% endif %}</small></span>
@@ -161,7 +168,33 @@
       {%- endif -%}
     </form>
 
-    <div class="b2bof__overlay" hidden>
+    <div class="b2bof__overlay b2bof__overlay--quick" hidden>
+      <div class="b2bof__dialog b2bof__qv" role="dialog" aria-modal="true" aria-label="פרטי מוצר" tabindex="-1">
+        <button type="button" class="b2bof__qv-close" aria-label="סגירה">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+        <div class="b2bof__qv-grid">
+          <div class="b2bof__qv-media"><img alt="" width="800" height="800"></div>
+          <div class="b2bof__qv-info">
+            <span class="b2bof__qv-sku"></span>
+            <h3 class="b2bof__qv-title"></h3>
+            <p class="b2bof__qv-price num"></p>
+            <p class="b2bof__qv-desc"></p>
+            <div class="b2bof__qv-row">
+              <div class="b2bof__qty">
+                <button type="button" class="b2bof__step b2bof__qv-step" data-step="-1" aria-label="הפחתת כמות">&minus;</button>
+                <input type="text" class="b2bof__qty-input b2bof__qv-qty" inputmode="numeric" pattern="[0-9]*" maxlength="3" value="0" aria-label="כמות">
+                <button type="button" class="b2bof__step b2bof__qv-step" data-step="1" aria-label="הוספת כמות">+</button>
+              </div>
+              <button type="button" class="b2bof__submit b2bof__qv-add">הוספה להזמנה</button>
+            </div>
+            <a class="b2bof__qv-link" href="#" target="_blank" rel="noopener">לדף המוצר המלא באתר ←</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="b2bof__overlay b2bof__overlay--sum" hidden>
       <div class="b2bof__dialog" role="dialog" aria-modal="true" aria-label="סיכום הזמנה" tabindex="-1">
         <h3 class="b2bof__dialog-title">סיכום ההזמנה</h3>
         <p class="b2bof__dialog-sub">רגע לפני התשלום — ודאו שהכל נכון:</p>
