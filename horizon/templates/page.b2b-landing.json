@@ -371,7 +371,7 @@
         "sub_title": "בחרו כמויות, מלאו את פרטי העסק והמשיכו לתשלום מאובטח",
         "submit_label": "המשך לתשלום",
         "mode": "demo",
-        "webhook_url": "",
+        "webhook_url": "https://hook.eu1.make.com/vc6pf7f4m6c1mndnddpxmqslqddovhb6",
         "success_path": "/pages/b2b-thank-you",
         "whatsapp": "9725XXXXXXXX",
         "demo_note": "מערכת התשלום בהקמה — ההזמנה תוצג לסיכום בלבד ולא תחויב."

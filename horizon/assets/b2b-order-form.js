@@ -257,16 +257,35 @@
     });
     var f = form.elements;
     if (!idempotencyKey) idempotencyKey = uuid();
+    var totalILS = Math.round(items.reduce(function (a, l) { return a + l.lineTotalILS; }, 0) * 100) / 100;
+    /* Green-Invoice-shaped passthrough objects (Make sends these straight to /payments/form).
+       Field names per Green Invoice (morning) API — verify against live API on first test. */
+    var income = items.map(function (l) {
+      return { catalogNum: l.sku, description: l.title, quantity: l.qty,
+        price: l.unitPriceILS, currency: 'ILS', vatType: 0 };
+    });
+    var client = {
+      name: f.company.value.trim(),
+      taxId: f.business_id.value.replace(/\D/g, ''),
+      emails: [f.email.value.trim()],
+      address: f.street.value.trim(),
+      city: f.city.value.trim(),
+      country: 'IL',
+      phone: normalizePhone(f.phone.value),
+      add: true
+    };
     return {
       source: 'b2b-landing',
       idempotencyKey: idempotencyKey,
       createdAt: new Date().toISOString(),
       items: items,
-      totalILS: Math.round(items.reduce(function (a, l) { return a + l.lineTotalILS; }, 0) * 100) / 100,
+      totalILS: totalILS,
       customer: { businessName: f.company.value.trim(), companyId: f.business_id.value.replace(/\D/g, ''),
         contactName: f.contact_name.value.trim(), phone: normalizePhone(f.phone.value),
         email: f.email.value.trim(), city: f.city.value.trim(), street: f.street.value.trim(),
-        notes: f.notes.value.trim() }
+        notes: f.notes.value.trim() },
+      client: client,
+      income: income
     };
   }
   function whatsappFallbackUrl(payload) {
