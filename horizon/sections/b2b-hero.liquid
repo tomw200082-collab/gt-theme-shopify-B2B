@@ -1,0 +1,143 @@
+{%- comment -%}
+  B2B Hero — GT Everyday (Horizon). Self-contained premium hero for the
+  b2b-landing template. Editable via theme editor; value-prop blocks.
+{%- endcomment -%}
+
+{%- assign sid = section.id -%}
+<section class="b2bhero" data-section-id="{{ sid }}">
+  <div class="b2bhero__decor" aria-hidden="true"></div>
+  <div class="b2bhero__inner">
+    {%- if section.settings.eyebrow != blank -%}
+      <span class="b2bhero__eyebrow">{{ section.settings.eyebrow }}</span>
+    {%- endif -%}
+    {%- if section.settings.title != blank -%}
+      <h1 class="b2bhero__title">{{ section.settings.title }}</h1>
+    {%- endif -%}
+    {%- if section.settings.subtitle != blank -%}
+      <p class="b2bhero__lede">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+    {%- if section.settings.cta_label != blank -%}
+      <a class="b2bhero__cta" href="{{ section.settings.cta_link | default: '#b2b-order' }}">
+        {{ section.settings.cta_label }}
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </a>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <ul class="b2bhero__props">
+        {%- for block in section.blocks -%}
+          <li class="b2bhero__prop" {{ block.shopify_attributes }}>
+            <span class="b2bhero__prop-ic">
+              {%- case block.settings.icon -%}
+                {%- when 'leaf' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c0-5 4.5-9 16-9 0 8-4 16-11 16Z"/><path d="M4 20c2-4 5-7 9-9"/></svg>
+                {%- when 'package' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8l9 5 9-5Z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
+                {%- when 'truck' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h11v9H3zM14 9h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg>
+                {%- when 'receipt' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h14v18l-3-2-2 2-2-2-2 2-2-2-3 2Z"/><path d="M8 8h8M8 12h8"/></svg>
+                {%- when 'shield' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6Z"/><path d="m9 12 2 2 4-4"/></svg>
+                {%- else -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18"/></svg>
+              {%- endcase -%}
+            </span>
+            <span class="b2bhero__prop-tx">
+              <strong>{{ block.settings.title }}</strong>
+              {%- if block.settings.text != blank -%}<span>{{ block.settings.text }}</span>{%- endif -%}
+            </span>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+</section>
+
+{% style %}
+#shopify-section-{{ sid }}{ margin:0; }
+.b2bhero{ position:relative; overflow:hidden; isolation:isolate;
+  background:linear-gradient(165deg,#eaf2e4 0%,#f6f7f2 52%,#fbf2e6 100%);
+  font-family:'Assistant',-apple-system,sans-serif; color:#1c2a18;
+  padding:clamp(56px,9vw,104px) 20px clamp(40px,6vw,64px); text-align:center; }
+.b2bhero__decor{ position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(40% 55% at 82% 8%, rgba(90,138,77,.16), transparent 70%),
+    radial-gradient(38% 50% at 12% 92%, rgba(200,116,46,.12), transparent 70%); }
+.b2bhero__inner{ max-width:860px; margin-inline:auto; }
+.b2bhero__eyebrow{ display:inline-block; font-size:13px; font-weight:700; letter-spacing:.14em;
+  color:#3f6b34; background:rgba(255,255,255,.7); border:1px solid #d7e4d0; border-radius:999px;
+  padding:7px 18px; margin-bottom:22px; backdrop-filter:blur(4px); }
+.b2bhero__title{ font-family:'Rubik','Assistant',sans-serif; font-weight:700;
+  font-size:clamp(34px,6.4vw,62px); line-height:1.04; letter-spacing:-0.025em;
+  margin:0 0 18px; color:#19260f; }
+.b2bhero__lede{ font-size:clamp(17px,2.3vw,21px); line-height:1.55; color:#53614b;
+  max-width:600px; margin:0 auto 30px; }
+.b2bhero__cta{ display:inline-flex; align-items:center; gap:9px; text-decoration:none;
+  background:linear-gradient(135deg,#d07e36,#c8742e); color:#fff;
+  font-family:'Rubik',sans-serif; font-weight:600; font-size:17px;
+  padding:15px 34px; border-radius:14px; box-shadow:0 8px 22px rgba(200,116,46,.34);
+  transition:transform .2s, box-shadow .2s, background .2s; }
+.b2bhero__cta:hover{ transform:translateY(-2px); box-shadow:0 12px 28px rgba(200,116,46,.42);
+  background:linear-gradient(135deg,#c8742e,#a85e20); color:#fff; }
+.b2bhero__cta svg{ width:18px; height:18px; }
+.b2bhero__props{ list-style:none; margin:clamp(40px,6vw,64px) auto 0; padding:0;
+  display:flex; gap:16px; flex-wrap:wrap; justify-content:center; max-width:980px; }
+.b2bhero__prop{ flex:1 1 250px; min-width:0; max-width:320px; display:flex; gap:14px; text-align:start;
+  align-items:flex-start; background:rgba(255,255,255,.72); border:1px solid #e2e9da;
+  border-radius:18px; padding:18px 20px; box-shadow:0 4px 16px rgba(28,42,24,.05);
+  backdrop-filter:blur(6px); }
+.b2bhero__prop-ic{ flex:0 0 46px; width:46px; height:46px; border-radius:14px;
+  display:flex; align-items:center; justify-content:center; color:#3f6b34;
+  background:linear-gradient(150deg,#e7f0e1,#d8e8d0); }
+.b2bhero__prop-ic svg{ width:24px; height:24px; }
+.b2bhero__prop-tx{ display:flex; flex-direction:column; gap:3px; min-width:0; }
+.b2bhero__prop-tx strong{ font-family:'Rubik',sans-serif; font-weight:600; font-size:16px; color:#1c2a18; }
+.b2bhero__prop-tx span{ font-size:14px; line-height:1.45; color:#5c6a54; }
+@media (max-width:600px){
+  .b2bhero__prop{ flex:1 1 100%; max-width:none; }
+}
+@media (prefers-reduced-motion: reduce){
+  .b2bhero__cta{ transition:none; }
+}
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "B2B Hero",
+  "tag": "section",
+  "class": "b2b-hero-section",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "תווית עליונה", "default": "מכירות לעסקים · B2B" },
+    { "type": "text", "id": "title", "label": "כותרת ראשית", "default": "GT Everyday לעסקים" },
+    { "type": "textarea", "id": "subtitle", "label": "תת כותרת", "default": "משקאות טבעיים לבתי קפה, מסעדות ואירועים — ישירות מהיצרן, במחיר אחיד ושקוף" },
+    { "type": "text", "id": "cta_label", "label": "טקסט כפתור", "default": "להרכבת הזמנה" },
+    { "type": "text", "id": "cta_link", "label": "קישור כפתור", "default": "#b2b-order" }
+  ],
+  "blocks": [
+    {
+      "name": "יתרון",
+      "type": "prop",
+      "settings": [
+        {
+          "type": "select", "id": "icon", "label": "אייקון", "default": "leaf",
+          "options": [
+            { "value": "leaf", "label": "עלה" },
+            { "value": "package", "label": "חבילה" },
+            { "value": "truck", "label": "משלוח" },
+            { "value": "receipt", "label": "חשבונית" },
+            { "value": "shield", "label": "מגן" }
+          ]
+        },
+        { "type": "text", "id": "title", "label": "כותרת", "default": "יתרון" },
+        { "type": "text", "id": "text", "label": "תיאור" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "B2B Hero",
+      "blocks": [
+        { "type": "prop", "settings": { "icon": "leaf", "title": "טבעי וישיר מהיצרן", "text": "תוצרת טבעית באיכות גבוהה, בלי מתווכים" } },
+        { "type": "prop", "settings": { "icon": "package", "title": "הכל מספק אחד", "text": "תה, סנגריה, מאצ'ה, סמודי ואביזרים בהזמנה אחת" } },
+        { "type": "prop", "settings": { "icon": "receipt", "title": "נוחות תפעולית", "text": "הזמנה מהירה, תשלום מאובטח וחשבונית מס" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

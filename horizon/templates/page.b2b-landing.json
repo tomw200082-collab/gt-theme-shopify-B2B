@@ -1,247 +1,45 @@
 {
   "sections": {
     "hero": {
-      "type": "section",
+      "type": "b2b-hero",
       "name": "B2B Hero",
       "blocks": {
-        "overline": {
-          "type": "text",
+        "p1": {
+          "type": "prop",
           "settings": {
-            "text": "<p>מכירות לעסקים · B2B</p>",
-            "width": "100%",
-            "max_width": "normal",
-            "alignment": "center",
-            "type_preset": "h6",
-            "font": "var(--font-primary--family)",
-            "wrap": "pretty"
+            "icon": "leaf",
+            "title": "טבעי וישיר מהיצרן",
+            "text": "תוצרת טבעית באיכות גבוהה, בלי מתווכים ובלי הפתעות"
           }
         },
-        "title": {
-          "type": "text",
+        "p2": {
+          "type": "prop",
           "settings": {
-            "text": "<h1>GT Everyday לעסקים</h1>",
-            "width": "100%",
-            "max_width": "normal",
-            "alignment": "center",
-            "type_preset": "h1",
-            "font": "var(--font-primary--family)",
-            "wrap": "pretty"
+            "icon": "package",
+            "title": "הכל מספק אחד",
+            "text": "תמציות תה, סנגריה, מאצ'ה, סמודי ואביזרים — בהזמנה אחת"
           }
         },
-        "subtitle": {
-          "type": "text",
+        "p3": {
+          "type": "prop",
           "settings": {
-            "text": "<p>משקאות טבעיים לבתי קפה, מסעדות ואירועים — ישירות מהיצרן, במחיר אחיד ושקוף</p>",
-            "width": "100%",
-            "max_width": "narrow",
-            "alignment": "center",
-            "type_preset": "rte",
-            "font": "var(--font-primary--family)",
-            "wrap": "pretty"
+            "icon": "receipt",
+            "title": "נוחות תפעולית לעסק",
+            "text": "הזמנה מהירה, תשלום מאובטח וחשבונית מס מסודרת"
           }
-        },
-        "cta": {
-          "type": "button",
-          "settings": {
-            "label": "להרכבת הזמנה",
-            "link": "#b2b-order",
-            "style_class": "button",
-            "width": "fit-content",
-            "width_mobile": "fit-content"
-          }
-        },
-        "props": {
-          "type": "group",
-          "settings": {
-            "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "center",
-            "vertical_alignment": "flex-start",
-            "gap": 32,
-            "width": "fill",
-            "inherit_color_scheme": true,
-            "padding-block-start": 24
-          },
-          "blocks": {
-            "p1": {
-              "type": "group",
-              "settings": {
-                "content_direction": "column",
-                "horizontal_alignment_flex_direction_column": "center",
-                "gap": 8,
-                "width": "custom",
-                "custom_width": 30,
-                "width_mobile": "fill",
-                "inherit_color_scheme": true,
-                "padding-block-start": 8,
-                "padding-block-end": 8
-              },
-              "blocks": {
-                "icon": {
-                  "type": "icon",
-                  "settings": {
-                    "icon": "leaf",
-                    "width": 28
-                  }
-                },
-                "ttl": {
-                  "type": "text",
-                  "settings": {
-                    "text": "<h5>טבעי וישיר מהיצרן</h5>",
-                    "width": "100%",
-                    "max_width": "normal",
-                    "alignment": "center",
-                    "type_preset": "h5",
-                    "font": "var(--font-primary--family)",
-                    "wrap": "pretty"
-                  }
-                },
-                "dsc": {
-                  "type": "text",
-                  "settings": {
-                    "text": "<p>תוצרת טבעית באיכות גבוהה, בלי מתווכים ובלי הפתעות</p>",
-                    "width": "100%",
-                    "max_width": "narrow",
-                    "alignment": "center",
-                    "type_preset": "rte",
-                    "font": "var(--font-primary--family)",
-                    "wrap": "pretty"
-                  }
-                }
-              },
-              "block_order": [
-                "icon",
-                "ttl",
-                "dsc"
-              ]
-            },
-            "p2": {
-              "type": "group",
-              "settings": {
-                "content_direction": "column",
-                "horizontal_alignment_flex_direction_column": "center",
-                "gap": 8,
-                "width": "custom",
-                "custom_width": 30,
-                "width_mobile": "fill",
-                "inherit_color_scheme": true,
-                "padding-block-start": 8,
-                "padding-block-end": 8
-              },
-              "blocks": {
-                "icon": {
-                  "type": "icon",
-                  "settings": {
-                    "icon": "box",
-                    "width": 28
-                  }
-                },
-                "ttl": {
-                  "type": "text",
-                  "settings": {
-                    "text": "<h5>הכל מספק אחד</h5>",
-                    "width": "100%",
-                    "max_width": "normal",
-                    "alignment": "center",
-                    "type_preset": "h5",
-                    "font": "var(--font-primary--family)",
-                    "wrap": "pretty"
-                  }
-                },
-                "dsc": {
-                  "type": "text",
-                  "settings": {
-                    "text": "<p>תמציות תה, סנגריה, מאצ'ה, סמודי ואביזרים — בהזמנה אחת</p>",
-                    "width": "100%",
-                    "max_width": "narrow",
-                    "alignment": "center",
-                    "type_preset": "rte",
-                    "font": "var(--font-primary--family)",
-                    "wrap": "pretty"
-                  }
-                }
-              },
-              "block_order": [
-                "icon",
-                "ttl",
-                "dsc"
-              ]
-            },
-            "p3": {
-              "type": "group",
-              "settings": {
-                "content_direction": "column",
-                "horizontal_alignment_flex_direction_column": "center",
-                "gap": 8,
-                "width": "custom",
-                "custom_width": 30,
-                "width_mobile": "fill",
-                "inherit_color_scheme": true,
-                "padding-block-start": 8,
-                "padding-block-end": 8
-              },
-              "blocks": {
-                "icon": {
-                  "type": "icon",
-                  "settings": {
-                    "icon": "truck",
-                    "width": 28
-                  }
-                },
-                "ttl": {
-                  "type": "text",
-                  "settings": {
-                    "text": "<h5>נוחות תפעולית לעסק</h5>",
-                    "width": "100%",
-                    "max_width": "normal",
-                    "alignment": "center",
-                    "type_preset": "h5",
-                    "font": "var(--font-primary--family)",
-                    "wrap": "pretty"
-                  }
-                },
-                "dsc": {
-                  "type": "text",
-                  "settings": {
-                    "text": "<p>הזמנה מהירה, תשלום מאובטח וחשבונית מס מסודרת</p>",
-                    "width": "100%",
-                    "max_width": "narrow",
-                    "alignment": "center",
-                    "type_preset": "rte",
-                    "font": "var(--font-primary--family)",
-                    "wrap": "pretty"
-                  }
-                }
-              },
-              "block_order": [
-                "icon",
-                "ttl",
-                "dsc"
-              ]
-            }
-          },
-          "block_order": [
-            "p1",
-            "p2",
-            "p3"
-          ]
         }
       },
       "block_order": [
-        "overline",
-        "title",
-        "subtitle",
-        "cta",
-        "props"
+        "p1",
+        "p2",
+        "p3"
       ],
       "settings": {
-        "content_direction": "column",
-        "horizontal_alignment_flex_direction_column": "center",
-        "gap": 16,
-        "section_width": "page-width",
-        "color_scheme": "scheme-3",
-        "padding-block-start": 72,
-        "padding-block-end": 64
+        "eyebrow": "מכירות לעסקים · B2B",
+        "title": "GT Everyday לעסקים",
+        "subtitle": "משקאות טבעיים לבתי קפה, מסעדות ואירועים — ישירות מהיצרן, במחיר אחיד ושקוף",
+        "cta_label": "להרכבת הזמנה",
+        "cta_link": "#b2b-order"
       }
     },
     "b2b_order": {
