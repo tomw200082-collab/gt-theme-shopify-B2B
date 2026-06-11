@@ -121,3 +121,38 @@ top:var(--header-height). תוקן והועלה.
 **ביצועים:** CSS ‏11KB, ‏JS ‏17KB (לא ממוזער, קריא בכוונה) — נטען רק בדף הנחיתה,
 script defer, תמונות lazy + width/height + aspect-ratio (אפס CLS צפוי), פונטים
 display=swap + preconnect. אין ספריות חיצוניות, אין קוד מת.
+
+## G3 — Make.com + חשבונית ירוקה (חקירה + תוכנית בנייה)
+
+**גישת Make (אומת):** מחובר כ-Tom Witt · org `6913249` ("My Organization", eu1) ·
+team `1240098` ("My Team") · תכנית Teams (premium apps, credentialRequests=on).
+→ יש הרשאה מלאה לבנות תרחישים.
+
+**קונקטור:** אין אפליקציית "חשבונית ירוקה/morning" מובנית ב-Make. נבנה במודולי HTTP
+גנריים (Make: HTTP "Make a request"). (קיים קונקטור Tranzila לסליקה ישראלית — לא נדרש כאן.)
+
+**חוזה ה-API של חשבונית ירוקה (morning) — לאימות מול ה-API החי בזמן הבנייה, לא להמציא:**
+- Base: `https://api.greeninvoice.co.il/api/v1`
+- Auth: `POST /account/token` body `{ "id": "<KEY_ID>", "secret": "<KEY_SECRET>" }`
+  → `{ "token": "<JWT>", "expires": <unix> }`. אח"כ `Authorization: Bearer <token>`.
+- דף תשלום: `POST /payments/form` (מייצר דף סליקה מתארח ומחזיר `url`). שדות עיקריים:
+  `description`, `type` (סוג מסמך שיופק אחרי תשלום), `lang:"he"`, `currency:"ILS"`,
+  `vatType`, `amount`, `maxPayments`, `client{ name, emails[], taxId, address, city,
+  country:"IL", phone, add:true }`, `income[{ description, quantity, price,
+  currency:"ILS", vatType, catalogNum }]`, `remarks`, `successUrl`, `failureUrl`, `notifyUrl`.
+  → תגובה: `{ "errorCode":0, "url":"https://...", "id":"..." }` — ה-`url` הוא דף הסליקה.
+  ⚠️ Apiary (`greeninvoice.docs.apiary.io`) חוסם fetch אוטומטי; השדות לעיל מבוססי-ידע
+  ומקורות פתוחים — יש לאמת מול הסביבה החיה של חשבונית ירוקה בזמן הבנייה ב-Make.
+  מקור רשמי: https://greeninvoice.docs.apiary.io/
+
+**תרחיש Make מתוכנן (מקצה לקצה):**
+1. Custom Webhook (trigger) — מקבל את ה-payload של הטופס.
+2. HTTP → `POST /account/token` (id+secret מ-connection/data store) → token.
+3. HTTP → `POST /payments/form` עם מיפוי: items→income, customer→client, totalILS→amount,
+   successUrl=`https://gteveryday.com/pages/b2b-thank-you`.
+4. Webhook Response → `{ "paymentUrl": "{{url מהשלב הקודם}}" }`.
+ואז בצד ה-theme: להדביק את ה-Webhook URL בהגדרת הסקשן ולהחליף `mode`→`live`.
+
+**חוסם יחיד (סוד שרק טום נותן):** מפתחות API של חשבונית ירוקה (KEY_ID + KEY_SECRET)
+מההגדרות → כלי מפתחים → מפתחות API. בלעדיהם אי אפשר לבדוק/להפעיל את התרחיש,
+ואסור ליצור מסמכים אמיתיים. את הסודות מזינים ישירות ב-Make (לא בצ'אט, לא בריפו).
