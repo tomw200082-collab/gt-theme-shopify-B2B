@@ -137,15 +137,16 @@
   /* ---------- qty interactions ---------- */
   root.addEventListener('click', function (e) {
     var btn = e.target.closest('.b2bof__step'); if (!btn) return;
+    if (btn.classList.contains('b2bof__qv-step')) return;
     var input = btn.parentElement.querySelector('.b2bof__qty-input');
     input.value = clampQty((parseInt(input.value, 10) || 0) + parseInt(btn.dataset.step, 10));
     refresh(parseInt(btn.dataset.step, 10) > 0);
   });
   root.addEventListener('input', function (e) {
-    if (e.target.classList.contains('b2bof__qty-input')) refresh(false);
+    if (e.target.classList.contains('b2bof__qty-input') && !e.target.classList.contains('b2bof__qv-qty')) refresh(false);
   });
   root.addEventListener('change', function (e) {
-    if (e.target.classList.contains('b2bof__qty-input')) { e.target.value = clampQty(e.target.value); refresh(false); }
+    if (e.target.classList.contains('b2bof__qty-input')) { e.target.value = clampQty(e.target.value); if (!e.target.classList.contains('b2bof__qv-qty')) refresh(false); }
   });
   root.addEventListener('focusin', function (e) {
     if (e.target.classList.contains('b2bof__qty-input')) e.target.select();
