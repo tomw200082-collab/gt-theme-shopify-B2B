@@ -11,7 +11,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=Frank+Ruhl+Libre:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap">
 {{ 'b2b-order-form.css' | asset_url | stylesheet_tag }}
 
 <section id="b2b-order" class="b2bof" data-section-id="{{ section.id }}">
@@ -80,23 +80,30 @@
                 data-pid="{{ p.id }}" data-vid="{{ v.id }}"
                 data-sku="{{ v.sku | escape }}" data-title="{{ p.title | escape }}"
                 data-price="{{ v.price }}" {{ block.shopify_attributes }}>
-                <div class="b2bof__img">
+                <div class="b2bof__media{% if p.featured_image == blank %} b2bof__media--empty{% endif %}">
                   {%- if p.featured_image != blank -%}
-                    <img src="{{ p.featured_image | image_url: width: 208, height: 208, crop: 'center' }}"
+                    <img src="{{ p.featured_image | image_url: width: 480, height: 480, crop: 'center' }}"
+                      srcset="{{ p.featured_image | image_url: width: 240, height: 240, crop: 'center' }} 240w, {{ p.featured_image | image_url: width: 480, height: 480, crop: 'center' }} 480w"
+                      sizes="(max-width:767px) 45vw, 212px"
                       alt="{{ p.featured_image.alt | default: p.title | escape }}"
-                      loading="lazy" width="104" height="104" style="aspect-ratio:1/1;">
+                      loading="lazy" width="240" height="240">
+                  {%- else -%}
+                    {{ 'product-apparel-1' | placeholder_svg_tag: 'b2bof__placeholder' }}
                   {%- endif -%}
+                  <span class="b2bof__badge num" aria-hidden="true">0</span>
                 </div>
-                <div class="b2bof__info">
-                  <span class="b2bof__name">{{ p.title }}</span>
+                <div class="b2bof__body">
+                  <h4 class="b2bof__name">{{ p.title }}</h4>
                   {%- if v.sku != blank -%}<span class="b2bof__sku"><bdi>{{ v.sku }}</bdi></span>{%- endif -%}
-                  <span class="b2bof__price num"><bdi>{{ v.price | money }}</bdi> ליחידה{% if block.settings.note != blank %} · {{ block.settings.note }}{% endif %}</span>
-                  <span class="b2bof__line-total num" aria-live="off"></span>
-                </div>
-                <div class="b2bof__qty">
-                  <button type="button" class="b2bof__step" data-step="-1" aria-label="הפחתת כמות — {{ p.title | escape }}">&minus;</button>
-                  <input type="text" class="b2bof__qty-input" inputmode="numeric" pattern="[0-9]*" maxlength="3" value="0" aria-label="כמות — {{ p.title | escape }}">
-                  <button type="button" class="b2bof__step" data-step="1" aria-label="הוספת כמות — {{ p.title | escape }}">+</button>
+                  <div class="b2bof__priceline">
+                    <span class="b2bof__price num"><bdi>{{ v.price | money }}</bdi> <small>ליחידה{% if block.settings.note != blank %} · {{ block.settings.note }}{% endif %}</small></span>
+                    <span class="b2bof__line-total num" aria-live="off"></span>
+                  </div>
+                  <div class="b2bof__qty">
+                    <button type="button" class="b2bof__step" data-step="-1" aria-label="הפחתת כמות — {{ p.title | escape }}">&minus;</button>
+                    <input type="text" class="b2bof__qty-input" inputmode="numeric" pattern="[0-9]*" maxlength="3" value="0" aria-label="כמות — {{ p.title | escape }}">
+                    <button type="button" class="b2bof__step" data-step="1" aria-label="הוספת כמות — {{ p.title | escape }}">+</button>
+                  </div>
                 </div>
               </div>
             {%- endif -%}

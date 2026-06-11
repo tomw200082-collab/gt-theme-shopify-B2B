@@ -52,8 +52,10 @@
       var q = qtyOf(c);
       var unit = parseInt(c.dataset.price, 10); /* agorot */
       var lineEl = c.querySelector('.b2bof__line-total');
+      var badge = c.querySelector('.b2bof__badge');
       c.classList.toggle('is-active', q > 0);
       lineEl.innerHTML = q > 0 ? bdi(fmt.format(unit * q / 100)) : '';
+      if (badge) badge.textContent = q;
       count += q; sum += unit * q;
     });
     return { count: count, sumILS: sum / 100 };
