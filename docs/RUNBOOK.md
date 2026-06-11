@@ -156,3 +156,24 @@ team `1240098` ("My Team") · תכנית Teams (premium apps, credentialRequests
 **חוסם יחיד (סוד שרק טום נותן):** מפתחות API של חשבונית ירוקה (KEY_ID + KEY_SECRET)
 מההגדרות → כלי מפתחים → מפתחות API. בלעדיהם אי אפשר לבדוק/להפעיל את התרחיש,
 ואסור ליצור מסמכים אמיתיים. את הסודות מזינים ישירות ב-Make (לא בצ'אט, לא בריפו).
+
+## G3 — שלד Make שנבנה בפועל ✅ (כבוי עד מפתחות)
+
+- **Webhook** (gateway-webhook) id `3210551` · URL:
+  `https://hook.eu1.make.com/vc6pf7f4m6c1mndnddpxmqslqddovhb6`
+- **Scenario** id `6137437` — "GT B2B → Green Invoice payment", team 1240098, **isActive=false**.
+  זרימה: Webhook(1) → HTTP `POST /account/token`(2) → HTTP `POST /payments/form` Bearer(3)
+  → Webhook Response `{paymentUrl: {{3.data.url}}}`(4).
+- צד theme: `assets/b2b-order-form.js` שולח כעת גם `income[]` ו-`client{}` בפורמט GI
+  (passthrough), בנוסף ל-items/customer. `webhook_url` הוגדר בתבנית בריפו; `mode` עדיין `demo`.
+  ⚠️ ה-theme החי טרם עודכן עם webhook_url/mode=live — זה חלק מסיום G3.
+
+### סיום G3 (אחרי שטום יוצר מפתחות API בחשבונית ירוקה):
+1. ב-Make, תרחיש 6137437, מודול 2 (token): להחליף `__PASTE_GI_KEY_ID__` ו-
+   `__PASTE_GI_KEY_SECRET__` במפתחות האמיתיים (או לחבר Data Store/connection).
+2. להריץ "Run once" + לשלוח הזמנת בדיקה מהדף → לאמת שמודול 3 מחזיר `url`,
+   ולתקן שמות שדות של `/payments/form` מול השגיאות שה-API יחזיר (type/vatType/income).
+3. להפעיל את התרחיש (scheduling: immediately/on-demand).
+4. בעורך ה-theme (סקשן B2B Order Form): לוודא `webhook_url` =
+   `https://hook.eu1.make.com/vc6pf7f4m6c1mndnddpxmqslqddovhb6` ולהחליף `mode`→`live`.
+5. בחשבונית ירוקה: להגדיר אמצעי סליקה פעיל, ו-redirect הצלחה ל-/pages/b2b-thank-you.
