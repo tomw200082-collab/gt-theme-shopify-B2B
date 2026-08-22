@@ -250,12 +250,6 @@
             "nav_label": "מאצ׳ה ואביזרים"
           }
         },
-        "h1": {
-          "type": "product",
-          "settings": {
-            "product": "maruei-טקסית"
-          }
-        },
         "h2": {
           "type": "product",
           "settings": {
@@ -362,7 +356,6 @@
         "s2",
         "s3",
         "g5",
-        "h1",
         "h2",
         "h4",
         "h6",

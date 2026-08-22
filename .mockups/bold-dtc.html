@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GT Everyday לעסקים · הרכבת הזמנה</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Secular+One&family=Heebo:wght@400;500;700;800;900&family=Assistant:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* ── color ── */
+  --green:#1f9d57;
+  --green-bright:#2fb24a;
+  --green-deep:#136b3a;
+  --green-ink:#0e4f2c;
+  --yellow:#ffd23f;
+  --berry:#e8455f;
+  --cream:#fbfaf5;
+  --cream-2:#f3f1e6;
+  --ink:#13231a;
+  --ink-soft:#3a4f43;
+  --line:#dfe3d6;
+  --white:#ffffff;
+
+  /* ── type scale ── */
+  --fs-eyebrow:.82rem;
+  --fs-body:1.05rem;
+  --fs-small:.9rem;
+  --fs-h3:1.35rem;
+  --fs-h2:clamp(2.1rem,6vw,4rem);
+  --fs-hero:clamp(2.8rem,9vw,7rem);
+  --fs-price:clamp(1.5rem,3vw,1.9rem);
+
+  /* ── space ── */
+  --sp-1:.4rem; --sp-2:.75rem; --sp-3:1.1rem; --sp-4:1.6rem;
+  --sp-5:2.4rem; --sp-6:3.6rem; --sp-7:5.5rem;
+
+  /* ── radius / shadow ── */
+  --r-sm:12px; --r-md:20px; --r-lg:30px; --r-xl:44px;
+  --r-pill:999px;
+  --sh-1:0 4px 14px rgba(19,35,26,.08);
+  --sh-2:0 14px 38px rgba(19,35,26,.14);
+  --sh-pop:0 18px 50px rgba(31,157,87,.28);
+  --ring:0 0 0 3px var(--yellow);
+
+  --maxw:1240px;
+  --bar-h:118px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Assistant",system-ui,sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  font-size:var(--fs-body);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:calc(var(--bar-h) + env(safe-area-inset-bottom,0px));
+  overflow-x:hidden;
+}
+h1,h2,h3,.display{font-family:"Secular One","Heebo",sans-serif;font-weight:400;line-height:.98;letter-spacing:-.01em}
+.display-heebo{font-family:"Heebo",sans-serif;font-weight:900}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(1rem,4vw,2.6rem)}
+:focus-visible{outline:none;box-shadow:var(--ring);border-radius:8px}
+
+/* ───────── header ───────── */
+.site-head{
+  position:sticky;top:0;z-index:60;
+  background:rgba(251,250,245,.86);
+  backdrop-filter:saturate(1.4) blur(14px);
+  border-bottom:2px solid var(--ink);
+}
+.head-row{display:flex;align-items:center;gap:var(--sp-4);height:68px}
+.brand{display:flex;align-items:center;gap:.55rem;font-family:"Secular One",sans-serif;font-size:1.45rem;letter-spacing:-.02em}
+.brand .mark{
+  width:34px;height:34px;border-radius:11px;
+  background:var(--green);color:var(--yellow);
+  display:grid;place-items:center;font-size:1.05rem;
+  box-shadow:inset 0 0 0 2px var(--ink);transform:rotate(-6deg);
+}
+.brand b{font-weight:400}
+.brand .leaf{color:var(--green)}
+.head-nav{margin-inline-start:var(--sp-3)}
+.head-nav a{font-weight:700;font-size:var(--fs-small);padding:.4rem .7rem;border-radius:var(--r-pill)}
+.head-nav a:hover{background:var(--cream-2)}
+.head-icons{margin-inline-start:auto;display:flex;align-items:center;gap:.35rem}
+.icon-btn{
+  width:42px;height:42px;border-radius:13px;display:grid;place-items:center;
+  border:2px solid transparent;transition:.18s;
+}
+.icon-btn:hover{border-color:var(--ink);background:var(--white)}
+.icon-btn svg{width:21px;height:21px}
+.icon-btn.cart{position:relative;background:var(--ink);color:var(--yellow)}
+.icon-btn.cart:hover{background:var(--green-ink)}
+.cart-dot{
+  position:absolute;inset-block-start:-5px;inset-inline-start:-5px;
+  min-width:21px;height:21px;padding:0 5px;border-radius:var(--r-pill);
+  background:var(--berry);color:#fff;font-family:"Heebo";font-weight:900;
+  font-size:.72rem;display:grid;place-items:center;border:2px solid var(--cream);
+}
+
+/* ───────── hero ───────── */
+.hero{position:relative;background:var(--green);color:var(--white);overflow:hidden;border-bottom:3px solid var(--ink)}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(120% 90% at 90% -10%,rgba(47,178,74,.9),transparent 55%),
+    radial-gradient(90% 120% at -10% 110%,rgba(14,79,44,.9),transparent 60%),
+    linear-gradient(140deg,var(--green-bright),var(--green-deep));
+  z-index:0;
+}
+/* diagonal sunburst stripes */
+.hero::after{
+  content:"";position:absolute;inset:0;z-index:0;opacity:.10;
+  background:repeating-linear-gradient(115deg,#fff 0 2px,transparent 2px 46px);
+  mix-blend-mode:overlay;
+}
+.hero-grid{position:relative;z-index:2;display:grid;gap:var(--sp-5);
+  grid-template-columns:1.05fr .95fr;align-items:center;
+  padding-block:clamp(2.6rem,6vw,5rem)}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--yellow);color:var(--ink);
+  font-family:"Heebo";font-weight:900;font-size:var(--fs-eyebrow);
+  letter-spacing:.02em;padding:.5rem 1rem;border-radius:var(--r-pill);
+  border:2px solid var(--ink);transform:rotate(-2deg);box-shadow:4px 4px 0 var(--ink);
+}
+.eyebrow .pulse{width:9px;height:9px;border-radius:50%;background:var(--berry);box-shadow:0 0 0 3px rgba(232,69,95,.35)}
+.hero h1{font-size:var(--fs-hero);margin-block:var(--sp-3) var(--sp-2);text-shadow:0 4px 0 rgba(14,79,44,.35)}
+.hero h1 .pop{color:var(--yellow);display:inline-block}
+.hero .lede{font-size:clamp(1.05rem,1.8vw,1.4rem);max-width:34ch;font-weight:600;color:#eafff0}
+.hero-cta-row{margin-block-start:var(--sp-4);display:flex;flex-wrap:wrap;gap:var(--sp-3);align-items:center}
+.btn-mega{
+  display:inline-flex;align-items:center;gap:.6rem;
+  background:var(--yellow);color:var(--ink);
+  font-family:"Heebo";font-weight:900;font-size:1.18rem;
+  padding:1.05rem 1.9rem;border-radius:var(--r-pill);
+  border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink);
+  transition:transform .14s ease,box-shadow .14s ease;
+}
+.btn-mega:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--ink)}
+.btn-mega:active{transform:translate(2px,2px);box-shadow:3px 3px 0 var(--ink)}
+.btn-mega svg{width:22px;height:22px}
+.hero-note{display:flex;align-items:center;gap:.5rem;font-weight:700;font-size:var(--fs-small);color:#d9ffe6}
+.hero-note svg{width:18px;height:18px;flex:none}
+
+/* hero image */
+.hero-media{position:relative}
+.hero-media .frame{
+  position:relative;border-radius:var(--r-xl);overflow:hidden;
+  border:4px solid var(--ink);box-shadow:14px 14px 0 var(--ink);
+  transform:rotate(2deg);background:var(--green-ink);aspect-ratio:4/5;
+}
+.hero-media img{width:100%;height:100%;object-fit:cover}
+.sticker{
+  position:absolute;z-index:3;background:var(--white);color:var(--ink);
+  font-family:"Heebo";font-weight:900;border:3px solid var(--ink);
+  border-radius:var(--r-md);padding:.7rem 1rem;line-height:1;text-align:center;
+  box-shadow:5px 5px 0 var(--ink);
+}
+.sticker small{display:block;font-family:"Assistant";font-weight:700;font-size:.7rem;color:var(--ink-soft);margin-block-start:.25rem}
+.sticker.s1{inset-block-start:-18px;inset-inline-start:-14px;transform:rotate(-8deg);background:var(--yellow)}
+.sticker.s2{inset-block-end:24px;inset-inline-end:-16px;transform:rotate(6deg);font-size:1.4rem;background:var(--berry);color:#fff}
+.sticker.s2 small{color:#ffe2e8}
+
+/* value props band */
+.props{background:var(--ink);color:var(--cream);border-bottom:3px solid var(--green-bright)}
+.props-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.prop{padding:var(--sp-5) var(--sp-4);display:flex;gap:var(--sp-3);position:relative}
+.prop:not(:last-child)::after{content:"";position:absolute;inset-block:18%;inset-inline-end:0;width:2px;background:rgba(255,255,255,.12)}
+.prop .num{
+  font-family:"Secular One";font-size:2.4rem;color:var(--yellow);line-height:1;flex:none;
+}
+.prop h3{font-size:var(--fs-h3);color:var(--white);margin-block-end:.3rem}
+.prop p{font-size:var(--fs-small);color:#c5d3c9;font-weight:500}
+
+/* ───────── order section ───────── */
+.order{padding-block:var(--sp-7) var(--sp-6);position:relative}
+.order-head{display:flex;flex-wrap:wrap;gap:var(--sp-4);align-items:flex-end;justify-content:space-between;margin-block-end:var(--sp-5)}
+.order-head .tag{
+  display:inline-block;background:var(--berry);color:#fff;font-family:"Heebo";font-weight:900;
+  font-size:.8rem;padding:.35rem .85rem;border-radius:var(--r-pill);transform:rotate(-2deg);margin-block-end:.7rem;border:2px solid var(--ink)
+}
+.order-head h2{font-size:var(--fs-h2);max-width:18ch}
+.order-head h2 u{text-decoration:none;color:var(--green);position:relative}
+.order-head h2 u::after{content:"";position:absolute;inset-inline:0;inset-block-end:-2px;height:10px;background:var(--yellow);z-index:-1;border-radius:4px}
+.order-head .sub{color:var(--ink-soft);font-weight:600;max-width:40ch}
+
+/* search + pills */
+.tool-bar{display:flex;flex-wrap:wrap;gap:var(--sp-3);align-items:center;margin-block-end:var(--sp-5)}
+.search-field{position:relative;flex:1 1 320px;min-width:240px}
+.search-field svg{position:absolute;inset-inline-start:1.05rem;inset-block-start:50%;transform:translateY(-50%);width:22px;height:22px;color:var(--green-deep)}
+.search-field input{
+  width:100%;font-family:inherit;font-size:1.05rem;font-weight:600;
+  padding:1rem 3.1rem 1rem 1.2rem;border-radius:var(--r-pill);
+  border:3px solid var(--ink);background:var(--white);color:var(--ink);
+}
+.search-field input::placeholder{color:#8a978d}
+.pills{display:flex;flex-wrap:wrap;gap:.5rem}
+.pill{
+  font-family:"Heebo";font-weight:800;font-size:var(--fs-small);
+  padding:.7rem 1.2rem;border-radius:var(--r-pill);
+  border:3px solid var(--ink);background:var(--white);transition:.16s;
+}
+.pill:hover{background:var(--cream-2)}
+.pill.active{background:var(--green);color:var(--white)}
+
+/* group header */
+.group-head{display:flex;align-items:center;gap:var(--sp-3);margin-block-end:var(--sp-4)}
+.group-head .badge-l{
+  font-family:"Secular One";font-size:1.1rem;background:var(--yellow);color:var(--ink);
+  border:3px solid var(--ink);border-radius:14px;padding:.45rem .8rem;transform:rotate(-3deg);flex:none
+}
+.group-head h3{font-size:1.7rem}
+.group-head .gsub{color:var(--ink-soft);font-weight:600;font-size:var(--fs-small)}
+.group-head .line{flex:1;height:3px;background:var(--ink);border-radius:2px;opacity:.12;min-width:20px}
+
+/* product grid */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-4)}
+.card{
+  position:relative;background:var(--white);border-radius:var(--r-lg);
+  border:3px solid var(--ink);box-shadow:6px 6px 0 rgba(19,35,26,.12);
+  padding:var(--sp-3);display:flex;flex-direction:column;
+  transition:transform .16s ease,box-shadow .16s ease;
+}
+.card:hover{transform:translateY(-4px);box-shadow:9px 12px 0 rgba(19,35,26,.16)}
+.card.selected{border-color:var(--green);box-shadow:8px 8px 0 var(--green);background:linear-gradient(180deg,#f4fff8,#fff)}
+.card-media{position:relative;border-radius:var(--r-md);overflow:hidden;background:var(--cream-2);aspect-ratio:1;border:2px solid var(--line)}
+.card-media img{width:100%;height:100%;object-fit:cover;transition:transform .3s ease}
+.card:hover .card-media img{transform:scale(1.05)}
+.qbadge{
+  position:absolute;inset-block-start:.55rem;inset-inline-start:.55rem;
+  min-width:30px;height:30px;padding:0 .4rem;border-radius:var(--r-pill);
+  background:var(--green);color:#fff;font-family:"Heebo";font-weight:900;font-size:.95rem;
+  display:grid;place-items:center;border:2px solid var(--ink);box-shadow:2px 2px 0 var(--ink);
+  opacity:0;transform:scale(.5);transition:.18s;
+}
+.card.selected .qbadge,.card[data-qty]:not([data-qty="0"]) .qbadge{opacity:1;transform:scale(1)}
+.peek{
+  position:absolute;inset-block-start:.55rem;inset-inline-end:.55rem;
+  width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.92);
+  border:2px solid var(--ink);display:grid;place-items:center;transition:.16s;
+}
+.peek:hover{background:var(--yellow)}
+.peek svg{width:17px;height:17px}
+.card-body{padding-block:var(--sp-3) 0;flex:1;display:flex;flex-direction:column}
+.card h4{font-family:"Heebo";font-weight:900;font-size:1.18rem;letter-spacing:-.01em}
+.card .sku{font-size:.78rem;font-weight:700;color:#9aa79e;margin-block-start:.15rem;direction:ltr;text-align:start}
+.price-row{margin-block:var(--sp-3) var(--sp-3);display:flex;align-items:baseline;gap:.4rem;margin-top:auto}
+.price{font-family:"Secular One";font-size:var(--fs-price);color:var(--green-deep);direction:ltr}
+.price-unit{font-size:.82rem;font-weight:700;color:var(--ink-soft)}
+
+/* stepper */
+.stepper{display:flex;align-items:center;justify-content:space-between;gap:.4rem;
+  background:var(--cream);border:3px solid var(--ink);border-radius:var(--r-pill);padding:.3rem}
+.card.selected .stepper{background:#eafff1;border-color:var(--green)}
+.step-btn{
+  width:42px;height:42px;border-radius:50%;display:grid;place-items:center;
+  background:var(--white);border:2px solid var(--ink);font-family:"Heebo";font-weight:900;
+  transition:.14s;flex:none
+}
+.step-btn:hover{background:var(--green);color:#fff}
+.step-btn svg{width:18px;height:18px}
+.step-btn.plus{background:var(--ink);color:var(--yellow)}
+.step-btn.plus:hover{background:var(--green)}
+.qty-num{font-family:"Heebo";font-weight:900;font-size:1.25rem;min-width:2ch;text-align:center;direction:ltr}
+
+/* ───────── business form ───────── */
+.bizform{margin-block-start:var(--sp-7)}
+.bizform-card{
+  background:var(--ink);color:var(--cream);border-radius:var(--r-xl);
+  border:3px solid var(--ink);padding:clamp(1.6rem,4vw,3rem);
+  position:relative;overflow:hidden;box-shadow:10px 10px 0 var(--green)
+}
+.bizform-card::before{
+  content:"";position:absolute;inset-block-start:-40%;inset-inline-end:-10%;
+  width:340px;height:340px;border-radius:50%;
+  background:radial-gradient(circle,rgba(47,178,74,.4),transparent 70%);z-index:0
+}
+.bizform-head{position:relative;z-index:1;display:flex;align-items:center;gap:var(--sp-3);margin-block-end:var(--sp-5)}
+.bizform-head .ic{width:56px;height:56px;border-radius:16px;background:var(--yellow);color:var(--ink);display:grid;place-items:center;border:3px solid var(--ink);transform:rotate(-5deg);flex:none}
+.bizform-head .ic svg{width:28px;height:28px}
+.bizform-head h3{font-size:2rem;color:var(--white)}
+.bizform-head p{color:#b6c6bc;font-weight:600;font-size:var(--fs-small)}
+.form-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-4)}
+.field{display:flex;flex-direction:column;gap:.45rem}
+.field.full{grid-column:1 / -1}
+.field label{font-family:"Heebo";font-weight:800;font-size:var(--fs-small);color:#dce9e1}
+.field label .req{color:var(--yellow)}
+.field input,.field textarea{
+  font-family:inherit;font-size:1.02rem;font-weight:600;
+  padding:.9rem 1.05rem;border-radius:14px;border:2px solid transparent;
+  background:#1d3327;color:var(--cream);transition:.16s;
+}
+.field input::placeholder,.field textarea::placeholder{color:#7e9388}
+.field input:focus,.field textarea:focus{border-color:var(--yellow);background:#244031;box-shadow:none}
+.field textarea{resize:vertical;min-height:96px}
+
+/* ───────── faq ───────── */
+.faq{padding-block:var(--sp-7) var(--sp-6)}
+.faq h2{font-size:var(--fs-h2);margin-block-end:var(--sp-5)}
+.faq h2 .pop{color:var(--green)}
+.faq-list{display:flex;flex-direction:column;gap:var(--sp-3)}
+.qa{background:var(--white);border:3px solid var(--ink);border-radius:var(--r-md);overflow:hidden;box-shadow:4px 4px 0 rgba(19,35,26,.1)}
+.qa summary{
+  list-style:none;cursor:pointer;display:flex;align-items:center;gap:var(--sp-3);
+  padding:1.25rem var(--sp-4);font-family:"Heebo";font-weight:900;font-size:1.2rem
+}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary .tog{
+  margin-inline-start:auto;width:36px;height:36px;border-radius:50%;flex:none;
+  background:var(--green);color:#fff;display:grid;place-items:center;transition:.2s;border:2px solid var(--ink)
+}
+.qa[open] summary .tog{transform:rotate(45deg);background:var(--berry)}
+.qa .ans{padding:0 var(--sp-4) 1.4rem;color:var(--ink-soft);font-weight:600;max-width:60ch}
+.qa summary .qmark{width:30px;height:30px;flex:none;border-radius:9px;background:var(--yellow);color:var(--ink);display:grid;place-items:center;font-family:"Secular One";border:2px solid var(--ink)}
+
+/* ───────── footer ───────── */
+.site-foot{background:var(--green-ink);color:#cfe8d8;border-top:3px solid var(--ink)}
+.foot-row{display:flex;flex-wrap:wrap;gap:var(--sp-3);align-items:center;justify-content:space-between;padding-block:var(--sp-5)}
+.foot-row .brand{color:#fff}
+.foot-row .brand .mark{background:var(--yellow);color:var(--green-ink)}
+.foot-row small{font-weight:600}
+
+/* ───────── sticky summary bar ───────── */
+.summary{
+  position:fixed;inset-block-end:0;inset-inline:0;z-index:70;
+  background:var(--cream);border-top:3px solid var(--ink);
+  box-shadow:0 -10px 40px rgba(19,35,26,.16);
+  padding-block-end:env(safe-area-inset-bottom,0px);
+}
+.summary-inner{display:flex;align-items:center;gap:var(--sp-4);padding-block:.8rem;flex-wrap:nowrap}
+.sum-totals{display:flex;align-items:center;gap:var(--sp-4);flex:none}
+.sum-block .k{font-size:.72rem;font-weight:800;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.04em}
+.sum-block .v{font-family:"Secular One";font-size:1.5rem;line-height:1;direction:ltr;text-align:start}
+.sum-block .v.tot{color:var(--green-deep)}
+.sum-mid{flex:1;min-width:0}
+.vat-note{font-size:.74rem;font-weight:700;color:var(--ink-soft);margin-block-end:.4rem;display:flex;align-items:center;gap:.4rem}
+.vat-note svg{width:15px;height:15px;flex:none;color:var(--green)}
+.progress-wrap{display:flex;align-items:center;gap:.7rem}
+.progress{flex:1;height:14px;border-radius:var(--r-pill);background:#e4e8d9;border:2px solid var(--ink);overflow:hidden;min-width:80px}
+.progress-bar{height:100%;width:16%;background:linear-gradient(90deg,var(--green-bright),var(--green));border-radius:var(--r-pill);transition:width .3s ease}
+.progress-bar.done{background:linear-gradient(90deg,var(--yellow),var(--green-bright))}
+.min-label{font-family:"Heebo";font-weight:900;font-size:var(--fs-small);white-space:nowrap;color:var(--berry)}
+.min-label.done{color:var(--green-deep)}
+.sum-cta{
+  flex:none;display:inline-flex;align-items:center;gap:.55rem;
+  background:var(--green);color:#fff;font-family:"Heebo";font-weight:900;font-size:1.12rem;
+  padding:1rem 1.7rem;border-radius:var(--r-pill);border:3px solid var(--ink);
+  box-shadow:5px 5px 0 var(--ink);transition:transform .14s,box-shadow .14s;
+}
+.sum-cta:hover:not(:disabled){transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink);background:var(--green-bright)}
+.sum-cta:disabled{background:#a9b8af;cursor:not-allowed;box-shadow:3px 3px 0 rgba(19,35,26,.4)}
+.sum-cta svg{width:20px;height:20px}
+.demo-note{font-size:.72rem;color:var(--ink-soft);font-weight:700;text-align:center;padding-block:0 .55rem;line-height:1.3}
+
+/* ───────── responsive ───────── */
+@media (max-width:1080px){
+  .grid{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:920px){
+  :root{--bar-h:188px}
+  .hero-grid{grid-template-columns:1fr;gap:var(--sp-6)}
+  .hero-media{max-width:440px;margin-inline:auto}
+  .props-grid{grid-template-columns:1fr}
+  .prop:not(:last-child)::after{inset-block:auto;inset-block-end:0;inset-inline:18%;width:auto;height:2px}
+  .summary-inner{flex-wrap:wrap}
+  .sum-mid{order:3;flex-basis:100%}
+  .sum-cta{margin-inline-start:auto}
+}
+@media (max-width:680px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .form-grid{grid-template-columns:1fr}
+  .head-nav{display:none}
+  .order-head h2{font-size:clamp(1.9rem,9vw,2.6rem)}
+}
+@media (max-width:430px){
+  :root{--bar-h:210px}
+  .card{padding:.7rem}
+  .step-btn{width:38px;height:38px}
+  .sum-totals{gap:var(--sp-3)}
+  .sum-block .v{font-size:1.25rem}
+  .sum-cta{font-size:1rem;padding:.85rem 1.2rem}
+  .btn-mega{width:100%;justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<!-- ───────── HEADER ───────── -->
+<header class="site-head">
+  <div class="wrap head-row">
+    <a class="brand" href="#" aria-label="GT Everyday עמוד הבית">
+      <span class="mark" aria-hidden="true">GT</span>
+      <span>GT <b>EVERYDAY</b><span class="leaf"> ·</span></span>
+    </a>
+    <nav class="head-nav" aria-label="ראשי">
+      <a href="#">עמוד הבית</a>
+    </nav>
+    <div class="head-icons">
+      <button class="icon-btn" aria-label="חיפוש">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="החשבון שלי">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+      </button>
+      <button class="icon-btn cart" aria-label="עגלת קניות, 2 פריטים">
+        <span class="cart-dot" id="headCartCount">2</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.2 12.5a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.2L21 8H6"/><circle cx="9" cy="21" r="1.3"/><circle cx="18" cy="21" r="1.3"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ───────── HERO ───────── -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow"><span class="pulse" aria-hidden="true"></span>מכירות לעסקים · B2B</span>
+      <h1>GT Everyday<br><span class="pop">לעסקים</span></h1>
+      <p class="lede">משקאות טבעיים לבתי קפה, מסעדות ואירועים — ישירות מהיצרן, במחיר אחיד ושקוף.</p>
+      <div class="hero-cta-row">
+        <a class="btn-mega" href="#order">
+          להרכבת הזמנה
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 5-7 7 7 7"/></svg>
+        </a>
+        <span class="hero-note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          מינימום הזמנה ₪800 · משלוח בצי שלנו
+        </span>
+      </div>
+    </div>
+    <div class="hero-media">
+      <div class="frame">
+        <img src="https://gteveryday.com/cdn/shop/t/118/assets/gt-hero-energy.webp" alt="משקאות GT Everyday טבעיים" loading="eager">
+      </div>
+      <span class="sticker s1">מהיצרן<small>ללא מתווכים</small></span>
+      <span class="sticker s2">מחיר אחיד<small>לכל עסק</small></span>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── VALUE PROPS ───────── -->
+<section class="props" aria-label="למה GT">
+  <div class="wrap props-grid">
+    <div class="prop">
+      <span class="num">01</span>
+      <div><h3>טבעי וישיר מהיצרן</h3><p>תוצרת טבעית באיכות גבוהה, בלי מתווכים ובלי הפתעות.</p></div>
+    </div>
+    <div class="prop">
+      <span class="num">02</span>
+      <div><h3>הכל מספק אחד</h3><p>תמציות תה, סנגריה, מאצ'ה, סמודי ואביזרים — בהזמנה אחת.</p></div>
+    </div>
+    <div class="prop">
+      <span class="num">03</span>
+      <div><h3>נוחות תפעולית לעסק</h3><p>הזמנה מהירה, קישור לתשלום מאובטח וחשבונית מס מסודרת.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── ORDER ───────── -->
+<main>
+<section class="order wrap" id="order">
+  <div class="order-head">
+    <div>
+      <span class="tag">בניית הזמנה</span>
+      <h2>הרכיבו <u>הזמנה</u> לעסק</h2>
+    </div>
+    <p class="sub">בחרו כמויות, מלאו את פרטי העסק והמשיכו לתשלום מאובטח.</p>
+  </div>
+
+  <!-- search + pills -->
+  <div class="tool-bar">
+    <div class="search-field">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+      <input type="search" placeholder="חיפוש מוצר או מק&quot;ט…" aria-label="חיפוש מוצר או מקט">
+    </div>
+    <div class="pills" role="tablist" aria-label="משפחות מוצר">
+      <button class="pill active" role="tab" aria-selected="true">תמציות</button>
+      <button class="pill" role="tab" aria-selected="false">סנגריה וסמודי</button>
+      <button class="pill" role="tab" aria-selected="false">מאצ'ה ואביזרים</button>
+    </div>
+  </div>
+
+  <!-- group header -->
+  <div class="group-head">
+    <span class="badge-l">1L</span>
+    <div>
+      <h3>תמציות תה · 1 ליטר</h3>
+      <span class="gsub">הליין המלא של תמציות התה שלנו</span>
+    </div>
+    <span class="line" aria-hidden="true"></span>
+  </div>
+
+  <!-- product grid -->
+  <div class="grid" id="grid">
+
+    <article class="card selected" data-qty="2" data-price="65">
+      <div class="card-media">
+        <span class="qbadge">2</span>
+        <button class="peek" aria-label="פרטים על DETOX"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 8h.01M11 12h1v4h1"/><circle cx="12" cy="12" r="9"/></svg></button>
+        <img src="https://gteveryday.com/cdn/shop/files/1_DETOX_6a0599d4-c5b5-453d-9372-492cf7a92096.jpg?height=600&width=600" alt="תמצית תה DETOX 1 ליטר" loading="lazy">
+      </div>
+      <div class="card-body">
+        <h4>DETOX 1000ml</h4>
+        <span class="sku">SKU · GT-DTX-1L</span>
+        <div class="price-row"><span class="price">₪65.00</span><span class="price-unit">ליחידה</span></div>
+        <div class="stepper">
+          <button class="step-btn minus" aria-label="הפחת כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+          <span class="qty-num">2</span>
+          <button class="step-btn plus" aria-label="הוסף כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" data-qty="0" data-price="65">
+      <div class="card-media">
+        <span class="qbadge">0</span>
+        <button class="peek" aria-label="פרטים על FRESH"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 8h.01M11 12h1v4h1"/><circle cx="12" cy="12" r="9"/></svg></button>
+        <img src="https://gteveryday.com/cdn/shop/files/1_FRESH_e2a8d7e1-fd4e-4220-9b4e-2f30ecf45263.jpg?height=600&width=600" alt="תמצית תה FRESH 1 ליטר" loading="lazy">
+      </div>
+      <div class="card-body">
+        <h4>FRESH 1000ml</h4>
+        <span class="sku">SKU · GT-FRS-1L</span>
+        <div class="price-row"><span class="price">₪65.00</span><span class="price-unit">ליחידה</span></div>
+        <div class="stepper">
+          <button class="step-btn minus" aria-label="הפחת כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+          <span class="qty-num">0</span>
+          <button class="step-btn plus" aria-label="הוסף כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </article>
+
+    <article class="card selected" data-qty="2" data-price="65">
+      <div class="card-media">
+        <span class="qbadge">2</span>
+        <button class="peek" aria-label="פרטים על ENERGY"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 8h.01M11 12h1v4h1"/><circle cx="12" cy="12" r="9"/></svg></button>
+        <img src="https://gteveryday.com/cdn/shop/files/1_ENERGY_2dd24aec-f8a6-48c8-bc64-0ec306637bae.jpg?height=600&width=600" alt="תמצית תה ENERGY 1 ליטר" loading="lazy">
+      </div>
+      <div class="card-body">
+        <h4>ENERGY 1000ml</h4>
+        <span class="sku">SKU · GT-ENR-1L</span>
+        <div class="price-row"><span class="price">₪65.00</span><span class="price-unit">ליחידה</span></div>
+        <div class="stepper">
+          <button class="step-btn minus" aria-label="הפחת כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+          <span class="qty-num">2</span>
+          <button class="step-btn plus" aria-label="הוסף כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" data-qty="0" data-price="65">
+      <div class="card-media">
+        <span class="qbadge">0</span>
+        <button class="peek" aria-label="פרטים על CONSCIOUSNESS"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 8h.01M11 12h1v4h1"/><circle cx="12" cy="12" r="9"/></svg></button>
+        <img src="https://gteveryday.com/cdn/shop/files/1_CONSCIOUSNESS_394a7393-898e-4efb-a091-79ffa69783bd.jpg?height=600&width=600" alt="תמצית תה CONSCIOUSNESS 1 ליטר" loading="lazy">
+      </div>
+      <div class="card-body">
+        <h4>CONSCIOUSNESS 1000ml</h4>
+        <span class="sku">SKU · GT-CNS-1L</span>
+        <div class="price-row"><span class="price">₪65.00</span><span class="price-unit">ליחידה</span></div>
+        <div class="stepper">
+          <button class="step-btn minus" aria-label="הפחת כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+          <span class="qty-num">0</span>
+          <button class="step-btn plus" aria-label="הוסף כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" data-qty="0" data-price="65">
+      <div class="card-media">
+        <span class="qbadge">0</span>
+        <button class="peek" aria-label="פרטים על CALM"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 8h.01M11 12h1v4h1"/><circle cx="12" cy="12" r="9"/></svg></button>
+        <img src="https://gteveryday.com/cdn/shop/files/1_CALM_08f7ddf9-7c57-4b8e-88b9-cfa8c4edd868.jpg?height=600&width=600" alt="תמצית תה CALM 1 ליטר" loading="lazy">
+      </div>
+      <div class="card-body">
+        <h4>CALM 1000ml</h4>
+        <span class="sku">SKU · GT-CLM-1L</span>
+        <div class="price-row"><span class="price">₪65.00</span><span class="price-unit">ליחידה</span></div>
+        <div class="stepper">
+          <button class="step-btn minus" aria-label="הפחת כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+          <span class="qty-num">0</span>
+          <button class="step-btn plus" aria-label="הוסף כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" data-qty="0" data-price="65">
+      <div class="card-media">
+        <span class="qbadge">0</span>
+        <button class="peek" aria-label="פרטים על REVIVE"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 8h.01M11 12h1v4h1"/><circle cx="12" cy="12" r="9"/></svg></button>
+        <img src="https://gteveryday.com/cdn/shop/files/1_REVIVE_2ed039f6-1399-4f06-9dd5-fbf0d492f0fa.jpg?height=600&width=600" alt="תמצית תה REVIVE 1 ליטר" loading="lazy">
+      </div>
+      <div class="card-body">
+        <h4>REVIVE 1000ml</h4>
+        <span class="sku">SKU · GT-RVV-1L</span>
+        <div class="price-row"><span class="price">₪65.00</span><span class="price-unit">ליחידה</span></div>
+        <div class="stepper">
+          <button class="step-btn minus" aria-label="הפחת כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+          <span class="qty-num">0</span>
+          <button class="step-btn plus" aria-label="הוסף כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" data-qty="0" data-price="65">
+      <div class="card-media">
+        <span class="qbadge">0</span>
+        <button class="peek" aria-label="פרטים על NAMASTEA"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 8h.01M11 12h1v4h1"/><circle cx="12" cy="12" r="9"/></svg></button>
+        <img src="https://gteveryday.com/cdn/shop/files/DSC_1180_02f0ed20-ead6-43cd-9f2b-cc06a217e1ae.jpg?height=600&width=600" alt="תמצית תה NAMASTEA 1 ליטר" loading="lazy">
+      </div>
+      <div class="card-body">
+        <h4>NAMASTEA 1000ml</h4>
+        <span class="sku">SKU · GT-NMS-1L</span>
+        <div class="price-row"><span class="price">₪65.00</span><span class="price-unit">ליחידה</span></div>
+        <div class="stepper">
+          <button class="step-btn minus" aria-label="הפחת כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+          <span class="qty-num">0</span>
+          <button class="step-btn plus" aria-label="הוסף כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" data-qty="0" data-price="65">
+      <div class="card-media">
+        <span class="qbadge">0</span>
+        <button class="peek" aria-label="פרטים על Desert Infusion"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 8h.01M11 12h1v4h1"/><circle cx="12" cy="12" r="9"/></svg></button>
+        <img src="https://gteveryday.com/cdn/shop/files/gt-desert.jpg?height=600&width=600" alt="תמצית תה Desert Infusion 1 ליטר" loading="lazy">
+      </div>
+      <div class="card-body">
+        <h4>Desert Infusion 1000ml</h4>
+        <span class="sku">SKU · GT-DSR-1L</span>
+        <div class="price-row"><span class="price">₪65.00</span><span class="price-unit">ליחידה</span></div>
+        <div class="stepper">
+          <button class="step-btn minus" aria-label="הפחת כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+          <span class="qty-num">0</span>
+          <button class="step-btn plus" aria-label="הוסף כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </article>
+
+  </div><!-- /grid -->
+
+  <!-- ───────── BUSINESS FORM ───────── -->
+  <div class="bizform">
+    <div class="bizform-card">
+      <div class="bizform-head">
+        <span class="ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-4 7 4v13M9 21v-5h6v5"/></svg>
+        </span>
+        <div>
+          <h3>פרטי העסק והאספקה</h3>
+          <p>הפרטים משמשים להפקת חשבונית מס ולתיאום אספקה בלבד.</p>
+        </div>
+      </div>
+      <form class="form-grid" onsubmit="return false">
+        <div class="field">
+          <label for="f-biz">שם העסק <span class="req">*</span></label>
+          <input id="f-biz" type="text" placeholder="לדוגמה: בית קפה הפינה" required>
+        </div>
+        <div class="field">
+          <label for="f-tax">ח.פ / עוסק מורשה</label>
+          <input id="f-tax" type="text" placeholder="מספר עוסק" dir="ltr">
+        </div>
+        <div class="field">
+          <label for="f-contact">איש קשר <span class="req">*</span></label>
+          <input id="f-contact" type="text" placeholder="שם מלא" required>
+        </div>
+        <div class="field">
+          <label for="f-phone">טלפון <span class="req">*</span></label>
+          <input id="f-phone" type="tel" dir="ltr" placeholder="050-0000000" required>
+        </div>
+        <div class="field">
+          <label for="f-email">אימייל <span class="req">*</span></label>
+          <input id="f-email" type="email" dir="ltr" placeholder="name@business.co.il" required>
+        </div>
+        <div class="field">
+          <label for="f-city">עיר <span class="req">*</span></label>
+          <input id="f-city" type="text" placeholder="עיר" required>
+        </div>
+        <div class="field full">
+          <label for="f-street">רחוב ומספר <span class="req">*</span></label>
+          <input id="f-street" type="text" placeholder="רחוב, מספר, קומה / כניסה" required>
+        </div>
+        <div class="field full">
+          <label for="f-notes">הערות לאספקה</label>
+          <textarea id="f-notes" placeholder="שעות קבלה, איש קשר במקום, הוראות פריקה…"></textarea>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── FAQ ───────── -->
+<section class="faq wrap">
+  <h2>שאלות <span class="pop">נפוצות</span></h2>
+  <div class="faq-list">
+    <details class="qa" open>
+      <summary><span class="qmark">?</span>למי מיועדת ההזמנה העסקית?<span class="tog" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+      <div class="ans">ההזמנה מיועדת לבתי עסק — בתי קפה, מסעדות, ברים, מלונות ואירועים. עובדים ישירות מול היצרן, ללא מתווכים, עם משלוח בצי שלנו.</div>
+    </details>
+    <details class="qa">
+      <summary><span class="qmark">?</span>האם המחירים שונים בין עסקים?<span class="tog" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+      <div class="ans">לא — מחיר אחיד ושקוף לכל העסקים. אותו מחיר לכל לקוח, בלי משא ומתן ובלי הפתעות. המחירים מוצגים ללא מע"מ; מע"מ יתווסף בחשבונית המס.</div>
+    </details>
+    <details class="qa">
+      <summary><span class="qmark">?</span>איך מתבצע התשלום ומה לגבי חשבונית?<span class="tog" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+      <div class="ans">לאחר הרכבת ההזמנה תקבלו קישור לתשלום מאובטח. עם השלמת התשלום מופקת חשבונית מס מסודרת הכוללת מע"מ, ונשלחת לאימייל שמילאתם.</div>
+    </details>
+  </div>
+</section>
+</main>
+
+<!-- ───────── FOOTER ───────── -->
+<footer class="site-foot">
+  <div class="wrap foot-row">
+    <a class="brand" href="#">
+      <span class="mark" aria-hidden="true">GT</span>
+      <span>GT <b>EVERYDAY</b></span>
+    </a>
+    <small>© 2026 GT Everyday</small>
+  </div>
+</footer>
+
+<!-- ───────── STICKY SUMMARY BAR ───────── -->
+<div class="summary" role="region" aria-label="סיכום הזמנה">
+  <div class="wrap summary-inner">
+    <div class="sum-totals">
+      <div class="sum-block">
+        <div class="k">פריטים</div>
+        <div class="v" id="sumCount">2 פריטים</div>
+      </div>
+      <div class="sum-block">
+        <div class="k">סה"כ</div>
+        <div class="v tot" id="sumTotal">₪130.00</div>
+      </div>
+    </div>
+    <div class="sum-mid">
+      <div class="vat-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+        המחירים אינם כוללים מע"מ · מע"מ יתווסף בחשבונית המס
+      </div>
+      <div class="progress-wrap">
+        <div class="progress"><div class="progress-bar" id="progBar" style="width:16%"></div></div>
+        <span class="min-label" id="minLabel">עוד ₪670.00 למינימום ההזמנה</span>
+      </div>
+    </div>
+    <button class="sum-cta" id="checkoutBtn">
+      המשך לתשלום
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </button>
+  </div>
+  <p class="demo-note">מערכת התשלום בהקמה — ההזמנה תוצג לסיכום בלבד ולא תחויב.</p>
+</div>
+
+<script>
+(function(){
+  var MIN = 800;
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var sumCount = document.getElementById('sumCount');
+  var sumTotal = document.getElementById('sumTotal');
+  var progBar  = document.getElementById('progBar');
+  var minLabel = document.getElementById('minLabel');
+  var headCount= document.getElementById('headCartCount');
+  var checkoutBtn = document.getElementById('checkoutBtn');
+
+  function nis(n){ return '₪' + n.toFixed(2); }
+
+  function setQty(card, q){
+    q = Math.max(0, q);
+    card.setAttribute('data-qty', q);
+    card.querySelector('.qty-num').textContent = q;
+    var badge = card.querySelector('.qbadge');
+    if(badge) badge.textContent = q;
+    card.classList.toggle('selected', q > 0);
+    render();
+  }
+
+  function render(){
+    var items = 0, total = 0, lines = 0;
+    cards.forEach(function(c){
+      var q = parseInt(c.getAttribute('data-qty'),10) || 0;
+      var p = parseFloat(c.getAttribute('data-price')) || 0;
+      items += q; total += q * p;
+      if(q > 0) lines++;
+    });
+    sumCount.textContent = items + ' פריטים';
+    sumTotal.textContent = nis(total);
+    headCount.textContent = items;
+
+    var pct = Math.min(100, Math.round(total / MIN * 100));
+    progBar.style.width = (total === 0 ? 2 : pct) + '%';
+
+    if(total >= MIN){
+      progBar.classList.add('done');
+      minLabel.classList.add('done');
+      minLabel.textContent = 'הגעתם למינימום ההזמנה ✓';
+      checkoutBtn.disabled = false;
+    } else {
+      progBar.classList.remove('done');
+      minLabel.classList.remove('done');
+      minLabel.textContent = 'עוד ' + nis(MIN - total) + ' למינימום ההזמנה';
+      checkoutBtn.disabled = total === 0;
+    }
+  }
+
+  cards.forEach(function(card){
+    var q = function(){ return parseInt(card.getAttribute('data-qty'),10) || 0; };
+    card.querySelector('.plus').addEventListener('click', function(){ setQty(card, q()+1); });
+    card.querySelector('.minus').addEventListener('click', function(){ setQty(card, q()-1); });
+  });
+
+  checkoutBtn.addEventListener('click', function(){
+    if(this.disabled) return;
+    alert('מערכת התשלום בהקמה — ההזמנה מוצגת לסיכום בלבד ולא תחויב.');
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

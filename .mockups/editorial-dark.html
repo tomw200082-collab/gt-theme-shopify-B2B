@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GT Everyday לעסקים — הרכבת הזמנה</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700;800;900&family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* ---- color tokens ---- */
+    --bg:#0e140d;
+    --bg-2:#141b12;
+    --bg-3:#1a2317;
+    --panel:#161e13;
+    --panel-2:#1c2618;
+    --line:rgba(201,168,106,.22);
+    --line-soft:rgba(243,234,217,.10);
+    --cream:#f3ead9;
+    --cream-dim:#cdc6b4;
+    --cream-faint:#8f8c7e;
+    --brass:#c9a86a;
+    --brass-bright:#e0c188;
+    --brass-deep:#9c7f48;
+    --sage:#8a9b7a;
+    --sage-deep:#5f7150;
+    --danger:#c97a5a;
+
+    /* ---- type ---- */
+    --serif:"Frank Ruhl Libre", Georgia, "Times New Roman", serif;
+    --sans:"Heebo", system-ui, sans-serif;
+
+    /* ---- type scale ---- */
+    --fs-eyebrow:.72rem;
+    --fs-small:.82rem;
+    --fs-body:1rem;
+    --fs-lede:1.2rem;
+    --fs-h3:1.4rem;
+    --fs-h2:clamp(1.9rem,4vw,3rem);
+    --fs-display:clamp(3rem,9.5vw,7.5rem);
+
+    /* ---- spacing ---- */
+    --sp-1:.35rem;
+    --sp-2:.6rem;
+    --sp-3:1rem;
+    --sp-4:1.6rem;
+    --sp-5:2.4rem;
+    --sp-6:4rem;
+    --sp-7:6.5rem;
+
+    /* ---- radius / shadow ---- */
+    --r-sm:6px;
+    --r-md:12px;
+    --r-lg:18px;
+    --r-pill:999px;
+    --shadow-card:0 24px 60px -28px rgba(0,0,0,.85);
+    --shadow-glow:0 0 80px -20px rgba(201,168,106,.35);
+    --shadow-bar:0 -18px 50px -20px rgba(0,0,0,.8);
+
+    --maxw:1240px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--cream);
+    font-family:var(--sans);
+    font-size:var(--fs-body);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+    padding-bottom:clamp(150px,22vh,180px); /* room for sticky bar */
+  }
+
+  /* ---- film grain + ambient light ---- */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    pointer-events:none; z-index:9000;
+    opacity:.05; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  body::after{
+    content:"";
+    position:fixed; inset:0;
+    pointer-events:none; z-index:0;
+    background:
+      radial-gradient(120% 80% at 70% -10%, rgba(201,168,106,.10), transparent 55%),
+      radial-gradient(100% 90% at 50% 110%, rgba(0,0,0,.55), transparent 60%);
+  }
+
+  .wrap{max-width:var(--maxw); margin-inline:auto; padding-inline:clamp(1.1rem,4vw,2.6rem); position:relative; z-index:1;}
+
+  /* ---- shared bits ---- */
+  .eyebrow{
+    font-family:var(--sans);
+    font-size:var(--fs-eyebrow);
+    font-weight:600;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--brass);
+    margin:0 0 var(--sp-3);
+    display:inline-flex; align-items:center; gap:.7em;
+  }
+  .eyebrow::before{
+    content:""; width:34px; height:1px;
+    background:linear-gradient(to left,var(--brass),transparent);
+    display:inline-block;
+  }
+  .serif{font-family:var(--serif); font-weight:800; line-height:1.04; letter-spacing:-.01em;}
+  .hairline{height:1px; background:linear-gradient(to left,transparent,var(--line),transparent); border:0; margin:0;}
+
+  a{color:inherit; text-decoration:none;}
+
+  /* =========================================================
+     HEADER
+  ========================================================= */
+  .site-header{
+    position:sticky; top:0; z-index:200;
+    backdrop-filter:blur(14px);
+    background:linear-gradient(to bottom,rgba(14,20,13,.92),rgba(14,20,13,.62));
+    border-bottom:1px solid var(--line-soft);
+  }
+  .site-header .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:68px; gap:var(--sp-4);
+  }
+  .wordmark{
+    font-family:var(--serif); font-weight:900;
+    font-size:1.18rem; letter-spacing:.16em;
+    display:inline-flex; align-items:baseline; gap:.45em;
+    color:var(--cream);
+  }
+  .wordmark .gt{
+    color:var(--brass);
+    font-size:1.35rem;
+    -webkit-text-stroke:.4px var(--brass-bright);
+  }
+  .wordmark .ev{font-family:var(--sans); font-weight:600; font-size:.66rem; letter-spacing:.4em; color:var(--cream-faint); text-transform:uppercase;}
+  .head-nav{display:flex; align-items:center; gap:var(--sp-4);}
+  .head-link{
+    font-size:.82rem; font-weight:500; color:var(--cream-dim);
+    letter-spacing:.06em; transition:color .25s;
+  }
+  .head-link:hover{color:var(--brass-bright);}
+  .head-icons{display:flex; align-items:center; gap:.4rem;}
+  .icon-btn{
+    width:40px; height:40px; display:grid; place-items:center;
+    border:1px solid transparent; border-radius:var(--r-pill);
+    color:var(--cream-dim); background:transparent; cursor:pointer;
+    transition:.25s; position:relative;
+  }
+  .icon-btn:hover{color:var(--brass-bright); border-color:var(--line); background:rgba(201,168,106,.06);}
+  .icon-btn svg{width:19px; height:19px;}
+  .cart-dot{
+    position:absolute; inset-block-start:6px; inset-inline-end:6px;
+    width:16px; height:16px; border-radius:50%;
+    background:var(--brass); color:#16110a;
+    font-family:var(--sans); font-weight:700; font-size:.6rem;
+    display:grid; place-items:center; line-height:1;
+  }
+  @media(max-width:560px){ .head-link{display:none;} }
+
+  /* =========================================================
+     HERO
+  ========================================================= */
+  .hero{
+    position:relative; overflow:hidden;
+    border-bottom:1px solid var(--line-soft);
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.05fr .95fr;
+    gap:clamp(1.5rem,4vw,3.5rem); align-items:center;
+    padding-block:clamp(3.2rem,7vw,6rem);
+  }
+  .hero-copy{position:relative; z-index:2;}
+  .hero h1{
+    font-size:var(--fs-display);
+    margin:0 0 var(--sp-3);
+    color:var(--cream);
+  }
+  .hero h1 .accent{
+    display:block; color:var(--brass);
+    font-weight:500; font-style:normal;
+  }
+  .hero .lede{
+    font-size:var(--fs-lede); color:var(--cream-dim);
+    max-width:34ch; margin:0 0 var(--sp-5); font-weight:300;
+  }
+  .hero-cta{display:flex; align-items:center; gap:var(--sp-4); flex-wrap:wrap;}
+
+  .btn{
+    font-family:var(--sans); font-weight:600; font-size:.96rem;
+    letter-spacing:.04em; cursor:pointer; border:0;
+    border-radius:var(--r-pill);
+    padding:.95rem 2rem;
+    display:inline-flex; align-items:center; gap:.7em;
+    transition:transform .25s cubic-bezier(.2,.7,.3,1), box-shadow .25s, background .25s;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg,var(--brass-bright),var(--brass) 55%,var(--brass-deep));
+    color:#16110a; box-shadow:var(--shadow-glow);
+  }
+  .btn-primary:hover{transform:translateY(-3px); box-shadow:0 0 90px -16px rgba(201,168,106,.6);}
+  .btn-primary svg{width:18px;height:18px;}
+  .btn-ghost{
+    background:transparent; color:var(--cream);
+    border:1px solid var(--line); padding:.95rem 1.6rem;
+  }
+  .btn-ghost:hover{border-color:var(--brass); color:var(--brass-bright);}
+
+  .hero-figure{
+    position:relative; z-index:1;
+    border-radius:var(--r-lg);
+    overflow:hidden;
+    aspect-ratio:4/5;
+    box-shadow:var(--shadow-card);
+  }
+  .hero-figure::after{
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(80% 60% at 50% 35%, rgba(201,168,106,.22), transparent 60%),
+               linear-gradient(to top, rgba(14,20,13,.8), transparent 45%);
+    pointer-events:none;
+  }
+  .hero-figure img{
+    width:100%; height:100%; object-fit:cover;
+    filter:saturate(1.05) contrast(1.04) brightness(.96);
+  }
+  .hero-figure .cap{
+    position:absolute; inset-inline-start:18px; inset-block-end:16px;
+    z-index:2; font-size:.74rem; letter-spacing:.18em;
+    text-transform:uppercase; color:var(--cream-dim);
+    display:flex; align-items:center; gap:.6em;
+  }
+  .hero-figure .cap .num{font-family:var(--serif); color:var(--brass-bright); font-size:1rem; font-weight:700;}
+
+  /* value props */
+  .valprops{
+    display:grid; grid-template-columns:repeat(3,1fr);
+    border-top:1px solid var(--line-soft);
+  }
+  .valprop{
+    padding:clamp(1.4rem,3vw,2.4rem) clamp(1rem,2.5vw,2rem);
+    border-inline-start:1px solid var(--line-soft);
+    position:relative;
+  }
+  .valprop:first-child{border-inline-start:0;}
+  .valprop .vnum{
+    font-family:var(--serif); font-weight:700;
+    color:var(--brass); font-size:.95rem; letter-spacing:.1em;
+    display:block; margin-bottom:.7rem; opacity:.85;
+  }
+  .valprop h3{
+    font-family:var(--serif); font-weight:700; font-size:1.3rem;
+    margin:0 0 .4rem; color:var(--cream);
+  }
+  .valprop p{margin:0; font-size:.92rem; color:var(--cream-faint); line-height:1.55;}
+
+  @media(max-width:880px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-figure{aspect-ratio:16/12; order:-1;}
+    .valprops{grid-template-columns:1fr;}
+    .valprop{border-inline-start:0; border-top:1px solid var(--line-soft);}
+    .valprop:first-child{border-top:0;}
+  }
+
+  /* =========================================================
+     ORDER SECTION
+  ========================================================= */
+  .section{padding-block:clamp(3rem,7vw,5.5rem);}
+  .section-head{max-width:46ch; margin-bottom:var(--sp-5);}
+  .section-head h2{font-size:var(--fs-h2); margin:0 0 var(--sp-2); color:var(--cream);}
+  .section-head .sub{font-size:1.05rem; color:var(--cream-dim); margin:0; font-weight:300;}
+
+  /* toolbar: search + pills */
+  .order-tools{
+    display:flex; flex-wrap:wrap; gap:var(--sp-3);
+    align-items:center; justify-content:space-between;
+    margin-bottom:var(--sp-5);
+    padding-bottom:var(--sp-4);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .searchbox{
+    position:relative; flex:1 1 280px; min-width:240px; max-width:430px;
+  }
+  .searchbox svg{
+    position:absolute; inset-inline-start:16px; inset-block-start:50%;
+    transform:translateY(-50%); width:18px; height:18px; color:var(--brass);
+  }
+  .searchbox input{
+    width:100%; padding:.85rem 3rem .85rem 1.2rem;
+    background:var(--panel); border:1px solid var(--line);
+    color:var(--cream); border-radius:var(--r-pill);
+    font-family:var(--sans); font-size:.95rem;
+    transition:.25s;
+  }
+  .searchbox input::placeholder{color:var(--cream-faint);}
+  .searchbox input:focus{outline:0; border-color:var(--brass); box-shadow:0 0 0 4px rgba(201,168,106,.12);}
+
+  .pills{display:flex; gap:.5rem; flex-wrap:wrap;}
+  .pill{
+    font-size:.86rem; font-weight:500; letter-spacing:.03em;
+    padding:.55rem 1.15rem; border-radius:var(--r-pill);
+    border:1px solid var(--line); color:var(--cream-dim);
+    background:transparent; cursor:pointer; transition:.25s;
+  }
+  .pill:hover{color:var(--brass-bright); border-color:var(--brass);}
+  .pill.active{
+    background:linear-gradient(135deg,var(--brass-bright),var(--brass-deep));
+    color:#16110a; border-color:transparent; font-weight:600;
+  }
+
+  /* group header */
+  .group-head{
+    display:flex; align-items:flex-end; justify-content:space-between;
+    gap:var(--sp-3); margin-bottom:var(--sp-4); flex-wrap:wrap;
+  }
+  .group-head .gh-left{display:flex; align-items:baseline; gap:1rem;}
+  .group-head .g-index{
+    font-family:var(--serif); font-weight:700; font-size:.85rem;
+    color:var(--brass); letter-spacing:.18em; white-space:nowrap;
+  }
+  .group-head h3{
+    font-family:var(--serif); font-weight:800; font-size:var(--fs-h3);
+    margin:0; color:var(--cream);
+  }
+  .group-head .g-sub{font-size:.9rem; color:var(--cream-faint); margin:0;}
+  .group-head .g-count{
+    font-size:.78rem; letter-spacing:.1em; color:var(--cream-faint);
+    border:1px solid var(--line-soft); border-radius:var(--r-pill);
+    padding:.4rem .9rem; white-space:nowrap;
+  }
+
+  /* product grid */
+  .grid{
+    display:grid; gap:clamp(1rem,2vw,1.4rem);
+    grid-template-columns:repeat(4,1fr);
+  }
+  @media(max-width:1080px){ .grid{grid-template-columns:repeat(3,1fr);} }
+  @media(max-width:720px){ .grid{grid-template-columns:repeat(2,1fr);} }
+
+  .card{
+    position:relative;
+    background:linear-gradient(180deg,var(--panel),var(--bg-2));
+    border:1px solid var(--line-soft);
+    border-radius:var(--r-md);
+    padding:var(--sp-3);
+    display:flex; flex-direction:column;
+    transition:transform .3s cubic-bezier(.2,.7,.3,1), border-color .3s, box-shadow .3s;
+    overflow:hidden;
+  }
+  .card::before{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background:radial-gradient(70% 50% at 50% 12%, rgba(201,168,106,.12), transparent 60%);
+    opacity:0; transition:opacity .3s;
+  }
+  .card:hover{transform:translateY(-5px); border-color:var(--line); box-shadow:var(--shadow-card);}
+  .card:hover::before{opacity:1;}
+
+  .card.selected{
+    border-color:var(--brass);
+    background:linear-gradient(180deg,#1f2717,#181f12);
+    box-shadow:0 22px 55px -26px rgba(0,0,0,.9), inset 0 0 0 1px rgba(201,168,106,.25);
+  }
+  .card.selected::before{opacity:1;}
+
+  .count-badge{
+    position:absolute; inset-block-start:12px; inset-inline-start:12px;
+    z-index:4; min-width:26px; height:26px; padding:0 .5rem;
+    border-radius:var(--r-pill);
+    background:linear-gradient(135deg,var(--brass-bright),var(--brass-deep));
+    color:#16110a; font-weight:800; font-size:.78rem;
+    display:none; align-items:center; justify-content:center;
+    box-shadow:0 4px 16px -4px rgba(201,168,106,.7);
+  }
+  .card.selected .count-badge{display:inline-flex;}
+
+  .card-media{
+    position:relative;
+    aspect-ratio:1/1;
+    border-radius:var(--r-sm);
+    overflow:hidden;
+    margin-bottom:var(--sp-3);
+    background:radial-gradient(60% 60% at 50% 45%, #232d1d, #11160e);
+  }
+  .card-media::after{
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(60% 45% at 50% 70%, rgba(201,168,106,.18), transparent 65%);
+    mix-blend-mode:screen; pointer-events:none;
+  }
+  .card-media img{
+    width:100%; height:100%; object-fit:contain;
+    padding:6%;
+    filter:drop-shadow(0 18px 26px rgba(0,0,0,.55)) saturate(1.05);
+    transition:transform .45s cubic-bezier(.2,.7,.3,1);
+  }
+  .card:hover .card-media img{transform:scale(1.05);}
+
+  .quickview{
+    position:absolute; inset-block-end:8px; inset-inline-end:8px; z-index:3;
+    font-size:.7rem; letter-spacing:.1em; font-weight:500;
+    color:var(--cream-dim);
+    background:rgba(14,20,13,.7); backdrop-filter:blur(6px);
+    border:1px solid var(--line-soft);
+    border-radius:var(--r-pill);
+    padding:.3rem .7rem .3rem .55rem;
+    display:inline-flex; align-items:center; gap:.35em; cursor:pointer;
+    transition:.25s; opacity:0; transform:translateY(6px);
+  }
+  .quickview svg{width:13px; height:13px;}
+  .card:hover .quickview, .card:focus-within .quickview{opacity:1; transform:translateY(0);}
+  .quickview:hover{color:var(--brass-bright); border-color:var(--brass);}
+
+  .card-name{
+    font-family:var(--serif); font-weight:700; font-size:1.12rem;
+    color:var(--cream); margin:0 0 .15rem; letter-spacing:.01em;
+    line-height:1.2;
+  }
+  .card-sku{font-size:.72rem; letter-spacing:.12em; color:var(--cream-faint); margin:0 0 .6rem; direction:ltr; text-align:start;}
+
+  .card-foot{
+    margin-top:auto; padding-top:var(--sp-3);
+    border-top:1px solid var(--line-soft);
+    display:flex; align-items:center; justify-content:space-between; gap:.6rem;
+  }
+  .price{display:flex; flex-direction:column; line-height:1.1;}
+  .price .amount{font-family:var(--serif); font-weight:700; font-size:1.18rem; color:var(--cream); direction:ltr;}
+  .price .per{font-size:.68rem; letter-spacing:.08em; color:var(--cream-faint);}
+
+  /* stepper */
+  .stepper{
+    display:inline-flex; align-items:center;
+    border:1px solid var(--line); border-radius:var(--r-pill);
+    background:var(--bg-3); overflow:hidden;
+  }
+  .selected .stepper{border-color:var(--brass);}
+  .step-btn{
+    width:34px; height:34px; border:0; background:transparent;
+    color:var(--cream); cursor:pointer; font-size:1.1rem;
+    display:grid; place-items:center; transition:.2s;
+  }
+  .step-btn:hover{background:rgba(201,168,106,.14); color:var(--brass-bright);}
+  .step-btn svg{width:14px; height:14px;}
+  .step-val{
+    min-width:30px; text-align:center;
+    font-family:var(--sans); font-weight:700; font-size:.95rem;
+    color:var(--cream); border:0; background:transparent;
+    -moz-appearance:textfield; appearance:textfield;
+    padding:0;
+  }
+  .step-val::-webkit-outer-spin-button,
+  .step-val::-webkit-inner-spin-button{-webkit-appearance:none; margin:0;}
+
+  /* =========================================================
+     BUSINESS FORM
+  ========================================================= */
+  .biz-form{
+    margin-top:var(--sp-6);
+    background:linear-gradient(180deg,var(--panel-2),var(--bg-2));
+    border:1px solid var(--line);
+    border-radius:var(--r-lg);
+    padding:clamp(1.6rem,4vw,3rem);
+    position:relative; overflow:hidden;
+  }
+  .biz-form::before{
+    content:""; position:absolute; inset-block-start:0; inset-inline-end:0;
+    width:240px; height:240px; pointer-events:none;
+    background:radial-gradient(circle at top left,rgba(201,168,106,.12),transparent 70%);
+  }
+  .biz-form .form-head{display:flex; align-items:center; gap:.9rem; margin-bottom:var(--sp-5);}
+  .biz-form .form-head .ico{
+    width:42px; height:42px; flex:none; border-radius:var(--r-sm);
+    display:grid; place-items:center;
+    border:1px solid var(--line); color:var(--brass);
+    background:rgba(201,168,106,.06);
+  }
+  .biz-form .form-head .ico svg{width:20px;height:20px;}
+  .biz-form h3{font-family:var(--serif); font-weight:800; font-size:1.5rem; margin:0; color:var(--cream);}
+  .biz-form .form-head p{margin:.1rem 0 0; font-size:.85rem; color:var(--cream-faint);}
+
+  .form-grid{
+    display:grid; grid-template-columns:repeat(2,1fr);
+    gap:var(--sp-3) var(--sp-4);
+  }
+  .field{display:flex; flex-direction:column; gap:.4rem;}
+  .field.full{grid-column:1 / -1;}
+  .field label{font-size:.82rem; font-weight:500; letter-spacing:.04em; color:var(--cream-dim);}
+  .field label .req{color:var(--brass); margin-inline-start:.15em;}
+  .field input, .field textarea{
+    font-family:var(--sans); font-size:.95rem;
+    background:var(--bg); border:1px solid var(--line-soft);
+    color:var(--cream); border-radius:var(--r-sm);
+    padding:.78rem .9rem; transition:.25s; width:100%;
+  }
+  .field input::placeholder, .field textarea::placeholder{color:#6f6c5f;}
+  .field input:focus, .field textarea:focus{
+    outline:0; border-color:var(--brass);
+    box-shadow:0 0 0 4px rgba(201,168,106,.10); background:#0c1109;
+  }
+  .field textarea{resize:vertical; min-height:96px;}
+  @media(max-width:640px){ .form-grid{grid-template-columns:1fr;} }
+
+  /* =========================================================
+     FAQ
+  ========================================================= */
+  .faq-section{border-top:1px solid var(--line-soft);}
+  .faq-list{display:grid; gap:.7rem; max-width:760px;}
+  details.faq{
+    border:1px solid var(--line-soft); border-radius:var(--r-md);
+    background:linear-gradient(180deg,var(--panel),var(--bg-2));
+    padding:0 var(--sp-4); transition:border-color .3s, background .3s;
+  }
+  details.faq[open]{border-color:var(--line); background:linear-gradient(180deg,var(--panel-2),var(--bg-2));}
+  details.faq summary{
+    list-style:none; cursor:pointer;
+    padding:1.2rem 0; display:flex; align-items:center; justify-content:space-between; gap:1rem;
+    font-family:var(--serif); font-weight:700; font-size:1.12rem; color:var(--cream);
+  }
+  details.faq summary::-webkit-details-marker{display:none;}
+  details.faq summary .q-ico{
+    flex:none; width:28px; height:28px; border-radius:50%;
+    border:1px solid var(--line); display:grid; place-items:center;
+    color:var(--brass); transition:transform .35s, background .25s;
+  }
+  details.faq summary .q-ico svg{width:13px; height:13px;}
+  details.faq[open] summary .q-ico{transform:rotate(45deg); background:rgba(201,168,106,.1);}
+  details.faq .answer{
+    padding:0 0 1.3rem; margin:0; color:var(--cream-dim);
+    font-size:.96rem; line-height:1.7; font-weight:300;
+    border-top:1px solid var(--line-soft); padding-top:1.1rem;
+  }
+  details.faq .answer strong{color:var(--brass-bright); font-weight:600;}
+
+  /* =========================================================
+     FOOTER
+  ========================================================= */
+  .site-footer{
+    border-top:1px solid var(--line-soft);
+    padding-block:var(--sp-5);
+    text-align:center;
+  }
+  .site-footer .wordmark{justify-content:center; margin-bottom:.6rem; font-size:1.3rem;}
+  .site-footer p{margin:0; font-size:.82rem; color:var(--cream-faint); letter-spacing:.05em;}
+
+  /* =========================================================
+     STICKY SUMMARY BAR
+  ========================================================= */
+  .summary-bar{
+    position:fixed; inset-inline:0; inset-block-end:0; z-index:500;
+    background:linear-gradient(to top,rgba(10,15,9,.99),rgba(16,22,14,.96));
+    backdrop-filter:blur(16px);
+    border-top:1px solid var(--line);
+    box-shadow:var(--shadow-bar);
+  }
+  .summary-bar .wrap{
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    align-items:center; gap:clamp(.8rem,2.5vw,2rem);
+    padding-block:.95rem;
+  }
+  .sum-totals{display:flex; align-items:baseline; gap:1.1rem; white-space:nowrap;}
+  .sum-items{font-size:.85rem; color:var(--cream-dim); letter-spacing:.04em;}
+  .sum-items b{color:var(--cream); font-weight:600;}
+  .sum-total{display:flex; align-items:baseline; gap:.4rem;}
+  .sum-total .lbl{font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--cream-faint);}
+  .sum-total .val{font-family:var(--serif); font-weight:800; font-size:1.7rem; color:var(--brass-bright); direction:ltr; line-height:1;}
+  .sum-vat{font-size:.7rem; color:var(--cream-faint); letter-spacing:.02em; display:block; margin-top:.25rem;}
+
+  .sum-progress{min-width:0;}
+  .sum-progress .track{
+    height:6px; border-radius:var(--r-pill);
+    background:rgba(243,234,217,.10); overflow:hidden; margin-bottom:.4rem;
+  }
+  .sum-progress .fill{
+    height:100%; width:16%;
+    background:linear-gradient(to left,var(--brass-bright),var(--sage));
+    border-radius:var(--r-pill);
+    transition:width .5s cubic-bezier(.2,.7,.3,1);
+  }
+  .sum-progress.met .fill{background:linear-gradient(to left,var(--sage),var(--brass-bright));}
+  .sum-progress .plbl{font-size:.76rem; color:var(--cream-faint); letter-spacing:.03em;}
+  .sum-progress .plbl b{color:var(--brass-bright); font-weight:600;}
+  .sum-progress.met .plbl b{color:var(--sage);}
+
+  .sum-cta{display:flex; flex-direction:column; align-items:stretch; gap:.4rem; white-space:nowrap;}
+  .sum-cta .btn{justify-content:center;}
+  .sum-cta .demo-note{font-size:.66rem; color:var(--cream-faint); text-align:center; max-width:260px; line-height:1.4;}
+
+  @media(max-width:880px){
+    .summary-bar .wrap{
+      grid-template-columns:1fr auto;
+      grid-template-areas:"totals cta" "prog prog";
+      gap:.55rem 1rem; padding-block:.75rem;
+    }
+    .sum-totals{grid-area:totals; flex-direction:column; gap:.15rem; align-items:flex-start;}
+    .sum-total .val{font-size:1.35rem;}
+    .sum-vat{display:none;}
+    .sum-cta{grid-area:cta;}
+    .sum-cta .demo-note{display:none;}
+    .sum-progress{grid-area:prog;}
+  }
+  @media(max-width:430px){
+    .sum-cta .btn{padding:.8rem 1.2rem; font-size:.88rem;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ========================= HEADER ========================= -->
+<header class="site-header">
+  <div class="wrap">
+    <a href="#" class="wordmark" aria-label="GT Everyday">
+      <span class="gt">GT</span><span class="ev">Everyday</span>
+    </a>
+    <nav class="head-nav" aria-label="ניווט ראשי">
+      <a href="#" class="head-link">עמוד הבית</a>
+      <div class="head-icons">
+        <button class="icon-btn" aria-label="חיפוש">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+        </button>
+        <button class="icon-btn" aria-label="חשבון">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M5 20c0-3.3 3.1-6 7-6s7 2.7 7 6"/></svg>
+        </button>
+        <button class="icon-btn" aria-label="עגלה">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h2l1.4 11.4a1.5 1.5 0 0 0 1.5 1.3h8.2a1.5 1.5 0 0 0 1.5-1.2L20 8H6.2"/><circle cx="9.5" cy="20.5" r="1.2"/><circle cx="17.5" cy="20.5" r="1.2"/></svg>
+          <span class="cart-dot" id="cartDot">2</span>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- ========================= HERO ========================= -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">מכירות לעסקים · B2B</span>
+      <h1 class="serif">GT Everyday<span class="accent">לעסקים</span></h1>
+      <p class="lede">משקאות טבעיים לבתי קפה, מסעדות ואירועים — ישירות מהיצרן, במחיר אחיד ושקוף.</p>
+      <div class="hero-cta">
+        <a href="#order" class="btn btn-primary">
+          להרכבת הזמנה
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+        </a>
+        <a href="#order" class="btn btn-ghost">לקטלוג המלא</a>
+      </div>
+    </div>
+    <figure class="hero-figure">
+      <img src="https://gteveryday.com/cdn/shop/t/118/assets/gt-hero-energy.webp" alt="קנקן משקה טבעי של GT Everyday זוהר על רקע כהה" loading="eager">
+      <figcaption class="cap"><span class="num">01</span> מהיצרן · ישירות אליכם</figcaption>
+    </figure>
+  </div>
+
+  <!-- value props -->
+  <div class="wrap">
+    <hr class="hairline" style="margin-bottom:0">
+  </div>
+  <div class="wrap">
+    <div class="valprops">
+      <article class="valprop">
+        <span class="vnum">I</span>
+        <h3>טבעי וישיר מהיצרן</h3>
+        <p>תוצרת טבעית באיכות גבוהה, בלי מתווכים ובלי הפתעות.</p>
+      </article>
+      <article class="valprop">
+        <span class="vnum">II</span>
+        <h3>הכל מספק אחד</h3>
+        <p>תמציות תה, סנגריה, מאצ'ה, סמודי ואביזרים — בהזמנה אחת.</p>
+      </article>
+      <article class="valprop">
+        <span class="vnum">III</span>
+        <h3>נוחות תפעולית לעסק</h3>
+        <p>הזמנה מהירה, קישור לתשלום מאובטח וחשבונית מס מסודרת.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= ORDER ========================= -->
+<section class="section" id="order">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">הרכבת הזמנה</span>
+      <h2 class="serif">הרכיבו הזמנה לעסק</h2>
+      <p class="sub">בחרו כמויות, מלאו את פרטי העסק והמשיכו לתשלום מאובטח.</p>
+    </div>
+
+    <!-- tools -->
+    <div class="order-tools">
+      <div class="searchbox">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+        <input type="search" placeholder="חיפוש מוצר או מק&quot;ט…" aria-label="חיפוש מוצר">
+      </div>
+      <div class="pills" role="tablist" aria-label="משפחות מוצרים">
+        <button class="pill active" role="tab" aria-selected="true">תמציות</button>
+        <button class="pill" role="tab" aria-selected="false">סנגריה וסמודי</button>
+        <button class="pill" role="tab" aria-selected="false">מאצ'ה ואביזרים</button>
+      </div>
+    </div>
+
+    <!-- group -->
+    <div class="group-head">
+      <div class="gh-left">
+        <span class="g-index">קבוצה 01</span>
+        <div>
+          <h3>תמציות תה · 1 ליטר</h3>
+          <p class="g-sub">הליין המלא של תמציות התה שלנו</p>
+        </div>
+      </div>
+      <span class="g-count">8 מוצרים</span>
+    </div>
+
+    <!-- product grid -->
+    <div class="grid" id="grid">
+
+      <!-- SELECTED 1 -->
+      <article class="card selected" data-qty="1">
+        <span class="count-badge" aria-hidden="true">1</span>
+        <div class="card-media">
+          <img src="https://gteveryday.com/cdn/shop/files/1_DETOX_6a0599d4-c5b5-453d-9372-492cf7a92096.jpg?height=600&width=600" alt="DETOX תמצית תה 1 ליטר" loading="lazy">
+          <button class="quickview" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v.01M11 12h1v4h1"/></svg>
+            פרטים
+          </button>
+        </div>
+        <h4 class="card-name">DETOX</h4>
+        <p class="card-sku">1000ml · SKU GT-DTX-1L</p>
+        <div class="card-foot">
+          <div class="price"><span class="amount">₪65.00</span><span class="per">ליחידה</span></div>
+          <div class="stepper">
+            <button class="step-btn" data-act="dec" aria-label="הפחת כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+            <input class="step-val" type="number" min="0" value="1" aria-label="כמות DETOX">
+            <button class="step-btn" data-act="inc" aria-label="הוסף כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2 -->
+      <article class="card" data-qty="0">
+        <span class="count-badge" aria-hidden="true">0</span>
+        <div class="card-media">
+          <img src="https://gteveryday.com/cdn/shop/files/1_FRESH_e2a8d7e1-fd4e-4220-9b4e-2f30ecf45263.jpg?height=600&width=600" alt="FRESH תמצית תה 1 ליטר" loading="lazy">
+          <button class="quickview" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v.01M11 12h1v4h1"/></svg>
+            פרטים
+          </button>
+        </div>
+        <h4 class="card-name">FRESH</h4>
+        <p class="card-sku">1000ml · SKU GT-FRS-1L</p>
+        <div class="card-foot">
+          <div class="price"><span class="amount">₪65.00</span><span class="per">ליחידה</span></div>
+          <div class="stepper">
+            <button class="step-btn" data-act="dec" aria-label="הפחת כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+            <input class="step-val" type="number" min="0" value="0" aria-label="כמות FRESH">
+            <button class="step-btn" data-act="inc" aria-label="הוסף כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          </div>
+        </div>
+      </article>
+
+      <!-- SELECTED 2 -->
+      <article class="card selected" data-qty="1">
+        <span class="count-badge" aria-hidden="true">1</span>
+        <div class="card-media">
+          <img src="https://gteveryday.com/cdn/shop/files/1_ENERGY_2dd24aec-f8a6-48c8-bc64-0ec306637bae.jpg?height=600&width=600" alt="ENERGY תמצית תה 1 ליטר" loading="lazy">
+          <button class="quickview" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v.01M11 12h1v4h1"/></svg>
+            פרטים
+          </button>
+        </div>
+        <h4 class="card-name">ENERGY</h4>
+        <p class="card-sku">1000ml · SKU GT-ENR-1L</p>
+        <div class="card-foot">
+          <div class="price"><span class="amount">₪65.00</span><span class="per">ליחידה</span></div>
+          <div class="stepper">
+            <button class="step-btn" data-act="dec" aria-label="הפחת כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+            <input class="step-val" type="number" min="0" value="1" aria-label="כמות ENERGY">
+            <button class="step-btn" data-act="inc" aria-label="הוסף כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4 -->
+      <article class="card" data-qty="0">
+        <span class="count-badge" aria-hidden="true">0</span>
+        <div class="card-media">
+          <img src="https://gteveryday.com/cdn/shop/files/1_CONSCIOUSNESS_394a7393-898e-4efb-a091-79ffa69783bd.jpg?height=600&width=600" alt="CONSCIOUSNESS תמצית תה 1 ליטר" loading="lazy">
+          <button class="quickview" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v.01M11 12h1v4h1"/></svg>
+            פרטים
+          </button>
+        </div>
+        <h4 class="card-name">CONSCIOUSNESS</h4>
+        <p class="card-sku">1000ml · SKU GT-CNS-1L</p>
+        <div class="card-foot">
+          <div class="price"><span class="amount">₪65.00</span><span class="per">ליחידה</span></div>
+          <div class="stepper">
+            <button class="step-btn" data-act="dec" aria-label="הפחת כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+            <input class="step-val" type="number" min="0" value="0" aria-label="כמות CONSCIOUSNESS">
+            <button class="step-btn" data-act="inc" aria-label="הוסף כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5 -->
+      <article class="card" data-qty="0">
+        <span class="count-badge" aria-hidden="true">0</span>
+        <div class="card-media">
+          <img src="https://gteveryday.com/cdn/shop/files/1_CALM_08f7ddf9-7c57-4b8e-88b9-cfa8c4edd868.jpg?height=600&width=600" alt="CALM תמצית תה 1 ליטר" loading="lazy">
+          <button class="quickview" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v.01M11 12h1v4h1"/></svg>
+            פרטים
+          </button>
+        </div>
+        <h4 class="card-name">CALM</h4>
+        <p class="card-sku">1000ml · SKU GT-CLM-1L</p>
+        <div class="card-foot">
+          <div class="price"><span class="amount">₪65.00</span><span class="per">ליחידה</span></div>
+          <div class="stepper">
+            <button class="step-btn" data-act="dec" aria-label="הפחת כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+            <input class="step-val" type="number" min="0" value="0" aria-label="כמות CALM">
+            <button class="step-btn" data-act="inc" aria-label="הוסף כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 6 -->
+      <article class="card" data-qty="0">
+        <span class="count-badge" aria-hidden="true">0</span>
+        <div class="card-media">
+          <img src="https://gteveryday.com/cdn/shop/files/1_REVIVE_2ed039f6-1399-4f06-9dd5-fbf0d492f0fa.jpg?height=600&width=600" alt="REVIVE תמצית תה 1 ליטר" loading="lazy">
+          <button class="quickview" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v.01M11 12h1v4h1"/></svg>
+            פרטים
+          </button>
+        </div>
+        <h4 class="card-name">REVIVE</h4>
+        <p class="card-sku">1000ml · SKU GT-RVV-1L</p>
+        <div class="card-foot">
+          <div class="price"><span class="amount">₪65.00</span><span class="per">ליחידה</span></div>
+          <div class="stepper">
+            <button class="step-btn" data-act="dec" aria-label="הפחת כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+            <input class="step-val" type="number" min="0" value="0" aria-label="כמות REVIVE">
+            <button class="step-btn" data-act="inc" aria-label="הוסף כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 7 -->
+      <article class="card" data-qty="0">
+        <span class="count-badge" aria-hidden="true">0</span>
+        <div class="card-media">
+          <img src="https://gteveryday.com/cdn/shop/files/DSC_1180_02f0ed20-ead6-43cd-9f2b-cc06a217e1ae.jpg?height=600&width=600" alt="NAMASTEA תמצית תה 1 ליטר" loading="lazy">
+          <button class="quickview" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v.01M11 12h1v4h1"/></svg>
+            פרטים
+          </button>
+        </div>
+        <h4 class="card-name">NAMASTEA</h4>
+        <p class="card-sku">1000ml · SKU GT-NMS-1L</p>
+        <div class="card-foot">
+          <div class="price"><span class="amount">₪65.00</span><span class="per">ליחידה</span></div>
+          <div class="stepper">
+            <button class="step-btn" data-act="dec" aria-label="הפחת כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+            <input class="step-val" type="number" min="0" value="0" aria-label="כמות NAMASTEA">
+            <button class="step-btn" data-act="inc" aria-label="הוסף כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 8 -->
+      <article class="card" data-qty="0">
+        <span class="count-badge" aria-hidden="true">0</span>
+        <div class="card-media">
+          <img src="https://gteveryday.com/cdn/shop/files/gt-desert.jpg?height=600&width=600" alt="Desert Infusion תמצית תה 1 ליטר" loading="lazy">
+          <button class="quickview" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v.01M11 12h1v4h1"/></svg>
+            פרטים
+          </button>
+        </div>
+        <h4 class="card-name">Desert Infusion</h4>
+        <p class="card-sku">1000ml · SKU GT-DST-1L</p>
+        <div class="card-foot">
+          <div class="price"><span class="amount">₪65.00</span><span class="per">ליחידה</span></div>
+          <div class="stepper">
+            <button class="step-btn" data-act="dec" aria-label="הפחת כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+            <input class="step-val" type="number" min="0" value="0" aria-label="כמות Desert Infusion">
+            <button class="step-btn" data-act="inc" aria-label="הוסף כמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- /grid -->
+
+    <!-- ===== business form ===== -->
+    <div class="biz-form">
+      <div class="form-head">
+        <span class="ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14"/><path d="M9 21v-5h6v5M9 11h.01M15 11h.01"/></svg>
+        </span>
+        <div>
+          <h3>פרטי העסק והאספקה</h3>
+          <p>נשתמש בפרטים אלה להפקת חשבונית מס ולתיאום האספקה.</p>
+        </div>
+      </div>
+
+      <form class="form-grid" autocomplete="on">
+        <div class="field">
+          <label for="f-biz">שם העסק <span class="req">*</span></label>
+          <input id="f-biz" name="business" type="text" placeholder="לדוגמה: קפה השדרה" required>
+        </div>
+        <div class="field">
+          <label for="f-tax">ח.פ / עוסק מורשה</label>
+          <input id="f-tax" name="tax" type="text" inputmode="numeric" placeholder="515012345" dir="ltr">
+        </div>
+        <div class="field">
+          <label for="f-name">איש קשר <span class="req">*</span></label>
+          <input id="f-name" name="contact" type="text" placeholder="שם מלא" required>
+        </div>
+        <div class="field">
+          <label for="f-phone">טלפון <span class="req">*</span></label>
+          <input id="f-phone" name="phone" type="tel" placeholder="050-000-0000" dir="ltr" required>
+        </div>
+        <div class="field">
+          <label for="f-email">אימייל <span class="req">*</span></label>
+          <input id="f-email" name="email" type="email" placeholder="orders@business.co.il" dir="ltr" required>
+        </div>
+        <div class="field">
+          <label for="f-city">עיר <span class="req">*</span></label>
+          <input id="f-city" name="city" type="text" placeholder="תל אביב" required>
+        </div>
+        <div class="field full">
+          <label for="f-street">רחוב ומספר <span class="req">*</span></label>
+          <input id="f-street" name="street" type="text" placeholder="שדרות רוטשילד 12" required>
+        </div>
+        <div class="field full">
+          <label for="f-notes">הערות לאספקה</label>
+          <textarea id="f-notes" name="notes" placeholder="קומה, שעות קבלה, איש קשר במקום, הוראות פריקה…"></textarea>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= FAQ ========================= -->
+<section class="section faq-section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">שאלות נפוצות</span>
+      <h2 class="serif">מה כדאי לדעת לפני ההזמנה</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq" open>
+        <summary>
+          למי מיועדת ההזמנה העסקית?
+          <span class="q-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </summary>
+        <p class="answer">ההזמנה מיועדת לעסקים — בתי קפה, מסעדות, ברים, מלונות, קייטרינג ואירועים. אנחנו מספקים ישירות מהיצרן עם צי ההפצה שלנו, ללא מתווכים.</p>
+      </details>
+      <details class="faq">
+        <summary>
+          האם המחירים שונים בין עסקים?
+          <span class="q-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </summary>
+        <p class="answer"><strong>לא — מחיר אחיד ושקוף לכל העסקים.</strong> אותו מחיר לכל לקוח, בלי מיקוח ובלי הפתעות. המחירים מוצגים ללא מע"מ, שמתווסף בחשבונית המס.</p>
+      </details>
+      <details class="faq">
+        <summary>
+          איך מתבצע התשלום ומה לגבי חשבונית?
+          <span class="q-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </summary>
+        <p class="answer">לאחר הרכבת ההזמנה תועברו לקישור תשלום מאובטח. עם השלמת התשלום מופקת חשבונית מס מסודרת על שם העסק, כולל מע"מ, ונשלחת לאימייל שמילאתם.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= FOOTER ========================= -->
+<footer class="site-footer">
+  <div class="wrap">
+    <a href="#" class="wordmark"><span class="gt">GT</span><span class="ev">Everyday</span></a>
+    <p>© 2026 GT Everyday</p>
+  </div>
+</footer>
+
+<!-- ========================= STICKY SUMMARY ========================= -->
+<aside class="summary-bar" aria-label="סיכום הזמנה">
+  <div class="wrap">
+    <div class="sum-totals">
+      <span class="sum-items"><b id="sumItems">2 פריטים</b></span>
+      <span class="sum-total">
+        <span class="lbl">סה״כ</span>
+        <span class="val" id="sumTotal">₪130.00</span>
+        <span class="sum-vat">המחירים אינם כוללים מע״מ · מע״מ יתווסף בחשבונית המס</span>
+      </span>
+    </div>
+
+    <div class="sum-progress" id="progWrap">
+      <div class="track"><div class="fill" id="progFill"></div></div>
+      <p class="plbl" id="progLbl">עוד <b>₪670.00</b> למינימום ההזמנה (₪800)</p>
+    </div>
+
+    <div class="sum-cta">
+      <button class="btn btn-primary" type="button">
+        המשך לתשלום
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg>
+      </button>
+      <span class="demo-note">מערכת התשלום בהקמה — ההזמנה תוצג לסיכום בלבד ולא תחויב.</span>
+    </div>
+  </div>
+</aside>
+
+<script>
+(function(){
+  var UNIT = 65;          // ₪ per unit, ex-VAT
+  var MIN  = 800;         // minimum order
+  var grid = document.getElementById('grid');
+
+  function fmt(n){ return '₪' + n.toLocaleString('en-US',{minimumFractionDigits:2, maximumFractionDigits:2}); }
+
+  function syncCard(card){
+    var input = card.querySelector('.step-val');
+    var qty = Math.max(0, parseInt(input.value,10) || 0);
+    input.value = qty;
+    card.dataset.qty = qty;
+    var badge = card.querySelector('.count-badge');
+    if(badge) badge.textContent = qty;
+    card.classList.toggle('selected', qty > 0);
+  }
+
+  function recalc(){
+    var cards = grid.querySelectorAll('.card');
+    var units = 0;
+    cards.forEach(function(c){ units += parseInt(c.dataset.qty,10) || 0; });
+    var total = units * UNIT;
+
+    // items label
+    var itemsLbl = units === 1 ? 'פריט אחד' : units + ' פריטים';
+    document.getElementById('sumItems').textContent = itemsLbl;
+    document.getElementById('sumTotal').textContent = fmt(total);
+
+    // cart dot
+    var dot = document.getElementById('cartDot');
+    dot.textContent = units;
+    dot.style.display = units > 0 ? 'grid' : 'none';
+
+    // progress
+    var fill = document.getElementById('progFill');
+    var lbl  = document.getElementById('progLbl');
+    var wrap = document.getElementById('progWrap');
+    var pct = Math.min(100, Math.round((total / MIN) * 100));
+    fill.style.width = Math.max(units > 0 ? 4 : 0, pct) + '%';
+    if(total >= MIN){
+      wrap.classList.add('met');
+      lbl.innerHTML = 'מעולה — עברתם את מינימום ההזמנה <b>(₪800)</b>';
+    } else {
+      wrap.classList.remove('met');
+      lbl.innerHTML = 'עוד <b>' + fmt(MIN - total) + '</b> למינימום ההזמנה (₪800)';
+    }
+  }
+
+  grid.addEventListener('click', function(e){
+    var btn = e.target.closest('.step-btn');
+    if(!btn) return;
+    var card = btn.closest('.card');
+    var input = card.querySelector('.step-val');
+    var qty = parseInt(input.value,10) || 0;
+    qty += (btn.dataset.act === 'inc') ? 1 : -1;
+    if(qty < 0) qty = 0;
+    input.value = qty;
+    syncCard(card);
+    recalc();
+  });
+
+  grid.addEventListener('input', function(e){
+    if(!e.target.classList.contains('step-val')) return;
+    syncCard(e.target.closest('.card'));
+    recalc();
+  });
+
+  // pills (visual only)
+  document.querySelectorAll('.pill').forEach(function(p){
+    p.addEventListener('click', function(){
+      document.querySelectorAll('.pill').forEach(function(x){ x.classList.remove('active'); x.setAttribute('aria-selected','false'); });
+      p.classList.add('active'); p.setAttribute('aria-selected','true');
+    });
+  });
+
+  recalc();
+})();
+</script>
+</body>
+</html>

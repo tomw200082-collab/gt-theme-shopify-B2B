@@ -433,9 +433,6 @@
     var desc = descEl ? descEl.textContent.trim() : '';
     qv.querySelector('.b2bof__qv-desc').textContent = desc;
     qv.querySelector('.b2bof__qv-desc').hidden = !desc;
-    var link = qv.querySelector('.b2bof__qv-link');
-    link.href = card.dataset.url || '#';
-    link.hidden = !card.dataset.url;
     qv.querySelector('.b2bof__qv-qty').value = qtyOf(card) || 1;
     qv.hidden = false;
     document.body.style.overflow = 'hidden';
